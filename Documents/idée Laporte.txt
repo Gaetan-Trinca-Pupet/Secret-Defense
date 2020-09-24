@@ -12,7 +12,7 @@ Mini-jeu (court) :
    - Eteindre les postes encore allumé avant la nuit (se deplacer zqsd)
    - Communiquer avec les autres profs les mauvais eleves après une séquence où on voit un cours, avec des eleves serieux et d'autres qui font autres choses
    - Brancher correctement un PC (souris)
-   - 
+   - Jeu de control avec commande tantot inversé, tantot non
    
 
 Boss (long) :
