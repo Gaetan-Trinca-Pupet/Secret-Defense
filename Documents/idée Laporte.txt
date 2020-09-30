@@ -17,4 +17,4 @@ Mini-jeu (court) :
 
 Boss (long) :
    - Programmer un bout de programme, ou placer des blocs de programmes dans le bon ordre
-   - Qte création de bronx
+   - (Adrien) Qte création de bronx
