@@ -28,3 +28,11 @@ void MiniJeu::setup(){
 MiniJeu::~MiniJeu(){
 	
 }
+
+sf::Color MiniJeu::getBackgroundColor()const{
+	return backgroundColor;
+}
+
+void MiniJeu::setBackgroundColor(const sf::Color& color){
+	backgroundColor = color;
+}
