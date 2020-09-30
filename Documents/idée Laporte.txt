@@ -9,7 +9,7 @@ Mini-jeu (court) :
    - Trouver l'erreur(s) sur une copie
    - Dans un amphi, plusieurs élèves posent des questions, dans une boite à réponse, séléctionner les bonnes réponses
    - Jeu de mémoire, plusieurs élèves posent des questions, et si une apparait plusieurs fois, punir l'élève.
-   - Eteindre les postes encore allumé avant la nuit (se deplacer zqsd)
+   - (Erwann)Eteindre les postes encore allumé avant la nuit (se deplacer zqsd)
    - Communiquer avec les autres profs les mauvais eleves après une séquence où on voit un cours, avec des eleves serieux et d'autres qui font autres choses
    - (Gaëtan) Brancher correctement un PC (souris)
    - Jeu de control avec commande tantot inversé, tantot non
