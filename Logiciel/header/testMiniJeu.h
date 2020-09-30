@@ -3,20 +3,23 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "MiniJeu.h"
+#include "miniJeu/MiniJeu.h"
 
 class UnMiniJeu: public MiniJeu{
 	private : 
 		sf::RectangleShape rectangle;
 		sf::Vector2f direction;
-	
-	public : 
-		UnMiniJeu(AppData& appData);
 		
+	protected :
 		virtual void setup();
 		
 		virtual void draw();
 		virtual void update();
+	
+	public : 
+		UnMiniJeu(AppData& appData);
+		
+		
 };
 
 #endif

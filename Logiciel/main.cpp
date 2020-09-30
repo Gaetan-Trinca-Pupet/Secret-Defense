@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 
-#include "header/MiniJeu.h"
+#include "header/miniJeu/MiniJeu.h"
 #include "header/testMiniJeu.h"
 
 int main(){
