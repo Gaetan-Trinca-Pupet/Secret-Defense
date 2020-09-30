@@ -7,7 +7,7 @@ UnMiniJeu::UnMiniJeu(AppData& appData) : MiniJeu(appData){
 void UnMiniJeu::setup(){
 	direction = sf::Vector2f(3,3);
 	app.window.setFramerateLimit(60);
-	backgroundColor = sf::Color(255,255,255);
+	setBackgroundColor(sf::Color(255,255,255));
 	rectangle.setPosition(app.window.getSize().x/2,app.window.getSize().y/2);
 	rectangle.setSize(sf::Vector2f(18,18));
 	rectangle.setFillColor(sf::Color(255,0,0));

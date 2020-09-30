@@ -1,4 +1,4 @@
-#include "../header/MiniJeu.h"
+#include "../../header/MiniJeu.h"
 
 MiniJeu::MiniJeu(AppData& appData) : app(appData), isFinished(false), backgroundColor(sf::Color(0,0,0,255)){
 	
@@ -27,4 +27,12 @@ void MiniJeu::setup(){
 
 MiniJeu::~MiniJeu(){
 	
+}
+
+sf::Color MiniJeu::getBackgroundColor()const{
+	return backgroundColor;
+}
+
+void MiniJeu::setBackgroundColor(const sf::Color& color){
+	backgroundColor = color;
 }
