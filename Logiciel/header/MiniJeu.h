@@ -10,16 +10,21 @@ struct AppData{
 };
 
 class MiniJeu{
+	private :
+		sf::Color backgroundColor;
 	protected :
 		AppData& app;
 		bool isFinished;
-		sf::Color backgroundColor;
-	
-	public :
-		MiniJeu(AppData& appData);
+		
 		virtual void setup();
 		virtual void draw()=0;
 		virtual void update()=0;
+		
+		sf::Color getBackgroundColor()const;
+		void setBackgroundColor(const sf::Color& color);
+	
+	public :
+		MiniJeu(AppData& appData);
 		void play();
 		virtual ~MiniJeu();
 };
