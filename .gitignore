@@ -1,6 +1,5 @@
-
-Logiciel/.vs/Logiciel/v16/Browse.VC.db
-Logiciel/.vs/Logiciel/v16/Browse.VC.opendb
-Logiciel/.vs/slnx.sqlite
-Logiciel/.vs/ProjectSettings.json
-Logiciel/.vs/Logiciel/v16/.suo
+*.json
+*.sqlite
+*.db
+Logiciel/source/.vs/source/v16/.suo
+3d094d02f3d104b8fca463e855373f2cfaa5e001
