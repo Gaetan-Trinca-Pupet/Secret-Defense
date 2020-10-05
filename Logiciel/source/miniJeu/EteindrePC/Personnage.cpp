@@ -21,19 +21,19 @@ void EteindrePC::Personnage::update(){
 	sprite_x%=4;
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && !sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
 		direction = EteindrePC::Direction::Haut;
-		position.y -= 4;
+		position.y -= 6;
 		hasMoved = true;
 	}else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Z)){
 		direction = EteindrePC::Direction::Bas;
-		position.y += 4;
+		position.y += 6;
 		hasMoved = true;
 	}else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
 		direction = EteindrePC::Direction::Gauche;
-		position.x -= 4;
+		position.x -= 6;
 		hasMoved = true;
 	}else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
 		direction = EteindrePC::Direction::Droite;
-		position.x += 4;
+		position.x += 6;
 		hasMoved = true;
 	}
 	
