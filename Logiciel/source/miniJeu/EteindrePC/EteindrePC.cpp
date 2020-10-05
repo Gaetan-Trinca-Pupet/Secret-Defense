@@ -5,7 +5,7 @@ EteindrePC::EteindrePC::EteindrePC(AppData& appData) : MiniJeu(appData){
 }
 
 void EteindrePC::EteindrePC::setup(){
-	
+	setBackgroundColor(sf::Color(245,200,120));
 }
 
 void EteindrePC::EteindrePC::draw(){
