@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
+
 //toutes les donnees partagees par les minijeux sont dans cette structure
 
 struct AppData{
@@ -15,6 +16,9 @@ class MiniJeu{
 	protected :
 		AppData& app;
 		bool isFinished;
+
+		float timer;
+		sf::Clock clock;
 		
 		virtual void setup();
 		virtual void draw()=0;

@@ -1,13 +1,13 @@
 #include "../../../header/miniJeu/BranchePC/Prise.h"
 
-Prise::prise(Prise* prise, int& myX, int& myY)
+Prise::Prise(Prise* prise, int myX, int myY)
 {
 	this->match = prise;
 	this->x = myX;
 	this->y = myY;
 }
 
-Prise::~prise()
+Prise::~Prise()
 {
 	delete match;
 }

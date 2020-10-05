@@ -4,11 +4,13 @@
 #include <SFML/Graphics.hpp>
 
 #include "miniJeu/MiniJeu.h"
+#include "Chrono.h"
 
 class UnMiniJeu: public MiniJeu{
 	private : 
 		sf::RectangleShape rectangle;
 		sf::Vector2f direction;
+		Chrono chrono;
 		
 	protected :
 		virtual void setup();

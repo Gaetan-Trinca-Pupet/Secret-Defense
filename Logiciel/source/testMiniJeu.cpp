@@ -11,13 +11,17 @@ void UnMiniJeu::setup(){
 	rectangle.setPosition(app.window.getSize().x/2,app.window.getSize().y/2);
 	rectangle.setSize(sf::Vector2f(18,18));
 	rectangle.setFillColor(sf::Color(255,0,0));
+	timer = 5;
+	chrono = Chrono(timer, &clock, app);
 }
 
 void UnMiniJeu::draw(){
 	app.window.draw(rectangle);
+	app.window.draw(chrono);
 }
 
 void UnMiniJeu::update(){
+	chrono.update();
 	if(rectangle.getPosition().x < 0)direction.x = 3;
 	else if(rectangle.getPosition().x > app.window.getSize().x)direction.x = -3;
 	if(rectangle.getPosition().y < 0)direction.y = 3;

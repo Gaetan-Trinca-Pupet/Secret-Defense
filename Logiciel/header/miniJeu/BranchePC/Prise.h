@@ -15,8 +15,8 @@ private:
 	sf::RectangleShape sprite;
 
 public:
-	prise(Prise* prise, int& myX = 0, int& myY = 0);
-	~prise();
+	Prise(Prise* prise, int myX = 0, int myY = 0);
+	~Prise();
 
 	void setSprite(sf::RectangleShape & shape);
 	void update();
