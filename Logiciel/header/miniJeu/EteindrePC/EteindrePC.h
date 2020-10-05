@@ -8,7 +8,6 @@ namespace EteindrePC{
 	class EteindrePC : public MiniJeu{
 		private :
 			Personnage laporte;
-		protected :
 			virtual void setup();
 			virtual void draw();
 			virtual void update();

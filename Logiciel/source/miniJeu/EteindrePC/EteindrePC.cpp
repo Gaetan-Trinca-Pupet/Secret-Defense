@@ -1,5 +1,6 @@
 #include "../../../header/miniJeu/EteindrePC/EteindrePC.h"
 
+
 EteindrePC::EteindrePC::EteindrePC(AppData& appData) : MiniJeu(appData){
 	
 }

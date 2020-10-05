@@ -10,7 +10,8 @@ int main(){
 	app.window.setFramerateLimit(60);
 	//UnMiniJeu unMiniJeu(app);
 	//unMiniJeu.play();
-	EteindrePC::EteindrePC jeu(app);
-	jeu.play();
+	MiniJeu * jeu = new EteindrePC::EteindrePC(app);
+	jeu->play();
+	delete jeu;
 	return 0;
 }
