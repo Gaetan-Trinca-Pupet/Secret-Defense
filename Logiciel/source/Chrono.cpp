@@ -12,6 +12,7 @@ Chrono::Chrono(float _time, sf::Clock* _clock, AppData& data) {
 	clock = _clock;
 	bar.setFillColor(sf::Color::Green);
 	bar.setPosition(sf::Vector2f(20 + 9, data.window.getSize().y -20 - 9));
+	tex = sf::Texture();
 	tex.loadFromFile("../ressource/pile.png");
 	spriteBatterie.setTexture(tex);
 	//spriteBatterie.setPosition(20, data.window.getSize().y - 20 - tex.getSize().y);
