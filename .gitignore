@@ -4,3 +4,11 @@
 Logiciel/source/.vs/source/v16/.suo
 3d094d02f3d104b8fca463e855373f2cfaa5e001
 *.opendb
+*.pro
+*.user
+*.Release
+*.Debug
+Logiciel/bin/Makefile
+*.o
+Logiciel/bin/debug/Logiciel.exe
+*.stash
