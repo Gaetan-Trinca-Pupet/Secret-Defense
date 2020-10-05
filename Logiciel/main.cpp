@@ -3,6 +3,7 @@
 #include "header/miniJeu/MiniJeu.h"
 #include "header/testMiniJeu.h"
 #include "header/miniJeu/EteindrePC/EteindrePC.h"
+#include "header/miniJeu/BranchePC/BranchePC.h"
 
 int main(){
 	AppData app;
@@ -10,7 +11,8 @@ int main(){
 	app.window.setFramerateLimit(60);
 	//UnMiniJeu unMiniJeu(app);
 	//unMiniJeu.play();
-	MiniJeu * jeu = new EteindrePC::EteindrePC(app);
+	//MiniJeu * jeu = new EteindrePC::EteindrePC(app);
+	MiniJeu* jeu = new BranchePC::BranchePC(app);
 	jeu->play();
 	delete jeu;
 	return 0;

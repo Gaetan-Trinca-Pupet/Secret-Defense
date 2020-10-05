@@ -2,8 +2,11 @@
 #define __BRANCHEPC_H_
 
 #include <vector>
+#include <cstdlib>
+#include <SFML/Window.hpp>
 #include "../MiniJeu.h"
 #include "Prise.h"
+#include "Hand.h"
 
 namespace BranchePC
 {
@@ -11,6 +14,7 @@ namespace BranchePC
 	{
 	private:
 		std::vector<Prise*> tabPrise;
+		Hand main = Hand(tabPrise);
 
 	protected:
 		virtual void setup();
