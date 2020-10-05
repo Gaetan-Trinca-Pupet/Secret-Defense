@@ -1,7 +1,7 @@
 #ifndef __MINI_JEU_ETEINDRE_
 #define __MINI_JEU_ETEINDRE_
 
-#include "../../MiniJeu.h"
+#include "../MiniJeu.h"
 
 namespace EteindrePC{
 	class EteindrePC : public MiniJeu{

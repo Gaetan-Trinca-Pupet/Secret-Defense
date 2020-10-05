@@ -1,5 +1,5 @@
 #include "../header/Chrono.h"
-
+#include<iostream>
 
 Chrono::Chrono() {
 }
@@ -10,18 +10,23 @@ Chrono::~Chrono() {
 Chrono::Chrono(float _time, sf::Clock* _clock, AppData& data) {
 	time = _time;
 	clock = _clock;
-	rect.setFillColor(sf::Color::Green);
-	//rect.setOrigin(sf::Vector2f(0, 483));
-	rect.setPosition(sf::Vector2f(9 + 20, data.window.getSize().y-(9 + 20)));
+	bar.setFillColor(sf::Color::Green);
+	bar.setPosition(sf::Vector2f(20 + 9, data.window.getSize().y -20 - 9));
+	tex.loadFromFile("../ressource/pile.png");
+	spriteBatterie.setTexture(tex);
+	//spriteBatterie.setPosition(20, data.window.getSize().y - 20 - tex.getSize().y);
+	spriteBatterie.setPosition(20, 20);
 	clock->restart();
 }
 
 void Chrono::update()
 {
-	rect.setSize(sf::Vector2f(51, /*483*/ -400 * ((time - clock->getElapsedTime().asSeconds()) /time)));
+	bar.setSize(sf::Vector2f(51, - 483 * ((time - clock->getElapsedTime().asSeconds()) /time)));
 }
 
 void Chrono::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	target.draw(rect, states);
+	target.draw(spriteBatterie);
+	target.draw(bar);
+	
 }

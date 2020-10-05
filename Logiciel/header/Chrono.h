@@ -19,7 +19,9 @@ private:
 
 	float time;
 	sf::Clock* clock;
-	sf::RectangleShape rect;
+	sf::RectangleShape bar;
+	sf::Sprite spriteBatterie;
+	sf::Texture tex;
 };
 
 #endif
