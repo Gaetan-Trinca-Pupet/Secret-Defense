@@ -1,7 +1,9 @@
 #ifndef __MINI_JEU_ETEINDRE_PERSONNAGE_H
 #define __MINI_JEU_ETEINDRE_PERSONNAGE_H
 
+#include <vector>
 #include <SFML/Graphics.hpp>
+#include "CollisionBox.h"
 
 namespace EteindrePC{
 	enum Direction{
@@ -19,11 +21,13 @@ namespace EteindrePC{
 			Direction direction;
 			sf::Texture texture;
 			unsigned char sprite_x;
+			std::vector<CollisionBox*> collisionList;
 			
 		public :
 			Personnage();
 			void update();
 			void draw(sf::RenderWindow& window);
+			void addCollisionBox(CollisionBox& collisionBox);
 	};
 }
 #endif

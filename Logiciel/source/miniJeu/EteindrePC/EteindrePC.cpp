@@ -1,12 +1,21 @@
 #include "../../../header/miniJeu/EteindrePC/EteindrePC.h"
 
 
-EteindrePC::EteindrePC::EteindrePC(AppData& appData) : MiniJeu(appData){
+EteindrePC::EteindrePC::EteindrePC(AppData& appData) : MiniJeu(appData), mur1(0,100),mur2(150,240), mur3(440,100), 
+		table1(sf::Vector2f(360,0), sf::Vector2f(600,75)),
+		table2(sf::Vector2f(300,220), sf::Vector2f(660,100)),
+		table3(sf::Vector2f(360,540-75), sf::Vector2f(600,75)){
 	
 }
 
 void EteindrePC::EteindrePC::setup(){
 	setBackgroundColor(sf::Color(245,200,120));
+	laporte.addCollisionBox(mur1.getCollisionBox());
+	laporte.addCollisionBox(mur2.getCollisionBox());
+	laporte.addCollisionBox(mur3.getCollisionBox());
+	laporte.addCollisionBox(table1.getCollisionBox());
+	laporte.addCollisionBox(table2.getCollisionBox());
+	laporte.addCollisionBox(table3.getCollisionBox());
 }
 
 void EteindrePC::EteindrePC::draw(){
@@ -14,39 +23,15 @@ void EteindrePC::EteindrePC::draw(){
 	solHall.setFillColor(sf::Color(200,200,230));
 	app.window.draw(solHall);
 	
-	sf::RectangleShape mur1(sf::Vector2f(10,100));
-	mur1.setFillColor(sf::Color(0,0,0));
-	mur1.setPosition(sf::Vector2f(140,0));
-	app.window.draw(mur1);
+	mur1.draw(app.window);
+	mur2.draw(app.window);
+	mur3.draw(app.window);
 	
-	sf::RectangleShape mur2(sf::Vector2f(10,540-100-50-150));
-	mur2.setFillColor(sf::Color(0,0,0));
-	mur2.setPosition(sf::Vector2f(140,150));
-	app.window.draw(mur2);
-	
-	sf::RectangleShape mur3(sf::Vector2f(10,100));
-	mur3.setFillColor(sf::Color(0,0,0));
-	mur3.setPosition(sf::Vector2f(140,540-100));
-	app.window.draw(mur3);
-	
-	sf::RectangleShape table1(sf::Vector2f(600,75));
-	table1.setFillColor(sf::Color(200,200,200));
-	table1.setPosition(sf::Vector2f(360,0));
-	app.window.draw(table1);
-	
-	sf::RectangleShape table2(sf::Vector2f(660,100));
-	table2.setFillColor(sf::Color(200,200,200));
-	table2.setPosition(sf::Vector2f(300,220));
-	app.window.draw(table2);
-	
-	sf::RectangleShape table3(sf::Vector2f(600,75));
-	table3.setFillColor(sf::Color(200,200,200));
-	table3.setPosition(sf::Vector2f(360,540-75));
-	app.window.draw(table3);
-	
+	table1.draw(app.window);
+	table2.draw(app.window);
+	table3.draw(app.window);
 	
 	laporte.draw(app.window);
-	
 }
 
 void EteindrePC::EteindrePC::update(){
