@@ -21,7 +21,6 @@ class UnMiniJeu: public MiniJeu{
 	public : 
 		UnMiniJeu(AppData& appData);
 		
-		
 };
 
 #endif
