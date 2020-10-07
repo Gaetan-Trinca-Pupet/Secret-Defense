@@ -12,6 +12,9 @@ BranchePC::Hand::Hand(std::vector<Prise*>& tabPrise):tab(&tabPrise)
 	x = 0;
 	y = 0;
 
+	lastX = 0;
+	lastY = 0;
+
 
 	isGrabbing = false;
 
@@ -41,17 +44,19 @@ void BranchePC::Hand::update(sf::RenderWindow& window)
 		
 		if (prise != nullptr)
 		{
-			prise->setX(x);
-			prise->setY(y);
+			prise->moveX(x-lastX);
+			prise->moveY(y-lastY);
 			prise->update();
 		}
-			
+		
 	}
 	else
 	{
 		prise = nullptr;
 		isGrabbing = false;
 	}
+	lastX = x;
+	lastY = y;
 }
 
 void BranchePC::Hand::draw(sf::RenderWindow& window)
@@ -64,14 +69,4 @@ void BranchePC::Hand::draw(sf::RenderWindow& window)
 		sprite.setTextureRect(sf::IntRect(0,0,25,25));
 	
 	window.draw(sprite);
-}
-
-void BranchePC::Hand::setX(const int& X)
-{
-	x = X;
-}
-
-void BranchePC::Hand::setY(const int& Y)
-{
-	y = Y;
 }

@@ -6,7 +6,7 @@
 #include <SFML/Window.hpp>
 #include "../MiniJeu.h"
 #include "Prise.h"
-#include "Hand.h"
+#include "../../Grabber.hpp"
 
 namespace BranchePC
 {
@@ -14,7 +14,7 @@ namespace BranchePC
 	{
 	private:
 		std::vector<Prise*> tabPrise;
-		Hand main = Hand(tabPrise);
+		Grabber::Grabber main = Grabber::Grabber(tabPrise);
 
 	protected:
 		virtual void setup();

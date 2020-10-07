@@ -9,14 +9,10 @@ bool BranchePC::Prise::isClose() const
 		((match->getY() >= y - sY / 2) && (match->getY() <= y + sY / 2)));
 }
 
-BranchePC::Prise::Prise(Prise* prise, const int& myX, const int& myY)
+BranchePC::Prise::Prise(Prise* prise, const int& myX, const int& myY) : Grabbed(myX,myY,50,50)
 {
-	this->match = prise;
-	this->x = myX;
-	this->y = myY;
-
-	this->sX = 50;
-	this->sY = 50;
+	match = prise;
+	x = myX;
 }
 
 BranchePC::Prise::~Prise()
@@ -27,11 +23,11 @@ BranchePC::Prise::~Prise()
 void BranchePC::Prise::setSprite(const sf::Texture & texture)
 {
 	this->texture = texture;
-	sprite.setTexture(this->texture);
+	sprite.setTexture(texture);
 	sprite.setTextureRect(sf::IntRect(0, 50, 50, 600));
 	if (match != nullptr)
 	{
-		match->setSprite(this->texture);
+		match->setSprite(texture);
 		match->sprite.setTextureRect(sf::IntRect(0, 0, 50, 50));
 	}
 }
@@ -43,7 +39,7 @@ void BranchePC::Prise::setSpriteRect(const unsigned short& x1, const unsigned sh
 
 void BranchePC::Prise::update()
 {
-	if (this->isClose())
+	if (isClose())
 	{
 		isMatched = true;
 		sprite.setTextureRect(sf::IntRect());
@@ -54,48 +50,12 @@ void BranchePC::Prise::update()
 
 void BranchePC::Prise::draw(sf::RenderWindow& window)
 {
-	sprite.setPosition(x - sX / 2, y - sY / 2);
+	sprite.setPosition(x - size_x / 2, y - size_y / 2);
 	window.draw(sprite);
 	if (this->match != nullptr) this->match->draw(window);
 }
 
-int BranchePC::Prise::getX() const
-{
-	return this->x;
-}
-
-int BranchePC::Prise::getY() const
-{
-	return this->y;
-}
-
-int BranchePC::Prise::getsX() const
-{
-	return sX;
-}
-
-int BranchePC::Prise::getsY() const
-{
-	return sY;
-}
-
-void BranchePC::Prise::setX(const int & X)
-{
-	if (isMatched)
-		x = match->getX();
-	else
-		this->x = X;
-}
-
-void BranchePC::Prise::setY(const int& Y)
-{
-	if (isMatched)
-		y = match->getY() + sY;
-	else
-		this->y = Y;
-}
-
 BranchePC::Prise* BranchePC::Prise::getMatch() const
 {
-	return this->match;
+	return match;
 }

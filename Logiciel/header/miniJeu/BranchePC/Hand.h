@@ -15,6 +15,9 @@ namespace BranchePC
 			int x;
 			int y;
 
+			int lastX;
+			int lastY;
+
 			int sX;
 			int sY;
 
@@ -31,9 +34,6 @@ namespace BranchePC
 
 			void update(sf::RenderWindow& window);
 			void draw(sf::RenderWindow& window);
-
-			void setX(const int& X);
-			void setY(const int& Y);
 	};
 }
 
