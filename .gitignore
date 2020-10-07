@@ -13,3 +13,12 @@ Logiciel/bin/Makefile
 Logiciel/bin/debug/Logiciel.exe
 *.stash
 *.autosave
+*.stash
+*.o
+*.exe
+*.o
+Logiciel/bin/Makefile
+*.Debug
+*.Release
+*.pro
+*.user
