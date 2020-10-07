@@ -3,6 +3,7 @@
 
 #include "Prise.h"
 #include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 #include <vector>
 
 namespace BranchePC
@@ -21,12 +22,15 @@ namespace BranchePC
 
 			BranchePC::Prise* prise;
 
+			sf::Sprite sprite;
+			sf::Texture texture;
+
 		public :
 			Hand(std::vector<Prise*>& tabPrise);
 			~Hand();
 
 			void update(sf::RenderWindow& window);
-			void draw(sf::RenderWindow& window)const;
+			void draw(sf::RenderWindow& window);
 
 			void setX(const int& X);
 			void setY(const int& Y);

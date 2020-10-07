@@ -2,11 +2,19 @@
 
 void BranchePC::BranchePC::setup()
 {
-	std::srand(std::time(nullptr));
-	app.window.sf::Window::setMouseCursorVisible(false);
-
 	const unsigned short nbPrise(9);
+
+	app.window.sf::Window::setMouseCursorVisible(false);
+	std::srand(std::time(nullptr));
+
+	
+
+	
+	
+
+	
 	tabPrise.resize(nbPrise);
+
 	std::vector<unsigned> tabPos1(nbPrise);
 
 	for (unsigned i(0); i < tabPos1.size(); ++i)
@@ -27,16 +35,13 @@ void BranchePC::BranchePC::setup()
 		tabPos2.pop_back();
 	}
 		
-	/*
-	for (unsigned i(0); i < tabPrise.size(); ++i)
+	for (unsigned i = 0; i < tabPrise.size(); i++)
 	{
-		tabPrise[i]->setSprite(sf::RectangleShape(sf::Vector2f(5,5)));
-		tabPrise[i]->getMatch()->setSprite(sf::RectangleShape(sf::Vector2f(5, 5)));
-
-		tabPrise[i]->setColor(20 + i * 50 , i * 50 , i * 50);
-		tabPrise[i]->getMatch()->setColor(20 + i * 50, i * 50, i * 50);
+		sf::Texture texture;
+		std::string src = "../ressource/BranchePC/prise_" + std::to_string(i) + ".png";
+		texture.loadFromFile(src);
+		tabPrise[i]->setSprite(texture);
 	}
-	*/
 
 	main.setX(app.window.getSize().x / 2);
 	main.setY(app.window.getSize().y / 2);

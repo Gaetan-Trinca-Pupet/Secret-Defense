@@ -17,7 +17,9 @@ namespace BranchePC
 
 		int sX;
 		int sY;
-		sf::RectangleShape sprite;
+
+		sf::Sprite sprite;
+		sf::Texture texture;
 
 		bool isClose()const;
 
@@ -25,13 +27,12 @@ namespace BranchePC
 		Prise(Prise* prise = nullptr, const int& myX = 0, const int& myY = 0);
 		~Prise();
 
-		/*
-		void setSprite(sf::RectangleShape& shape);
-		void setColor(const unsigned& r, const unsigned& g, const unsigned& b)const;
-		*/
+		void setSprite(const sf::Texture& textur);
+		void setSpriteRect(const unsigned short& x1 = 0, const unsigned short& y1 = 0, const unsigned short& x2 = 0, const unsigned short& y2 = 0);
+
 		void update();
 
-		void draw(sf::RenderWindow& window)const;
+		void draw(sf::RenderWindow& window);
 
 		int getX()const;
 		int getY()const;

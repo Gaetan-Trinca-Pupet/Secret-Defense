@@ -1,15 +1,17 @@
 #include "../../../header/miniJeu/BranchePC/Hand.h"
 
 
-BranchePC::Hand::Hand(std::vector<Prise*>& tabPrise)
+BranchePC::Hand::Hand(std::vector<Prise*>& tabPrise):tab(&tabPrise)
 {
-	tab = &tabPrise;
+	texture.loadFromFile("../ressource/BranchePC/open_hand.png");
+	sprite.setTexture(texture);
+
+	sX = texture.getSize().x/2;
+	sY = texture.getSize().y;
 
 	x = 0;
 	y = 0;
 
-	sX = 5;
-	sY = 5;
 
 	isGrabbing = false;
 
@@ -52,15 +54,16 @@ void BranchePC::Hand::update(sf::RenderWindow& window)
 	}
 }
 
-void BranchePC::Hand::draw(sf::RenderWindow& window) const
+void BranchePC::Hand::draw(sf::RenderWindow& window)
 {
-	sf::RectangleShape sprit(sf::Vector2f(sX, sY));
-	sprit.setPosition(x - sX / 2, y - sY / 2);
+	sprite.setPosition(x - sX / 2, y - sY / 2);
+	
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
-		sprit.setFillColor(sf::Color::Red);
+		sprite.setTextureRect(sf::IntRect(25, 0, 25, 25));
 	else
-		sprit.setFillColor(sf::Color::White);
-	window.draw(sprit);
+		sprite.setTextureRect(sf::IntRect(0,0,25,25));
+	
+	window.draw(sprite);
 }
 
 void BranchePC::Hand::setX(const int& X)

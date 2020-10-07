@@ -24,28 +24,38 @@ BranchePC::Prise::~Prise()
 	delete match;
 }
 
-/*
-void BranchePC::Prise::setSprite(sf::RectangleShape& shape)
+void BranchePC::Prise::setSprite(const sf::Texture & texture)
 {
-	this->sprite = shape;
+	this->texture = texture;
+	sprite.setTexture(this->texture);
+	sprite.setTextureRect(sf::IntRect(0, 50, 50, 600));
+	if (match != nullptr)
+	{
+		match->setSprite(this->texture);
+		match->sprite.setTextureRect(sf::IntRect(0, 0, 50, 50));
+	}
 }
 
-void BranchePC::Prise::setColor(const unsigned& r, const unsigned& g, const unsigned& b) const
+void BranchePC::Prise::setSpriteRect(const unsigned short& x1, const unsigned short& y1, const unsigned short& x2, const unsigned short& y2)
 {
-	this->sprite.setFillColor(sf::Color(r, g, b));
+	sprite.setTextureRect(sf::IntRect(x1, y1, x2, y2));
 }
-*/
+
 void BranchePC::Prise::update()
 {
 	if (this->isClose())
+	{
 		isMatched = true;
+		sprite.setTextureRect(sf::IntRect());
+		match->sprite.setTextureRect(sf::IntRect(50, 0, 50, 600));
+	}
+		
 }
 
-void BranchePC::Prise::draw(sf::RenderWindow& window) const
+void BranchePC::Prise::draw(sf::RenderWindow& window)
 {
-	sf::RectangleShape sprit (sf::Vector2f(sX, sY));
-	sprit.setPosition(x - sX / 2, y - sY / 2);
-	window.draw(sprit);
+	sprite.setPosition(x - sX / 2, y - sY / 2);
+	window.draw(sprite);
 	if (this->match != nullptr) this->match->draw(window);
 }
 
