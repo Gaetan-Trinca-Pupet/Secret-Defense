@@ -5,7 +5,7 @@ Controllable::Controllable()
 
 }
 
-void Controllable::update()
+void Controllable::update(const sf::Event & events)
 {
 
 }

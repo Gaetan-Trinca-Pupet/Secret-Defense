@@ -1,13 +1,13 @@
 #ifndef CONTROLLABLE_H
 #define CONTROLLABLE_H
 
-#include "header/entity.h"
+#include <SFML/Graphics.hpp>
 
-class Controllable:Entity
+class Controllable:sf::RectangleShape
 {
 public:
     Controllable();
-    void update();
+    void update(const sf::Event & events);
 };
 
 #endif // CONTROLLABLE_H

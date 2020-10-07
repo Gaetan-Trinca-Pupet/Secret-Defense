@@ -2,12 +2,20 @@
 
 #include "header/miniJeu/MiniJeu.h"
 #include "header/testMiniJeu.h"
+#include "header/clickable.h"
 
 int main(){
-	AppData app;
-	app.window.create(sf::VideoMode(960, 540), "test");
-	app.window.setFramerateLimit(60);
-	//UnMiniJeu unMiniJeu(app);
-	//unMiniJeu.play();
-	return 0;
+    AppData app;
+    app.window.create(sf::VideoMode(960, 540), "test");
+    app.window.setFramerateLimit(60);
+    Clickable* test = new Clickable(sf::Vector2f(0,0), sf::Vector2f(50,50));
+    test->setWindow(*app.window);
+    test->setFillColor(sf::Color(0,255,0));
+    app.window.draw(*test);
+    while (true) {
+        test->onClick();
+        app.window.draw(*test);
+    }
+    delete test;
+    return 0;
 }
