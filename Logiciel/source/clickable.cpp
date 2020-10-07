@@ -1,5 +1,4 @@
-#include "header/clickable.h"
-
+#include "../header/clickable.h"
 Clickable::Clickable(const sf::Vector2f & pos, const sf::Vector2f & size, sf::Window* w) : window(w)
 {
     setPosition(pos);

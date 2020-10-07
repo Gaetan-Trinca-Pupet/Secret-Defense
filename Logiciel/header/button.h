@@ -1,7 +1,7 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include "header/clickable.h"
+#include "../header/clickable.h"
 
 class Button:Clickable
 {
