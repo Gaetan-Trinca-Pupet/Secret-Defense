@@ -25,7 +25,8 @@ void main(){
 		angle = angle - 2*PI/nbangles;
 		++i;
 	}
-	vec4 offsetlastvertex = vec4(cos(deg) * radius/width, -sin(deg) * radius/height, 0.0, 1.0);
+	vec4 offsetlastvertex = vec4(cos(-deg-PI/2) * radius/width, -sin(-deg-PI/2) * radius/height, 0.0, 0.0);
+	gl_Position = gl_in[0].gl_Position + offsetlastvertex;
 	EmitVertex();
 	EndPrimitive();
 }
