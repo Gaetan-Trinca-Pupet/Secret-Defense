@@ -16,6 +16,10 @@ void EteindrePC::EteindrePC::setup(){
 	laporte.addCollisionBox(table1.getCollisionBox());
 	laporte.addCollisionBox(table2.getCollisionBox());
 	laporte.addCollisionBox(table3.getCollisionBox());
+	rond.setRadius(50);
+	rond.setColor(sf::Color(255,0,0));
+	rond.setPosition(sf::Vector2f(0.9,0.9));
+	clock.restart();
 }
 
 void EteindrePC::EteindrePC::draw(){
@@ -32,8 +36,10 @@ void EteindrePC::EteindrePC::draw(){
 	table3.draw(app.window);
 	
 	laporte.draw(app.window);
+	app.window.draw(rond);
 }
 
 void EteindrePC::EteindrePC::update(){
 	laporte.update();
+	rond.setDeg(3.14159265359*2*(30-clock.getElapsedTime().asSeconds())/30);
 }

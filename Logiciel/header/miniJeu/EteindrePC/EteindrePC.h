@@ -1,10 +1,14 @@
 #ifndef __MINI_JEU_ETEINDRE_
 #define __MINI_JEU_ETEINDRE_
 
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+
 #include "../MiniJeu.h"
 #include "Personnage.h"
 #include "Mur.h"
 #include "Table.h"
+#include "Filled_arc.h"
 
 namespace EteindrePC{
 	class EteindrePC : public MiniJeu{
@@ -15,7 +19,9 @@ namespace EteindrePC{
 			Table table1;
 			Table table2;
 			Table table3;
+			Filled_arc rond;
 			Personnage laporte;
+			sf::Clock clock;
 			virtual void setup();
 			virtual void draw();
 			virtual void update();
