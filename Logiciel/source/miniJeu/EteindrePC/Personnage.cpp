@@ -77,3 +77,7 @@ void EteindrePC::Personnage::update(){
 void EteindrePC::Personnage::addCollisionBox(CollisionBox& collisionBox){
 	collisionList.push_back(&collisionBox);
 }
+
+std::pair<sf::Vector2f*,EteindrePC::Direction*> EteindrePC::Personnage::getPersoView(){
+	return std::pair<sf::Vector2f*,Direction*>(&position,&direction);
+}

@@ -9,6 +9,7 @@
 #include "Mur.h"
 #include "Table.h"
 #include "Filled_arc.h"
+#include "PC_bas.h"
 
 namespace EteindrePC{
 	class EteindrePC : public MiniJeu{
@@ -21,6 +22,7 @@ namespace EteindrePC{
 			Table table3;
 			Filled_arc rond;
 			Personnage laporte;
+			PC_bas pc;
 			sf::Clock clock;
 			virtual void setup();
 			virtual void draw();

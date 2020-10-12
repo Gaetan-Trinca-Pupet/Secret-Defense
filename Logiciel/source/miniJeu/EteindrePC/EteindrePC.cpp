@@ -19,6 +19,8 @@ void EteindrePC::EteindrePC::setup(){
 	rond.setRadius(50);
 	rond.setColor(sf::Color(255,0,0));
 	rond.setPosition(sf::Vector2f(0.9,0.9));
+	pc.setPosition(sf::Vector2f(300,220));
+	pc.setPersoView(laporte.getPersoView());
 	clock.restart();
 }
 
@@ -37,9 +39,11 @@ void EteindrePC::EteindrePC::draw(){
 	
 	laporte.draw(app.window);
 	app.window.draw(rond);
+	pc.draw(app.window);
 }
 
 void EteindrePC::EteindrePC::update(){
 	laporte.update();
+	pc.update();
 	rond.setDeg(3.14159265359*2*(30-clock.getElapsedTime().asSeconds())/30);
 }

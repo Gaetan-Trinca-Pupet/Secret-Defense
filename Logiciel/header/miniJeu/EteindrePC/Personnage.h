@@ -2,6 +2,8 @@
 #define __MINI_JEU_ETEINDRE_PERSONNAGE_H
 
 #include <vector>
+#include <utility>
+
 #include <SFML/Graphics.hpp>
 #include "CollisionBox.h"
 
@@ -28,6 +30,7 @@ namespace EteindrePC{
 			void update();
 			void draw(sf::RenderWindow& window);
 			void addCollisionBox(CollisionBox& collisionBox);
+			std::pair<sf::Vector2f*,EteindrePC::Direction*> getPersoView();
 	};
 }
 #endif
