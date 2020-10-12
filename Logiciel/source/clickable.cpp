@@ -30,15 +30,15 @@ bool Clickable::isClicked()
 {
     sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
     return (sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
-            mousePos.x >= rect.left && mousePos.x <= rect.left + rect.width &&
-            mousePos.y >= rect.left && mousePos.y <= rect.left + rect.width);
+            mousePos.x >= pos.x && mousePos.x <= pos.x + size.x &&
+            mousePos.y >= pos.y && mousePos.y <= pos.y + size.y);
 }
 
 bool Clickable::isHovered()
 {
     sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
-    return (mousePos.x >= rect.left && mousePos.x <= rect.left + rect.width &&
-            mousePos.y >= rect.left && mousePos.y <= rect.left + rect.width);
+    return (mousePos.x >= pos.x && mousePos.x <= pos.x + size.x &&
+            mousePos.y >= pos.y && mousePos.y <= pos.y + size.y);
 }
 
 Clickable::~Clickable()

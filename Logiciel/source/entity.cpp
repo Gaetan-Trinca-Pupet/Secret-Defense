@@ -1,7 +1,7 @@
 #include "header/entity.h"
 
-Entity::Entity(const sf::Vector2f & pos, const sf::Vector2f & size, sf::RenderWindow* w, const sf::Sprite & s)
-    : rect(pos, size), window(w), sprite(s)
+Entity::Entity(const sf::Vector2f & p, const sf::Vector2f & s, sf::RenderWindow* w, const sf::Sprite & sp)
+    : pos(p), size(s), window(w), sprite(sp)
 {
 
 }
@@ -23,4 +23,34 @@ void Entity::draw(sf::RenderTarget &target, sf::RenderStates states) const
 Entity::~Entity()
 {
     delete window;
+}
+
+void Entity::setPos(const sf::Vector2f & p)
+{
+    pos = p;
+}
+
+const sf::Vector2f &Entity::getPos()
+{
+    return pos;
+}
+
+void Entity::setSize(const sf::Vector2f & s)
+{
+    size = s;
+}
+
+const sf::Vector2f &Entity::getSize()
+{
+    return size;
+}
+
+void Entity::setSprite(const sf::Sprite &sp)
+{
+    sprite = sp;
+}
+
+const sf::Sprite &Entity::getSprite()
+{
+    return sprite;
 }
