@@ -24,7 +24,12 @@ void Clickable::onClick()
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)&&
             mousePos.x >= this->getPosition().x && mousePos.x <= this->getPosition().x + this->getSize().x &&
             mousePos.y >= this->getPosition().y && mousePos.y <= this->getPosition().y + this->getSize().y)
-        std::cout << "briz"<< std::endl;
+        actionOnClick();
+}
+
+void actionOnClick()
+{
+
 }
 
 bool Clickable::isClicked()
