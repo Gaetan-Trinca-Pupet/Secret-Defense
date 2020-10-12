@@ -10,6 +10,7 @@ private:
 public:
     Button(const std::string & t = std::string());
     virtual ~Button();
+    virtual void actionOnClick();
 };
 
 #endif // BUTTON_H

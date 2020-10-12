@@ -9,3 +9,7 @@ Button::~Button()
 {
 
 }
+
+void Button::actionOnClick() {
+    std::cout << "It works !" << std::endl;
+}

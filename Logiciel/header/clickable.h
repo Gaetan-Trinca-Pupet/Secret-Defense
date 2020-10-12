@@ -7,15 +7,17 @@
 class Clickable:public sf::RectangleShape
 {
 private:
-    sf::Window* window;
+    sf::RenderWindow* window;
+    bool mouseIsAlreadyPressed;
     virtual void actionOnClick();
 public:
-    Clickable(const sf::Vector2f & pos = sf::Vector2f(), const sf::Vector2f & size = sf::Vector2f(), sf::Window* w = nullptr);
+    Clickable(const sf::Vector2f & pos = sf::Vector2f(), const sf::Vector2f & size = sf::Vector2f(), sf::RenderWindow* w = nullptr);
     void onClick();
-    virtual bool isClicked();
+    bool isClicked();
+    bool isHovered();
     virtual ~Clickable();
     sf::Window* getWindow() const;
-    void setWindow(sf::Window* value);
+    void setWindow(sf::RenderWindow* value);
 };
 
 #endif // CLICKABLE_H
