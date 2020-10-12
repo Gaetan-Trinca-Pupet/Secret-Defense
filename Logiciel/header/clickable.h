@@ -4,20 +4,19 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-class Clickable:public sf::RectangleShape
+#include "header/entity.h"
+
+class Clickable:public Entity
 {
 private:
-    sf::RenderWindow* window;
     bool mouseIsAlreadyPressed;
     virtual void actionOnClick();
 public:
-    Clickable(const sf::Vector2f & pos = sf::Vector2f(), const sf::Vector2f & size = sf::Vector2f(), sf::RenderWindow* w = nullptr);
+    Clickable(const sf::Vector2f & pos = sf::Vector2f(), const sf::Vector2f & size = sf::Vector2f(), sf::RenderWindow* w = nullptr, const sf::Sprite & sprite = sf::Sprite());
     void onClick();
     bool isClicked();
     bool isHovered();
     virtual ~Clickable();
-    sf::Window* getWindow() const;
-    void setWindow(sf::RenderWindow* value);
 };
 
 #endif // CLICKABLE_H

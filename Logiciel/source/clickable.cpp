@@ -1,19 +1,8 @@
 #include "header/clickable.h"
 
-Clickable::Clickable(const sf::Vector2f & pos, const sf::Vector2f & size, sf::RenderWindow* w) : window(w)
+Clickable::Clickable(const sf::Vector2f & pos, const sf::Vector2f & size, sf::RenderWindow* w, const sf::Sprite & sprite) : Entity(pos, size, w, sprite)
 {
-    setPosition(pos);
-    setSize(size);
-}
 
-sf::Window* Clickable::getWindow() const
-{
-    return window;
-}
-
-void Clickable::setWindow(sf::RenderWindow* w)
-{
-    window = w;
 }
 
 void Clickable::onClick()
@@ -41,15 +30,15 @@ bool Clickable::isClicked()
 {
     sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
     return (sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
-            mousePos.x >= this->getPosition().x && mousePos.x <= this->getPosition().x + this->getSize().x &&
-            mousePos.y >= this->getPosition().y && mousePos.y <= this->getPosition().y + this->getSize().y);
+            mousePos.x >= rect.left && mousePos.x <= rect.left + rect.width &&
+            mousePos.y >= rect.left && mousePos.y <= rect.left + rect.width);
 }
 
 bool Clickable::isHovered()
 {
     sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
-    return (mousePos.x >= this->getPosition().x && mousePos.x <= this->getPosition().x + this->getSize().x &&
-            mousePos.y >= this->getPosition().y && mousePos.y <= this->getPosition().y + this->getSize().y);
+    return (mousePos.x >= rect.left && mousePos.x <= rect.left + rect.width &&
+            mousePos.y >= rect.left && mousePos.y <= rect.left + rect.width);
 }
 
 Clickable::~Clickable()

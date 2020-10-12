@@ -10,7 +10,6 @@ int main(){
     app.window.setFramerateLimit(60);
     Clickable* test = new Clickable(sf::Vector2f(0,0), sf::Vector2f(50,50));
     test->setWindow(&app.window);
-    test->setFillColor(sf::Color(0,255,0));
     app.window.draw(*test);
     while(app.window.isOpen()){
         sf::Event event;
