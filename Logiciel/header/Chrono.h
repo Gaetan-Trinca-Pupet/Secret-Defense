@@ -23,8 +23,8 @@ private:
 	//AssetManager* assetManager;
 	sf::Clock* clock;
 	Filled_arc arc;
-	/*sf::Texture tex;
-	sf::CircleShape outline;*/
+	//sf::Texture tex;
+	sf::CircleShape outline;
 };
 
 #endif
