@@ -3,13 +3,14 @@
 
 #include <SFML/Graphics.hpp>
 #include "miniJeu/MiniJeu.h"
+#include "Filled_arc.h"
 #include "AssetManager.h"
 
 class Chrono : public sf::Drawable {
 public:
 
 	Chrono();
-	Chrono(float _time, sf::Clock* _clock, sf::RenderWindow& window, AssetManager* _assetManager);
+	Chrono(float _time, sf::Clock* _clock, sf::RenderWindow& window);
 	virtual ~Chrono();
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -19,11 +20,11 @@ public:
 private:
 
 	float time;
-	AssetManager* assetManager;
+	//AssetManager* assetManager;
 	sf::Clock* clock;
-	sf::RectangleShape bar;
-	sf::Texture tex;
-	sf::Sprite spriteBatterie;
+	Filled_arc arc;
+	/*sf::Texture tex;
+	sf::CircleShape outline;*/
 };
 
 #endif

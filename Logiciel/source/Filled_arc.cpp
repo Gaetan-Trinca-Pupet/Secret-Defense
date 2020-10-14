@@ -1,9 +1,9 @@
 #include "../header/Filled_arc.h"
 
-sf::Shader EteindrePC::Filled_arc::shader;
-bool EteindrePC::Filled_arc::isLoaded;
+sf::Shader Filled_arc::shader;
+bool Filled_arc::isLoaded;
 
-EteindrePC::Filled_arc::Filled_arc(const sf::Vector2f& position, const sf::Color& col, const unsigned int rad, const unsigned int nba)
+Filled_arc::Filled_arc(const sf::Vector2f& position, const sf::Color& col, const unsigned int rad, const unsigned int nba)
 		: point(position,col), radius(rad), nbangles(nba), deg(2*3.14159265358979323846){
 	if(!isLoaded){
 		constexpr char vertexShaderFilename[] = "../ressource/EteindrePC/shaders/filled_arc.vert";
@@ -13,7 +13,7 @@ EteindrePC::Filled_arc::Filled_arc(const sf::Vector2f& position, const sf::Color
 	}
 }
 
-void EteindrePC::Filled_arc::draw(sf::RenderTarget& target, sf::RenderStates states) const{
+void Filled_arc::draw(sf::RenderTarget& target, sf::RenderStates states) const{
 	shader.setUniform("radius",int(radius));
 	shader.setUniform("nbangles",int(nbangles));
 	shader.setUniform("width",int(target.getSize().x));
@@ -26,22 +26,22 @@ void EteindrePC::Filled_arc::draw(sf::RenderTarget& target, sf::RenderStates sta
 	target.draw(vertices, states);
 }
 
-void EteindrePC::Filled_arc::setPosition(const sf::Vector2f& position){
+void Filled_arc::setPosition(const sf::Vector2f& position){
 	point.position = position;
 }
 
-void EteindrePC::Filled_arc::setColor(const sf::Color& col){
+void Filled_arc::setColor(const sf::Color& col){
 	point.color = col;
 }
 
-void EteindrePC::Filled_arc::setRadius(const unsigned rad ){
+void Filled_arc::setRadius(const unsigned rad ){
 	radius = rad;
 }
 
-void EteindrePC::Filled_arc::setNBangles(const unsigned nba){
+void Filled_arc::setNBangles(const unsigned nba){
 	nbangles = nba;
 }
 
-void EteindrePC::Filled_arc::setDeg(const float& degre){
+void Filled_arc::setDeg(const float& degre){
 	deg = degre;
 }
