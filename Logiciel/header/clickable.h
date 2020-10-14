@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-#include "header/entity.h"
+#include "../header/entity.h"
 
 class Clickable:public Entity
 {

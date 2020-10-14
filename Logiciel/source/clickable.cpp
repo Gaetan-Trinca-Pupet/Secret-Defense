@@ -1,4 +1,4 @@
-#include "header/clickable.h"
+#include "../header/clickable.h"
 
 Clickable::Clickable(const sf::Vector2f & pos, const sf::Vector2f & size, sf::RenderWindow* w, const sf::Sprite & sprite) : Entity(pos, size, w, sprite)
 {

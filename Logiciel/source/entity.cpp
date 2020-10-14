@@ -1,4 +1,4 @@
-#include "header/entity.h"
+#include "../header/entity.h"
 
 Entity::Entity(const sf::Vector2f & p, const sf::Vector2f & s, sf::RenderWindow* w, const sf::Sprite & sp)
     : pos(p), size(s), window(w), sprite(sp)

@@ -1,4 +1,4 @@
-#include "header/button.h"
+#include "../header/button.h"
 
 Button::Button(const std::string &t) : text(t)
 {
