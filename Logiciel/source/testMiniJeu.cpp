@@ -1,10 +1,12 @@
 #include "../header/testMiniJeu.h"
+#include <iostream>
 
 UnMiniJeu::UnMiniJeu(AppData& appData) : MiniJeu(appData){
 	
 }
 
-void UnMiniJeu::setup(){
+void UnMiniJeu::setup() {
+
 	direction = sf::Vector2f(3,3);
 	app.window.setFramerateLimit(60);
 	setBackgroundColor(sf::Color(255,255,255));
@@ -13,9 +15,12 @@ void UnMiniJeu::setup(){
 	rectangle.setFillColor(sf::Color(255,0,0));
 	timer = 5;
 	chrono = Chrono(timer, &clock, app.window, &assetManager);
+
 }
 
+
 void UnMiniJeu::draw(){
+
 	app.window.draw(rectangle);
 	app.window.draw(chrono);
 }
