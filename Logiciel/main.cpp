@@ -2,6 +2,7 @@
 
 #include "header/miniJeu/MiniJeu.h"
 #include "header/testMiniJeu.h"
+#include "header/clickable.h"
 
 int main(){
 	AppData app;
@@ -9,7 +10,7 @@ int main(){
 	app.window.setFramerateLimit(60);
 	//UnMiniJeu unMiniJeu(app);
 	//unMiniJeu.play();
-	MiniJeu * jeu = new UnMiniJeu(app);
+	MiniJeu* jeu = new UnMiniJeu(app);
 	jeu->play();
 	delete jeu;
 	return 0;

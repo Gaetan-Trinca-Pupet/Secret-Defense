@@ -11,6 +11,9 @@ class UnMiniJeu: public MiniJeu{
 		sf::RectangleShape rectangle;
 		sf::Vector2f direction;
 		Chrono chrono;
+		float time;
+		sf::Clock clock;
+
 		
 	protected :
 		virtual void setup();
@@ -20,6 +23,7 @@ class UnMiniJeu: public MiniJeu{
 	
 	public : 
 		UnMiniJeu(AppData& appData);
+		
 		
 };
 

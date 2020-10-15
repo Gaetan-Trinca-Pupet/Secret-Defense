@@ -2,11 +2,14 @@
 
 
 AssetManager::AssetManager() {
+<<<<<<< HEAD
 
     /*sf::Texture texture;
     texture.loadFromFile("r.png");
 
     textures["player"] = texture;*/
+=======
+>>>>>>> master
 }
 
 sf::Texture& AssetManager::getTexture(std::string path)
