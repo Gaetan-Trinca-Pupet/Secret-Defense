@@ -9,10 +9,7 @@ Button::~Button()
 {
 
 }
-<<<<<<< HEAD
-=======
 
 void Button::actionOnClick() {
     std::cout << "It works !" << std::endl;
 }
->>>>>>> master

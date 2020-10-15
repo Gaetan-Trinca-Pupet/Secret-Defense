@@ -2,8 +2,6 @@
 #define __MINIJEU_H_
 
 #include <SFML/Graphics.hpp>
-#include "../AssetManager.h"
-
 
 //toutes les donnees partagees par les minijeux sont dans cette structure
 
@@ -18,11 +16,6 @@ class MiniJeu{
 	protected :
 		AppData& app;
 		bool isFinished;
-		
-
-		float timer;
-		sf::Clock clock;
-		AssetManager assetManager;
 		
 		virtual void setup();
 		virtual void draw()=0;
