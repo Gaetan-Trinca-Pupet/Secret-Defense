@@ -1,28 +1,33 @@
 #include "../header/entity.h"
 
-Entity::Entity(const sf::Vector2f & p, const sf::Vector2f & s, sf::RenderWindow* w, const sf::Sprite & sp)
-    : pos(p), size(s), window(w), sprite(sp)
+///
+/// \brief Entity::Entity is the constructor for Entity
+/// \param p is the position of te entity
+/// \param s is the size of the entity
+/// \param w is a pointer to the window the entity will be displayed on
+/// \param sp is the entity's sprite
+///
+
+Entity::Entity(const sf::Vector2f & p, const sf::Vector2f & s, sf::Drawable* sp)
+    : pos(p), size(s), sprite(sp)
 {
 
 }
 
-sf::Window* Entity::getWindow() const
-{
-    return window;
-}
+///
+/// \brief Entity::draw draws the sprite at the correct position on the window
+/// \param target the window to draw on
+/// \param states
+///
 
-void Entity::setWindow(sf::RenderWindow* w)
-{
-    window = w;
-}
 void Entity::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-    target.draw(sprite, states);
+    target.draw(*sprite, states);
 }
 
 Entity::~Entity()
 {
-    delete window;
+
 }
 
 void Entity::setPos(const sf::Vector2f & p)
@@ -45,12 +50,12 @@ const sf::Vector2f &Entity::getSize()
     return size;
 }
 
-void Entity::setSprite(const sf::Sprite &sp)
+void Entity::setSprite(sf::Drawable* sp)
 {
     sprite = sp;
 }
 
-const sf::Sprite &Entity::getSprite()
+sf::Drawable* Entity::getSprite()
 {
     return sprite;
 }

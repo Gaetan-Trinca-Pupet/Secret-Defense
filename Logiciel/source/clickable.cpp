@@ -1,6 +1,6 @@
 #include "../header/clickable.h"
 
-Clickable::Clickable(const sf::Vector2f & pos, const sf::Vector2f & size, sf::RenderWindow* w, const sf::Sprite & sprite) : Entity(pos, size, w, sprite)
+Clickable::Clickable(const sf::Vector2f & pos, const sf::Vector2f & size, sf::RenderWindow* w, sf::Drawable* sprite) : Entity(pos, size, sprite), window(w)
 {
 
 }
@@ -39,6 +39,16 @@ bool Clickable::isHovered()
     sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
     return (mousePos.x >= pos.x && mousePos.x <= pos.x + size.x &&
             mousePos.y >= pos.y && mousePos.y <= pos.y + size.y);
+}
+
+sf::Window* Clickable::getWindow() const
+{
+    return window;
+}
+
+void Clickable::setWindow(sf::RenderWindow* w)
+{
+    window = w;
 }
 
 Clickable::~Clickable()
