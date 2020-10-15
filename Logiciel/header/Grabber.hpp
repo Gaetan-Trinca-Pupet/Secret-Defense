@@ -67,7 +67,7 @@ namespace Grabber
 
 		~Grabber();
 
-		void setSprite(const std::string& str);
+		void setSprite(const sf::Texture& textur);
 
 		void update(sf::RenderWindow& window);
 		void draw(sf::RenderWindow& window);
@@ -184,8 +184,6 @@ namespace Grabber
 		lastX, lastY, x, y = 0;
 		isGrabbing = false;
 		grabbed = nullptr;
-
-		setSprite("../ressource/BranchePC/open_hand.png");
 	}
 
 	// Destructor of Grabber
@@ -200,9 +198,9 @@ namespace Grabber
 	// Allows the user to set the sprite of the cursor, the size doesn't matter
 	// The texture must be an image split in half, one half for when the user is left clicking, the other for when the user is not
 	// For example, image.png (50x100) (WIDTHxHEIGHT) will be split in two 50x50 texture
-	inline void Grabber::setSprite(const std::string& str)
+	inline void Grabber::setSprite(const sf::Texture& textur)
 	{
-		texture.loadFromFile(str);
+		texture = textur;
 		sprite.setTexture(texture);
 
 		size_x = texture.getSize().x / 2;
