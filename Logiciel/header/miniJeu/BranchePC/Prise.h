@@ -7,7 +7,7 @@
 
 namespace BranchePC
 {
-	class Prise : public Grabber::Grabbed
+	class Prise : public Grabber::Grabbable
 	{
 	private:
 		Prise* match;

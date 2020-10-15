@@ -14,7 +14,7 @@ namespace BranchePC
 	{
 	private:
 
-		Grabber::Grabber main;
+		Grabber::Grabber* main;
 		std::vector<Prise*> tabPrise;
 		
 

@@ -46,21 +46,24 @@ void BranchePC::BranchePC::setup()
 		tabPrise[i]->setSprite(texture);
 	}
 	
-	main = Grabber::Grabber (tabPrise);
-	main.setX(app.window.getSize().x / 2);
-	main.setY(app.window.getSize().y / 2);
+	main = new Grabber::Grabber (&tabPrise);
+	main->setX(app.window.getSize().x / 2);
+	main->setY(app.window.getSize().y / 2);
+	sf::Texture texture;
+	texture.loadFromFile("../ressource/BranchePC/hand.png");
+	main->setSprite(texture);
 }
 
 void BranchePC::BranchePC::draw()
 {
 	for (unsigned i(0); i < tabPrise.size(); ++i)
 		tabPrise[i]->draw(app.window);
-	main.draw(app.window);
+	main->draw(app.window);
 }
 
 void BranchePC::BranchePC::update()
 {
-	main.update(app.window);
+	main->update(app.window);
 }
 
 BranchePC::BranchePC::BranchePC(AppData& appData): MiniJeu(appData)

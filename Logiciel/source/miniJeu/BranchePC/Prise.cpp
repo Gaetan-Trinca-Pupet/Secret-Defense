@@ -9,10 +9,9 @@ bool BranchePC::Prise::isClose() const
 		((match->getY() >= y - size_y / 2) && (match->getY() <= y + size_y / 2)));
 }
 
-BranchePC::Prise::Prise(Prise* prise, const int& myX, const int& myY) : Grabbed(myX,myY,50,50)
+BranchePC::Prise::Prise(Prise* prise, const int& myX, const int& myY) : Grabbable(myX,myY,50,50)
 {
 	match = prise;
-	x = myX;
 }
 
 BranchePC::Prise::~Prise()
@@ -20,9 +19,9 @@ BranchePC::Prise::~Prise()
 	delete match;
 }
 
-void BranchePC::Prise::setSprite(const sf::Texture & texture)
+void BranchePC::Prise::setSprite(const sf::Texture& textur)
 {
-	this->texture = texture;
+	texture = textur;
 	sprite.setTexture(texture);
 	sprite.setTextureRect(sf::IntRect(0, 50, 50, 600));
 	if (match != nullptr)
