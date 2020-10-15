@@ -10,6 +10,7 @@ int main(){
 	app.window.setFramerateLimit(60);
 	//UnMiniJeu unMiniJeu(app);
 	//unMiniJeu.play();
+	app.difficulty = 10;
 	MiniJeu * jeu = new EteindrePC::EteindrePC(app);
 	jeu->play();
 	delete jeu;

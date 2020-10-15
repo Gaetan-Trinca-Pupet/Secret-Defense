@@ -28,10 +28,12 @@ void EteindrePC::Personnage::update(){
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && !sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
 		direction = EteindrePC::Direction::Haut;
 		bool canPass(true);
+		if(position.y -6 < -up_offset)canPass= false;
 		for(CollisionBox* box : collisionList){
 			if(position.y > box->getPosition().y && position.y - 6 + up_offset < box->getPosition().y + box->getSize().y
 					&& position.x + right_offset > box->getPosition().x && position.x + left_offset < box->getPosition().x + box->getSize().x){
 				canPass = false;
+				break;
 			}
 		}
 		if(canPass)position.y -= 6;
@@ -39,10 +41,12 @@ void EteindrePC::Personnage::update(){
 	}else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Z)){
 		direction = EteindrePC::Direction::Bas;
 		bool canPass(true);
+		if(position.y + 6 > 540-down_offset)canPass= false;
 		for(CollisionBox* box : collisionList){
 			if(position.y + down_offset < box->getPosition().y + box->getSize().y && position.y + 6 + down_offset > box->getPosition().y 
 					&& position.x + right_offset > box->getPosition().x && position.x + left_offset < box->getPosition().x + box->getSize().x){
 				canPass = false;
+				break;
 			}
 		}
 		if(canPass)position.y += 6;
@@ -50,10 +54,12 @@ void EteindrePC::Personnage::update(){
 	}else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
 		direction = EteindrePC::Direction::Gauche;
 		bool canPass(true);
+		if(position.x - 6 < -left_offset)canPass= false;
 		for(CollisionBox* box : collisionList){
 			if(position.x + right_offset > box->getPosition().x + box->getSize().x && position.x + left_offset - 6 < box->getPosition().x + box->getSize().x
 					&& position.y + down_offset  > box->getPosition().y && position.y + up_offset < box->getPosition().y + box->getSize().y){
 				canPass = false;
+				break;
 			}
 		}
 		if(canPass)position.x -= 6;
@@ -61,10 +67,12 @@ void EteindrePC::Personnage::update(){
 	}else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
 		direction = EteindrePC::Direction::Droite;
 		bool canPass(true);
+		if(position.x + 6 > 960-right_offset)canPass= false;
 		for(CollisionBox* box : collisionList){
 			if(position.x + left_offset  < box->getPosition().x + box->getSize().x && position.x + right_offset + 6 > box->getPosition().x 
 					&& position.y + down_offset  > box->getPosition().y && position.y + up_offset < box->getPosition().y + box->getSize().y){
 				canPass = false;
+				break;
 			}
 		}
 		if(canPass)position.x += 6;

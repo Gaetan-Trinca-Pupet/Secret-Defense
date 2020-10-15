@@ -5,9 +5,10 @@ bool EteindrePC::PC_base::isOn() const{
 }
 
 void EteindrePC::PC_base::update(){
-	if(this->isPersonnageLookingAt() && sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !alreadyChanged){
-		on = !on;
-		alreadyChanged = true;
+	if((!notFirstTime || clock.getElapsedTime().asSeconds() >= 1.2) && this->isPersonnageLookingAt() && sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+		on = (!on) & 1;
+		clock.restart();
+		notFirstTime = true;
 	}
 }
 
@@ -22,4 +23,12 @@ void EteindrePC::PC_base::setPersoView(const std::pair<sf::Vector2f*,EteindrePC:
 
 void EteindrePC::PC_base::setPosition(const sf::Vector2f& pos){
 	position = pos;
+}
+
+EteindrePC::PC_base::PC_base(){
+	on = false;
+}
+
+void EteindrePC::PC_base::setOn(bool b){
+	on = b;
 }

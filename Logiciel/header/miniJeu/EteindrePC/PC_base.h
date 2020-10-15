@@ -5,13 +5,15 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <SFML/System.hpp>
 
 #include "Personnage.h"
 
 namespace EteindrePC{
 	class PC_base{
 		private :
-			bool alreadyChanged;
+			sf::Clock clock;
+			bool notFirstTime;
 		protected :
 			sf::Vector2f position;
 			bool on;
@@ -22,10 +24,12 @@ namespace EteindrePC{
 			
 		public :
 			bool isOn() const;
+			void setOn(bool b);
 			void update();
 			void draw(sf::RenderWindow& window);
 			void setPersoView(const std::pair<sf::Vector2f*,EteindrePC::Direction*>& pView);
 			void setPosition(const sf::Vector2f& pos);
+			PC_base();
 	};
 }
 #endif

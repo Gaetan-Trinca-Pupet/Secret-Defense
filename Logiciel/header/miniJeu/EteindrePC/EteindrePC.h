@@ -1,6 +1,10 @@
 #ifndef __MINI_JEU_ETEINDRE_
 #define __MINI_JEU_ETEINDRE_
 
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
@@ -8,8 +12,9 @@
 #include "Personnage.h"
 #include "Mur.h"
 #include "Table.h"
-#include "Filled_arc.h"
+#include "../../Filled_arc.h"
 #include "PC_bas.h"
+#include "PC_haut.h"
 
 namespace EteindrePC{
 	class EteindrePC : public MiniJeu{
@@ -22,13 +27,18 @@ namespace EteindrePC{
 			Table table3;
 			Filled_arc rond;
 			Personnage laporte;
-			PC_bas pc;
+			std::vector<PC_base*> pcs;
 			sf::Clock clock;
+			sf::Time tempsCouloir;
+			int temps;
 			virtual void setup();
 			virtual void draw();
 			virtual void update();
+			void createPCs();
+			void initPCs();
 		public :
 			EteindrePC(AppData& appData);
+			~EteindrePC();
 	};
 }
 #endif

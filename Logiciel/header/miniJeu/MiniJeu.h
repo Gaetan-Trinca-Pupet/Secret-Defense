@@ -8,6 +8,7 @@
 struct AppData{
 	sf::RenderWindow window;
 	unsigned int difficulty;
+	int life;
 };
 
 class MiniJeu{
