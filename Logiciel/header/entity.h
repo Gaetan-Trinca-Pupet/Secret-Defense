@@ -9,21 +9,20 @@
 
 class Entity : public sf::Drawable
 {
-protected:
+private:
     sf::Vector2f pos;
     sf::Vector2f size;
-private:
     sf::Drawable* sprite;
 public:
     Entity(const sf::Vector2f & p = sf::Vector2f(), const sf::Vector2f & s = sf::Vector2f(), sf::Drawable* sp = nullptr);
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
     virtual ~Entity();
     void setPos(const sf::Vector2f & p);
-    const sf::Vector2f & getPos();
+    const sf::Vector2f & getPos() const;
     void setSize(const sf::Vector2f & s);
-    const sf::Vector2f & getSize();
+    const sf::Vector2f & getSize() const;
     void setSprite(sf::Drawable* sp);
-    sf::Drawable* getSprite ();
+    sf::Drawable* getSprite () const;
 };
 
 #endif // ENTITY_H

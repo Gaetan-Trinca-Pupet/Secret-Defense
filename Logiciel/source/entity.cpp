@@ -35,7 +35,7 @@ void Entity::setPos(const sf::Vector2f & p)
     pos = p;
 }
 
-const sf::Vector2f &Entity::getPos()
+const sf::Vector2f &Entity::getPos() const
 {
     return pos;
 }
@@ -45,7 +45,7 @@ void Entity::setSize(const sf::Vector2f & s)
     size = s;
 }
 
-const sf::Vector2f &Entity::getSize()
+const sf::Vector2f &Entity::getSize() const
 {
     return size;
 }
@@ -55,7 +55,7 @@ void Entity::setSprite(sf::Drawable* sp)
     sprite = sp;
 }
 
-sf::Drawable* Entity::getSprite()
+sf::Drawable* Entity::getSprite() const
 {
     return sprite;
 }

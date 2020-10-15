@@ -30,15 +30,15 @@ bool Clickable::isClicked()
 {
     sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
     return (sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
-            mousePos.x >= pos.x && mousePos.x <= pos.x + size.x &&
-            mousePos.y >= pos.y && mousePos.y <= pos.y + size.y);
+            mousePos.x >= getPos().x && mousePos.x <= getPos().x + getSize().x &&
+            mousePos.y >= getPos().y && mousePos.y <= getPos().y + getSize().y);
 }
 
 bool Clickable::isHovered()
 {
     sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
-    return (mousePos.x >= pos.x && mousePos.x <= pos.x + size.x &&
-            mousePos.y >= pos.y && mousePos.y <= pos.y + size.y);
+    return (mousePos.x >= getPos().x && mousePos.x <= getPos().x + getSize().x &&
+            mousePos.y >= getPos().y && mousePos.y <= getPos().y + getSize().y);
 }
 
 sf::Window* Clickable::getWindow() const
@@ -53,5 +53,5 @@ void Clickable::setWindow(sf::RenderWindow* w)
 
 Clickable::~Clickable()
 {
-
+    delete window;
 }

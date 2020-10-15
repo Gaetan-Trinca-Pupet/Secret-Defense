@@ -2,7 +2,7 @@
 
 #include "header/miniJeu/MiniJeu.h"
 #include "header/testMiniJeu.h"
-#include "header/clickable.h"
+#include "header/button.h"
 
 int main(){
 	AppData app;
