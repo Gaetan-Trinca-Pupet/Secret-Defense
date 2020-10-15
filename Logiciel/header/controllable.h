@@ -3,6 +3,10 @@
 
 #include <SFML/Graphics.hpp>
 
+///
+/// \brief The Controllable class is supposed to be an entity which can react to the events (but it is not implemented)
+///
+
 class Controllable:sf::RectangleShape
 {
 public:
