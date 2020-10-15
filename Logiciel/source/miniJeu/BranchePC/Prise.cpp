@@ -3,10 +3,10 @@
 bool BranchePC::Prise::isClose() const
 {
 	return
-		(((x >= match->getX() - match->getsX() / 2) && (x <= match->getX() + match->getsX() / 2)) ||
-		((match->getX() >= x - sX / 2) && (match->getX() <= x + sX / 2))) &&
-		(((y >= match->getY() - match->getsY() / 2) && (y <= match->getY() + match->getsY() / 2)) ||
-		((match->getY() >= y - sY / 2) && (match->getY() <= y + sY / 2)));
+		(((x >= match->getX() - match->getSizeX() / 2) && (x <= match->getX() + match->getSizeX() / 2)) ||
+		((match->getX() >= x - size_x / 2) && (match->getX() <= x + size_x / 2))) &&
+		(((y >= match->getY() - match->getSizeY() / 2) && (y <= match->getY() + match->getSizeY() / 2)) ||
+		((match->getY() >= y - size_y / 2) && (match->getY() <= y + size_y / 2)));
 }
 
 BranchePC::Prise::Prise(Prise* prise, const int& myX, const int& myY) : Grabbed(myX,myY,50,50)

@@ -2,6 +2,7 @@
 
 void BranchePC::BranchePC::setup()
 {
+	
 	const unsigned short nbPrise(9);
 
 	app.window.sf::Window::setMouseCursorVisible(false);
@@ -11,7 +12,7 @@ void BranchePC::BranchePC::setup()
 
 	
 	
-
+	
 	
 	tabPrise.resize(nbPrise);
 
@@ -34,6 +35,8 @@ void BranchePC::BranchePC::setup()
 		tabPos2[rand] = tabPos2[tabPos2.size() - 1];
 		tabPos2.pop_back();
 	}
+
+	
 		
 	for (unsigned i = 0; i < tabPrise.size(); i++)
 	{
@@ -42,7 +45,8 @@ void BranchePC::BranchePC::setup()
 		texture.loadFromFile(src);
 		tabPrise[i]->setSprite(texture);
 	}
-
+	
+	main = Grabber::Grabber (tabPrise);
 	main.setX(app.window.getSize().x / 2);
 	main.setY(app.window.getSize().y / 2);
 }

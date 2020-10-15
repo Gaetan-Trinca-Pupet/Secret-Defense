@@ -1,5 +1,5 @@
-#ifndef __GRABBER_H_
-#define __GRABBER_H_
+#ifndef __GRABBER_HPP_
+#define __GRABBER_HPP_
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -15,6 +15,8 @@ namespace Grabber
 
 		int size_x;
 		int size_y;
+
+		
 
 		
 	public:
@@ -62,102 +64,109 @@ namespace Grabber
 		bool canGrab(Grabbed* const grab)const;
 
 	public:
-		Grabber(std::vector<Grabbed*>& tab);
+		Grabber();
+		template<typename T>
+		Grabber(std::vector<T*>& tab);
+
 		~Grabber();
 
 		void setSprite(const std::string& str);
 
 		void update(sf::RenderWindow& window);
 		void draw(sf::RenderWindow& window);
+
+		void setX(const int& X);
+		void setY(const int& Y);
 	};
 
 
 
 // Definition of Grabbed
 
-
 	// Constructor of Grabbed
-	inline Grabbed::Grabbed(const int& X, const int& Y, const int& sx, const int& sy) : x(X), y(Y), size_x(sx), size_y(sy)
+	Grabbed::Grabbed(const int& X, const int& Y, const int& sx, const int& sy) : x(X), y(Y), size_x(sx), size_y(sy)
 	{
 
 	}
 
 	// Detructor of Grabbed
-	inline Grabbed::~Grabbed()
+	Grabbed::~Grabbed()
 	{
 
 	}
 
 	// virtual function to update the object.
-	inline void update()
+	void update()
 	{
 
 	}
 
 	// set the position on the x-axis of the object
-	inline void Grabbed::setX(const int& X)
+	void Grabbed::setX(const int& X)
 	{
 		x = X;
 	}
 
 	// set the position on the y-axis of the object
-	inline void Grabbed::setY(const int& Y)
+	void Grabbed::setY(const int& Y)
 	{
 		y = Y;
 	}
 
 	// set the size on the x-axis of the object
-	inline void Grabbed::setSizeX(const int& X)
+	void Grabbed::setSizeX(const int& X)
 	{
 		size_x = X;
 	}
 
 	// set the size on the x-axis of the object
-	inline void Grabbed::setSizeY(const int& Y)
+	void Grabbed::setSizeY(const int& Y)
 	{
 		size_y = Y;
 	}
 
 	// Move the object on the x-axis
-	inline void Grabbed::moveX(const int& X)
+	void Grabbed::moveX(const int& X)
 	{
 		x += X;
 	}
 
 	// Move the object on the y-axis
-	inline void Grabbed::moveY(const int& Y)
+	void Grabbed::moveY(const int& Y)
 	{
 		y += Y;
 	}
 
 	// Return the position x of the object
-	inline int Grabbed::getX()const
+	int Grabbed::getX()const
 	{
 		return x;
 	}
 
 	// Return the position y of the object
-	inline int Grabbed::getY()const
+	int Grabbed::getY()const
 	{
 		return y;
 	}
 
 	// Return the size_x of the object
-	inline int Grabbed::getSizeX()const
+	int Grabbed::getSizeX()const
 	{
 		return size_x;
 	}
 
 	// Return the size_y of the object
-	inline int Grabbed::getSizeY()const
+	int Grabbed::getSizeY()const
 	{
 		return size_y;
 	}
 
+
+
 // Definition of Grabber
 
 	// canGrab() is used to know if the cursor is hovering over an Grabbed parameter, if it is, it return true
-	inline bool Grabber::canGrab(Grabbed* const grab)const
+	bool Grabber::canGrab(Grabbed* const grab)const
 	{
 		return 
 			(((x >= grab->getX() - grab->getSizeX() / 2) && (x <= grab->getX() + grab->getSizeX() / 2)) ||
@@ -166,9 +175,21 @@ namespace Grabber
 			((grab->getY() >= y - size_y / 2) && (grab->getY() <= y + size_y / 2)));
 	}
 
-	// Constructor of Grabber, it needs a vector of all the Item you can grab
-	inline Grabber::Grabber(std::vector<Grabbed*>& tab) : tabGrabbed(&tab)
+	Grabber::Grabber()
 	{
+
+	}
+
+	// Constructor of Grabber, it needs a vector of all the Item you can grab
+	template<typename T>
+	Grabber::Grabber(std::vector<T*>& tab)// : tabGrabbed(&tab.begin(), &tab.end())
+	{
+		tabGrabbed->resize(tab.size());
+		for (unsigned i = 0; i < tab.size(); ++i)
+		{
+			(*tabGrabbed)[i] = tab[i];
+		}
+		//copy(&tab.begin(), &tab.end(), tabGrabbed->begin());
 		lastX, lastY, x, y = 0;
 		isGrabbing = false;
 		grabbed = nullptr;
@@ -177,16 +198,18 @@ namespace Grabber
 	}
 
 	// Destructor of Grabber
-	inline Grabber::~Grabber()
+	Grabber::~Grabber()
 	{
 		delete grabbed;
+		for (unsigned it = 0 ; it < tabGrabbed->size() ; ++it)
+			delete (*tabGrabbed)[it];
 		delete tabGrabbed;
 	}
 
 	// Allows the user to set the sprite of the cursor, the size doesn't matter
 	// The texture must be an image split in half, one half for when the user is left clicking, the other for when the user is not
 	// For example, image.png (50x100) (WIDTHxHEIGHT) will be split in two 50x50 texture
-	inline void Grabber::setSprite(const std::string& str)
+	void Grabber::setSprite(const std::string& str)
 	{
 		texture.loadFromFile(str);
 		sprite.setTexture(texture);
@@ -196,7 +219,7 @@ namespace Grabber
 	}
 
 	// Updates the cursor position (refferring to 'window') and what it is grabbing is left_cliking
-	inline void Grabber::update(sf::RenderWindow& window)
+	void Grabber::update(sf::RenderWindow& window)
 	{
 		x = sf::Mouse::getPosition(window).x;
 		y = sf::Mouse::getPosition(window).y;
@@ -228,7 +251,7 @@ namespace Grabber
 	}
 
 	// Draws the cursor on 'window'
-	inline void Grabber::draw(sf::RenderWindow& window)
+	void Grabber::draw(sf::RenderWindow& window)
 	{
 		sprite.setPosition(x - size_x / 2, y - size_y / 2);
 
@@ -238,6 +261,18 @@ namespace Grabber
 			sprite.setTextureRect(sf::IntRect(0, 0, size_x, size_y));
 
 		window.draw(sprite);
+	}
+
+	// Set the x position of the cursor
+	void Grabber::setX(const int& X)
+	{
+		x = X;
+	}
+
+	// Set the y position of the cursor
+	void Grabber::setY(const int& Y)
+	{
+		y = Y;
 	}
 }
 

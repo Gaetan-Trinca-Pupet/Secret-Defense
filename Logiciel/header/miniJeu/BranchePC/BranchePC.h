@@ -13,8 +13,10 @@ namespace BranchePC
 	class BranchePC : public MiniJeu
 	{
 	private:
+
+		Grabber::Grabber main;
 		std::vector<Prise*> tabPrise;
-		Grabber::Grabber main = Grabber::Grabber(tabPrise);
+		
 
 	protected:
 		virtual void setup();
