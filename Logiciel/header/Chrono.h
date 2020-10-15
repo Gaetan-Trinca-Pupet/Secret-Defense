@@ -25,6 +25,7 @@ private:
 	Filled_arc arc;
 	//sf::Texture tex;
 	sf::CircleShape outline;
+	float factor;
 };
 
 #endif
