@@ -7,7 +7,7 @@
 
 namespace Grabber
 {
-	class Grabbed
+	class Grabbable
 	{
 	protected:
 		int x;
@@ -18,8 +18,8 @@ namespace Grabber
 
 		
 	public:
-		Grabbed(const int& X = 0, const int& Y = 0, const int& sx = 0, const int& sy = 0);
-		virtual ~Grabbed();
+		Grabbable(const int& X = 0, const int& Y = 0, const int& sx = 0, const int& sy = 0);
+		virtual ~Grabbable();
 
 		virtual void update()=0;
 
@@ -43,8 +43,8 @@ namespace Grabber
 	class Grabber
 	{
 	private:
-		std::vector<Grabbed*>* tabGrabbed;
-		Grabbed* grabbed;
+		std::vector<Grabbable*>* tabGrabbable;
+		Grabbable* grabbed;
 
 		sf::Sprite sprite;
 		sf::Texture texture;
@@ -59,7 +59,7 @@ namespace Grabber
 		int size_y;
 
 		bool isGrabbing;
-		bool canGrab(Grabbed* const grab)const;
+		bool canGrab(Grabbable* const grab)const;
 
 	public:
 		Grabber();
@@ -78,82 +78,82 @@ namespace Grabber
 
 
 
-// Definition of Grabbed
+// Definition of Grabbable
 
-	// Constructor of Grabbed
-	inline Grabbed::Grabbed(const int& X, const int& Y, const int& sx, const int& sy) : x(X), y(Y), size_x(sx), size_y(sy)
+	// Constructor of Grabbable
+	inline Grabbable::Grabbable(const int& X, const int& Y, const int& sx, const int& sy) : x(X), y(Y), size_x(sx), size_y(sy)
 	{
 
 	}
 
-	// Detructor of Grabbed
-	inline Grabbed::~Grabbed()
+	// Detructor of Grabbable
+	inline Grabbable::~Grabbable()
 	{
 
 	}
 
 	// virtual function to update the object.
-	inline void Grabbed::update()
+	inline void Grabbable::update()
 	{
 
 	}
 
 	// set the position on the x-axis of the object
-	inline void Grabbed::setX(const int& X)
+	inline void Grabbable::setX(const int& X)
 	{
 		x = X;
 	}
 
 	// set the position on the y-axis of the object
-	inline void Grabbed::setY(const int& Y)
+	inline void Grabbable::setY(const int& Y)
 	{
 		y = Y;
 	}
 
 	// set the size on the x-axis of the object
-	inline void Grabbed::setSizeX(const int& X)
+	inline void Grabbable::setSizeX(const int& X)
 	{
 		size_x = X;
 	}
 
 	// set the size on the x-axis of the object
-	inline void Grabbed::setSizeY(const int& Y)
+	inline void Grabbable::setSizeY(const int& Y)
 	{
 		size_y = Y;
 	}
 
 	// Move the object on the x-axis
-	inline void Grabbed::moveX(const int& X)
+	inline void Grabbable::moveX(const int& X)
 	{
 		x += X;
 	}
 
 	// Move the object on the y-axis
-	inline void Grabbed::moveY(const int& Y)
+	inline void Grabbable::moveY(const int& Y)
 	{
 		y += Y;
 	}
 
 	// Return the position x of the object
-	inline int Grabbed::getX()const
+	inline int Grabbable::getX()const
 	{
 		return x;
 	}
 
 	// Return the position y of the object
-	inline int Grabbed::getY()const
+	inline int Grabbable::getY()const
 	{
 		return y;
 	}
 
 	// Return the size_x of the object
-	inline int Grabbed::getSizeX()const
+	inline int Grabbable::getSizeX()const
 	{
 		return size_x;
 	}
 
 	// Return the size_y of the object
-	inline int Grabbed::getSizeY()const
+	inline int Grabbable::getSizeY()const
 	{
 		return size_y;
 	}
@@ -162,8 +162,8 @@ namespace Grabber
 
 // Definition of Grabber
 
-	// canGrab() is used to know if the cursor is hovering over an Grabbed parameter, if it is, it return true
-	inline bool Grabber::canGrab(Grabbed* const grab)const
+	// canGrab() is used to know if the cursor is hovering over an Grabbable parameter, if it is, it return true
+	inline bool Grabber::canGrab(Grabbable* const grab)const
 	{
 		return 
 			(((x >= grab->getX() - grab->getSizeX() / 2) && (x <= grab->getX() + grab->getSizeX() / 2)) ||
@@ -180,7 +180,7 @@ namespace Grabber
 	// Constructor of Grabber, it needs a vector of all the Item you can grab
 	inline Grabber::Grabber(void* tab)
 	{
-		tabGrabbed = ((std::vector<Grabbed*>*)tab);
+		tabGrabbable = ((std::vector<Grabbable*>*)tab);
 		lastX, lastY, x, y = 0;
 		isGrabbing = false;
 		grabbed = nullptr;
@@ -192,9 +192,9 @@ namespace Grabber
 	inline Grabber::~Grabber()
 	{
 		delete grabbed;
-		for (unsigned it = 0 ; it < tabGrabbed->size() ; ++it)
-			delete (*tabGrabbed)[it];
-		delete tabGrabbed;
+		for (unsigned it = 0 ; it < tabGrabbable->size() ; ++it)
+			delete (*tabGrabbable)[it];
+		delete tabGrabbable;
 	}
 
 	// Allows the user to set the sprite of the cursor, the size doesn't matter
@@ -220,9 +220,9 @@ namespace Grabber
 			if (!isGrabbing)
 			{
 				isGrabbing = true;
-				for (unsigned i(0); i < tabGrabbed->size() && grabbed == nullptr; ++i)
-					if (canGrab((*tabGrabbed)[i]))
-						grabbed = (*tabGrabbed)[i];
+				for (unsigned i(0); i < tabGrabbable->size() && grabbed == nullptr; ++i)
+					if (canGrab((*tabGrabbable)[i]))
+						grabbed = (*tabGrabbable)[i];
 			}
 
 			if (grabbed != nullptr)
