@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 ///
-/// \brief The Entity class is a class allowing to have a sprite with a position, a size, and a window to be displayed on
+/// \brief The Entity class is a class allowing to have a sprite with a position and a size
 ///
 
 class Entity : public sf::Drawable
