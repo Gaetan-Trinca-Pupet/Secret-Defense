@@ -43,7 +43,7 @@ namespace Grabber
 	class Grabber
 	{
 	private:
-		std::vector<Grabbable*>* tabGrabbable;
+		std::vector<Grabbable*> tabGrabbable;
 		Grabbable* grabbed;
 
 		sf::Sprite sprite;
@@ -63,9 +63,12 @@ namespace Grabber
 
 	public:
 		Grabber();
-		Grabber(void* tab);
+		template<typename T> Grabber(std::vector<T*>& tab);
 
 		~Grabber();
+
+		template<typename T> void add(const T& grab);
+		template<typename T> void remove(const T& grab);
 
 		void setSprite(const sf::Texture& textur);
 
@@ -74,6 +77,8 @@ namespace Grabber
 
 		void setX(const int& X);
 		void setY(const int& Y);
+
+		template<typename T> bool find(const T& grab) const;
 	};
 
 
@@ -174,13 +179,18 @@ namespace Grabber
 
 	inline Grabber::Grabber()
 	{
-
+		lastX, lastY, x, y = 0;
+		isGrabbing = false;
+		grabbed = nullptr;
 	}
 
 	// Constructor of Grabber, it needs a vector of all the Item you can grab
-	inline Grabber::Grabber(void* tab)
+	template<typename T>
+	inline Grabber::Grabber(std::vector<T*>& tab)
 	{
-		tabGrabbable = ((std::vector<Grabbable*>*)tab);
+		tabGrabbable.resize(tab.size());
+		for (unsigned i(0) ; i < tab.size() ; ++i)
+			tabGrabbable[i] = tab[i];
 		lastX, lastY, x, y = 0;
 		isGrabbing = false;
 		grabbed = nullptr;
@@ -190,9 +200,28 @@ namespace Grabber
 	inline Grabber::~Grabber()
 	{
 		delete grabbed;
-		for (unsigned it = 0 ; it < tabGrabbable->size() ; ++it)
-			delete (*tabGrabbable)[it];
-		delete tabGrabbable;
+		for (unsigned i = 0; i < tabGrabbable.size(); ++i)
+			delete tabGrabbable[i];
+	}
+
+	template<typename T>
+	inline void Grabber::add(const T& grab)
+	{
+		if (this->find(grab)) return;
+		tabGrabbable.push_back(grab);
+	}
+
+	template<typename T>
+	inline void Grabber::remove(const T& grab)
+	{
+		if (this->find(grab))
+			for(unsigned i (0) ; i < tabGrabbable.size() ; ++i)
+				if (tabGrabbable[i] == grab)
+				{
+					tabGrabbable[i] == tabGrabbable[tabGrabbable.size() - 1];
+					tabGrabbable.resize(tabGrabbable.size() - 1);
+					return;
+				}
 	}
 
 	// Allows the user to set the sprite of the cursor, the size doesn't matter
@@ -218,9 +247,9 @@ namespace Grabber
 			if (!isGrabbing)
 			{
 				isGrabbing = true;
-				for (unsigned i(0); i < tabGrabbable->size() && grabbed == nullptr; ++i)
-					if (canGrab((*tabGrabbable)[i]))
-						grabbed = (*tabGrabbable)[i];
+				for (unsigned i(0); i < tabGrabbable.size() && grabbed == nullptr; ++i)
+					if (canGrab(tabGrabbable[i]))
+						grabbed = tabGrabbable[i];
 			}
 
 			if (grabbed != nullptr)
@@ -262,6 +291,15 @@ namespace Grabber
 	inline void Grabber::setY(const int& Y)
 	{
 		y = Y;
+	}
+
+	template<typename T>
+	inline bool Grabber::find(const T& grab) const
+	{
+		for (unsigned i(0); i < tabGrabbable.size() ; ++i)
+			if (tabGrabbable[i] == grab)
+				return true;
+		return false;
 	}
 }
 
