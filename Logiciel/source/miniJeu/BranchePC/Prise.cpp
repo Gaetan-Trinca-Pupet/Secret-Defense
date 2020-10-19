@@ -23,7 +23,7 @@ void BranchePC::Prise::setSprite(const sf::Texture& textur)
 {
 	texture = textur;
 	sprite.setTexture(texture);
-	sprite.setTextureRect(sf::IntRect(0, 50, 50, 600));
+	sprite.setTextureRect(sf::IntRect(0, 50, 50, 200));
 	if (match != nullptr)
 	{
 		match->setSprite(texture);
@@ -42,7 +42,7 @@ void BranchePC::Prise::update()
 	{
 		isMatched = true;
 		sprite.setTextureRect(sf::IntRect());
-		match->sprite.setTextureRect(sf::IntRect(50, 0, 50, 600));
+		match->sprite.setTextureRect(sf::IntRect(50, 0, 50, 200));
 	}
 		
 }
