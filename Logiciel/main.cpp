@@ -9,7 +9,7 @@ int main(){
 	app.window.create(sf::VideoMode(960, 540), "test");
 	app.window.setFramerateLimit(60);
 	//UnMiniJeu unMiniJeu(app);
-	//unMiniJeu.play();
+    //unMiniJeu.play();
 	MiniJeu* jeu = new UnMiniJeu(app);
 	jeu->play();
 	delete jeu;

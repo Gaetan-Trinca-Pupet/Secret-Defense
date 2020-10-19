@@ -14,12 +14,6 @@ Entity::Entity(const sf::Vector2f & p, const sf::Vector2f & s, sf::Drawable* sp)
 
 }
 
-///
-/// \brief Entity::draw draws the sprite at the correct position on the window
-/// \param target the window to draw on
-/// \param states
-///
-
 void Entity::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     target.draw(*sprite, states);
@@ -27,7 +21,7 @@ void Entity::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 Entity::~Entity()
 {
-
+    delete sprite;
 }
 
 void Entity::setPos(const sf::Vector2f & p)

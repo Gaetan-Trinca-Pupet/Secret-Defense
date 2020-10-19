@@ -41,16 +41,6 @@ bool Clickable::isHovered()
             mousePos.y >= getPos().y && mousePos.y <= getPos().y + getSize().y);
 }
 
-sf::Window* Clickable::getWindow() const
-{
-    return window;
-}
-
-void Clickable::setWindow(sf::RenderWindow* w)
-{
-    window = w;
-}
-
 Clickable::~Clickable()
 {
     delete window;
