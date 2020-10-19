@@ -207,8 +207,8 @@ namespace Grabber
 	template<typename T>
 	inline void Grabber::add(const T& grab)
 	{
-		if (this->find(grab)) return;
-		tabGrabbable.push_back(grab);
+		if (!this->find(grab))
+			tabGrabbable.push_back(grab);
 	}
 
 	template<typename T>
@@ -218,8 +218,7 @@ namespace Grabber
 			for(unsigned i (0) ; i < tabGrabbable.size() ; ++i)
 				if (tabGrabbable[i] == grab)
 				{
-					tabGrabbable[i] == tabGrabbable[tabGrabbable.size() - 1];
-					tabGrabbable.resize(tabGrabbable.size() - 1);
+					tabGrabbable.erase(tabGrabbable.begin() + i);
 					return;
 				}
 	}
