@@ -14,7 +14,7 @@ class Clickable:public Entity
 {
 private:
     sf::RenderWindow* window;
-    bool mouseIsAlreadyPressed;
+    static bool mouseIsAlreadyPressed;
     virtual void actionOnClick();
 public:
 

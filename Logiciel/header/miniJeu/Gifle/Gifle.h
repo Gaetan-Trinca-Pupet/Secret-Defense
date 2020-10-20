@@ -12,7 +12,8 @@ private:
 	virtual void setup();
 	virtual void draw();
 	virtual void update();
-	bool compareEtudiantPtr(Etudiant* e1, Etudiant* e2);
+
+	bool mouseIsAlreadyPressed;
 
 	Chrono chrono;
 

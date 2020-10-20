@@ -1,9 +1,10 @@
 #include "../header/clickable.h"
 
+bool Clickable::mouseIsAlreadyPressed(false);
 
 Clickable::Clickable(const sf::Vector2f& pos, const sf::Vector2f& size, sf::RenderWindow* w, sf::Shape* sprite) : Entity(pos, size, sprite), window(w)
 {
-    mouseIsAlreadyPressed = false;
+
 }
 
 bool Clickable::onClick()
@@ -11,15 +12,17 @@ bool Clickable::onClick()
     bool isClicked = false;
 
     if (window == nullptr) return false;
+
     if (!mouseIsAlreadyPressed) {
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
+            //std::cout << pos.y << std::endl;
             if (isHovered())
             {
-                actionOnClick();
                 isClicked = true;
+                actionOnClick();
+                mouseIsAlreadyPressed = true;
             }
-            mouseIsAlreadyPressed = true;
         }
     }
     else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)) mouseIsAlreadyPressed = false;

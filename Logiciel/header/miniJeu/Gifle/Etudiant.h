@@ -18,6 +18,7 @@ public:
 	Etudiant(const sf::Vector2f& pos, sf::RenderWindow* w, float dir, float* _deltaTime);
 	virtual ~Etudiant();
 	void update();
+	bool isOutOfBounds();
 
 };
 
