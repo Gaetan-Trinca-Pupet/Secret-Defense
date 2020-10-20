@@ -3,7 +3,7 @@
 void BranchePC::BranchePC::setup()
 {
 	
-	const unsigned short nbPrise(9);
+	nbPrise = (1 + std::rand()%6);
 
 	
 
@@ -17,8 +17,10 @@ void BranchePC::BranchePC::setup()
 
 	std::vector<unsigned> tabPos1(nbPrise);
 
+	const unsigned short decalage = 200;
+
 	for (unsigned i(0); i < tabPos1.size(); ++i)
-		tabPos1[i] = 200 + ((app.window.getSize().x - 200)/nbPrise) * i;
+		tabPos1[i] = decalage + ((app.window.getSize().x - decalage)/nbPrise) * i;
 
 	std::vector<unsigned> tabPos2 = tabPos1;
 
@@ -30,7 +32,7 @@ void BranchePC::BranchePC::setup()
 		tabPos1.pop_back();
 
 		rand = std::rand() % tabPos2.size();
-		tabPrise[i]->setX(tabPos2[rand]);
+		tabPrise[i]->setX(tabPos2[rand] + ((app.window.getSize().x - decalage) / nbPrise) / 2);
 		tabPos2[rand] = tabPos2[tabPos2.size() - 1];
 		tabPos2.pop_back();
 	}
@@ -56,6 +58,7 @@ void BranchePC::BranchePC::setup()
 
 void BranchePC::BranchePC::draw()
 {
+	app.window.draw(background);
 	for (unsigned i(0); i < tabPrise.size(); ++i)
 		tabPrise[i]->draw(app.window);
 	main.draw(app.window);
@@ -64,13 +67,25 @@ void BranchePC::BranchePC::draw()
 void BranchePC::BranchePC::update()
 {
 	main.update(app.window);
+	for (Prise* prise : tabPrise)
+		if (prise->isMatched() and main.find(prise))
+		{
+			main.remove(prise);
+			--nbPrise;
+		}
+	if (nbPrise <= 0)
+		isFinished = true;
 }
 
 BranchePC::BranchePC::BranchePC(AppData& appData): MiniJeu(appData)
 {
-	main = Grabber::Grabber();
 	app.window.sf::Window::setMouseCursorVisible(false);
 	std::srand(std::time(nullptr));
+
+	main = Grabber::Grabber();
+
+	backImage.loadFromFile("../ressource/BranchePC/background.png");
+	background.setTexture(backImage);
 }
 
 BranchePC::BranchePC::~BranchePC()

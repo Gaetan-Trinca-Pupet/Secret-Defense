@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <SFML/Audio.hpp>
 #include "../../Grabber.hpp"
 
 namespace BranchePC
@@ -11,10 +12,13 @@ namespace BranchePC
 	{
 	private:
 		Prise* match;
-		bool isMatched = false;
+		bool isItMatched = false;
 
 		sf::Sprite sprite;
 		sf::Texture texture;
+
+		sf::SoundBuffer sound;
+		sf::Sound sound_plugged;
 
 		bool isClose()const;
 
@@ -28,6 +32,8 @@ namespace BranchePC
 		virtual void update();
 
 		void draw(sf::RenderWindow& window);
+
+		bool isMatched()const;
 
 		Prise* getMatch()const;
 	};

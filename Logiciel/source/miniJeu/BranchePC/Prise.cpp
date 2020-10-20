@@ -12,6 +12,11 @@ bool BranchePC::Prise::isClose() const
 BranchePC::Prise::Prise(Prise* prise, const int& myX, const int& myY) : Grabbable(myX,myY,50,50)
 {
 	match = prise;
+
+	sound.loadFromFile("../ressource/BranchePC/correct.wav");
+	sound_plugged.setBuffer(sound);
+	sound_plugged.setVolume(5);
+	sound_plugged.setPitch(4);
 }
 
 BranchePC::Prise::~Prise()
@@ -23,7 +28,7 @@ void BranchePC::Prise::setSprite(const sf::Texture& textur)
 {
 	texture = textur;
 	sprite.setTexture(texture);
-	sprite.setTextureRect(sf::IntRect(0, 50, 50, 200));
+	sprite.setTextureRect(sf::IntRect(0, 50, 50, 600));
 	if (match != nullptr)
 	{
 		match->setSprite(texture);
@@ -38,11 +43,12 @@ void BranchePC::Prise::setSpriteRect(const unsigned short& x1, const unsigned sh
 
 void BranchePC::Prise::update()
 {
-	if (isClose())
+	if (isClose() && !isItMatched)
 	{
-		isMatched = true;
+		sound_plugged.play();
+		isItMatched = true;
 		sprite.setTextureRect(sf::IntRect());
-		match->sprite.setTextureRect(sf::IntRect(50, 0, 50, 200));
+		match->sprite.setTextureRect(sf::IntRect(50, 0, 50, 600));
 	}
 		
 }
@@ -52,6 +58,11 @@ void BranchePC::Prise::draw(sf::RenderWindow& window)
 	sprite.setPosition(x - size_x / 2, y - size_y / 2);
 	window.draw(sprite);
 	if (this->match != nullptr) this->match->draw(window);
+}
+
+bool BranchePC::Prise::isMatched()const
+{
+	return this->isItMatched;
 }
 
 BranchePC::Prise* BranchePC::Prise::getMatch() const

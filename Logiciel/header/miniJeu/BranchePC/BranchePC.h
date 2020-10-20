@@ -13,9 +13,13 @@ namespace BranchePC
 	class BranchePC : public MiniJeu
 	{
 	private:
+		unsigned short nbPrise;
 
 		Grabber::Grabber main;
 		std::vector<Prise*> tabPrise;
+
+		sf::Sprite background;
+		sf::Texture backImage;
 		
 
 	protected:
