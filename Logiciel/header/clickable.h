@@ -17,10 +17,11 @@ private:
     bool mouseIsAlreadyPressed;
     virtual void actionOnClick();
 public:
-    Clickable(const sf::Vector2f & pos = sf::Vector2f(), const sf::Vector2f & size = sf::Vector2f(), sf::RenderWindow* w = nullptr, sf::Drawable* sprite = nullptr);
+
+    Clickable(const sf::Vector2f& pos = sf::Vector2f(), const sf::Vector2f& size = sf::Vector2f(), sf::RenderWindow* w = nullptr, sf::Shape* sprite = nullptr);
     sf::Window* getWindow() const;
     void setWindow(sf::RenderWindow* w);
-    void onClick();
+    bool onClick();
     bool isClicked();
     bool isHovered();
     virtual ~Clickable();

@@ -1,24 +1,30 @@
 #include "../header/clickable.h"
 
-Clickable::Clickable(const sf::Vector2f & pos, const sf::Vector2f & size, sf::RenderWindow* w, sf::Drawable* sprite) : Entity(pos, size, sprite), window(w)
-{
 
+Clickable::Clickable(const sf::Vector2f& pos, const sf::Vector2f& size, sf::RenderWindow* w, sf::Shape* sprite) : Entity(pos, size, sprite), window(w)
+{
+    mouseIsAlreadyPressed = false;
 }
 
-void Clickable::onClick()
+bool Clickable::onClick()
 {
-    if (window == nullptr) return;
+    bool isClicked = false;
+
+    if (window == nullptr) return false;
     if (!mouseIsAlreadyPressed) {
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
             if (isHovered())
             {
                 actionOnClick();
+                isClicked = true;
             }
             mouseIsAlreadyPressed = true;
         }
     }
     else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)) mouseIsAlreadyPressed = false;
+
+    return isClicked;
 }
 
 void Clickable::actionOnClick()

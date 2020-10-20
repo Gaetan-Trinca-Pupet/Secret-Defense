@@ -17,7 +17,6 @@ Chrono::Chrono(float _time, sf::Clock* _clock, sf::RenderWindow& window) {
 	//outline.setOutlineThickness(8);
 	outline.setOrigin(outline.getRadius(), outline.getRadius());
 	outline.setPosition(window.getSize().x * (0.8/2+0.5), window.getSize().y * (0.2 / 2));
-	clock->restart();
 
 	factor = 0.3;
 }
@@ -25,7 +24,7 @@ Chrono::Chrono(float _time, sf::Clock* _clock, sf::RenderWindow& window) {
 void Chrono::update()
 {
 	//spriteBatterie.setTexture(tex);
-	if (time - clock->getElapsedTime().asSeconds() < 0.001) return;
+	if (time < clock->getElapsedTime().asSeconds()) return;
 
 	arc.setDeg(3.14159265359 * 2 * (time - clock->getElapsedTime().asSeconds()) / time);
 

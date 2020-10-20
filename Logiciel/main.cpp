@@ -2,6 +2,7 @@
 
 #include "header/miniJeu/MiniJeu.h"
 #include "header/testMiniJeu.h"
+#include "header/miniJeu/Gifle/Gifle.h"
 #include "header/clickable.h"
 
 int main(){
@@ -10,7 +11,7 @@ int main(){
 	app.window.setFramerateLimit(60);
 	//UnMiniJeu unMiniJeu(app);
 	//unMiniJeu.play();
-	MiniJeu* jeu = new UnMiniJeu(app);
+	MiniJeu* jeu = new Gifle(app);
 	jeu->play();
 	delete jeu;
 	return 0;

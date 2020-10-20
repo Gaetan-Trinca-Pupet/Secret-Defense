@@ -8,7 +8,7 @@
 /// \param sp is the entity's sprite
 ///
 
-Entity::Entity(const sf::Vector2f & p, const sf::Vector2f & s, sf::Drawable* sp)
+Entity::Entity(const sf::Vector2f & p, const sf::Vector2f & s, sf::Shape* sp)
     : pos(p), size(s), sprite(sp)
 {
 
@@ -22,6 +22,7 @@ Entity::Entity(const sf::Vector2f & p, const sf::Vector2f & s, sf::Drawable* sp)
 
 void Entity::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
+    sprite->setPosition(pos);
     target.draw(*sprite, states);
 }
 
@@ -50,12 +51,16 @@ const sf::Vector2f &Entity::getSize()
     return size;
 }
 
-void Entity::setSprite(sf::Drawable* sp)
+void Entity::setSprite(sf::Shape* sp)
 {
     sprite = sp;
 }
 
-sf::Drawable* Entity::getSprite()
+sf::Shape* Entity::getSprite()
 {
     return sprite;
+}
+
+bool Entity::operator < (Entity& e) {
+    return pos.y < e.getPos().y;
 }

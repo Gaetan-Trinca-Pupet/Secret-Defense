@@ -5,8 +5,12 @@ MiniJeu::MiniJeu(AppData& appData) : app(appData), isFinished(false), background
 }
 
 void MiniJeu::play(){
+
 	this->setup();
 	while(app.window.isOpen() && !isFinished){
+
+		deltaTime = deltaTimeClock.restart().asSeconds();
+
 		sf::Event event;
 		while(app.window.pollEvent(event)){
 			if(event.type == sf::Event::Closed){
