@@ -33,6 +33,7 @@ class MiniJeu{
 		MiniJeu(AppData& appData);
 		void play();
 		virtual ~MiniJeu();
+
 };
 
 #endif

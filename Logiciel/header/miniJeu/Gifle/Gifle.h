@@ -12,8 +12,9 @@ private:
 	virtual void setup();
 	virtual void draw();
 	virtual void update();
-
+	//todo : handleevent
 	bool mouseIsAlreadyPressed;
+	int wave;
 
 	Chrono chrono;
 

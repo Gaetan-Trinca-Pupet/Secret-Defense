@@ -4,26 +4,29 @@ MiniJeu::MiniJeu(AppData& appData) : app(appData), isFinished(false), background
 	
 }
 
-void MiniJeu::play(){
+void MiniJeu::play() {
 
 	this->setup();
-	while(app.window.isOpen() && !isFinished){
+	while (app.window.isOpen() && !isFinished) {
 
 		deltaTime = deltaTimeClock.restart().asSeconds();
 
-		sf::Event event;
-		while(app.window.pollEvent(event)){
-			if(event.type == sf::Event::Closed){
-				app.window.close();
-				return;
-			}
-		}
 		app.window.clear(backgroundColor);
 		this->update();
 		this->draw();
 		app.window.display();
+
+		sf::Event event;
+		while (app.window.pollEvent(event)) {
+			if (event.type == sf::Event::Closed) {
+				app.window.close();
+				return;
+			}
+		}
+
 	}
 }
+
 
 void MiniJeu::setup(){
 	
@@ -32,6 +35,9 @@ void MiniJeu::setup(){
 MiniJeu::~MiniJeu(){
 	
 }
+
+
+
 
 sf::Color MiniJeu::getBackgroundColor()const{
 	return backgroundColor;

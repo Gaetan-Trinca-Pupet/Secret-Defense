@@ -9,7 +9,7 @@ protected:
 	bool isGifle;
 	virtual void actionOnClick();
 	float* deltaTime;
-	float speed;
+	int speed;
 	float dir;
 
 

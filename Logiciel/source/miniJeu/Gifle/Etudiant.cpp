@@ -9,14 +9,16 @@ Etudiant::Etudiant(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, flo
 	deltaTime = _deltaTime;
 	dir = _dir;
 	isGifle = false;
-	speed = 100;
-	sf::RectangleShape* rect = new sf::RectangleShape(sf::Vector2f(100, 200));
-	//rect->setOrigin(rect->getSize().x / 2, 0);
+	speed = 110;
+	speed += (float(rand()) / float(RAND_MAX) - 0.5) * float(speed * 0.3);
+	
+	sf::RectangleShape* rect = new sf::RectangleShape(sf::Vector2f(175, 500));
 	rect->setFillColor(sf::Color::Blue);
 	rect->setOutlineColor(sf::Color::Green);
 	rect->setOutlineThickness(4);
 	setSprite(rect);
-	size = sf::Vector2f(100, 200);
+
+	size = sf::Vector2f(175, 175);
 
 }
 
@@ -30,7 +32,7 @@ void Etudiant::update() {
 
 bool Etudiant::isOutOfBounds()
 {
-	return (dir > 0)  && pos.x > getWindow()->getSize().x + getSprite()->getOutlineThickness()
+	return (dir > 0)  && pos.x >   getWindow()->getSize().x + getSprite()->getOutlineThickness()
 		|| (dir <= 0) && pos.x < - getSprite()->getOutlineThickness() - size.x;
 }
 

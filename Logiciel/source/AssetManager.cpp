@@ -21,9 +21,4 @@ sf::Texture& AssetManager::getTexture(std::string path)
     }
 }
 
-void AssetManager::unloadTexture(std::string path)
-{
-    textures.erase(path);
-}
-
 

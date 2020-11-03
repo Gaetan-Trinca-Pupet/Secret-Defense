@@ -14,19 +14,23 @@ bool Clickable::onClick()
     if (window == nullptr) return false;
 
     if (!mouseIsAlreadyPressed) {
+        
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
-            //std::cout << pos.y << std::endl;
+            
             if (isHovered())
             {
+                //std::cout << "aa" << std::endl;
                 isClicked = true;
                 actionOnClick();
                 mouseIsAlreadyPressed = true;
+                
             }
+            
         }
     }
     else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)) mouseIsAlreadyPressed = false;
-
+    //std::cout << mouseIsAlreadyPressed <<  pos.y << std::endl;
     return isClicked;
 }
 
