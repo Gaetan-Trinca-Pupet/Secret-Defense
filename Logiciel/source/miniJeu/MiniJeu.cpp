@@ -39,7 +39,7 @@ void MiniJeu::setBackgroundColor(const sf::Color& color){
 }
 
 void MiniJeu::drawInterface(){
-    if (!coeur.loadFromFile("../ressource/coeur.png"))
+    if (!coeur.loadFromFile("../ressource/image/coeur.png"))
     {
         std::cout<<"erreur loadFromFile"<<std::endl;
     }
