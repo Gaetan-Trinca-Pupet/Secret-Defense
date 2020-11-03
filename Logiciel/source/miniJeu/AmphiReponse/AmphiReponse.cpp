@@ -8,6 +8,7 @@ std::vector<std::string> AmphiReponse::AmphiReponse::getTabQ() const
 	tab.push_back("Comment écrire for ?"); //2
 	tab.push_back("Je peux aller au toilette ?"); //3
 	tab.push_back("J'arrive pas à voir"); //4
+	tab.push_back("J'ai une question..."); //5
 	return tab;
 }
 
@@ -19,6 +20,7 @@ std::vector<std::string> AmphiReponse::AmphiReponse::getTabR() const
 	tab.push_back("for (;;);"); //2
 	tab.push_back("Non tu restes"); //3
 	tab.push_back("Rapproche toi"); //4
+	tab.push_back("Elle est nulle"); //5
 	return tab;
 }
 
@@ -38,8 +40,7 @@ void AmphiReponse::AmphiReponse::setup()
 {
 	const unsigned short decalage = 250;
 	
-	
-	nbQuestion = 2 + (app.difficulty > 3 ? 3 : app.difficulty);
+	nbQuestion = 2 + (app.difficulty > 4 ? 4 : app.difficulty);
 	const unsigned short nbMauvaiseReponse = (app.difficulty/3 > 6 ? 6 : app.difficulty/3);
 
 	std::vector<std::string> tabQ = getTabQ();
