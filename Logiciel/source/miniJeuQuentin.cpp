@@ -48,6 +48,7 @@ void miniJeuQ::update()
 
     if (cercle.getPosition().y<0 || cercle.getPosition().y>app.window.getSize().y-cercle.getRadius()*2)
     {
+        app.score+=1;
         isFinished=true;
     }
     if (cercle.getPosition().x<0 || cercle.getPosition().x>app.window.getSize().x-cercle.getRadius()*2)

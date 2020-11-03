@@ -1,5 +1,4 @@
 #include "../header/gameOverWindow.h"
-#include <iostream>
 
 gameOverWindow::gameOverWindow(AppData& appData) : MiniJeu(appData)
 {
