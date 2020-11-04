@@ -10,9 +10,19 @@
 
 namespace memoryQuestions {
 
+enum resultId {
+    unfinished,
+    wonLeft,
+    wonRight,
+    lostLeft,
+    lostRight,
+    lostBoth
+};
+
 class MemoryQuestions : public MiniJeu
 {
 private:
+    resultId result;
     QuestionList questionList;
     Button leftQuestionButton;
     Button rightQuestionButton;

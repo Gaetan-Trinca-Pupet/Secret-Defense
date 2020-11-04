@@ -45,3 +45,8 @@ void Button::setColor(const sf::Color & c)
     outerRect.setFillColor(c);
     innerRect.setFillColor(c * sf::Color(128,128,128));
 }
+
+sf::Color Button::getColor()
+{
+    return outerRect.getFillColor();
+}
