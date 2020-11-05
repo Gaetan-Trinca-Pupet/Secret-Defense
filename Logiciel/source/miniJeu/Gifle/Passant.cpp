@@ -3,7 +3,7 @@
 
 
 
-Etudiant::Etudiant(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, float* _deltaTime)
+Passant::Passant(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, float* _deltaTime)
 	:Clickable(pos, sf::Vector2f(), w)
 {
 	deltaTime = _deltaTime;
@@ -22,30 +22,30 @@ Etudiant::Etudiant(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, flo
 
 }
 
-Etudiant::~Etudiant() {
+Passant::~Passant() {
 
 }
 
-void Etudiant::update() {
+void Passant::update() {
 	pos.x += dir * speed * (*deltaTime);
 }
 
-bool Etudiant::isOutOfBounds()
+bool Passant::isOutOfBounds()
 {
 	return (dir > 0)  && pos.x >   getWindow()->getSize().x + getSprite()->getOutlineThickness()
 		|| (dir <= 0) && pos.x < - getSprite()->getOutlineThickness() - size.x;
 }
 
-void Etudiant::actionOnClick() {
+void Passant::actionOnClick() {
 	if (isGifle) return;
 	isGifle = true;
-	speed *= 7;
+	speed *= 8;
 	std::cout << "comment osez vous" << std::endl;
 
 	//change de sprite;
 }
 
-NonMasque::NonMasque(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, float* _deltaTime) : Etudiant(pos, w, _dir, _deltaTime){
+NonMasque::NonMasque(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, float* _deltaTime) : Passant(pos, w, _dir, _deltaTime){
 
 	getSprite()->setOutlineColor(sf::Color::Red);
 }

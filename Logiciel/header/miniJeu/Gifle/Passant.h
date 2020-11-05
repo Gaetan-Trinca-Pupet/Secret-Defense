@@ -1,9 +1,9 @@
-#ifndef __ETUDIANT_H_
-#define __ETUDIANT_H_
+#ifndef __PASSANT_H_
+#define __PASSANT_H_
 
 #include "../../clickable.h"
 
-class Etudiant : public Clickable {
+class Passant : public Clickable {
 protected:
 
 	bool isGifle;
@@ -15,14 +15,14 @@ protected:
 
 
 public:
-	Etudiant(const sf::Vector2f& pos, sf::RenderWindow* w, float dir, float* _deltaTime);
-	virtual ~Etudiant();
+	Passant(const sf::Vector2f& pos, sf::RenderWindow* w, float dir, float* _deltaTime);
+	virtual ~Passant();
 	void update();
 	bool isOutOfBounds();
 
 };
 
-class NonMasque : public Etudiant {
+class NonMasque : public Passant {
 private:
 	virtual void actionOnClick();
 public:
