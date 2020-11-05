@@ -3,7 +3,7 @@
 
 #include "../MiniJeu.h"
 #include "MiniTest.h"
-#include <vector>
+#include "Etudiant.h"
 
 class DisitribMiniTests : public MiniJeu {
 public:
@@ -12,7 +12,7 @@ public:
 	virtual void update();
 
 	std::vector<MiniTest> MiniTests;
-	std::vector<
+	std::vector<Etudiant> Etudiants;
 
 private:
 	DisitribMiniTests(AppData& appData);

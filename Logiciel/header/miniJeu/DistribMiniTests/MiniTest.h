@@ -4,7 +4,7 @@
 #include "../../Grabber.hpp"
 #include "../../entity.h"
 
-class MiniTest : public MiniJeu, public Entity{
+class MiniTest : public MiniJeu, public Grabber::Grabbable {
 public:
 
 	virtual void update();
