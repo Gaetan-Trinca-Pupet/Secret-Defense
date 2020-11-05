@@ -23,16 +23,10 @@ int main()
         std::cout<<"erreur loadFromFile"<<std::endl;
     }
 
-    transData transdata;
-    transdata.text.setFont(app.font);
-    transdata.text.setPosition(app.window.getSize().x/2, app.window.getSize().y/6);
-    //UnMiniJeu unMiniJeu(app);
-    //unMiniJeu.play();
-    //MiniJeu * jeu = new EteindrePC::EteindrePC(app);
-    //jeu->play();
-    //delete jeu;
-
     unsigned int lastPlayed=0; //pour éviter que le même mini jeu soit joué 2 fois d'affilée
+
+    sf::Texture textureImg;
+    sf::Texture textureBg;
 
     while(true)
     {
@@ -60,15 +54,30 @@ int main()
         case 1:
         {
             std::cout<<"playing trans1!"<<endl;
-            transdata.text.setString("Transition du mini jeu 1\nSuite du texte"); //obligatoire chaque fois qu'on crée une nouvelle transition pour un mini jeu
-            transdata.text.setPosition(transdata.text.getPosition().x-transdata.text.getGlobalBounds().width/2, transdata.text.getPosition().y); //pour afficher au centre, toujours ajouter cette ligne pour la transition de n'importe quel minijeu !!après le setstring!!
-            transdata.colorText=sf::Color(sf::Color::Red); //pas obligatoire, blanc par défaut !attention! après le premier mini jeu joué, la couleur reste la couleur définie par le mini jeu précédent
-            transition trans1(app,transdata);
+            sf::Text txt;
+            txt.setString("texte de la transition :\n1");
+            transition trans1(app,txt);
+
+            //Exemple d'ajout de background et d'image
+
+            /*
+            if (!textureBg.loadFromFile("../ressource/image/background.png"))
+            {
+                std::cout<<"erreur loadFromFile"<<std::endl;
+            }
+            if (!textureImg.loadFromFile("../ressource/image/laporte.png"))
+            {
+                std::cout<<"erreur loadFromFile"<<std::endl;
+            }
+            trans1.setTextureBackGround(textureBg);
+            trans1.setTextureImage(textureImg);
+            trans1.setPositionImg(sf::Vector2f(app.window.getSize().x/2, app.window.getSize().y-300));
+            */
+
             trans1.play();
             miniJeuQ thefirst(app);
             std::cout<<"playing thefirst!"<<std::endl;
             thefirst.play();
-            transdata.text.setPosition(transdata.text.getPosition().x+transdata.text.getGlobalBounds().width/2, transdata.text.getPosition().y); //obligatoire pour restituer la place enlevée avant, à mettre avant le break à chaque mini jeu
             lastPlayed=1; //à mettre avant chaque break, remplacer 1 par le numéro du case
             break;
         }
@@ -76,15 +85,13 @@ int main()
         case 2:
         {
             std::cout<<"playing trans2!"<<endl;
-            transdata.text.setString("Transition du mini jeu 2\nSuite du texte");
-            transdata.text.setPosition(transdata.text.getPosition().x-transdata.text.getGlobalBounds().width/2, transdata.text.getPosition().y);
-            transdata.colorText=sf::Color(sf::Color::Blue);
-            transition trans2(app,transdata);
+            sf::Text txt2;
+            txt2.setString("texte de la transition :\n2");
+            transition trans2(app,txt2);
             trans2.play();
             miniJeuQ thesecond(app);
             std::cout<<"playing thesecond!"<<std::endl;
             thesecond.play();
-            transdata.text.setPosition(transdata.text.getPosition().x+transdata.text.getGlobalBounds().width/2, transdata.text.getPosition().y);
             lastPlayed=2;
             break;
         }
@@ -92,15 +99,13 @@ int main()
         case 3:
         {
             std::cout<<"playing trans3!"<<endl;
-            transdata.text.setString("Transition du mini jeu 3\nSuite du texte");
-            transdata.text.setPosition(transdata.text.getPosition().x-transdata.text.getGlobalBounds().width/2, transdata.text.getPosition().y);
-            transdata.colorText=sf::Color(sf::Color::Magenta);
-            transition trans3(app,transdata);
+            sf::Text txt3;
+            txt3.setString("texte de la transition :\n3");
+            transition trans3(app,txt3);
             trans3.play();
             miniJeuQ thethird(app);
             std::cout<<"playing thethird!"<<std::endl;
             thethird.play();
-            transdata.text.setPosition(transdata.text.getPosition().x+transdata.text.getGlobalBounds().width/2, transdata.text.getPosition().y);
             lastPlayed=3;
             break;
         }
@@ -108,15 +113,13 @@ int main()
         case 4:
         {
             std::cout<<"playing trans4!"<<endl;
-            transdata.text.setString("Transition du mini jeu 4\nSuite du texte");
-            transdata.text.setPosition(transdata.text.getPosition().x-transdata.text.getGlobalBounds().width/2, transdata.text.getPosition().y);
-            transdata.colorText=sf::Color(sf::Color::Yellow);
-            transition trans4(app,transdata);
+            sf::Text txt4;
+            txt4.setString("texte de la transition :\n4");
+            transition trans4(app,txt4);
             trans4.play();
             miniJeuQ thefourth(app);
             std::cout<<"playing thefourth!"<<std::endl;
             thefourth.play();
-            transdata.text.setPosition(transdata.text.getPosition().x+transdata.text.getGlobalBounds().width/2, transdata.text.getPosition().y);
             lastPlayed=4;
             break;
         }
