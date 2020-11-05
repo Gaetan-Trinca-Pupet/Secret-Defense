@@ -29,6 +29,7 @@ private:
     unsigned short leftQuestionRank;
     unsigned short rightQuestionRank;
     sf::Clock clock;
+    float timeBetweenQuestions;
 public:
     MemoryQuestions(AppData & appData);
     virtual void setup();

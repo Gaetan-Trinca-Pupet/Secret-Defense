@@ -5,16 +5,20 @@ using namespace memoryQuestions;
 QuestionList::QuestionList(unsigned short difficulty)
 {
     std::srand(std::time(NULL));
-    availableQuestions.resize(20);
-    answeredQuestions.resize(availableQuestions.size(), false);
-    unsigned short nbAvailable (0);
-    while (nbAvailable < difficulty + 5 && nbAvailable < availableQuestions.size()) {
-        unsigned short rank = rand()%10;
-        if (!availableQuestions[rank]) {
-            availableQuestions[rank] = true;
-            ++nbAvailable;
+    if (difficulty + 4 > 20) availableQuestions.resize(20,true);
+    else {
+        availableQuestions.resize(20);
+        unsigned short nbAvailable (0);
+        while (nbAvailable < difficulty + 4 && nbAvailable < availableQuestions.size()) {
+            unsigned short rank = rand()%availableQuestions.size();
+            if (!availableQuestions[rank]) {
+                availableQuestions[rank] = true;
+                ++nbAvailable;
+            }
         }
     }
+    answeredQuestions.resize(availableQuestions.size(), false);
+
 }
 
 bool QuestionList::askQuestion(const unsigned short & rank)

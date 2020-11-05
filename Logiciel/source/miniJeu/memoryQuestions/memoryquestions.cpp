@@ -4,7 +4,7 @@ using namespace memoryQuestions;
 
 MemoryQuestions::MemoryQuestions(AppData &appData) : MiniJeu(appData), result  (unfinished), questionList(appData.difficulty),
     leftQuestionButton(&appData.window, sf::Vector2f(600,100), sf::Vector2f(100,100), "", 20, sf::Color::Cyan),
-    rightQuestionButton(&appData.window, sf::Vector2f(600,100), sf::Vector2f(100,300), "", 20, sf::Color::Cyan)
+    rightQuestionButton(&appData.window, sf::Vector2f(600,100), sf::Vector2f(100,300), "", 20, sf::Color::Cyan), timeBetweenQuestions(2 * pow(0.95, std::max(int(app.difficulty)-16, 0)))
 {
 
 }
@@ -53,7 +53,8 @@ void memoryQuestions::MemoryQuestions::update()
                 rightQuestionButton.setColor(sf::Color::Red);
             }
         }
-        if (clock.getElapsedTime().asSeconds() > 2) {
+        if (clock.getElapsedTime().asSeconds() > timeBetweenQuestions) {
+            std::cout << timeBetweenQuestions << std::endl;
             if (questionList.askQuestion(leftQuestionRank)) {
                 result = lostLeft;
                 leftQuestionButton.setColor(sf::Color::Red);
