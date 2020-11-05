@@ -54,7 +54,6 @@ void memoryQuestions::MemoryQuestions::update()
             }
         }
         if (clock.getElapsedTime().asSeconds() > timeBetweenQuestions) {
-            std::cout << timeBetweenQuestions << std::endl;
             if (questionList.askQuestion(leftQuestionRank)) {
                 result = lostLeft;
                 leftQuestionButton.setColor(sf::Color::Red);
