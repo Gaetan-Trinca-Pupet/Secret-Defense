@@ -49,6 +49,8 @@ public:
     /// \param c is the outer color of the button (the inner one is the same but lighter)
     ///
     void setColor(const sf::Color & c);
+
+    sf::Color getColor();
 };
 
 #endif // BUTTON_H

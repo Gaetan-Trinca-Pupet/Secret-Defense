@@ -5,8 +5,7 @@ Button::Button(sf::RenderWindow *w, const sf::Vector2f &size, const sf::Vector2f
 {
     font.loadFromFile("../ressource/fonts/OpenSans-Regular.ttf");
     text = sf::Text(t, font, textSize);
-    text.setOrigin(sf::Vector2f(text.getLocalBounds().width/2,text.getLocalBounds().height/2));
-    text.setPosition(sf::Vector2f(pos.x + size.x/2, pos.y + (size.y - text.getLocalBounds().height) / 2));
+    text.setPosition(sf::Vector2f(pos.x + size.x/2 - text.getLocalBounds().width /2, pos.y + (size.y - text.getLocalBounds().height) / 2));
     outerRect = sf::RectangleShape(size);
     outerRect.setFillColor(col);
     outerRect.setPosition(pos);
@@ -36,11 +35,18 @@ void Button::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 void Button::setText(const std::string &s)
 {
-    text = sf::Text(s, font);
+    text.setPosition(text.getPosition().x + text.getLocalBounds().width/2, text.getPosition().y + text.getLocalBounds().height/2);
+    text.setString(s);
+    text.setPosition(text.getPosition().x - text.getLocalBounds().width/2, text.getPosition().y - text.getLocalBounds().height/2);
 }
 
 void Button::setColor(const sf::Color & c)
 {
     outerRect.setFillColor(c);
     innerRect.setFillColor(c * sf::Color(128,128,128));
+}
+
+sf::Color Button::getColor()
+{
+    return outerRect.getFillColor();
 }

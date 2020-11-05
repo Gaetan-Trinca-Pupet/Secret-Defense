@@ -28,10 +28,19 @@ void Clickable::actionOnClick()
 
 bool Clickable::isClicked()
 {
-    sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
-    return (sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
-            mousePos.x >= getPos().x && mousePos.x <= getPos().x + getSize().x &&
-            mousePos.y >= getPos().y && mousePos.y <= getPos().y + getSize().y);
+    if (!mouseIsAlreadyPressed) {
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            if (isHovered())
+            {
+                std::cout << "click" << std::endl;
+                return true;
+            }
+            mouseIsAlreadyPressed = true;
+        }
+    }
+    else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)) mouseIsAlreadyPressed = false;
+    return false;
 }
 
 bool Clickable::isHovered()
