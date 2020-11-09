@@ -1,14 +1,9 @@
 #include "../header/clickable.h"
 
-<<<<<<< Updated upstream
-Clickable::Clickable(const sf::Vector2f & pos, const sf::Vector2f & size, sf::RenderWindow* w, sf::Shape* sprite) : Entity(pos, size, sprite), window(w)
-=======
-bool Clickable::mouseIsAlreadyPressed = false;
-
 Clickable::Clickable(const sf::Vector2f & pos, const sf::Vector2f & size, sf::RenderWindow* w, sf::Texture* texture) : sf::RectangleShape(size), window(w)
->>>>>>> Stashed changes
 {
-
+    setPosition(pos);
+    setTexture(texture);
 }
 
 void Clickable::onClick()
@@ -51,8 +46,8 @@ bool Clickable::isClicked()
 bool Clickable::isHovered()
 {
     sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
-    return (mousePos.x >= getPos().x && mousePos.x <= getPos().x + getSize().x &&
-            mousePos.y >= getPos().y && mousePos.y <= getPos().y + getSize().y);
+    return (mousePos.x >= getPosition().x && mousePos.x <= getPosition().x + getSize().x &&
+            mousePos.y >= getPosition().y && mousePos.y <= getPosition().y + getSize().y);
 }
 
 Clickable::~Clickable()

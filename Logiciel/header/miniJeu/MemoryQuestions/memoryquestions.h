@@ -32,9 +32,7 @@ private:
     sf::Clock clock;
     float timeBetweenQuestions;
     sf::RectangleShape laporte;
-    Entity laporteEntity;
     sf::RectangleShape background;
-    Entity backgroundEntity;
     AssetManager assetManager;
 public:
     MemoryQuestions(AppData & appData);

@@ -8,10 +8,8 @@ MemoryQuestions::MemoryQuestions(AppData &appData) : MiniJeu(appData), result  (
     laporte(sf::Vector2f(163,228)), background(sf::Vector2f(960, 540))
 {
     laporte.setTexture(&assetManager.getTexture("../ressource/image/laporte.png"));
-    laporteEntity.setSprite(&laporte);
-    laporteEntity.setPos(sf::Vector2f(366, 300));
+    laporte.setPosition(sf::Vector2f(366, 300));
     background.setTexture(&assetManager.getTexture(("../ressource/image/background.png")));
-    backgroundEntity.setSprite(&background);
 }
 
 void memoryQuestions::MemoryQuestions::setup()
@@ -28,9 +26,9 @@ void memoryQuestions::MemoryQuestions::setup()
 void memoryQuestions::MemoryQuestions::draw()
 {
     if (result == lostBoth || result == lostLeft || result == lostRight)
-        laporteEntity.setPos(sf::Vector2f(laporteEntity.getPos().x + (std::rand() % 3-1), laporteEntity.getPos().y + (std::rand() % 3-1)));
+        laporte.setPosition(sf::Vector2f(laporte.getPosition().x + (std::rand() % 3-1), laporte.getPosition().y + (std::rand() % 3-1)));
     app.window.draw(background);
-    app.window.draw(laporteEntity);
+    app.window.draw(laporte);
     app.window.draw(leftQuestionButton);
     app.window.draw(rightQuestionButton);
 }
@@ -51,7 +49,6 @@ void memoryQuestions::MemoryQuestions::update()
                 result = lostRight;
                 leftQuestionButton.setColor(sf::Color::Red);
                 laporte.setTexture(&assetManager.getTexture("../ressource/image/laporteColere.png"));
-                laporteEntity.setSprite(&laporte);
             }
         }
         if (rightQuestionButton.isClicked()) {
@@ -63,7 +60,6 @@ void memoryQuestions::MemoryQuestions::update()
                 result = lostRight;
                 rightQuestionButton.setColor(sf::Color::Red);
                 laporte.setTexture(&assetManager.getTexture("../ressource/image/laporteColere.png"));
-                laporteEntity.setSprite(&laporte);
             }
         }
         if (clock.getElapsedTime().asSeconds() > timeBetweenQuestions) {
@@ -71,14 +67,12 @@ void memoryQuestions::MemoryQuestions::update()
                 result = lostLeft;
                 leftQuestionButton.setColor(sf::Color::Red);
                 laporte.setTexture(&assetManager.getTexture("../ressource/image/laporteColere.png"));
-                laporteEntity.setSprite(&laporte);
             }
             if (questionList.askQuestion(rightQuestionRank)) {
                 if (result == lostLeft) result = lostBoth;
                 else result = lostRight;
                 rightQuestionButton.setColor(sf::Color::Red);
                 laporte.setTexture(&assetManager.getTexture("../ressource/image/laporteColere.png"));
-                laporteEntity.setSprite(&laporte);
             }
             if (result == unfinished) {
                 leftQuestionButton.setColor(sf::Color::Blue);
