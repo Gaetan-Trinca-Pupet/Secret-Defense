@@ -72,7 +72,7 @@ namespace Grabber
 
 		void setSprite(const sf::Texture& textur);
 
-		void update(sf::RenderWindow& window);
+		void GrabbableUpdate(sf::RenderWindow& window);
 		void draw(sf::RenderWindow& window);
 
 		void setX(const int& X);
@@ -97,8 +97,8 @@ namespace Grabber
 
 	}
 
-	// virtual function to update the object.
-	inline void Grabbable::update()
+	// virtual function to GrabbableUpdate the object.
+	inline void Grabbable::GrabbableUpdate()
 	{
 
 	}
@@ -255,7 +255,7 @@ namespace Grabber
 			{
 				grabbed->moveX(x - lastX);
 				grabbed->moveY(y - lastY);
-				grabbed->update();
+				grabbed->GrabbableUpdate();
 			}
 		}
 		else
