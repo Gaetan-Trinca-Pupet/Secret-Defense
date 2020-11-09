@@ -10,7 +10,7 @@
 /// \brief The Clickable class allows to create an entity with an action if you click on it, and to check if it is clicked or hovered (using the window the clickable is on to know the mouse position)
 ///
 
-class Clickable:public Entity
+class Clickable:public sf::RectangleShape
 {
 private:
     sf::RenderWindow* window;
@@ -27,7 +27,7 @@ public:
     /// \param w is the window the clikable will be displayed on
     /// \param sprite is the clickable's sprite
     ///
-    Clickable(const sf::Vector2f & pos = sf::Vector2f(), const sf::Vector2f & size = sf::Vector2f(), sf::RenderWindow* w = nullptr, sf::Shape* sprite = nullptr);
+    Clickable(const sf::Vector2f & pos = sf::Vector2f(), const sf::Vector2f & size = sf::Vector2f(), sf::RenderWindow* w = nullptr, sf::Texture* texture = nullptr);
     ///
     /// \brief onClick checks if the button is clicked and calls actionOnClick if it is
     ///     (if the mouse hasn't been released since the last call of OnClick, it won't call actionOnClick)

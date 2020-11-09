@@ -9,11 +9,9 @@ Button::Button(sf::RenderWindow *w, const sf::Vector2f &size, const sf::Vector2f
     outerRect = sf::RectangleShape(size);
     outerRect.setFillColor(col);
     outerRect.setPosition(pos);
-    setSprite(&outerRect);
     innerRect = sf::RectangleShape(sf::Vector2f(size.x-6, size.y-6));
     innerRect.setFillColor(col*sf::Color(128,128,128));
     innerRect.setPosition(sf::Vector2f(pos.x+3, pos.y+3));
-    setSprite(&outerRect);
 }
 
 Button::~Button()
