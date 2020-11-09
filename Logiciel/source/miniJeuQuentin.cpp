@@ -12,7 +12,7 @@ void miniJeuQ::setup()
     cercle.setFillColor(sf::Color(sf::Color::Red));
     std::cout<<app.lives<<std::endl;
     time=8;
-    chrono=Chrono(time, &clock, app.window);
+    chrono=Chrono(app.window);
 }
 
 void miniJeuQ::draw()

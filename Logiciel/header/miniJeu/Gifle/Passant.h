@@ -11,14 +11,14 @@ protected:
 	float* deltaTime;
 	int speed;
 	float dir;
-
-
+	sf::RenderWindow* window;
 
 public:
 	Passant(const sf::Vector2f& pos, sf::RenderWindow* w, float dir, float* _deltaTime);
 	virtual ~Passant();
 	void update();
 	bool isOutOfBounds();
+	bool operator < (Passant& p2);
 
 };
 

@@ -2,9 +2,8 @@
 #define __ETUDIANT_H_
 
 #include "../../Grabber.hpp"
-#include "../../entity.h"
 
-class Etudiant : public Entity{
+class Etudiant : public sf::RectangleShape{
 public:
 
 private:
