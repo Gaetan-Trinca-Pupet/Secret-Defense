@@ -21,7 +21,7 @@ namespace Grabber
 		Grabbable(const int& X = 0, const int& Y = 0, const int& sx = 0, const int& sy = 0);
 		virtual ~Grabbable();
 
-		virtual void update()=0;
+		virtual void updateOnGrab()=0;
 
 		void setX(const int& X);
 		void setY(const int& Y);
@@ -98,7 +98,7 @@ namespace Grabber
 	}
 
 	// virtual function to update the object.
-	inline void Grabbable::update()
+	inline void Grabbable::updateOnGrab()
 	{
 
 	}
@@ -255,7 +255,7 @@ namespace Grabber
 			{
 				grabbed->moveX(x - lastX);
 				grabbed->moveY(y - lastY);
-				grabbed->update();
+				grabbed->updateOnGrab();
 			}
 		}
 		else
