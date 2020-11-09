@@ -11,8 +11,6 @@ class UnMiniJeu: public MiniJeu{
 		sf::RectangleShape rectangle;
 		sf::Vector2f direction;
 		Chrono chrono;
-		float time;
-		sf::Clock clock;
 
 		
 	protected :

@@ -22,6 +22,11 @@ class MiniJeu{
 	protected :
 		AppData& app;
 		bool isFinished;
+
+		
+		sf::Clock deltaTimeClock;
+		float deltaTime;
+		float tempsMax;
 		
 		virtual void setup();
 		virtual void draw()=0;
@@ -35,6 +40,7 @@ class MiniJeu{
 		MiniJeu(AppData& appData);
         void play();
 		virtual ~MiniJeu();
+
 };
 
 #endif

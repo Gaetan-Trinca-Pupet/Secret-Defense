@@ -10,22 +10,24 @@ class Chrono : public sf::Drawable {
 public:
 
 	Chrono();
-	Chrono(float _time, sf::Clock* _clock, sf::RenderWindow& window);
+	Chrono(sf::RenderWindow& window);
 	virtual ~Chrono();
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	void update();
 
+	float getTimePassed();
+	void setTempsMax(float _tempsMax);
+
 private:
 
-	float time;
-	//AssetManager* assetManager;
-	sf::Clock* clock;
+
+	sf::Clock clock;
 	Filled_arc arc;
-	//sf::Texture tex;
 	sf::CircleShape outline;
 	float factor;
+	float tempsMax;
 };
 
 #endif
