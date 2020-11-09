@@ -28,7 +28,7 @@ void Entity::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 Entity::~Entity()
 {
-
+    delete sprite;
 }
 
 void Entity::setPos(const sf::Vector2f & p)

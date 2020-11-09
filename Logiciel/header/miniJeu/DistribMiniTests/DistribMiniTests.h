@@ -14,6 +14,8 @@ public:
 	std::vector<MiniTest> MiniTests;
 	std::vector<Etudiant> Etudiants;
 
+	Grabber::Grabber hand;
+
 private:
 	DisitribMiniTests(AppData& appData);
 	virtual ~DisitribMiniTests();
