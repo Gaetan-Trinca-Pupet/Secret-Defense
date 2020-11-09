@@ -5,16 +5,18 @@ But du jeu : faire le score le plus élevé sur une série de mini-jeu très cou
 
 
 Mini-jeu (court) :
-   - Laporte corrige des copies d'eleves, avec comme seule options juste ou faux
+   - (Gaëtan)Laporte corrige des copies d'eleves, avec comme seule options juste ou faux
    - Trouver l'erreur(s) sur une copie
-   - Dans un amphi, plusieurs élèves posent des questions, dans une boite à réponse, séléctionner les bonnes réponses
+   - (Gaëtan) Dans un amphi, plusieurs élèves posent des questions, dans une boite à réponse, séléctionner les bonnes réponses
    - Jeu de mémoire, plusieurs élèves posent des questions, et si une apparait plusieurs fois, punir l'élève.
    - (Erwann)Eteindre les postes encore allumé avant la nuit (se deplacer zqsd)
    - Communiquer avec les autres profs les mauvais eleves après une séquence où on voit un cours, avec des eleves serieux et d'autres qui font autres choses
    - (Gaëtan) Brancher correctement un PC (souris)
+   - (Ugo) Mettre des claque aux élèves sans masques
    - Jeu de control avec commande tantot inversé, tantot non
    
 
 Boss (long) :
+   - (erwann) Test des projets de PTUTs (spong invader) avec les controles qui font n'imp!
    - Programmer un bout de programme, ou placer des blocs de programmes dans le bon ordre
    - (Adrien) Qte création de bronx

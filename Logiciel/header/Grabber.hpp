@@ -16,12 +16,12 @@ namespace Grabber
 		int size_x;
 		int size_y;
 
-
+		
 	public:
 		Grabbable(const int& X = 0, const int& Y = 0, const int& sx = 0, const int& sy = 0);
 		virtual ~Grabbable();
 
-		virtual void update() = 0;
+		virtual void update()=0;
 
 		void setX(const int& X);
 		void setY(const int& Y);
@@ -72,7 +72,7 @@ namespace Grabber
 
 		void setSprite(const sf::Texture& textur);
 
-		void update(sf::RenderWindow& window);
+		void GrabbableUpdate(sf::RenderWindow& window);
 		void draw(sf::RenderWindow& window);
 
 		void setX(const int& X);
@@ -83,9 +83,9 @@ namespace Grabber
 
 
 
-	// Definition of Grabbable
+// Definition of Grabbable
 
-		// Constructor of Grabbable
+	// Constructor of Grabbable
 	inline Grabbable::Grabbable(const int& X, const int& Y, const int& sx, const int& sy) : x(X), y(Y), size_x(sx), size_y(sy)
 	{
 
@@ -97,8 +97,8 @@ namespace Grabber
 
 	}
 
-	// virtual function to update the object.
-	inline void Grabbable::update()
+	// virtual function to GrabbableUpdate the object.
+	inline void Grabbable::GrabbableUpdate()
 	{
 
 	}
@@ -165,16 +165,16 @@ namespace Grabber
 
 
 
-	// Definition of Grabber
+// Definition of Grabber
 
-		// canGrab() is used to know if the cursor is hovering over an Grabbable parameter, if it is, it return true
+	// canGrab() is used to know if the cursor is hovering over an Grabbable parameter, if it is, it return true
 	inline bool Grabber::canGrab(Grabbable* const grab)const
 	{
-		return
+		return 
 			(((x >= grab->getX() - grab->getSizeX() / 2) && (x <= grab->getX() + grab->getSizeX() / 2)) ||
-				((grab->getX() >= x - size_x / 2) && (grab->getX() <= x + size_x / 2))) &&
+			((grab->getX() >= x - size_x / 2) && (grab->getX() <= x + size_x / 2))) &&
 			(((y >= grab->getY() - grab->getSizeY() / 2) && (y <= grab->getY() + grab->getSizeY() / 2)) ||
-				((grab->getY() >= y - size_y / 2) && (grab->getY() <= y + size_y / 2)));
+			((grab->getY() >= y - size_y / 2) && (grab->getY() <= y + size_y / 2)));
 	}
 
 	inline Grabber::Grabber()
@@ -189,7 +189,7 @@ namespace Grabber
 	inline Grabber::Grabber(std::vector<T*>& tab)
 	{
 		tabGrabbable.resize(tab.size());
-		for (unsigned i(0); i < tab.size(); ++i)
+		for (unsigned i(0) ; i < tab.size() ; ++i)
 			tabGrabbable[i] = tab[i];
 		lastX, lastY, x, y = 0;
 		isGrabbing = false;
@@ -215,7 +215,7 @@ namespace Grabber
 	inline void Grabber::remove(const T& grab)
 	{
 		if (this->find(grab))
-			for (unsigned i(0); i < tabGrabbable.size(); ++i)
+			for(unsigned i (0) ; i < tabGrabbable.size() ; ++i)
 				if (tabGrabbable[i] == grab)
 				{
 					tabGrabbable.erase(tabGrabbable.begin() + i);
@@ -255,7 +255,7 @@ namespace Grabber
 			{
 				grabbed->moveX(x - lastX);
 				grabbed->moveY(y - lastY);
-				grabbed->update();
+				grabbed->GrabbableUpdate();
 			}
 		}
 		else
@@ -295,7 +295,7 @@ namespace Grabber
 	template<typename T>
 	inline bool Grabber::find(const T& grab) const
 	{
-		for (unsigned i(0); i < tabGrabbable.size(); ++i)
+		for (unsigned i(0); i < tabGrabbable.size() ; ++i)
 			if (tabGrabbable[i] == grab)
 				return true;
 		return false;

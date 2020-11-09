@@ -4,17 +4,53 @@
 #include "../header/clickable.h"
 
 ///
-/// \brief The Button class is supposed to be a clickable that displays a string easily modifiable (but it is not implemented)
+/// \brief The Button class is a clickable that displays a string in a rectangle
 ///
 
-class Button:Clickable
+class Button:public Clickable
 {
 private:
-    std::string text;
+    sf::Font font;
+    sf::Text text;
+    sf::RectangleShape innerRect;
+    sf::RectangleShape outerRect;
+    virtual void actionOnClick() override;
 public:
-    Button(const std::string & t = std::string());
+
+    ///
+    /// \brief Button::Button is the constructor for Button, which uses the postion, the size, the color,
+    ///     the text, its size and the window the button will be displayed on to create the button
+    /// \param t is the string to be displayed
+    /// \param col is the color of the outer rect of the button (the inner color depends on this color)
+    /// \param pos is the top left position of the button
+    /// \param size is the button's size
+    /// \param w is the window the button will be displayed on
+    ///
+    Button(sf::RenderWindow* w = nullptr, const sf::Vector2f & size = sf::Vector2f(), const sf::Vector2f & pos = sf::Vector2f(),
+           const std::string & t = std::string(), const unsigned short textSize = 20, const sf::Color & col = sf::Color());
+
     virtual ~Button();
-    virtual void actionOnClick();
+
+    ///
+    /// \brief draw draws the button on a window
+    /// \param target is the window for the button to be displayed on
+    /// \param states is some additionnal parameters that can be used to change the way the button is displayed
+    ///
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+
+    ///
+    /// \brief setText sets the text to be displayed
+    /// \param s the string corresponding to the button's text
+    ///
+    void setText(const std::string & s);
+
+    ///
+    /// \brief setColor sets the color of the button
+    /// \param c is the outer color of the button (the inner one is the same but lighter)
+    ///
+    void setColor(const sf::Color & c);
+
+    sf::Color getColor();
 };
 
 #endif // BUTTON_H

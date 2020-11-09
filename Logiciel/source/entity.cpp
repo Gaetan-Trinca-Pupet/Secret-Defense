@@ -22,18 +22,18 @@ Entity::Entity(const sf::Vector2f & p, const sf::Vector2f & s, sf::Shape* sp)
 
 void Entity::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-    sprite->setPosition(pos);
     target.draw(*sprite, states);
 }
 
 Entity::~Entity()
 {
-    delete sprite;
+
 }
 
 void Entity::setPos(const sf::Vector2f & p)
 {
     pos = p;
+    sprite->setPosition(pos);
 }
 
 const sf::Vector2f &Entity::getPos()
@@ -64,3 +64,4 @@ sf::Shape* Entity::getSprite()
 bool Entity::operator < (Entity& e) {
     return pos.y < e.getPos().y;
 }
+

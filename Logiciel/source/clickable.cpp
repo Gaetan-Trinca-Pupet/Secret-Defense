@@ -1,37 +1,24 @@
 #include "../header/clickable.h"
 
-bool Clickable::mouseIsAlreadyPressed(false);
-
-Clickable::Clickable(const sf::Vector2f& pos, const sf::Vector2f& size, sf::RenderWindow* w, sf::Shape* sprite) : Entity(pos, size, sprite), window(w)
+Clickable::Clickable(const sf::Vector2f & pos, const sf::Vector2f & size, sf::RenderWindow* w, sf::Shape* sprite) : Entity(pos, size, sprite), window(w)
 {
 
 }
 
-bool Clickable::onClick()
+void Clickable::onClick()
 {
-    bool isClicked = false;
-
-    if (window == nullptr) return false;
-
+    if (window == nullptr) return;
     if (!mouseIsAlreadyPressed) {
-        
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
-            
             if (isHovered())
             {
-                //std::cout << "aa" << std::endl;
-                isClicked = true;
                 actionOnClick();
-                mouseIsAlreadyPressed = true;
-                
             }
-            
+            mouseIsAlreadyPressed = true;
         }
     }
     else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)) mouseIsAlreadyPressed = false;
-    //std::cout << mouseIsAlreadyPressed <<  pos.y << std::endl;
-    return isClicked;
 }
 
 void Clickable::actionOnClick()
@@ -41,30 +28,28 @@ void Clickable::actionOnClick()
 
 bool Clickable::isClicked()
 {
-    sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
-    return (sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
-            mousePos.x >= pos.x && mousePos.x <= pos.x + size.x &&
-            mousePos.y >= pos.y && mousePos.y <= pos.y + size.y);
+    if (!mouseIsAlreadyPressed) {
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            if (isHovered())
+            {
+                return true;
+            }
+            mouseIsAlreadyPressed = true;
+        }
+    }
+    else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)) mouseIsAlreadyPressed = false;
+    return false;
 }
 
 bool Clickable::isHovered()
 {
     sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
-    return (mousePos.x >= pos.x && mousePos.x <= pos.x + size.x &&
-            mousePos.y >= pos.y && mousePos.y <= pos.y + size.y);
-}
-
-sf::Window* Clickable::getWindow() const
-{
-    return window;
-}
-
-void Clickable::setWindow(sf::RenderWindow* w)
-{
-    window = w;
+    return (mousePos.x >= getPos().x && mousePos.x <= getPos().x + getSize().x &&
+            mousePos.y >= getPos().y && mousePos.y <= getPos().y + getSize().y);
 }
 
 Clickable::~Clickable()
 {
-
+    delete window;
 }
