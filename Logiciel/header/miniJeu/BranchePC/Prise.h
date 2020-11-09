@@ -29,7 +29,7 @@ namespace BranchePC
 		void setSprite(const sf::Texture& textur);
 		void setSpriteRect(const unsigned short& x1 = 0, const unsigned short& y1 = 0, const unsigned short& x2 = 0, const unsigned short& y2 = 0);
 
-		virtual void update();
+		virtual void GrabbableUpdate();
 
 		void draw(sf::RenderWindow& window);
 

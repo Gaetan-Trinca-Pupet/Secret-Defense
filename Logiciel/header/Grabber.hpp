@@ -97,8 +97,8 @@ namespace Grabber
 
 	}
 
-	// virtual function to update the object.
-	inline void Grabbable::update()
+	// virtual function to GrabbableUpdate the object.
+	inline void Grabbable::GrabbableUpdate()
 	{
 
 	}
@@ -256,7 +256,7 @@ namespace Grabber
 			{
 				grabbed->moveX(x - lastX);
 				grabbed->moveY(y - lastY);
-				grabbed->update();
+				grabbed->GrabbableUpdate();
 			}
 		}
 		else
