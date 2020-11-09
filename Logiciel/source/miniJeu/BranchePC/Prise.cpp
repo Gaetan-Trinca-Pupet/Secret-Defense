@@ -41,7 +41,7 @@ void BranchePC::Prise::setSpriteRect(const unsigned short& x1, const unsigned sh
 	sprite.setTextureRect(sf::IntRect(x1, y1, x2, y2));
 }
 
-void BranchePC::Prise::GrabbableUpdate()
+void BranchePC::Prise::updateOnGrab()
 {
 	if (isClose() && !isItMatched)
 	{
