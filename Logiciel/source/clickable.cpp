@@ -1,6 +1,6 @@
 #include "../header/clickable.h"
 
-Clickable::Clickable(const sf::Vector2f & pos, const sf::Vector2f & size, sf::RenderWindow* w, sf::Drawable* sprite) : Entity(pos, size, sprite), window(w)
+Clickable::Clickable(const sf::Vector2f & pos, const sf::Vector2f & size, sf::RenderWindow* w, sf::Shape* sprite) : Entity(pos, size, sprite), window(w)
 {
 
 }
@@ -33,7 +33,6 @@ bool Clickable::isClicked()
         {
             if (isHovered())
             {
-                std::cout << "click" << std::endl;
                 return true;
             }
             mouseIsAlreadyPressed = true;

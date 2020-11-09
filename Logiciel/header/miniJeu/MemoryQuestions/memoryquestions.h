@@ -7,6 +7,7 @@
 #include "../MiniJeu.h"
 #include "../../button.h"
 #include "questionlist.h"
+#include "../../AssetManager.h"
 
 namespace memoryQuestions {
 
@@ -30,6 +31,11 @@ private:
     unsigned short rightQuestionRank;
     sf::Clock clock;
     float timeBetweenQuestions;
+    sf::RectangleShape laporte;
+    Entity laporteEntity;
+    sf::RectangleShape background;
+    Entity backgroundEntity;
+    AssetManager assetManager;
 public:
     MemoryQuestions(AppData & appData);
     virtual void setup();

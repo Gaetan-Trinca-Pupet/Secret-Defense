@@ -81,7 +81,7 @@ std::string QuestionList::getQuestion(const unsigned short & rank)
         return "Quelle est la difference entre ++i et i++";
         break;
     case 13 :
-        return "Quelle est la différence entre un pointeur et une reference ?";
+        return "Quelle est la difference entre un pointeur et une reference ?";
         break;
     case 14 :
         return "Quelle est la difference entre * et &";

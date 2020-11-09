@@ -3,10 +3,15 @@
 using namespace memoryQuestions;
 
 MemoryQuestions::MemoryQuestions(AppData &appData) : MiniJeu(appData), result  (unfinished), questionList(appData.difficulty),
-    leftQuestionButton(&appData.window, sf::Vector2f(600,100), sf::Vector2f(100,100), "", 20, sf::Color::Cyan),
-    rightQuestionButton(&appData.window, sf::Vector2f(600,100), sf::Vector2f(100,300), "", 20, sf::Color::Cyan), timeBetweenQuestions(2 * pow(0.95, std::max(int(app.difficulty)-16, 0)))
+    leftQuestionButton(&appData.window, sf::Vector2f(600,50), sf::Vector2f(50,30), "", 20, sf::Color::Cyan),
+    rightQuestionButton(&appData.window, sf::Vector2f(600,50), sf::Vector2f(100,165), "", 20, sf::Color::Cyan), timeBetweenQuestions(2 * pow(0.95, std::max(int(app.difficulty)-16, 0))),
+    laporte(sf::Vector2f(163,228)), background(sf::Vector2f(960, 540))
 {
-
+    laporte.setTexture(&assetManager.getTexture("../ressource/image/laporte.png"));
+    laporteEntity.setSprite(&laporte);
+    laporteEntity.setPos(sf::Vector2f(366, 300));
+    background.setTexture(&assetManager.getTexture(("../ressource/image/background.png")));
+    backgroundEntity.setSprite(&background);
 }
 
 void memoryQuestions::MemoryQuestions::setup()
@@ -22,6 +27,10 @@ void memoryQuestions::MemoryQuestions::setup()
 
 void memoryQuestions::MemoryQuestions::draw()
 {
+    if (result == lostBoth || result == lostLeft || result == lostRight)
+        laporteEntity.setPos(sf::Vector2f(laporteEntity.getPos().x + (std::rand() % 3-1), laporteEntity.getPos().y + (std::rand() % 3-1)));
+    app.window.draw(background);
+    app.window.draw(laporteEntity);
     app.window.draw(leftQuestionButton);
     app.window.draw(rightQuestionButton);
 }
@@ -41,6 +50,8 @@ void memoryQuestions::MemoryQuestions::update()
             else {
                 result = lostRight;
                 leftQuestionButton.setColor(sf::Color::Red);
+                laporte.setTexture(&assetManager.getTexture("../ressource/image/laporteColere.png"));
+                laporteEntity.setSprite(&laporte);
             }
         }
         if (rightQuestionButton.isClicked()) {
@@ -51,17 +62,23 @@ void memoryQuestions::MemoryQuestions::update()
             else {
                 result = lostRight;
                 rightQuestionButton.setColor(sf::Color::Red);
+                laporte.setTexture(&assetManager.getTexture("../ressource/image/laporteColere.png"));
+                laporteEntity.setSprite(&laporte);
             }
         }
         if (clock.getElapsedTime().asSeconds() > timeBetweenQuestions) {
             if (questionList.askQuestion(leftQuestionRank)) {
                 result = lostLeft;
                 leftQuestionButton.setColor(sf::Color::Red);
+                laporte.setTexture(&assetManager.getTexture("../ressource/image/laporteColere.png"));
+                laporteEntity.setSprite(&laporte);
             }
             if (questionList.askQuestion(rightQuestionRank)) {
                 if (result == lostLeft) result = lostBoth;
                 else result = lostRight;
                 rightQuestionButton.setColor(sf::Color::Red);
+                laporte.setTexture(&assetManager.getTexture("../ressource/image/laporteColere.png"));
+                laporteEntity.setSprite(&laporte);
             }
             if (result == unfinished) {
                 leftQuestionButton.setColor(sf::Color::Blue);

@@ -27,7 +27,7 @@ public:
     /// \param w is the window the clikable will be displayed on
     /// \param sprite is the clickable's sprite
     ///
-    Clickable(const sf::Vector2f & pos = sf::Vector2f(), const sf::Vector2f & size = sf::Vector2f(), sf::RenderWindow* w = nullptr, sf::Drawable* sprite = nullptr);
+    Clickable(const sf::Vector2f & pos = sf::Vector2f(), const sf::Vector2f & size = sf::Vector2f(), sf::RenderWindow* w = nullptr, sf::Shape* sprite = nullptr);
     ///
     /// \brief onClick checks if the button is clicked and calls actionOnClick if it is
     ///     (if the mouse hasn't been released since the last call of OnClick, it won't call actionOnClick)
