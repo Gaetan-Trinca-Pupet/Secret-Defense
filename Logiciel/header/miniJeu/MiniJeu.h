@@ -11,6 +11,7 @@ struct AppData{
     unsigned int lives;
     sf::Font font;
     unsigned int selecteur;
+	bool fullscreen;
 };
 
 class MiniJeu{
