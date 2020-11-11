@@ -1,9 +1,11 @@
 #include "../header/Textfield.h"
 
 void incrementAnything(void* i){
+	++*(char*)i;
+	/* ne marche que sur windows
 	asm("movb (%rcx), %al");
 	asm("inc %al");
-	asm("movb %al, (%rcx)");
+	asm("movb %al, (%rcx)");*/
 }
 
 Textfield::Textfield(){

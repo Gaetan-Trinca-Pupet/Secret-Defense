@@ -24,7 +24,7 @@ void TestProjetPtut::TestProjetPtut::setup(){
 	textfield.setPosition(sf::Vector2f(200,200));
 	textfield.setSize(sf::Vector2u(500,50));
 	textfield.setFont(font);
-	textfield.setMaxLength(20);
+	//textfield.setMaxLength(20);
 	textfield.setFillColor(sf::Color(127,127,127));
 	textfield.setTextColor(sf::Color(0,0,0));
 }
