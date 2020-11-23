@@ -3,15 +3,24 @@
 Button::Button(sf::RenderWindow *w, const sf::Vector2f &size, const sf::Vector2f &pos, const std::string &t, const unsigned short textSize, const sf::Color &col)
     : Clickable(pos, size, w)
 {
-    font.loadFromFile("../ressource/fonts/OpenSans-Regular.ttf");
-    text = sf::Text(t, font, textSize);
-    text.setPosition(sf::Vector2f(pos.x + size.x/2 - text.getLocalBounds().width /2, pos.y + (size.y - text.getLocalBounds().height) / 2));
+    if (!font.loadFromFile("../ressource/fonts/OpenSans-Regular.ttf"))
+        std::cerr << "Can't load font" << std::endl;
+    text.setString(t);
+    text.setFont(font);
+    text.setCharacterSize(textSize);
+    text.setFillColor(sf::Color::Black);
+    text.setPosition(sf::Vector2f(pos.x + size.x/2 - text.getLocalBounds().width /2, pos.y + size.y/2 - text.getLocalBounds().height / 2));
     outerRect = sf::RectangleShape(size);
-    outerRect.setFillColor(col);
+    outerRect.setFillColor(col*sf::Color(128,128,128));
     outerRect.setPosition(pos);
     innerRect = sf::RectangleShape(sf::Vector2f(size.x-6, size.y-6));
-    innerRect.setFillColor(col*sf::Color(128,128,128));
+    innerRect.setFillColor(col);
     innerRect.setPosition(sf::Vector2f(pos.x+3, pos.y+3));
+}
+
+Button::Button(const Button &button): font(button.font), text(button.text), innerRect(button.innerRect), outerRect(button.outerRect)
+{
+    text.setFont(font);
 }
 
 Button::~Button()

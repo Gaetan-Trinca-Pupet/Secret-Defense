@@ -29,6 +29,8 @@ public:
     Button(sf::RenderWindow* w = nullptr, const sf::Vector2f & size = sf::Vector2f(), const sf::Vector2f & pos = sf::Vector2f(),
            const std::string & t = std::string(), const unsigned short textSize = 20, const sf::Color & col = sf::Color());
 
+    Button(const Button & button);
+
     virtual ~Button();
 
     ///
