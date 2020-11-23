@@ -28,7 +28,7 @@ namespace BranchePC
 		virtual void update();
 	public:
 		BranchePC(AppData& appData);
-		~BranchePC();
+		virtual ~BranchePC();
 	};
 }
 

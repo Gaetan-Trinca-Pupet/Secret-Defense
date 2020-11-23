@@ -17,8 +17,8 @@ namespace BranchePC
 		sf::Sprite sprite;
 		sf::Texture texture;
 
-		sf::SoundBuffer sound;
-		sf::Sound sound_plugged;
+		//sf::SoundBuffer sound;
+		//sf::Sound sound_plugged;
 
 		bool isClose()const;
 

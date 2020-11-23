@@ -2,7 +2,6 @@
 
 #include "header/miniJeu/MiniJeu.h"
 #include "header/testMiniJeu.h"
-#include "header/miniJeu/EteindrePC/EteindrePC.h"
 #include "header/miniJeu/BranchePC/BranchePC.h"
 
 int main(){

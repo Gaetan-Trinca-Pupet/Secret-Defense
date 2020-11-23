@@ -12,11 +12,11 @@ bool BranchePC::Prise::isClose() const
 BranchePC::Prise::Prise(Prise* prise, const int& myX, const int& myY) : Grabbable(myX,myY,50,50)
 {
 	match = prise;
-
+/*
 	sound.loadFromFile("../ressource/BranchePC/correct.wav");
 	sound_plugged.setBuffer(sound);
 	sound_plugged.setVolume(5);
-	sound_plugged.setPitch(4);
+	sound_plugged.setPitch(4);*/
 }
 
 BranchePC::Prise::~Prise()
@@ -45,7 +45,7 @@ void BranchePC::Prise::updateOnGrab()
 {
 	if (isClose() && !isItMatched)
 	{
-		sound_plugged.play();
+		//sound_plugged.play();
 		isItMatched = true;
 		sprite.setTextureRect(sf::IntRect());
 		match->sprite.setTextureRect(sf::IntRect(50, 0, 50, 600));
