@@ -14,8 +14,8 @@ namespace AmphiReponse
 		QuestionReponse* match;
 		bool isItMatched = false;
 
-		sf::SoundBuffer sound;
-		sf::Sound sound_plugged;
+		//sf::SoundBuffer sound;
+		//sf::Sound sound_plugged;
 
 		sf::RectangleShape bulle;
 		sf::RectangleShape bord_bulle;

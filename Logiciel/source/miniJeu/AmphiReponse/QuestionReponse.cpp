@@ -18,10 +18,10 @@ AmphiReponse::QuestionReponse::QuestionReponse(QuestionReponse* QR, const std::s
 	libele.setString(str);
 	libele.setCharacterSize(20);
 
-	sound.loadFromFile("../ressource/BranchePC/correct.wav");
-	sound_plugged.setBuffer(sound);
-	sound_plugged.setVolume(5);
-	sound_plugged.setPitch(4);
+	//sound.loadFromFile("../ressource/BranchePC/correct.wav");
+	//sound_plugged.setBuffer(sound);
+	//sound_plugged.setVolume(5);
+	//sound_plugged.setPitch(4);
 
 	setSizeX((str.length()/1.5) * (libele.getCharacterSize() + libele.getLetterSpacing()));
 	setSizeY(libele.getCharacterSize() + 10);
@@ -52,7 +52,7 @@ void AmphiReponse::QuestionReponse::update()
 {
 	if ( match != nullptr && isClose() && !isItMatched)
 	{
-		sound_plugged.play();
+		//sound_plugged.play();
 		isItMatched = true;
 	}
 }

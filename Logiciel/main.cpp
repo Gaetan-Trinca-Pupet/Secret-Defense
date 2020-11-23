@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <SFML/Graphics.hpp>
 
-#include "header/miniJeu/MiniJeu.h"
+#include "header/miniJeu/AmphiReponse/AmphiReponse.h"
 #include "header/transition.h"
 #include "header/testMiniJeu.h"
 #include "header/miniJeuQuentin.h"
@@ -28,8 +28,8 @@ int main()
     transdata.text.setPosition(app.window.getSize().x/2, app.window.getSize().y/6);
     //UnMiniJeu unMiniJeu(app);
     //unMiniJeu.play();
-    //MiniJeu * jeu = new EteindrePC::EteindrePC(app);
-    //jeu->play();
+    MiniJeu * jeu = new AmphiReponse::AmphiReponse(app);
+    jeu->play();
     //delete jeu;
 
     unsigned int lastPlayed=0; //pour éviter que le même mini jeu soit joué 2 fois d'affilée
