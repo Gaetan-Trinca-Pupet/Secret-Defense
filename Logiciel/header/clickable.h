@@ -14,7 +14,8 @@ class Clickable:public sf::RectangleShape
 {
 private:
     sf::RenderWindow* window;
-    static bool mouseIsAlreadyPressed;
+    bool mouseIsAlreadyPressed;
+    static bool otherClickableAlreadyClicked;
     ///
     /// \brief actionOnClick is the action the button will do if it is clicked when onClick is called
     ///

@@ -3,13 +3,15 @@
 
 #include "../../Grabber.hpp"
 
-class MiniTest : public Grabber::Grabbable {
+class MiniTest : public Grabber::Grabbable, public sf::RectangleShape {
 public:
-
-	virtual void update();
+	bool isThrown;
 
 private:
 	MiniTest();
+	MiniTest(sf::Vector2f pos);
+
+	void update();
 
 	virtual ~MiniTest();
 

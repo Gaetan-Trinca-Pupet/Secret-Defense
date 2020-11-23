@@ -17,19 +17,24 @@ Passant::Passant(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, float
 	setFillColor(sf::Color::Blue);
 	setOutlineColor(sf::Color::Green);
 	setOutlineThickness(4);
-	setSize(sf::Vector2f(175, 175));
+	setSize(sf::Vector2f(175, 85));
 
 	
 
 }
 
 Passant::~Passant() {
+}
 
+void Passant::draw(sf::RenderTarget& target, sf::RenderStates states) const{
+	sf::RectangleShape rect(*this);
+	rect.setSize(sf::Vector2f(getSize().x, 300));
+	target.draw(rect);
 }
 
 void Passant::update() {
 
-	setPosition(getPosition() + sf::Vector2f(dir * speed * (*deltaTime), 0));
+	move(dir * speed * (*deltaTime), 0);
 }
 
 bool Passant::isOutOfBounds()

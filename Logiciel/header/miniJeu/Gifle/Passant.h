@@ -20,6 +20,8 @@ public:
 	bool isOutOfBounds();
 	bool operator < (Passant& p2);
 
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
 };
 
 class NonMasque : public Passant {
