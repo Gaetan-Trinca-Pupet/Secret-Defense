@@ -29,7 +29,7 @@ namespace AmphiReponse
 		QuestionReponse(QuestionReponse* QR, const std::string& str, const bool& isQuest = false, const int& myX = 0, const int& myY = 0);
 		~QuestionReponse();
 
-		virtual void update();
+		virtual void updateOnGrab();
 
 		void draw(sf::RenderWindow& window);
 

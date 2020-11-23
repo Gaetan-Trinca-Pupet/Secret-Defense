@@ -5,15 +5,18 @@
 
 class MiniTest : public Grabber::Grabbable, public sf::RectangleShape {
 public:
-	bool isThrown;
 
-private:
+
 	MiniTest();
+	virtual ~MiniTest();
 	MiniTest(sf::Vector2f pos);
 
 	void update();
 
-	virtual ~MiniTest();
+private:
+
+	bool isThrown;
+	
 
 };
 

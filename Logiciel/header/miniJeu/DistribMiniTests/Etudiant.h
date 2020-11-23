@@ -5,10 +5,11 @@
 
 class Etudiant : public sf::RectangleShape{
 public:
-
-private:
 	Etudiant();
 	virtual ~Etudiant();
+
+private:
+
 
 };
 

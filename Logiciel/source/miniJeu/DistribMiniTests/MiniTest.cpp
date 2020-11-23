@@ -17,6 +17,10 @@ MiniTest::MiniTest(sf::Vector2f pos) {
 
 }
 
+MiniTest::~MiniTest() {
+
+}
+
 void MiniTest::update() {
 	if (isThrown) {
 
