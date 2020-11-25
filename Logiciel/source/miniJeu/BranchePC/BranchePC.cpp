@@ -32,7 +32,7 @@ void BranchePC::BranchePC::setup()
 		tabPos1.pop_back();
 
 		rand = std::rand() % tabPos2.size();
-		tabPrise[i]->setX(tabPos2[rand] + ((app.window.getSize().x - decalage) / nbPrise) / 2);
+		tabPrise[i]->setPosition(tabPos2[rand] + ((app.window.getSize().x - decalage) / nbPrise) / 2, tabPrise[i]->getPosition().y);
 		tabPos2[rand] = tabPos2[tabPos2.size() - 1];
 		tabPos2.pop_back();
 	}
