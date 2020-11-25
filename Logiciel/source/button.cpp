@@ -13,6 +13,7 @@ Button::Button(sf::RenderWindow *w, const sf::Vector2f &size, const sf::Vector2f
     outerRect = sf::RectangleShape(size);
     outerRect.setFillColor(col*sf::Color(128,128,128));
     outerRect.setPosition(pos);
+    setPosition(pos);
     innerRect = sf::RectangleShape(sf::Vector2f(size.x-6, size.y-6));
     innerRect.setFillColor(col);
     innerRect.setPosition(sf::Vector2f(pos.x+3, pos.y+3));
@@ -37,6 +38,7 @@ void Button::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     target.draw(outerRect, states);
     target.draw(innerRect, states);
+    text.setFont (font);
     target.draw(text, states);
 }
 
@@ -49,11 +51,22 @@ void Button::setText(const std::string &s)
 
 void Button::setColor(const sf::Color & c)
 {
-    outerRect.setFillColor(c);
-    innerRect.setFillColor(c * sf::Color(128,128,128));
+    innerRect.setFillColor(c);
+    outerRect.setFillColor(c * sf::Color(128,128,128));
 }
 
 sf::Color Button::getColor()
 {
-    return outerRect.getFillColor();
+    return innerRect.getFillColor();
+}
+
+Button &Button::operator=(const Button &b)
+{
+    font = b.font;
+    text = b.text;
+    innerRect = b.innerRect;
+    outerRect = b.outerRect;
+    text.setFont(font);
+    setWindow(*b.getWindow());
+    setPosition(b.getPosition());
 }

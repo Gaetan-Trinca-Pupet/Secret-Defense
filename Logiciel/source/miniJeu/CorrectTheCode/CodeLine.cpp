@@ -22,7 +22,7 @@ void CodeLine::initCodeLine()
     wrongLine[1] = 1;
 
     codeLinesVector[2][0] = "string text;";
-    codeLinesVector[2][1] = "cout << \"Saisissez une chaîne de caractères\" << endl;";
+    codeLinesVector[2][1] = "cout << \"Saisissez une chaine de caracteres\" << endl;";
     codeLinesVector[2][2] = "cout >> text;";
     wrongLine[2] = 1;
 
@@ -31,7 +31,7 @@ void CodeLine::initCodeLine()
     codeLinesVector[3][2] = "    cout << \"Gagne !\";";
     wrongLine[3] = 0;
 
-    codeLinesVector[4][0] = "float f1 (12,345);";
+    codeLinesVector[4][0] = "string f1 (12,345);";
     codeLinesVector[4][1] = "float f2 (1,2345);";
     codeLinesVector[4][2] = "if (f1 == f2)";
     codeLinesVector[4][3] = "    cout << \"Gagne !\";";
@@ -78,7 +78,9 @@ CodeLine::CodeLine(sf::RenderWindow *w, const unsigned short &type, const unsign
 {
     setText(codeLinesVector[type][rank]);
     if (rank == wrongLine[type])
-        isWrong = true;
+        wrongness = true;
+    else
+        wrongness = false;
 }
 
 CodeLine::~CodeLine()
@@ -86,5 +88,10 @@ CodeLine::~CodeLine()
 
 }
 
+bool CodeLine::isWrong()
+{
+    return wrongness;
+}
+
 std::vector<std::vector<std::string>> correctthecode::CodeLine::codeLinesVector;
-std::vector<bool> correctthecode::CodeLine::wrongLine;
+std::vector<unsigned short> correctthecode::CodeLine::wrongLine;

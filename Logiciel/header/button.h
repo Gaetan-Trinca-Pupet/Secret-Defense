@@ -11,7 +11,7 @@ class Button:public Clickable
 {
 private:
     sf::Font font;
-    sf::Text text;
+    mutable sf::Text text;
     sf::RectangleShape innerRect;
     sf::RectangleShape outerRect;
     virtual void actionOnClick() override;
@@ -53,6 +53,8 @@ public:
     void setColor(const sf::Color & c);
 
     sf::Color getColor();
+
+    Button & operator= (const Button & b);
 };
 
 #endif // BUTTON_H

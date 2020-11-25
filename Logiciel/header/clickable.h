@@ -41,6 +41,10 @@ public:
     /// \return a boolean tellig if the button is hovered
     ///
     bool isHovered();
+
+    void setWindow(sf::RenderWindow & w);
+    sf::RenderWindow* getWindow() const;
+
     virtual ~Clickable();
 };
 
