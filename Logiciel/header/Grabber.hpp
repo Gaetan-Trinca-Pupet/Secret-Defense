@@ -5,38 +5,19 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
+#include <iostream>
+
 namespace Grabber
 {
-	class Grabbable
+	class Grabbable : public sf::RectangleShape
 	{
 	protected:
-		int x;
-		int y;
-
-		int size_x;
-		int size_y;
-
 		
 	public:
 		Grabbable(const int& X = 0, const int& Y = 0, const int& sx = 0, const int& sy = 0);
 		virtual ~Grabbable();
 
-		virtual void update()=0;
-
-		void setX(const int& X);
-		void setY(const int& Y);
-
-		void setSizeX(const int& X);
-		void setSizeY(const int& Y);
-
-		void moveX(const int& X);
-		void moveY(const int& Y);
-
-		int getX()const;
-		int getY()const;
-
-		int getSizeX()const;
-		int getSizeY()const;
+		virtual void updateOnGrab();
 
 	};
 
@@ -85,10 +66,11 @@ namespace Grabber
 
 // Definition of Grabbable
 
-	// Constructor of Grabbable
-	inline Grabbable::Grabbable(const int& X, const int& Y, const int& sx, const int& sy) : x(X), y(Y), size_x(sx), size_y(sy)
-	{
+	// Constructor of Grabbable++
 
+	inline Grabbable::Grabbable(const int& X, const int& Y, const int& sx, const int& sy) : sf::RectangleShape(sf::Vector2f(sx,sy))
+	{
+		setPosition(X, Y);
 	}
 
 	// Detructor of Grabbable
@@ -98,71 +80,10 @@ namespace Grabber
 	}
 
 	// virtual function to update the object.
-	inline void Grabbable::update()
+	inline void Grabbable::updateOnGrab()
 	{
 
 	}
-
-	// set the position on the x-axis of the object
-	inline void Grabbable::setX(const int& X)
-	{
-		x = X;
-	}
-
-	// set the position on the y-axis of the object
-	inline void Grabbable::setY(const int& Y)
-	{
-		y = Y;
-	}
-
-	// set the size on the x-axis of the object
-	inline void Grabbable::setSizeX(const int& X)
-	{
-		size_x = X;
-	}
-
-	// set the size on the x-axis of the object
-	inline void Grabbable::setSizeY(const int& Y)
-	{
-		size_y = Y;
-	}
-
-	// Move the object on the x-axis
-	inline void Grabbable::moveX(const int& X)
-	{
-		x += X;
-	}
-
-	// Move the object on the y-axis
-	inline void Grabbable::moveY(const int& Y)
-	{
-		y += Y;
-	}
-
-	// Return the position x of the object
-	inline int Grabbable::getX()const
-	{
-		return x;
-	}
-
-	// Return the position y of the object
-	inline int Grabbable::getY()const
-	{
-		return y;
-	}
-
-	// Return the size_x of the object
-	inline int Grabbable::getSizeX()const
-	{
-		return size_x;
-	}
-
-	// Return the size_y of the object
-	inline int Grabbable::getSizeY()const
-	{
-		return size_y;
-	}
-
 
 
 // Definition of Grabber
@@ -171,10 +92,10 @@ namespace Grabber
 	inline bool Grabber::canGrab(Grabbable* const grab)const
 	{
 		return 
-			(((x >= grab->getX() - grab->getSizeX() / 2) && (x <= grab->getX() + grab->getSizeX() / 2)) ||
-			((grab->getX() >= x - size_x / 2) && (grab->getX() <= x + size_x / 2))) &&
-			(((y >= grab->getY() - grab->getSizeY() / 2) && (y <= grab->getY() + grab->getSizeY() / 2)) ||
-			((grab->getY() >= y - size_y / 2) && (grab->getY() <= y + size_y / 2)));
+			(((x >= grab->getPosition().x - grab->getSize().x / 2) && (x <= grab->getPosition().x + grab->getSize().x / 2)) ||
+			((grab->getPosition().x >= x - size_x / 2) && (grab->getPosition().x <= x + size_x / 2))) &&
+			(((y >= grab->getPosition().y - grab->getSize().y / 2) && (y <= grab->getPosition().y + grab->getSize().y / 2)) ||
+			((grab->getPosition().y >= y - size_y / 2) && (grab->getPosition().y <= y + size_y / 2)));
 	}
 
 	inline Grabber::Grabber()
@@ -253,10 +174,12 @@ namespace Grabber
 
 			if (grabbed != nullptr)
 			{
-				grabbed->moveX(x - lastX);
-				grabbed->moveY(y - lastY);
-				grabbed->update();
+				grabbed->move(x - lastX, y - lastY);
+				
+				grabbed->setOutlineColor(sf::Color::Red);
+				grabbed->updateOnGrab();
 			}
+			else std::cout << "aa" << std::endl;;
 		}
 		else
 		{

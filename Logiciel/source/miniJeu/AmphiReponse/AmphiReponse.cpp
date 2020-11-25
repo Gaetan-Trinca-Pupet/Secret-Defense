@@ -86,8 +86,7 @@ void AmphiReponse::AmphiReponse::setup()
 	for (unsigned i = 0; i < tabQuest.size(); ++i)
 	{
 		unsigned short n = std::rand() % tabNum.size();
-		tabQuest[tabNum[n]]->setX((decalage + ((app.window.getSize().x - decalage) / tabQuest.size()) * i) + ((app.window.getSize().x - decalage) / tabQuest.size())/2);
-		tabQuest[tabNum[n]]->setY(app.window.getSize().y - (i % 2 == 0 ? 100 + (i % 4 == 0 ? 150 : 0) : 150 + (i % 3 == 0 ? 50 : 0)));
+		tabQuest[tabNum[n]]->setPosition((decalage + ((app.window.getSize().x - decalage) / tabQuest.size()) * i) + ((app.window.getSize().x - decalage) / tabQuest.size())/2, app.window.getSize().y - (i % 2 == 0 ? 100 + (i % 4 == 0 ? 150 : 0) : 150 + (i % 3 == 0 ? 50 : 0)));
 		tabNum.erase(tabNum.begin() + n);
 	}
 
@@ -100,8 +99,7 @@ void AmphiReponse::AmphiReponse::setup()
 		unsigned short n = std::rand() % tabNum.size();
 		if (tabQuest[tabNum[n]]->getMatch() != nullptr)
 		{
-			tabQuest[tabNum[n]]->getMatch()->setX(decalage + (((app.window.getSize().x - decalage) / tabQuest.size()) * i));
-			tabQuest[tabNum[n]]->getMatch()->setY((i % 2 == 0 ? 50 + (i % 4 == 0 ? 150 : 0) : 100 + (i%3 == 0 ? 50 : 0)));
+			tabQuest[tabNum[n]]->getMatch()->setPosition(decalage + (((app.window.getSize().x - decalage) / tabQuest.size()) * i), (i % 2 == 0 ? 50 + (i % 4 == 0 ? 150 : 0) : 100 + (i%3 == 0 ? 50 : 0)));
 		}
 		tabNum.erase(tabNum.begin() + n);
 	}

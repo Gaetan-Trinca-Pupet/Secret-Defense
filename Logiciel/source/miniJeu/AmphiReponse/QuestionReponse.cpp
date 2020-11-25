@@ -3,10 +3,10 @@
 bool AmphiReponse::QuestionReponse::isClose() const
 {
 	return 
-		(((x >= match->getX() - match->getSizeX() / 2) && (x <= match->getX() + match->getSizeX() / 2)) ||
-		((match->getX() >= x - size_x / 2) && (match->getX() <= x + size_x / 2))) &&
-		(((y >= match->getY() - match->getSizeY() / 2) && (y <= match->getY() + match->getSizeY() / 2)) ||
-		((match->getY() >= y - size_y / 2) && (match->getY() <= y + size_y / 2)));
+		(((getPosition().x >= match->getPosition().x - match->getSize().x / 2) && (getPosition().x <= match->getPosition().x + match->getSize().x / 2)) ||
+		((match->getPosition().x >= getPosition().x - getSize().x / 2) && (match->getPosition().x <= getPosition().x + getSize().x / 2))) &&
+		(((getPosition().y >= match->getPosition().y - match->getSize().y / 2) && (getPosition().y <= match->getPosition().y + match->getSize().y / 2)) ||
+		((match->getPosition().y >= getPosition().y - getSize().y / 2) && (match->getPosition().y <= getPosition().y + getSize().y / 2)));
 }
 
 AmphiReponse::QuestionReponse::QuestionReponse(QuestionReponse* QR, const std::string& str, const bool& isQuest, const int& myX, const int& myY) : Grabbable(myX, myY)
@@ -23,11 +23,10 @@ AmphiReponse::QuestionReponse::QuestionReponse(QuestionReponse* QR, const std::s
 	//sound_plugged.setVolume(5);
 	//sound_plugged.setPitch(4);
 
-	setSizeX((str.length()/1.5) * (libele.getCharacterSize() + libele.getLetterSpacing()));
-	setSizeY(libele.getCharacterSize() + 10);
+	setSize(sf::Vector2f((str.length()/1.5) * (libele.getCharacterSize() + libele.getLetterSpacing()),libele.getCharacterSize() + 10));
 
-	bulle.setSize(sf::Vector2f(size_x +3, size_y +3));
-	bord_bulle.setSize(sf::Vector2f(size_x+10, size_y+10));
+	bulle.setSize(sf::Vector2f(getSize().x +3, getSize().y +3));
+	bord_bulle.setSize(sf::Vector2f(getSize().x+10, getSize().y+10));
 
 	if (isQuest)
 	{
@@ -48,7 +47,7 @@ AmphiReponse::QuestionReponse::~QuestionReponse()
 	delete match;
 }
 
-void AmphiReponse::QuestionReponse::update()
+void AmphiReponse::QuestionReponse::updateOnGrab()
 {
 	if ( match != nullptr && isClose() && !isItMatched)
 	{
@@ -61,9 +60,9 @@ void AmphiReponse::QuestionReponse::draw(sf::RenderWindow& window)
 {
 	if (!isItMatched)
 	{
-		libele.setPosition(x + (std::rand() % 3) - size_x / 2, y + (std::rand() % 3) - size_y / 2);
-		bulle.setPosition(x + (std::rand() % 3) - (size_x + 3) / 2, y + (std::rand() % 3) - (size_y + 3) / 2);
-		bord_bulle.setPosition(x + (std::rand() % 3) - (size_x+10) / 2, y + (std::rand() % 3) - (size_y+10) / 2);
+		libele.setPosition(getPosition().x + (std::rand() % 3) - getSize().x / 2, getPosition().y + (std::rand() % 3) - getSize().y/ 2);
+		bulle.setPosition(getPosition().x + (std::rand() % 3) - (getSize().x + 3) / 2, getPosition().y + (std::rand() % 3) - (getSize().y + 3) / 2);
+		bord_bulle.setPosition(getPosition().x + (std::rand() % 3) - (getSize().x+10) / 2, getPosition().y + (std::rand() % 3) - (getSize().y+10) / 2);
 
 		window.draw(bord_bulle);
 		window.draw(bulle);
