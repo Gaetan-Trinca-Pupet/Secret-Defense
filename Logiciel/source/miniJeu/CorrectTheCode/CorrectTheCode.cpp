@@ -9,7 +9,6 @@ CorrectTheCode::CorrectTheCode(AppData &appdata) : MiniJeu(appdata), maxTime((3+
 void CorrectTheCode::setup()
 {
     CodeLine::initCodeLine();
-    srand(time(NULL));
     unsigned short codenb (rand()%2 + std::min(2*((app.difficulty-1)/2), unsigned(8)));
     code.resize(std::min((app.difficulty-1)/2 + 2, unsigned(6)));
     for (unsigned short rank = 0; rank < code.size(); ++rank) {
