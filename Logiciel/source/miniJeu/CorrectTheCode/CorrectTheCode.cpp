@@ -1,7 +1,7 @@
 #include "../../../header/miniJeu/CorrectTheCode/CorrectTheCode.h"
 
 using namespace correctthecode;
-CorrectTheCode::CorrectTheCode(AppData &appdata) : MiniJeu(appdata), maxTime((3+0.66*std::min(int(app.difficulty), 12))* pow(0.95, std::max(int(app.difficulty)-12, 0) )), chrono(maxTime, &clock, app.window)
+CorrectTheCode::CorrectTheCode(AppData &appdata) : MiniJeu(appdata), maxTime((3+0.66*std::min(int(app.difficulty), 9))* pow(0.95, std::max(int(app.difficulty)-9, 0) )), chrono(maxTime, &clock, app.window)
 {
 
 }
@@ -9,13 +9,13 @@ CorrectTheCode::CorrectTheCode(AppData &appdata) : MiniJeu(appdata), maxTime((3+
 void CorrectTheCode::setup()
 {
     CodeLine::initCodeLine();
-    unsigned short codenb (rand()%2 + std::min(2*(app.difficulty/2), unsigned(8)));
-    code.resize(app.difficulty/2 + 2);
+    srand(time(NULL));
+    unsigned short codenb (rand()%2 + std::min(2*((app.difficulty-1)/2), unsigned(8)));
+    code.resize(std::min((app.difficulty-1)/2 + 2, unsigned(6)));
     for (unsigned short rank = 0; rank < code.size(); ++rank) {
         code[rank] = CodeLine(&app.window, codenb, rank);
     }
     clock.restart();
-    std::cout << maxTime << std::endl;
 }
 
 void CorrectTheCode::draw()
@@ -50,6 +50,7 @@ void CorrectTheCode::update()
             }
             --app.lives;
             isEnding = true;
+            clock.restart();
         }
     }
     else {
