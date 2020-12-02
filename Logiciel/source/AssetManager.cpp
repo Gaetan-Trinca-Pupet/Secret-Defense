@@ -1,6 +1,8 @@
 #include"../header/AssetManager.h"
 
 
+std::map<std::string, sf::Texture> AssetManager::textures;
+
 AssetManager::AssetManager() {
 }
 

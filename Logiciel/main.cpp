@@ -4,7 +4,6 @@
 
 #include "header/miniJeu/MiniJeu.h"
 #include "header/miniJeu/Gifle/Gifle.h"
-#include "header/miniJeu/AmphiReponse/AmphiReponse.h"
 
 using namespace std;
 
@@ -17,9 +16,9 @@ int main()
     app.difficulty=1; //TODO implémenter la difficulté dans les mini jeux
     app.lives=3;
 
-    AmphiReponse::AmphiReponse minjeu(app);
+    Gifle* minjeu(new Gifle(app));
 
-    minjeu.play();
+    minjeu->play();
 
     
 

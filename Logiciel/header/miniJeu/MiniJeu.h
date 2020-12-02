@@ -2,6 +2,8 @@
 #define __MINIJEU_H_
 
 #include <SFML/Graphics.hpp>
+#include "../AssetManager.h"
+#include "../Chrono.h"
 #include <iostream>
 
 //toutes les donnees partagees par les minijeux sont dans cette structure
@@ -16,14 +18,15 @@ struct AppData{
 };
 
 class MiniJeu{
-	private :
+	private:
 		sf::Color backgroundColor;
         sf::Texture coeur;
-	protected :
+
+	protected:
 		AppData& app;
 		bool isFinished;
 
-		
+		Chrono chrono;
 		sf::Clock deltaTimeClock;
 		float deltaTime;
 		float tempsMax;

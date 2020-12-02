@@ -7,6 +7,11 @@
 #include "../../Chrono.h"
 
 class Gifle : public MiniJeu {
+public:
+	Gifle(AppData& appData);
+	virtual ~Gifle();
+
+
 private:
 
 	virtual void draw();
@@ -14,13 +19,14 @@ private:
 
 	int wave;
 
-	Chrono chrono;
+	unsigned nbAGifler;
+	unsigned nbGifles;
 
+
+	Chrono chrono;
 	std::vector<Passant*> Passants;
 
-public:
-	Gifle(AppData& appData);
-	virtual ~Gifle();
+
 };
 
 

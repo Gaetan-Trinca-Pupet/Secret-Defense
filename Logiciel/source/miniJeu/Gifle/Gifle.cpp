@@ -35,13 +35,11 @@ void Gifle::draw()
 
 void Gifle::update()
 {
-	
 
 	float timeBetweenWaves = 0.5;
 
 	if (chrono.getTimePassed() - wave > timeBetweenWaves) {
 
-		
 		if (wave % 7 == 1 || wave % 7 == 5) {
 			Passants.push_back(new NonMasque
 			(sf::Vector2f(-rand() % 100 - 175, rand() % (app.window.getSize().y - 180) + 100), &app.window, 1, &deltaTime));
@@ -50,7 +48,8 @@ void Gifle::update()
 		}
 		else if (wave % 7 == 3 || wave % 7 == 6) {
 			Passants.push_back(new Passant
-			(sf::Vector2f(-rand() % 100 - 175, rand() % (app.window.getSize().y - 180) + 100), &app.window, 1, &deltaTime));
+			(sf::Vector2f(-rand() % 100 - 175,
+				           rand() % (app.window.getSize().y - 180) + 100),&app.window, 1, &deltaTime));
 			Passants.push_back(new NonMasque
 			(sf::Vector2f(app.window.getSize().x + rand() % 100 + 175, rand() % (app.window.getSize().y - 180) + 100), &app.window, -1, &deltaTime));
 		}
@@ -69,18 +68,12 @@ void Gifle::update()
 		if (Passants.size() == 0) break;
 		--i;
 		Passants[i]->update();
+
 		if (Passants[i]->isOutOfBounds()) {
 			Passants.erase(Passants.begin() + i);
 			sort(Passants.begin(), Passants.end(), comparePassantPtr);
 		}
 	}
-
-	//if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-	for (std::vector<Passant*>::iterator i(Passants.end()); i != Passants.begin();) {
-		--i;
-		(*i)->onClick();
-	}
-	//}
 
 	chrono.update();
 }

@@ -18,9 +18,6 @@ Passant::Passant(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, float
 	setOutlineColor(sf::Color::Green);
 	setOutlineThickness(4);
 	setSize(sf::Vector2f(175, 85));
-
-	
-
 }
 
 Passant::~Passant() {
@@ -34,6 +31,7 @@ void Passant::draw(sf::RenderTarget& target, sf::RenderStates states) const{
 
 void Passant::update() {
 
+	onClick();
 	move(dir * speed * (*deltaTime), 0);
 }
 
@@ -47,7 +45,6 @@ void Passant::actionOnClick() {
 	if (isGifle) return;
 	isGifle = true;
 	speed *= 8;
-	std::cout << "comment osez vous" << std::endl;
 
 	//change de sprite;
 }
@@ -64,8 +61,7 @@ NonMasque::~NonMasque() {
 void NonMasque::actionOnClick() {
 	if (isGifle) return;
 	isGifle = true;
-	speed *= 5;
-	std::cout << "arg" << std::endl;
+	speed *= 8;
 
 	//change de sprite;
 }
