@@ -10,6 +10,7 @@
 #include "../../Controles.h"
 #include "Shield.h"
 #include "Ball.h"
+#include "Missile.h"
 
 namespace TestProjetPtut{
 	class Spaceship{
@@ -20,13 +21,19 @@ namespace TestProjetPtut{
 			Shield shield;
 			sf::Vector2f positionLimit;
 			std::vector<Ball> * balls;
+			std::vector<Missile>* missiles;
+			sf::Clock cooldown;
+			short int pv;
+			constexpr float cooldown_duration(){return 0.1;};
 		public :
 			Spaceship();
 			void bindControles(Controles& contr);
 			void setBalls(std::vector<Ball> * tabBall);
+			void setMissiles(std::vector<Missile> * tabMissile);
 			void setPositionLimit(const sf::Vector2f& pl);
 			void draw(sf::RenderWindow& window);
 			void update();
+			void inflictDamage(const short int damage);
 	};
 }
 

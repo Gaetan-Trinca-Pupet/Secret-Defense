@@ -7,9 +7,13 @@ TestProjetPtut::Ball::Ball(const sf::Vector2f& position, const sf::Vector2f& dir
 	direction = dir;
 	enemy = true;
 	killed = false;
+	if(direction.y <= 0){
+		direction = sf::Vector2f((std::rand()%100-50)/float(5),(std::rand()%70+30)/float(10));
+	}
 }
 
 void TestProjetPtut::Ball::update(){
+	if(sprite.getPosition().x < positionLimit.x + texture.getSize().x || sprite.getPosition().x + texture.getSize().x > positionLimit.y)direction.x *= -1;
 	sprite.move(direction);
 }
 
@@ -38,4 +42,9 @@ void TestProjetPtut::Ball::kill(){
 	killed = true;
 }
 
+const sf::Rect<float> TestProjetPtut::Ball::getGlobalBounds()const{
+	return sprite.getGlobalBounds();
+}
+
 sf::Texture TestProjetPtut::Ball::texture;
+sf::Vector2f TestProjetPtut::Ball::positionLimit;

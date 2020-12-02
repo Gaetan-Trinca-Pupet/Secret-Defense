@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Ball.h"
+#include "Missile.h"
 
 namespace TestProjetPtut{
 	class Invader{
@@ -17,6 +18,9 @@ namespace TestProjetPtut{
 			float x_sin;
 			short int pv;
 			sf::Clock cooldown;
+			sf::Clock invulnerabilityDuration;
+			char signe_speed;
+			bool invulnerability;
 		public :
 			Invader(sf::Vector2f pos = sf::Vector2f(960/2,50));
 			void update();
@@ -24,8 +28,11 @@ namespace TestProjetPtut{
 			bool mustBeDestroyed()const;
 			bool isKilled()const;
 			
+			void inflictDamage(const short int damage);
+			
 			static sf::Texture texture;
 			static std::vector<Ball>* balls;
+			static std::vector<Missile>* missiles;
 	};
 }
 

@@ -14,7 +14,9 @@
 #include "../../Controles.h"
 #include "Invader.h"
 #include "Ball.h"
-#include "../../Textfield.h"
+#include "Missile.h"
+#include "Spawner.h"
+#include "GlitchEffect.h"
 
 namespace TestProjetPtut{
 	class TestProjetPtut : public MiniJeu{
@@ -24,16 +26,11 @@ namespace TestProjetPtut{
 			Controles controles;
 			std::vector<Invader> invaders;
 			std::vector<Ball> balls;
+			std::vector<Missile> missiles;
 			sf::Texture textureBackground;
 			sf::Sprite background;
-			int ccc;
-			int h_ccc;
-			sf::Clock appInv;
-			
-			sf::Font font;
-			
-			Textfield textfield;
-			
+			Spawner spawner;
+			GlitchEffect glitchEffect;
 			void setup();
 			void draw();
 			void update();

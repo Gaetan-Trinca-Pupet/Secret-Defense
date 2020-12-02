@@ -1,17 +1,21 @@
 #include "../../../header/miniJeu/TestProjetPtut/Shield.h"
 
 TestProjetPtut::Shield::Shield(){
-	texture.loadFromFile("../ressource/TestProjetPtut/shild.bmp");
+	texture.loadFromFile("../ressource/TestProjetPtut/bouclier.png");
 	sprite.setTexture(texture);
-	sprite.setScale(0.9,0.9);
-	sprite.setOrigin(texture.getSize().x/2,0);
+	sprite.setTextureRect(sf::Rect<int>(0,0,80,11));
+	sprite.setScale(0.9,0.9); //11*80
+	sprite.setOrigin(sprite.getLocalBounds().width/2,0);
 	pv = 10;
 	active = true;
 }
 
 void TestProjetPtut::Shield::update(){
 	sprite.setPosition(sf::Vector2f(position->x,position->y-40));
-	if(pv <= 0 && cooldown.getElapsedTime().asSeconds()>5)pv=10;
+	if(pv <= 0 && cooldown.getElapsedTime().asSeconds()>5){
+		pv=10;
+		active = true;
+	}
 	for(Ball& ball : *balls){
 		if(active && ball.isEnemy() && sprite.getPosition().x + 50 > ball.getPosition().x-8 && sprite.getPosition().x - 50 < ball.getPosition().x+8 && 
 		sprite.getPosition().y+5 > ball.getPosition().y -8 && sprite.getPosition().y-5 < ball.getPosition().y +8){
@@ -26,6 +30,8 @@ void TestProjetPtut::Shield::update(){
 			}
 		}
 	}
+	if(animationClock.getElapsedTime().asMilliseconds()>200)animationClock.restart();
+	sprite.setTextureRect(sf::Rect<int>((5-pv/2)*80,11*(animationClock.getElapsedTime().asMilliseconds()/50),80,11));
 }
 
 void TestProjetPtut::Shield::draw(sf::RenderWindow& window){
@@ -42,4 +48,8 @@ void TestProjetPtut::Shield::turnOnOff(){
 
 void TestProjetPtut::Shield::setBalls(std::vector<Ball> * tabBall){
 	balls = tabBall;
+}
+
+bool TestProjetPtut::Shield::isActive()const{
+	return active;
 }

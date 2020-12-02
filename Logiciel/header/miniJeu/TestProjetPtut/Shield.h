@@ -16,6 +16,7 @@ namespace TestProjetPtut{
 			std::vector<Ball> * balls;
 			sf::Clock cooldown;
 			sf::Clock damageCooldown;
+			sf::Clock animationClock;
 			short int pv;
 			bool active;
 			
@@ -26,6 +27,7 @@ namespace TestProjetPtut{
 			void bindPosition(const sf::Vector2f& pos);
 			void turnOnOff();
 			void setBalls(std::vector<Ball> * tabBall);
+			bool isActive()const;
 	};
 }
 

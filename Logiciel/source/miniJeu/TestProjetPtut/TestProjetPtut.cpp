@@ -1,32 +1,31 @@
 #include "../../../header/miniJeu/TestProjetPtut/TestProjetPtut.h"
 
 TestProjetPtut::TestProjetPtut::TestProjetPtut(AppData& appData): MiniJeu(appData){
-	Invader::texture.loadFromFile("../ressource/TestProjetPtut/Invader.bmp");
+	Invader::texture.loadFromFile("../ressource/TestProjetPtut/Invader.png");
 	Ball::texture.loadFromFile("../ressource/TestProjetPtut/balle.bmp");
+	GlitchEffect::init();
 	Invader::balls = &balls;
+	Invader::missiles = &missiles;
+	controles.setUpKey(sf::Keyboard::Key::Up);
+	controles.setDownKey(sf::Keyboard::Key::Down);
+	controles.setLeftKey(sf::Keyboard::Key::Left);
+	controles.setRightKey(sf::Keyboard::Key::Right);
 }
 
 void TestProjetPtut::TestProjetPtut::setup(){
-	std::srand(std::time(NULL));
 	setBackgroundColor(sf::Color(0,0,0));
-	ccc =4;
 	textureBackground.loadFromFile("../ressource/TestProjetPtut/bg.bmp");
 	textureBackground.setRepeated(true);
 	background.setTexture(textureBackground);
 	background.setTextureRect(sf::IntRect(0,0,540,540));
 	background.setPosition(sf::Vector2f((960-540)/2,0));
 	spaceship.bindControles(controles);
+	Ball::positionLimit = sf::Vector2f(background.getTextureRect().left+background.getPosition().x,background.getTextureRect().width+background.getPosition().x);
 	spaceship.setPositionLimit(sf::Vector2f(background.getTextureRect().left+background.getPosition().x,background.getTextureRect().width+background.getPosition().x));
 	spaceship.setBalls(&balls);
-	h_ccc = std::rand()%100;
-	appInv.restart();
-	font.loadFromFile("../ressource/fonts/OpenSans-Regular.ttf");
-	textfield.setPosition(sf::Vector2f(200,200));
-	textfield.setSize(sf::Vector2u(500,50));
-	textfield.setFont(font);
-	//textfield.setMaxLength(20);
-	textfield.setFillColor(sf::Color(127,127,127));
-	textfield.setTextColor(sf::Color(0,0,0));
+	spaceship.setMissiles(&missiles);
+	spawner.setInvaders(&invaders);
+	spawner.setDifficulty(app.difficulty);
 }
 
 void TestProjetPtut::TestProjetPtut::draw(){
@@ -36,10 +35,14 @@ void TestProjetPtut::TestProjetPtut::draw(){
 		ball.draw(app.window);
 	}
 	
+	for(Missile& missile : missiles){
+		missile.draw(app.window);
+	}
+	
 	for(Invader& invader : invaders){
 		invader.draw(app.window);
 	}
-	textfield.draw(app.window);
+	if(glitchEffect.isActive())glitchEffect.draw(app.window);
 }
 
 void TestProjetPtut::TestProjetPtut::update(){
@@ -54,17 +57,21 @@ void TestProjetPtut::TestProjetPtut::update(){
 	for(int i(invaders.size()-1); i >= 0; --i){
 		invaders[i].update();
 		if(invaders[i].mustBeDestroyed()){
+			if(!invaders[i].isKilled())spaceship.inflictDamage(2);
 			invaders.erase(invaders.begin()+i);
 		}
 	}
 	
-	if(ccc > 0 && appInv.getElapsedTime().asSeconds()>0.5){
-		invaders.push_back(Invader(sf::Vector2f(960/2,-h_ccc)));
-		--ccc;
-		appInv.restart();
-	}else if(ccc == 0 && appInv.getElapsedTime().asSeconds()>6.5){
-		ccc=4;
-		h_ccc = std::rand()%100;
+	for(int i(missiles.size()-1); i >= 0; --i){
+		missiles[i].update();
+		if(missiles[i].mustBeDestroyed()){
+			missiles.erase(missiles.begin()+i);
+		}
 	}
-	textfield.update(app.window);
+	
+	spawner.update();
+	if(spawner.isWaveFinished()){
+		glitchEffect.start(app.window);
+		controles.shuffle();
+	}
 }

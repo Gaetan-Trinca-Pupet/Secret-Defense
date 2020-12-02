@@ -1,6 +1,6 @@
 #include "../header/Controles.h"
 
-Controles::Controles(sf::Keyboard::Key up, sf::Keyboard::Key down,sf::Keyboard::Key left, sf::Keyboard::Key right, sf::Keyboard::Key action){
+Controles::Controles(const std::vector<sf::Keyboard::Key>& up, const std::vector<sf::Keyboard::Key>& down, const std::vector<sf::Keyboard::Key>& left, const std::vector<sf::Keyboard::Key>& right, const std::vector<sf::Keyboard::Key>& action){
 	controles['z']=up;
 	controles['s']=down;
 	controles['q']=left;
@@ -17,14 +17,21 @@ Controles::Controles(sf::Keyboard::Key up, sf::Keyboard::Key down,sf::Keyboard::
 	leftClick=false;
 	rightClick=false;
 	actionClick=false;
+	
+	//std::srand(std::time(NULL));
 }
 
 Controles::Controles(){
-	controles['z']=sf::Keyboard::Z;
-	controles['s']=sf::Keyboard::S;
-	controles['q']=sf::Keyboard::Q;
-	controles['d']=sf::Keyboard::D;
-	controles[' ']=sf::Keyboard::Space;
+	shuffledControles['z'] = 'z';
+	shuffledControles['q'] = 'q';
+	shuffledControles['s'] = 's';
+	shuffledControles['d'] = 'd';
+	shuffledControles[' '] = ' ';
+	controles['z'].push_back(sf::Keyboard::Z);
+	controles['s'].push_back(sf::Keyboard::S);
+	controles['q'].push_back(sf::Keyboard::Q);
+	controles['d'].push_back(sf::Keyboard::D);
+	controles[' '].push_back(sf::Keyboard::Space);
 	upPress=false;
 	downPress=false;
 	leftPress=false;
@@ -36,11 +43,13 @@ Controles::Controles(){
 	leftClick=false;
 	rightClick=false;
 	actionClick=false;
+	
+	//std::srand(std::time(NULL));
 }
 
 void Controles::update(){
 	
-	if(sf::Keyboard::isKeyPressed(controles['z'])){
+	if(isKeyPressed('z')){
 		upClick=!upPress;
 		upPress=true;
 	}else{
@@ -48,7 +57,7 @@ void Controles::update(){
 		upPress=false;
 	}
 	
-	if(sf::Keyboard::isKeyPressed(controles['s'])){
+	if(isKeyPressed('s')){
 		downClick=!downPress;
 		downPress=true;
 	}else{
@@ -56,7 +65,7 @@ void Controles::update(){
 		downPress=false;
 	}
 	
-	if(sf::Keyboard::isKeyPressed(controles['q'])){
+	if(isKeyPressed('q')){
 		leftClick=!leftPress;
 		leftPress=true;
 	}else{
@@ -64,7 +73,7 @@ void Controles::update(){
 		leftPress=false;
 	}
 	
-	if(sf::Keyboard::isKeyPressed(controles['d'])){
+	if(isKeyPressed('d')){
 		rightClick=!rightPress;
 		rightPress=true;
 	}else{
@@ -72,7 +81,7 @@ void Controles::update(){
 		rightPress=false;
 	}
 	
-	if(sf::Keyboard::isKeyPressed(controles[' '])){
+	if(isKeyPressed(' ')){
 		actionClick=!actionPress;
 		actionPress=true;
 	}else{
@@ -123,21 +132,38 @@ bool Controles::isActionClicked(){
 }
 
 void Controles::setUpKey(sf::Keyboard::Key key){
-	controles['z']=key;
+	controles['z'].push_back(key);
 }
 
 void Controles::setDownKey(sf::Keyboard::Key key){
-	controles['s']=key;
+	controles['s'].push_back(key);
 }
 
 void Controles::setLeftKey(sf::Keyboard::Key key){
-	controles['q']=key;
+	controles['q'].push_back(key);
 }
 
 void Controles::setRightKey(sf::Keyboard::Key key){
-	controles['d']=key;
+	controles['d'].push_back(key);
 }
 
 void Controles::setActionKey(sf::Keyboard::Key key){
-	controles[' ']=key;
+	controles[' '].push_back(key);
+}
+
+bool Controles::isKeyPressed(char idKey){
+	for(const sf::Keyboard::Key& key : controles[shuffledControles[idKey]]){
+		if(sf::Keyboard::isKeyPressed(key))return true;
+	}
+	return false;
+}
+
+void Controles::shuffle(){
+	std::vector<char> keys = {'z','q','s','d',' '};
+	std::vector<char> ids = {'z','q','s','d',' '};
+	for(const char& id :ids){
+		unsigned int i = ((unsigned int)std::rand())%keys.size();
+		shuffledControles[id] = keys[i];
+		keys.erase(keys.begin()+i);
+	}
 }

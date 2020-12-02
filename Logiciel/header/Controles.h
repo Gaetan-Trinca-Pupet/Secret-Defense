@@ -1,14 +1,19 @@
 #ifndef __CONTROLES
 #define __CONTROLES
 
+#include <map>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 
-#include <map>
 
 class Controles{
 	private:
-		std::map<char,sf::Keyboard::Key> controles;
+		std::map<char,std::vector<sf::Keyboard::Key>> controles;
+		std::map<char,char> shuffledControles;
 		bool upPress;
 		bool downPress;
 		bool leftPress;
@@ -20,9 +25,11 @@ class Controles{
 		bool leftClick;
 		bool rightClick;
 		bool actionClick;
+		
+		bool isKeyPressed(char idKey);
 	
 	public:
-		Controles(sf::Keyboard::Key up, sf::Keyboard::Key down,sf::Keyboard::Key left, sf::Keyboard::Key right, sf::Keyboard::Key action);
+		Controles(const std::vector<sf::Keyboard::Key>& up, const std::vector<sf::Keyboard::Key>& down, const std::vector<sf::Keyboard::Key>& left, const std::vector<sf::Keyboard::Key>& right, const std::vector<sf::Keyboard::Key>& action);
 		Controles();
 		
 		void update();
@@ -44,6 +51,8 @@ class Controles{
 		void setLeftKey(sf::Keyboard::Key key);
 		void setRightKey(sf::Keyboard::Key key);
 		void setActionKey(sf::Keyboard::Key key);
+		
+		void shuffle();
 };
 
 #endif

@@ -11,13 +11,13 @@
 
 int main()
 {
-    srand(time(NULL));
+    std::srand(time(nullptr));
     AppData app;
 	app.fullscreen = false;
     app.window.create(sf::VideoMode(960, 540), "test");
     app.window.setFramerateLimit(60);
     app.difficulty=1; //TODO implémenter la difficulté dans les mini jeux
-    app.lives=3;
+    app.lives=0;
     //unMiniJeu.play();
     MiniJeu * jeu = new TestProjetPtut::TestProjetPtut(app);
     jeu->play();
