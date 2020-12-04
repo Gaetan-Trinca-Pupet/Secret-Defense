@@ -8,41 +8,42 @@
 
 //toutes les donnees partagees par les minijeux sont dans cette structure
 
-struct AppData{
+struct AppData
+{
 	sf::RenderWindow window;
-    unsigned int difficulty;
-    unsigned int lives;
-    sf::Font font;
-    unsigned int selecteur;
-    unsigned int score=0;
+	unsigned int difficulty;
+	unsigned int lives;
+	sf::Font font;
+	unsigned int selecteur;
+	unsigned int score = 0;
 };
 
-class MiniJeu{
-	private:
-		sf::Color backgroundColor;
-        sf::Texture coeur;
+class MiniJeu
+{
+private:
+	sf::Color backgroundColor;
+	sf::Texture coeur;
 
-	protected:
-		AppData& app;
-		bool isFinished;
+protected:
+	AppData& app;
+	bool isFinished;
 
-		Chrono chrono;
-		sf::Clock deltaTimeClock;
-		float deltaTime;
-		float tempsMax;
-		
-		virtual void setup();
-		virtual void draw()=0;
-		virtual void update()=0;
-		
-		sf::Color getBackgroundColor()const;
-        void setBackgroundColor(const sf::Color& color);
-        void drawInterface();
+	Chrono chrono;
+	sf::Clock deltaTimeClock;
+	float deltaTime;
 
-	public :
-		MiniJeu(AppData& appData);
-        void play();
-		virtual ~MiniJeu();
+	virtual void setup();
+	virtual void draw() = 0;
+	virtual void update() = 0;
+
+	sf::Color getBackgroundColor()const;
+	void setBackgroundColor(const sf::Color& color);
+	void drawInterface();
+
+public:
+	MiniJeu(AppData& appData);
+	void play();
+	virtual ~MiniJeu();
 
 };
 

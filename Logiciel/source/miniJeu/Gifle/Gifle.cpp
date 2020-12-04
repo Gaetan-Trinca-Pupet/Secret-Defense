@@ -7,17 +7,23 @@ bool comparePassantPtr(Passant* e1, Passant* e2)
 	return (*e1 < *e2);
 }
 
-Gifle::Gifle(AppData& appData) : MiniJeu(appData) {
+Gifle::Gifle(AppData& appData) : MiniJeu(appData)
+{
 	isFinished = false;
 	tempsMax = 20;
 	chrono = Chrono(app.window);
 	chrono.setTempsMax(tempsMax);
 	wave = 0;
 	srand(std::time(NULL));
+
+	timeBetweenWaves = 0.5;
+	nbAGifler = tempsMax / timeBetweenWaves - 1;
 }
 
-Gifle::~Gifle() {
-	for (int i(Passants.size()); i != 0;) {
+Gifle::~Gifle()
+{
+	for (int i(Passants.size()); i != 0;)
+	{
 		--i;
 		Passants.erase(Passants.begin() + i);
 	}
@@ -26,7 +32,8 @@ Gifle::~Gifle() {
 void Gifle::draw()
 {
 
-	for (Passant* e : Passants) {
+	for (Passant* e : Passants)
+	{
 		app.window.draw(*e);
 	}
 
@@ -36,40 +43,38 @@ void Gifle::draw()
 void Gifle::update()
 {
 
-	float timeBetweenWaves = 0.5;
 
-	if (chrono.getTimePassed() - wave > timeBetweenWaves) {
 
-		if (wave % 7 == 1 || wave % 7 == 5) {
+	if (chrono.getTimePassed() - wave * timeBetweenWaves > timeBetweenWaves)
+	{
+
+		if (wave % 4 == 0 || wave % 7 == 2)
+		{
 			Passants.push_back(new NonMasque
 			(sf::Vector2f(-rand() % 100 - 175, rand() % (app.window.getSize().y - 180) + 100), &app.window, 1, &deltaTime));
 			Passants.push_back(new Passant
 			(sf::Vector2f(app.window.getSize().x + rand() % 100 + 175, rand() % (app.window.getSize().y - 180) + 100), &app.window, -1, &deltaTime));
 		}
-		else if (wave % 7 == 3 || wave % 7 == 6) {
+		else if (wave % 4 == 1 || wave % 4 == 3)
+		{
 			Passants.push_back(new Passant
 			(sf::Vector2f(-rand() % 100 - 175,
-				           rand() % (app.window.getSize().y - 180) + 100),&app.window, 1, &deltaTime));
+				rand() % (app.window.getSize().y - 180) + 100), &app.window, 1, &deltaTime));
 			Passants.push_back(new NonMasque
 			(sf::Vector2f(app.window.getSize().x + rand() % 100 + 175, rand() % (app.window.getSize().y - 180) + 100), &app.window, -1, &deltaTime));
 		}
-		else {
-			Passants.push_back(new Passant
-				(sf::Vector2f(-rand() % 100 - 175, rand() % (app.window.getSize().y - 180) + 100), &app.window, 1, &deltaTime));
-			Passants.push_back(new Passant
-				(sf::Vector2f(app.window.getSize().x + rand() % 100 + 175, rand() % (app.window.getSize().y - 180) + 100), &app.window,-1, &deltaTime));
-		}
 
-		wave++;
+		++wave;
 		sort(Passants.begin(), Passants.end(), comparePassantPtr);
 	}
 
-	for (int i(Passants.size()); i != 0;) {
-		if (Passants.size() == 0) break;
+	for (int i(Passants.size()); i != 0 || Passants.size() != 0;)
+	{
 		--i;
 		Passants[i]->update();
 
-		if (Passants[i]->isOutOfBounds()) {
+		if (Passants[i]->isOutOfBounds())
+		{
 			Passants.erase(Passants.begin() + i);
 			sort(Passants.begin(), Passants.end(), comparePassantPtr);
 		}

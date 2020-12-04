@@ -3,10 +3,11 @@
 
 #include "../../Grabber.hpp"
 #include "Etudiant.h"
+#include "../../AssetManager.h"
 
-class MiniTest : public Grabber::Grabbable{
+class MiniTest : public Grabber::Grabbable
+{
 public:
-
 
 	MiniTest();
 	MiniTest(sf::Vector2f pos, float rotation, sf::FloatRect throwRange, float* _deltaTime, sf::RenderWindow& _window);
@@ -22,8 +23,8 @@ public:
 
 
 private:
+
 	bool isThrown;
-	bool toBeRemoved;
 	sf::FloatRect throwRange;
 	float throwSpeed;
 	float* deltaTime;

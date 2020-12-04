@@ -1,16 +1,16 @@
 #include "../../../header/miniJeu/DistribMiniTests/MiniTest.h"
 
-MiniTest::MiniTest() {
+MiniTest::MiniTest()
+{
 
 }
 
-MiniTest::MiniTest(sf::Vector2f pos, float rotation, sf::FloatRect _throwRange,
-	               float* _deltaTime, sf::RenderWindow& _window) {
+MiniTest::MiniTest(sf::Vector2f pos, float rotation, sf::FloatRect _throwRange, float* _deltaTime, sf::RenderWindow& _window)
+{
 
 	deltaTime = _deltaTime;
 	winSize = _window.getSize();
 	throwRange = _throwRange;
-
 
 	setPosition(pos);
 	setRotation(rotation);
@@ -22,10 +22,10 @@ MiniTest::MiniTest(sf::Vector2f pos, float rotation, sf::FloatRect _throwRange,
 	setOutlineColor(sf::Color::Black);
 
 	isThrown = false;
-	throwSpeed = 120;
+	throwSpeed = 150;
 
+	setTexture(&AssetManager::getTexture("../ressource/DistribMiniTests/MiniTest.png"));
 	rTex.create(getSize().y * 2, getSize().y * 2);
-
 }
 
 bool MiniTest::canBeGrabbed()
@@ -39,41 +39,50 @@ void MiniTest::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	sprite.setTexture(rTex.getTexture());
 	sprite.setPosition(getPosition());
 	sprite.setOrigin(getSize().y, getSize().y);
-	if(isThrown)
-		sprite.setScale(1, (1 -((winSize.y  - (getPosition().y > 100 ? getPosition().y : 100)) / winSize.y) ));
+
+	if (isThrown)
+		sprite.setScale(1, (1 - ((winSize.y - (getPosition().y > 100 ? getPosition().y : 100)) / winSize.y)));
+
 	target.draw(sprite);
 
 }
 
 MiniTest::~MiniTest()
 {
-	
+
 }
 
 void MiniTest::update()
 {
 
-	if (isThrown) {
+	if (isThrown)
+	{
 
 		move(throwDir * (*deltaTime));
-		rotate((*deltaTime) * 600);
+		rotate((*deltaTime) * 650);
 
 		float scale = getScale().x;
-		if (scale > 0) {
+		if (scale > 0)
+		{
 			float scaleDiff = scale - (*deltaTime) * 0.20;
 			setScale(scaleDiff, scaleDiff);
 		}
 	}
-	else {
+	else
+	{
 
-		if ( !throwRange.contains(getPosition())) {
+		if (!throwRange.contains(getPosition()))
+		{
 			isThrown = true;
+
 
 			float hyp = sqrt(pow(getPosition().x - (lastPos.x), 2) + pow(getPosition().y - lastPos.y, 2));
 
 			throwDir.x = (getPosition().x - (lastPos.x)) / hyp;
 			throwDir.y = (getPosition().y - (lastPos.y)) / hyp;
 			throwDir *= throwSpeed;
+
+			setPosition(lastPos);
 		}
 
 		lastPos = getPosition();

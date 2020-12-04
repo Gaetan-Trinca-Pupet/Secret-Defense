@@ -6,7 +6,8 @@
 #include "../../clickable.h"
 #include "../../Chrono.h"
 
-class Gifle : public MiniJeu {
+class Gifle : public MiniJeu
+{
 public:
 	Gifle(AppData& appData);
 	virtual ~Gifle();
@@ -14,12 +15,16 @@ public:
 
 private:
 
+	float tempsMax;
+
 	virtual void draw();
 	virtual void update();
 
 	int wave;
+	float timeBetweenWaves;
 
 	unsigned nbAGifler;
+
 	unsigned nbGifles;
 
 

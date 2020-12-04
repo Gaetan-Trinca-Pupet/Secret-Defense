@@ -3,7 +3,8 @@
 
 #include "../../clickable.h"
 
-class Passant : public Clickable {
+class Passant : public Clickable
+{
 protected:
 
 	bool isGifle;
@@ -24,7 +25,8 @@ public:
 
 };
 
-class NonMasque : public Passant {
+class NonMasque : public Passant
+{
 private:
 	virtual void actionOnClick();
 public:

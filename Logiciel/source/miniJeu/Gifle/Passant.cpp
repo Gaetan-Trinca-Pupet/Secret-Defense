@@ -10,9 +10,9 @@ Passant::Passant(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, float
 	deltaTime = _deltaTime;
 	dir = _dir;
 	isGifle = false;
-	speed = 110;
+	speed = 160;
 	speed += (float(rand()) / float(RAND_MAX) - 0.5) * float(speed * 0.3);
-	
+
 	sf::RectangleShape* rect = new sf::RectangleShape(sf::Vector2f(175, 500));
 	setFillColor(sf::Color::Blue);
 	setOutlineColor(sf::Color::Green);
@@ -20,16 +20,19 @@ Passant::Passant(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, float
 	setSize(sf::Vector2f(175, 85));
 }
 
-Passant::~Passant() {
+Passant::~Passant()
+{
 }
 
-void Passant::draw(sf::RenderTarget& target, sf::RenderStates states) const{
+void Passant::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
 	sf::RectangleShape rect(*this);
 	rect.setSize(sf::Vector2f(getSize().x, 300));
 	target.draw(rect);
 }
 
-void Passant::update() {
+void Passant::update()
+{
 
 	onClick();
 	move(dir * speed * (*deltaTime), 0);
@@ -37,11 +40,12 @@ void Passant::update() {
 
 bool Passant::isOutOfBounds()
 {
-	return (dir > 0)  && getPosition().x >   window->getSize().x + getOutlineThickness()
-		|| (dir <= 0) && getPosition().x < - getOutlineThickness() - getSize().x;
+	return (dir > 0) && getPosition().x > window->getSize().x + getOutlineThickness()
+		|| (dir <= 0) && getPosition().x < -getOutlineThickness() - getSize().x;
 }
 
-void Passant::actionOnClick() {
+void Passant::actionOnClick()
+{
 	if (isGifle) return;
 	isGifle = true;
 	speed *= 8;
@@ -49,16 +53,19 @@ void Passant::actionOnClick() {
 	//change de sprite;
 }
 
-NonMasque::NonMasque(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, float* _deltaTime) : Passant(pos, w, _dir, _deltaTime){
+NonMasque::NonMasque(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, float* _deltaTime) : Passant(pos, w, _dir, _deltaTime)
+{
 
 	setOutlineColor(sf::Color::Red);
 }
 
-NonMasque::~NonMasque() {
+NonMasque::~NonMasque()
+{
 
 }
 
-void NonMasque::actionOnClick() {
+void NonMasque::actionOnClick()
+{
 	if (isGifle) return;
 	isGifle = true;
 	speed *= 8;
@@ -66,6 +73,7 @@ void NonMasque::actionOnClick() {
 	//change de sprite;
 }
 
-bool Passant::operator < (Passant& p2) {
+bool Passant::operator < (Passant& p2)
+{
 	return getPosition().y < p2.getPosition().y;
 }

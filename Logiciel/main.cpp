@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "header/miniJeu/MiniJeu.h"
-#include "header/miniJeu/Gifle/Gifle.h"
+#include "header/miniJeu/DistribMiniTests/DistribMiniTests.h"
 
 using namespace std;
 
@@ -13,12 +13,12 @@ int main()
     AppData app;
     app.window.create(sf::VideoMode(960, 540), "test");
     app.window.setFramerateLimit(60);
-    app.difficulty=1; //TODO implémenter la difficulté dans les mini jeux
+    app.difficulty=4;
     app.lives=3;
 
-    Gifle* minjeu(new Gifle(app));
+    DisitribMiniTests* minijeu(new DisitribMiniTests(app));
 
-    minjeu->play();
+    minijeu->play();
 
     
 

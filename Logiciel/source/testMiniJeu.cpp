@@ -11,8 +11,6 @@ void UnMiniJeu::setup(){
 	rectangle.setPosition(app.window.getSize().x/2,app.window.getSize().y/2);
 	rectangle.setSize(sf::Vector2f(18,18));
 	rectangle.setFillColor(sf::Color(255,0,0));
-
-	tempsMax = 8;
 	chrono = Chrono(app.window);
 
 }
