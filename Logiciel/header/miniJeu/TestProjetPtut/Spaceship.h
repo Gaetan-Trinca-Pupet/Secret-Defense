@@ -34,6 +34,7 @@ namespace TestProjetPtut{
 			void draw(sf::RenderWindow& window);
 			void update();
 			void inflictDamage(const short int damage);
+			const short int& getPv()const;
 	};
 }
 

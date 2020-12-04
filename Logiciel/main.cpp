@@ -16,7 +16,7 @@ int main()
 	app.fullscreen = false;
     app.window.create(sf::VideoMode(960, 540), "test");
     app.window.setFramerateLimit(60);
-    app.difficulty=1; //TODO implémenter la difficulté dans les mini jeux
+    app.difficulty=3; //TODO implémenter la difficulté dans les mini jeux
     app.lives=0;
     //unMiniJeu.play();
     MiniJeu * jeu = new TestProjetPtut::TestProjetPtut(app);

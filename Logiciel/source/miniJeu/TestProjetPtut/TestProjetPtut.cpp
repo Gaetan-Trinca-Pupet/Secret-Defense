@@ -74,4 +74,5 @@ void TestProjetPtut::TestProjetPtut::update(){
 		glitchEffect.start(app.window);
 		controles.shuffle();
 	}
+	if(spaceship.getPv() <= 0)isFinished = true;
 }

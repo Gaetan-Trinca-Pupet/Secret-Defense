@@ -62,3 +62,7 @@ void TestProjetPtut::Spaceship::inflictDamage(const short int damage){
 	pv -= damage;
 	if(pv < 0) pv = 0;
 }
+
+const short int& TestProjetPtut::Spaceship::getPv()const{
+	return pv;
+}
