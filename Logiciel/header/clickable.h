@@ -4,7 +4,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-
 ///
 /// \brief The Clickable class allows to create an entity with an action if you click on it, and to check if it is clicked or hovered (using the window the clickable is on to know the mouse position)
 ///
@@ -42,6 +41,10 @@ public:
     /// \return a boolean tellig if the button is hovered
     ///
     bool isHovered();
+
+    void setWindow(sf::RenderWindow & w);
+    sf::RenderWindow* getWindow() const;
+
     virtual ~Clickable();
 };
 

@@ -6,6 +6,7 @@ Clickable::Clickable(const sf::Vector2f & pos, const sf::Vector2f & size, sf::Re
     setTexture(texture);
 }
 
+
 void Clickable::onClick()
 {
     if (window == nullptr) return;
@@ -32,11 +33,11 @@ bool Clickable::isClicked()
     if (!mouseIsAlreadyPressed) {
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
+            mouseIsAlreadyPressed = true;
             if (isHovered())
             {
                 return true;
             }
-            mouseIsAlreadyPressed = true;
         }
     }
     else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)) mouseIsAlreadyPressed = false;
@@ -50,7 +51,17 @@ bool Clickable::isHovered()
             mousePos.y >= getPosition().y && mousePos.y <= getPosition().y + getSize().y);
 }
 
+void Clickable::setWindow(sf::RenderWindow &w)
+{
+    window = &w;
+}
+
+sf::RenderWindow* Clickable::getWindow() const
+{
+    return window;
+}
+
 Clickable::~Clickable()
 {
-    delete window;
+
 }
