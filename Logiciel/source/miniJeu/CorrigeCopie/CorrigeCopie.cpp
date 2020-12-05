@@ -52,7 +52,7 @@ std::vector<QuestRep> getTabQuest()
 
 
 	//3
-	tabQuest.question = "i++ ou ++i ?";
+	tabQuest.question = "Par défaut, i++ ou ++i ?";
 	tabRepVrai.push_back("++i");
 	tabRepFaux.push_back("i++");
 
@@ -102,7 +102,7 @@ std::vector<QuestRep> getTabQuest()
 
 	//6
 	tabQuest.question = "Ecrivez le corps de la fonction find(n,tab) où on recherche n dans tab :";
-	tabRepVrai.push_back("for(unsigned i = 0 ; i < tab.size() ; ++i) if (tab[i] == n) return i;");
+	tabRepVrai.push_back("for(unsigned i = 0 ; i < tab.size() ;++i)\nif (tab[i] == n) return i;");
 	tabRepFaux.push_back("if (n == tab) return true;");
 	tabRepFaux.push_back("if (n != tab) return false;");
 	tabRepFaux.push_back("return n;");
@@ -148,9 +148,9 @@ std::vector<QuestRep> getTabQuest()
 
 
 	//9
-	tabQuest.question = "Pètes et répètes sont sur un bateau, pètes tombent à l'eau, qui c'est qui reste sur le bateau ?";
-	tabRepVrai.push_back("Répètes.");
-	tabRepFaux.push_back("Pètes.");
+	tabQuest.question = "Pète et répète sont sur un bateau, pète tombe à l'eau, qui c'est qui reste sur le bateau ?";
+	tabRepVrai.push_back("Répète.");
+	tabRepFaux.push_back("Pète.");
 	tabRepFaux.push_back("Petit bateau, qui navigue sur les flots.");
 
 	tabQuest.tabRepVrai = tabRepVrai;
@@ -164,7 +164,7 @@ std::vector<QuestRep> getTabQuest()
 	//10
 	tabQuest.question = "Écrivez un pointeur sur un int :";
 	tabRepVrai.push_back("int* n = new int();");
-	tabRepVrai.push_back("int i; int* n = &i;");
+	tabRepVrai.push_back("int i;\nint* n = &i;");
 	tabRepFaux.push_back("int n = new int();");
 	tabRepFaux.push_back("int* n = int();");
 	tabRepFaux.push_back("int* n = new unsigned();");
@@ -181,72 +181,153 @@ std::vector<QuestRep> getTabQuest()
 
 }
 
+void CorrigeCopie::CorrigeCopie::computeTabText()
+{
+	for (Reponse& QR : tabLibelle)
+	{
+		std::string str = QR.question.getString();
+		unsigned short sizeLine = 0;
+		for (unsigned i = 0 ; i < str.size() ; ++i)
+		{
+			sizeLine += 1;
+			if (str[i] == '\n') sizeLine = 0;
+			if ((QR.question.getCharacterSize() + QR.question.getLetterSpacing()) * sizeLine >= feuille.getSize().x)
+			{
+				QR.nbligne += 1;
+				for (i; str[i] != ' ' and i != 0; --i);
+				sizeLine = 0;
+				str.insert(++i, "\n");
+				i += 1;
+			}
+		}
+		QR.question.setString(str);
+
+		str = QR.reponse.getString();
+		sizeLine = 0;
+		for (unsigned i = 0; i < str.size(); ++i)
+		{
+			sizeLine += 1;
+			if (str[i] == '\n') sizeLine = 0;
+			if (QR.reponse.getCharacterSize() * sizeLine + QR.reponse.getLetterSpacing() * sizeLine >= feuille.getSize().x)
+			{
+				for (i; str[i] != ' ' and i != 0; --i);
+				sizeLine = 0;
+				str.insert(++i, "\n");
+				i += 1;
+			}
+		}
+		QR.reponse.setString(str);
+	}
+}
+
 void CorrigeCopie::CorrigeCopie::setup()
 {
-	tempsMax = 1000;
+	tempsMax = 2000;
 	tempsPasse = 0;
 
 	std::vector<QuestRep> tab = getTabQuest();
 
-	const unsigned nbQuestion = std::rand() % tab.size();
+	const unsigned nbQuestion = 2 + std::rand() % (tab.size()-2);
 	const unsigned short sizeQuest = 200;
 	
 	
 
 	tabLibelle.resize(nbQuestion);
 
-	//Definit tout
+	//Definit les questions réponses et vrai faux
 	for (unsigned i = 0; i < tabLibelle.size(); ++i)
 	{
 		unsigned n = std::rand() % tab.size();
-		tabLibelle[i].second.first.setString(tab[n].question);
+		tabLibelle[i].question.setString(tab[n].question);
 
 		if (std::rand() % 2 == 0)
 		{
-			tabLibelle[i].first = true;
-			tabLibelle[i].second.second.setString(tab[n].tabRepVrai[std::rand() % tab[n].tabRepVrai.size()]);
+			tabLibelle[i].VF = true;
+			tabLibelle[i].reponse.setString(tab[n].tabRepVrai[std::rand() % tab[n].tabRepVrai.size()]);
 		}
 		else
 		{
-			tabLibelle[i].first = false;
-			tabLibelle[i].second.second.setString(tab[n].tabRepFaux[std::rand() % tab[n].tabRepFaux.size()]);
+			tabLibelle[i].VF = false;
+			tabLibelle[i].reponse.setString(tab[n].tabRepFaux[std::rand() % tab[n].tabRepFaux.size()]);
 		}
 
 		tab.erase(tab.begin() + n);
 	}
+	
+	tabBouton.resize(tabLibelle.size());
+	for (unsigned i = 0; i < tabBouton.size() ; ++i)
+	{
+		tabBouton[i].first = new BoutonVF(app.window , true);
+		tabBouton[i].second = new BoutonVF(app.window , false);
+	}
+	
 
 	//Definit les graphisme du Texte
 	for (unsigned i = 0; i < tabLibelle.size(); ++i)
 	{
-		tabLibelle[i].second.first.setFont(font);
-		tabLibelle[i].second.second.setFont(font);
+		tabLibelle[i].question.setFont(font);
+		tabLibelle[i].reponse.setFont(font);
 
-		tabLibelle[i].second.first.setCharacterSize(20);
-		tabLibelle[i].second.second.setCharacterSize(15);
+		tabLibelle[i].question.setCharacterSize(20);
+		tabLibelle[i].reponse.setCharacterSize(15);
 
-		tabLibelle[i].second.first.setStyle(sf::Text::Bold);
+		tabLibelle[i].question.setStyle(sf::Text::Bold);
 
-		tabLibelle[i].second.first.setFillColor(sf::Color::Black);
-		tabLibelle[i].second.second.setFillColor(sf::Color::Blue);
+		tabLibelle[i].question.setFillColor(sf::Color::Black);
+		tabLibelle[i].reponse.setFillColor(sf::Color::Blue);
 	}
 
-
-	sizeFeuille = (nbQuestion * sizeQuest) + 100;
-	feuille.setSize(sf::Vector2f(app.window.getSize().x-200,sizeFeuille));
+	feuille.setSize(sf::Vector2f(app.window.getSize().x-200, (nbQuestion * sizeQuest) + 100));
 	feuille.setFillColor(sf::Color::White);
+
+	computeTabText();
 }
 
 void CorrigeCopie::CorrigeCopie::update()
 {
-	posCamera = (sizeFeuille + (app.window.getSize().y / 2)) * (tempsPasse / tempsMax);
+	posCamera = (feuille.getSize().y + (app.window.getSize().y / 2)) * (tempsPasse / tempsMax);
 
 	feuille.setPosition(100, int((app.window.getSize().y / 2) - posCamera));
 	for (unsigned i = 0; i < tabLibelle.size(); ++i)
 	{
-		tabLibelle[i].second.first.setPosition(150 , int((app.window.getSize().y / 2) + 50 + (200 * i) - posCamera));
-		tabLibelle[i].second.second.setPosition(150, int((app.window.getSize().y / 2) + 100 + (200 * i) - posCamera));
+		tabLibelle[i].question.setPosition(150 , int((app.window.getSize().y / 2) + 50 + (200 * i) - posCamera));
+		tabLibelle[i].reponse.setPosition(150, int((app.window.getSize().y / 2) + 50 + tabLibelle[i].question.getCharacterSize()*(tabLibelle[i].nbligne + 1) + (200 * i) - posCamera));
+
+		tabBouton[i].first->setPosition(int(feuille.getPosition().x + feuille.getSize().x - 200) , int((app.window.getSize().y / 2) + 50 + (200 * i) - posCamera));
+		tabBouton[i].second->setPosition(int(feuille.getPosition().x + feuille.getSize().x - 100) , int((app.window.getSize().y / 2) + 50 + (200 * i) - posCamera));
 	}
 
+	for (unsigned i = 0; i < tabBouton.size(); ++i)
+	{
+		tabBouton[i].first->update();
+		tabBouton[i].second->update();
+	}
+
+	// Checks if the buttons are pressed
+	for(unsigned i = 0 ; i < tabBouton.size() ; ++i)
+	{
+		if(!(tabBouton[i].first->hasBeenClicked() || tabBouton[i].second->hasBeenClicked()))
+		{
+			tabBouton[i].first->onClick();
+			tabBouton[i].second->onClick();
+		}
+	}
+	
+	for(unsigned i = 0 ; i < tabLibelle.size() ; ++i)
+	{
+		if(tabBouton[i].first->hasBeenClicked() || tabBouton[i].second->hasBeenClicked())
+			if(tabLibelle[i].VF == (tabBouton[i].first->hasBeenClicked() ? tabBouton[i].first->isWhat() : tabBouton[i].second->isWhat()))
+				tabLibelle[i].isCorrect = true;
+			else
+				isFinished = true;
+	}
+	unsigned short compte = 0;
+	for(unsigned i = 0 ; i < tabLibelle.size() ; ++i)
+		if(tabLibelle[i].isCorrect == true)
+			++compte;
+	if(tabLibelle.size() == compte)
+		isFinished = true;
+	
 	tempsPasse += 1;
 	if (tempsPasse > tempsMax) isFinished = true;
 }
@@ -257,8 +338,17 @@ void CorrigeCopie::CorrigeCopie::draw()
 
 	for (unsigned i = 0; i < tabLibelle.size(); ++i)
 	{
-		app.window.draw(tabLibelle[i].second.first);
-		app.window.draw(tabLibelle[i].second.second);
+		app.window.draw(tabLibelle[i].question);
+		app.window.draw(tabLibelle[i].reponse);
+	}
+
+	for (unsigned i = 0; i < tabBouton.size(); ++i)
+	{
+		if(not(tabBouton[i].first->hasBeenClicked() or tabBouton[i].second->hasBeenClicked()))
+		{
+			tabBouton[i].first->draw(app.window);
+			tabBouton[i].second->draw(app.window);
+		}
 	}
 }
 
@@ -271,5 +361,9 @@ CorrigeCopie::CorrigeCopie::CorrigeCopie(AppData& appData) : MiniJeu(appData)
 
 CorrigeCopie::CorrigeCopie::~CorrigeCopie()
 {
-
+	for (unsigned i = 0; i < tabBouton.size(); ++i)
+	{
+		delete tabBouton[i].first;
+		delete tabBouton[i].second;
+	}
 }

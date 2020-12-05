@@ -8,9 +8,6 @@
 struct AppData{
 	sf::RenderWindow window;
     unsigned int difficulty;
-    unsigned int lives;
-    sf::Font font;
-    unsigned int selecteur;
 };
 
 class MiniJeu{
