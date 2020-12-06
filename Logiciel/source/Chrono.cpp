@@ -10,12 +10,12 @@ Chrono::~Chrono() {
 
 Chrono::Chrono(sf::RenderWindow& window) {
 
-	arc.setRadius(80);
+	arc.setRadius(40);
 	arc.setPosition(sf::Vector2f(0.8,0.8));
 	outline.setRadius(48);
 	//outline.setOutlineThickness(8);
 	outline.setOrigin(outline.getRadius(), outline.getRadius());
-	outline.setPosition(window.getSize().x * (0.8/2+0.5), window.getSize().y * (0.2 / 2));
+	outline.setPosition(window.getView().getSize().x * (0.8/2+0.5), window.getView().getSize().y * (0.2 / 2));
 
 	factor = 0.3;
 }
