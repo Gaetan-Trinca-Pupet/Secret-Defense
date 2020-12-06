@@ -14,22 +14,18 @@ public:
 
 
 private:
-
-	float tempsMax;
-
 	virtual void draw();
 	virtual void update();
+
+	void creerPassants();
 
 	int wave;
 	float timeBetweenWaves;
 
-	unsigned nbAGifler;
-
-	unsigned nbGifles;
-
+	int erreurCpt;
 
 	Chrono chrono;
-	std::vector<Passant*> Passants;
+	std::vector<Passant*> passants;
 
 
 };

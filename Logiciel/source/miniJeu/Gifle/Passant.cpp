@@ -3,19 +3,24 @@
 
 
 
-Passant::Passant(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, float* _deltaTime)
+Passant::Passant(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, bool masque, unsigned difficulty)
 	:Clickable(pos, sf::Vector2f(), w)
 {
+	masked = masque;
 	window = w;
-	deltaTime = _deltaTime;
 	dir = _dir;
-	isGifle = false;
-	speed = 160;
+	gifle = false;
+	speed = 2;
 	speed += (float(rand()) / float(RAND_MAX) - 0.5) * float(speed * 0.3);
 
 	sf::RectangleShape* rect = new sf::RectangleShape(sf::Vector2f(175, 500));
 	setFillColor(sf::Color::Blue);
-	setOutlineColor(sf::Color::Green);
+	
+	if(masked)
+		setOutlineColor(sf::Color::Green);
+	else
+		setOutlineColor(sf::Color::Red);
+
 	setOutlineThickness(4);
 	setSize(sf::Vector2f(175, 85));
 }
@@ -33,9 +38,10 @@ void Passant::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void Passant::update()
 {
-
 	onClick();
-	move(dir * speed * (*deltaTime), 0);
+
+	if (!(gifle && clockPourDelaiFuite.getElapsedTime().asSeconds() < 0.3))
+		move(dir * speed, 0);
 }
 
 bool Passant::isOutOfBounds()
@@ -44,31 +50,23 @@ bool Passant::isOutOfBounds()
 		|| (dir <= 0) && getPosition().x < -getOutlineThickness() - getSize().x;
 }
 
+bool Passant::isMasked()
+{
+	return masked;
+}
+
+bool Passant::isGifle()
+{
+	return gifle;
+}
+
 void Passant::actionOnClick()
 {
-	if (isGifle) return;
-	isGifle = true;
-	speed *= 8;
+	if (gifle) return;
+	gifle = true;
+	speed *= 10;
 
-	//change de sprite;
-}
-
-NonMasque::NonMasque(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, float* _deltaTime) : Passant(pos, w, _dir, _deltaTime)
-{
-
-	setOutlineColor(sf::Color::Red);
-}
-
-NonMasque::~NonMasque()
-{
-
-}
-
-void NonMasque::actionOnClick()
-{
-	if (isGifle) return;
-	isGifle = true;
-	speed *= 8;
+	clockPourDelaiFuite.restart();
 
 	//change de sprite;
 }

@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "header/miniJeu/MiniJeu.h"
-#include "header/miniJeu/DistribMiniTests/DistribMiniTests.h"
+#include "header/miniJeu/Gifle/Gifle.h"
 
 using namespace std;
 
@@ -16,7 +16,7 @@ int main()
     app.difficulty=4;
     app.lives=3;
 
-    DisitribMiniTests* minijeu(new DisitribMiniTests(app));
+    Gifle* minijeu(new Gifle(app));
 
     minijeu->play();
 

@@ -5,34 +5,27 @@
 
 class Passant : public Clickable
 {
-protected:
-
-	bool isGifle;
-	virtual void actionOnClick();
-	float* deltaTime;
-	int speed;
-	float dir;
-	sf::RenderWindow* window;
 
 public:
-	Passant(const sf::Vector2f& pos, sf::RenderWindow* w, float dir, float* _deltaTime);
+	Passant(const sf::Vector2f& pos, sf::RenderWindow* w, float dir, bool isMasque, unsigned difficulty);
 	virtual ~Passant();
 	void update();
 	bool isOutOfBounds();
+	bool isMasked();
+	bool isGifle();
 	bool operator < (Passant& p2);
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-};
-
-class NonMasque : public Passant
-{
 private:
-	virtual void actionOnClick();
-public:
-	NonMasque(const sf::Vector2f& pos, sf::RenderWindow* w, float dir, float* _deltaTime);
-	virtual ~NonMasque();
 
+	bool gifle;
+	virtual void actionOnClick();
+	float speed;
+	float dir;
+	bool masked;
+	sf::RenderWindow* window;
+	sf::Clock clockPourDelaiFuite;
 };
 
 

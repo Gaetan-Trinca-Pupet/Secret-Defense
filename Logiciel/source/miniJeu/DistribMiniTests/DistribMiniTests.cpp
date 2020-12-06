@@ -72,9 +72,9 @@ void DisitribMiniTests::update()
 
 			for (Etudiant& e : etudiants)
 			{
-
 				if (e.tryToCatch(miniTests[i]->getPosition()))
 				{
+					delete miniTests[i];
 					miniTests.erase(miniTests.begin() + i);
 					--nbADistribuer;
 					break;

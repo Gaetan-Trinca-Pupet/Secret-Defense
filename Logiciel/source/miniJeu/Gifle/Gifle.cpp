@@ -9,30 +9,27 @@ bool comparePassantPtr(Passant* e1, Passant* e2)
 
 Gifle::Gifle(AppData& appData) : MiniJeu(appData)
 {
-	isFinished = false;
-	tempsMax = 20;
 	chrono = Chrono(app.window);
-	chrono.setTempsMax(tempsMax);
-	wave = 0;
+	chrono.setTempsMax(16);
 	srand(std::time(NULL));
 
-	timeBetweenWaves = 0.5;
-	nbAGifler = tempsMax / timeBetweenWaves - 1;
+	erreurCpt = app.difficulty < 3 ? 3 - app.difficulty : 0;
+	timeBetweenWaves = 2;
 }
 
 Gifle::~Gifle()
 {
-	for (int i(Passants.size()); i != 0;)
+	for (int i(passants.size()); i != 0;)
 	{
 		--i;
-		Passants.erase(Passants.begin() + i);
+		delete passants[i];
 	}
 }
 
 void Gifle::draw()
 {
 
-	for (Passant* e : Passants)
+	for (Passant* e : passants)
 	{
 		app.window.draw(*e);
 	}
@@ -42,45 +39,73 @@ void Gifle::draw()
 
 void Gifle::update()
 {
+	if (chrono.getTimePassed() > chrono.getTempsMax() )
+		isFinished = true;
 
-
-
-	if (chrono.getTimePassed() - wave * timeBetweenWaves > timeBetweenWaves)
+	if (passants.size() == 0 || chrono.getTimePassed() - wave * timeBetweenWaves > timeBetweenWaves)
 	{
 
-		if (wave % 4 == 0 || wave % 7 == 2)
-		{
-			Passants.push_back(new NonMasque
-			(sf::Vector2f(-rand() % 100 - 175, rand() % (app.window.getSize().y - 180) + 100), &app.window, 1, &deltaTime));
-			Passants.push_back(new Passant
-			(sf::Vector2f(app.window.getSize().x + rand() % 100 + 175, rand() % (app.window.getSize().y - 180) + 100), &app.window, -1, &deltaTime));
-		}
-		else if (wave % 4 == 1 || wave % 4 == 3)
-		{
-			Passants.push_back(new Passant
-			(sf::Vector2f(-rand() % 100 - 175,
-				rand() % (app.window.getSize().y - 180) + 100), &app.window, 1, &deltaTime));
-			Passants.push_back(new NonMasque
-			(sf::Vector2f(app.window.getSize().x + rand() % 100 + 175, rand() % (app.window.getSize().y - 180) + 100), &app.window, -1, &deltaTime));
-		}
+		creerPassants();
 
 		++wave;
-		sort(Passants.begin(), Passants.end(), comparePassantPtr);
+		sort(passants.begin(), passants.end(), comparePassantPtr);
 	}
 
-	for (int i(Passants.size()); i != 0 || Passants.size() != 0;)
+	for (int i(passants.size()); i != 0 && passants.size() != 0;)
 	{
 		--i;
-		Passants[i]->update();
+		passants[i]->update();
 
-		if (Passants[i]->isOutOfBounds())
+		if (passants[i]->isOutOfBounds())
 		{
-			Passants.erase(Passants.begin() + i);
-			sort(Passants.begin(), Passants.end(), comparePassantPtr);
+			if ( (!passants[i]->isMasked() && !passants[i]->isGifle()) ||
+			     ( passants[i]->isMasked() &&  passants[i]->isGifle() && erreurCpt <= 0))
+			{
+				app.lives -= 1;
+				isFinished = true;
+			}
+			
+			delete passants[i];
+			passants.erase(passants.begin() + i);
 		}
 	}
 
 	chrono.update();
+}
+
+
+void Gifle::creerPassants()
+{
+
+	int numPasdeMasque(rand() % 4);
+	unsigned cpt(0);
+
+	sf::Vector2f pos;
+
+	//haut à gauche
+	pos = sf::Vector2f(-200, 100);
+	pos.x -= rand() % 100;
+	pos.y += rand() % (((app.window.getSize().y - 200) / 2) - 10);
+	passants.push_back(new Passant(pos, &app.window, 1, cpt++ != numPasdeMasque, app.difficulty));
+	//bas à gauche
+	pos = sf::Vector2f(-200, app.window.getSize().y - 100);
+	pos.x -= rand() % 100;
+	pos.y -= rand() % (((app.window.getSize().y - 200) / 2) + 10);
+	passants.push_back(new Passant(pos, &app.window, 1,cpt++ != numPasdeMasque, app.difficulty));
+
+	//haut à droite
+	pos = sf::Vector2f(app.window.getSize().x + 200, 100);
+	pos.x += rand() % 100;
+	pos.y += rand() % (((app.window.getSize().y - 200) / 2) - 10);
+	passants.push_back(new Passant(pos, &app.window, -1, cpt++ != numPasdeMasque, app.difficulty));
+
+	//bas à droite
+	pos = sf::Vector2f(app.window.getSize().x + 200, app.window.getSize().y - 100);
+	pos.x += rand() % 100;
+	pos.y -= rand() % (((app.window.getSize().y - 200) / 2) + 10);
+	passants.push_back(new Passant(pos, &app.window, -1, cpt++ != numPasdeMasque, app.difficulty));
+
+
 }
 
 

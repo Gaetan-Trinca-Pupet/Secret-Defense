@@ -18,6 +18,7 @@ public:
 
 	float getTimePassed();
 	void setTempsMax(float _tempsMax);
+	float getTempsMax();
 
 private:
 

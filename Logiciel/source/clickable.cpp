@@ -58,5 +58,4 @@ bool Clickable::isHovered()
 
 Clickable::~Clickable()
 {
-    delete window;
 }
