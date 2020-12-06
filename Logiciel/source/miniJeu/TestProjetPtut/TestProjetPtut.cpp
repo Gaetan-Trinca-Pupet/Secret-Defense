@@ -84,5 +84,6 @@ void TestProjetPtut::TestProjetPtut::update(){
 		++app.difficulty;
 		isFinished = true;
 	}
+	glitchEffect.update();
 	chrono.update();
 }

@@ -2,7 +2,8 @@
 
 
 TestProjetPtut::GlitchEffect::GlitchEffect(){
-	((sf::Time*)((void*)this))->operator=(*((sf::Time*)((void*)this))-sf::Time(sf::seconds(100)));
+	//((sf::Time*)((void*)this))->operator=(*((sf::Time*)((void*)this))-sf::Time(sf::seconds(100)));
+	active = false;
 	states.shader = &shader;
 	states.texture = &texture;
 	if(!isLoaded){
@@ -23,7 +24,11 @@ void TestProjetPtut::GlitchEffect::draw(sf::RenderWindow& window){
 }
 
 bool TestProjetPtut::GlitchEffect::isActive()const{
-	return clock.getElapsedTime().asSeconds() < 0.4;
+	return active;
+}
+
+void TestProjetPtut::GlitchEffect::update(){
+	if(clock.getElapsedTime().asSeconds() > 0.3)active = false;
 }
 
 void TestProjetPtut::GlitchEffect::start(sf::RenderWindow& window){
@@ -31,7 +36,7 @@ void TestProjetPtut::GlitchEffect::start(sf::RenderWindow& window){
 	sf::Vector2u windowSize = window.getSize();
 	texture.create(windowSize.x, windowSize.y);
 	texture.update(window);
-	
+	active = true;
 	clock.restart();
 }
 

@@ -10,6 +10,7 @@ namespace TestProjetPtut{
 			sf::Clock clock;
 			sf::Texture texture;
 			sf::RenderStates states;
+			bool active;
 			static sf::Shader shader;
 			static bool isLoaded;
 		public:
@@ -17,6 +18,7 @@ namespace TestProjetPtut{
 			void draw(sf::RenderWindow& window);
 			bool isActive()const;
 			void start(sf::RenderWindow& window);
+			void update();
 	};
 }
 
