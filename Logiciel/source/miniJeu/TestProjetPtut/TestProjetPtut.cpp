@@ -1,18 +1,18 @@
 #include "../../../header/miniJeu/TestProjetPtut/TestProjetPtut.h"
 
-TestProjetPtut::TestProjetPtut::TestProjetPtut(AppData& appData): MiniJeu(appData){
-	Invader::texture.loadFromFile("../ressource/TestProjetPtut/Invader.png");
-	Ball::texture.loadFromFile("../ressource/TestProjetPtut/balle.bmp");
-	GlitchEffect::init();
+TestProjetPtut::TestProjetPtut::TestProjetPtut(AppData& appData): MiniJeu(appData),chrono(appData.window){
 	Invader::balls = &balls;
 	Invader::missiles = &missiles;
-	controles.setUpKey(sf::Keyboard::Key::Up);
-	controles.setDownKey(sf::Keyboard::Key::Down);
 	controles.setLeftKey(sf::Keyboard::Key::Left);
+	controles.setLeftKey(sf::Keyboard::Key::Q);
 	controles.setRightKey(sf::Keyboard::Key::Right);
+	controles.setRightKey(sf::Keyboard::Key::D);
+	controles.setActionKey(sf::Keyboard::Key::Space);
+	innerInterface.setPv(spaceship.getPv());
 }
 
 void TestProjetPtut::TestProjetPtut::setup(){
+	chrono.setTempsMax(45);
 	setBackgroundColor(sf::Color(0,0,0));
 	textureBackground.loadFromFile("../ressource/TestProjetPtut/bg.bmp");
 	textureBackground.setRepeated(true);
@@ -43,6 +43,8 @@ void TestProjetPtut::TestProjetPtut::draw(){
 		invader.draw(app.window);
 	}
 	if(glitchEffect.isActive())glitchEffect.draw(app.window);
+	innerInterface.draw(app.window);
+	app.window.draw(chrono);
 }
 
 void TestProjetPtut::TestProjetPtut::update(){
@@ -74,5 +76,13 @@ void TestProjetPtut::TestProjetPtut::update(){
 		glitchEffect.start(app.window);
 		controles.shuffle();
 	}
-	if(spaceship.getPv() <= 0)isFinished = true;
+	if(spaceship.getPv() <= 0){
+		--app.lives;
+		++app.difficulty;
+		isFinished = true;
+	}else if(chrono.getTimePassed() > 45){
+		++app.difficulty;
+		isFinished = true;
+	}
+	chrono.update();
 }

@@ -5,6 +5,10 @@ TestProjetPtut::GlitchEffect::GlitchEffect(){
 	((sf::Time*)((void*)this))->operator=(*((sf::Time*)((void*)this))-sf::Time(sf::seconds(100)));
 	states.shader = &shader;
 	states.texture = &texture;
+	if(!isLoaded){
+		shader.loadFromFile("../ressource/shaders/wave.vert","../ressource/shaders/blur.frag");
+		isLoaded = true;
+	}
 }
 
 void TestProjetPtut::GlitchEffect::draw(sf::RenderWindow& window){
@@ -31,8 +35,5 @@ void TestProjetPtut::GlitchEffect::start(sf::RenderWindow& window){
 	clock.restart();
 }
 
-void TestProjetPtut::GlitchEffect::init(){
-	shader.loadFromFile("../ressource/shaders/wave.vert","../ressource/shaders/blur.frag");
-}
-
 sf::Shader TestProjetPtut::GlitchEffect::shader;
+bool TestProjetPtut::GlitchEffect::isLoaded;

@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "../../AssetManager.h"
+
 namespace TestProjetPtut{
 	class Ball{
 		private :
@@ -21,7 +23,6 @@ namespace TestProjetPtut{
 			bool mustBeDestroyed()const;
 			void kill();
 			
-			static sf::Texture texture;
 			static sf::Vector2f positionLimit;
 	};
 }

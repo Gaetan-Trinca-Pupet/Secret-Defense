@@ -11,13 +11,12 @@ namespace TestProjetPtut{
 			sf::Texture texture;
 			sf::RenderStates states;
 			static sf::Shader shader;
+			static bool isLoaded;
 		public:
 			GlitchEffect();
 			void draw(sf::RenderWindow& window);
 			bool isActive()const;
 			void start(sf::RenderWindow& window);
-			
-			static void init();
 	};
 }
 

@@ -17,11 +17,14 @@
 #include "Missile.h"
 #include "Spawner.h"
 #include "GlitchEffect.h"
+#include "InnerInterface.h"
+#include "../../Chrono.h"
 
 namespace TestProjetPtut{
 	class TestProjetPtut : public MiniJeu{
 		
 		private :
+			Chrono chrono;
 			Spaceship spaceship;
 			Controles controles;
 			std::vector<Invader> invaders;
@@ -31,6 +34,7 @@ namespace TestProjetPtut{
 			sf::Sprite background;
 			Spawner spawner;
 			GlitchEffect glitchEffect;
+			InnerInterface innerInterface;
 			void setup();
 			void draw();
 			void update();

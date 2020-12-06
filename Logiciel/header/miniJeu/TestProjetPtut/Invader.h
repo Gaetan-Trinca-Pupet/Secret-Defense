@@ -9,6 +9,7 @@
 
 #include "Ball.h"
 #include "Missile.h"
+#include "../../AssetManager.h"
 
 namespace TestProjetPtut{
 	class Invader{
@@ -30,7 +31,6 @@ namespace TestProjetPtut{
 			
 			void inflictDamage(const short int damage);
 			
-			static sf::Texture texture;
 			static std::vector<Ball>* balls;
 			static std::vector<Missile>* missiles;
 	};

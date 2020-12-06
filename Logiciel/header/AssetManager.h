@@ -1,17 +1,23 @@
 #ifndef ASSETMANAGER_H
 #define ASSETMANAGER_H
 
+#include <map>
+#include <string>
+
 #include<SFML/Graphics.hpp>
+#include<SFML/Audio.hpp>
 
 class AssetManager
 {
 public:
-    AssetManager();
-    sf::Texture& getTexture(std::string path);
-    void unloadTexture(std::string path);
+	AssetManager();
+	static sf::Texture& getTexture(std::string path);
+	//sf::Sound& getSound(std::string path);
+	//sf::Font& getFont();
 private:
-    std::map<std::string, sf::Texture> textures;
-    std::map<std::string, sf::Font> fonts;
+	static std::map<std::string, sf::Texture> textures;
+	//std::map<std::string, sf::Sound> sounds;
+	//sf::Font font;
 };
 
 #endif // ASSETMANAGER_Hs

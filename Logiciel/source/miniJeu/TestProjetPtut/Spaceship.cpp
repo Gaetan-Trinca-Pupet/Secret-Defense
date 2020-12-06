@@ -7,7 +7,7 @@ TestProjetPtut::Spaceship::Spaceship(){
 	sprite.setOrigin(sf::Vector2f(texture.getSize().x/2,texture.getSize().y/2));
 	sprite.setPosition(sf::Vector2f(960/2,540-texture.getSize().y/1.5));
 	shield.bindPosition(sprite.getPosition());
-	pv = 6;
+	pv = 8;
 	cooldown.restart();
 }
 

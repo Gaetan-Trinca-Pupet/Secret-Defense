@@ -2,7 +2,7 @@
 
 TestProjetPtut::Invader::Invader(sf::Vector2f pos){
 	sprite.setPosition(pos);
-	sprite.setTexture(texture);
+	sprite.setTexture(AssetManager::getTexture("../ressource/TestProjetPtut/Invader.png"));
 	sprite.setTextureRect(sf::Rect<int>(0,0,32,32));
 	sprite.setOrigin(sf::Vector2f(16,16));
 	signe_speed = 1;
@@ -83,6 +83,5 @@ void TestProjetPtut::Invader::inflictDamage(const short int damage){
 	invulnerabilityDuration.restart();
 }
 
-sf::Texture TestProjetPtut::Invader::texture;
 std::vector<TestProjetPtut::Ball>* TestProjetPtut::Invader::balls;
 std::vector<TestProjetPtut::Missile>* TestProjetPtut::Invader::missiles;

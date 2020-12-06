@@ -27,11 +27,11 @@ Controles::Controles(){
 	shuffledControles['s'] = 's';
 	shuffledControles['d'] = 'd';
 	shuffledControles[' '] = ' ';
-	controles['z'].push_back(sf::Keyboard::Z);
+	/*controles['z'].push_back(sf::Keyboard::Z);
 	controles['s'].push_back(sf::Keyboard::S);
 	controles['q'].push_back(sf::Keyboard::Q);
 	controles['d'].push_back(sf::Keyboard::D);
-	controles[' '].push_back(sf::Keyboard::Space);
+	controles[' '].push_back(sf::Keyboard::Space);*/
 	upPress=false;
 	downPress=false;
 	leftPress=false;
@@ -159,8 +159,8 @@ bool Controles::isKeyPressed(char idKey){
 }
 
 void Controles::shuffle(){
-	std::vector<char> keys = {'z','q','s','d',' '};
-	std::vector<char> ids = {'z','q','s','d',' '};
+	std::vector<char> keys = {'q','d',' '};
+	std::vector<char> ids = {'q','d',' '};
 	for(const char& id :ids){
 		unsigned int i = ((unsigned int)std::rand())%keys.size();
 		shuffledControles[id] = keys[i];

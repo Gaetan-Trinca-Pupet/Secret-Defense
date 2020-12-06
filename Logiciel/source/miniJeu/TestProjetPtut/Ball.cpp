@@ -2,8 +2,8 @@
 
 TestProjetPtut::Ball::Ball(const sf::Vector2f& position, const sf::Vector2f& dir){
 	sprite.setPosition(position);
-	sprite.setTexture(texture);
-	sprite.setOrigin(sf::Vector2f(texture.getSize().x/2,texture.getSize().y/2));
+	sprite.setTexture(AssetManager::getTexture("../ressource/TestProjetPtut/balle.bmp"));
+	sprite.setOrigin(sf::Vector2f(sprite.getGlobalBounds().width/2,sprite.getGlobalBounds().height/2));
 	direction = dir;
 	enemy = true;
 	killed = false;
@@ -13,7 +13,7 @@ TestProjetPtut::Ball::Ball(const sf::Vector2f& position, const sf::Vector2f& dir
 }
 
 void TestProjetPtut::Ball::update(){
-	if(sprite.getPosition().x < positionLimit.x + texture.getSize().x || sprite.getPosition().x + texture.getSize().x > positionLimit.y)direction.x *= -1;
+	if(sprite.getPosition().x < positionLimit.x + sprite.getGlobalBounds().width || sprite.getPosition().x + sprite.getGlobalBounds().width > positionLimit.y)direction.x *= -1;
 	sprite.move(direction);
 }
 
@@ -46,5 +46,4 @@ const sf::Rect<float> TestProjetPtut::Ball::getGlobalBounds()const{
 	return sprite.getGlobalBounds();
 }
 
-sf::Texture TestProjetPtut::Ball::texture;
 sf::Vector2f TestProjetPtut::Ball::positionLimit;
