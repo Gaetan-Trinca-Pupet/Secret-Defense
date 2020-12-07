@@ -18,6 +18,10 @@ namespace Grabber
 		virtual ~Grabbable();
 
 		virtual void updateOnGrab();
+		virtual void onGrab();
+		virtual void onRelease();
+
+		virtual bool canBeGrabbed();
 
 	};
 
@@ -44,12 +48,12 @@ namespace Grabber
 
 	public:
 		Grabber();
-		template<typename T> Grabber(std::vector<T*>& tab);
+		Grabber(std::vector<Grabbable*>& tab);
 
 		~Grabber();
 
-		template<typename T> void add(const T& grab);
-		template<typename T> void remove(const T& grab);
+		void add( Grabbable* grab);
+		void remove(const Grabbable* grab);
 
 		void setSprite(const sf::Texture& textur);
 
@@ -59,7 +63,7 @@ namespace Grabber
 		void setX(const int& X);
 		void setY(const int& Y);
 
-		template<typename T> bool find(const T& grab) const;
+		bool find(const Grabbable* grab) const;
 	};
 
 
@@ -68,9 +72,10 @@ namespace Grabber
 
 	// Constructor of Grabbable++
 
-	inline Grabbable::Grabbable(const int& X, const int& Y, const int& sx, const int& sy) : sf::RectangleShape(sf::Vector2f(sx,sy))
+	inline Grabbable::Grabbable(const int& X, const int& Y, const int& sx, const int& sy) 
 	{
 		setPosition(X, Y);
+		setSize(sf::Vector2f(sx, sy));
 	}
 
 	// Detructor of Grabbable
@@ -79,10 +84,27 @@ namespace Grabber
 
 	}
 
-	// virtual function to update the object.
+	// virtual function to update the object when it is grabbed.
 	inline void Grabbable::updateOnGrab()
 	{
 
+	}
+
+	// virtual function called when the object was just grabbed
+	inline void Grabbable::onGrab()
+	{
+
+	}
+
+	// virtual function called when the object was released
+	inline void Grabbable::onRelease()
+	{
+		
+	}
+
+	inline bool Grabbable::canBeGrabbed()
+	{
+		return true;
 	}
 
 
@@ -91,11 +113,7 @@ namespace Grabber
 	// canGrab() is used to know if the cursor is hovering over an Grabbable parameter, if it is, it return true
 	inline bool Grabber::canGrab(Grabbable* const grab)const
 	{
-		return 
-			(((x >= grab->getPosition().x - grab->getSize().x / 2) && (x <= grab->getPosition().x + grab->getSize().x / 2)) ||
-			((grab->getPosition().x >= x - size_x / 2) && (grab->getPosition().x <= x + size_x / 2))) &&
-			(((y >= grab->getPosition().y - grab->getSize().y / 2) && (y <= grab->getPosition().y + grab->getSize().y / 2)) ||
-			((grab->getPosition().y >= y - size_y / 2) && (grab->getPosition().y <= y + size_y / 2)));
+		return grab->getGlobalBounds().contains(sf::Vector2f(x, y));
 	}
 
 	inline Grabber::Grabber()
@@ -106,8 +124,7 @@ namespace Grabber
 	}
 
 	// Constructor of Grabber, it needs a vector of all the Item you can grab
-	template<typename T>
-	inline Grabber::Grabber(std::vector<T*>& tab)
+	inline Grabber::Grabber(std::vector<Grabbable*>& tab)
 	{
 		tabGrabbable.resize(tab.size());
 		for (unsigned i(0) ; i < tab.size() ; ++i)
@@ -125,15 +142,14 @@ namespace Grabber
 			delete tabGrabbable[i];
 	}
 
-	template<typename T>
-	inline void Grabber::add(const T& grab)
+	inline void Grabber::add(Grabbable* grab)
 	{
 		if (!this->find(grab))
 			tabGrabbable.push_back(grab);
 	}
 
-	template<typename T>
-	inline void Grabber::remove(const T& grab)
+
+	inline void Grabber::remove(const Grabbable* grab)
 	{
 		if (this->find(grab))
 			for(unsigned i (0) ; i < tabGrabbable.size() ; ++i)
@@ -168,21 +184,30 @@ namespace Grabber
 			{
 				isGrabbing = true;
 				for (unsigned i(0); i < tabGrabbable.size() && grabbed == nullptr; ++i)
-					if (canGrab(tabGrabbable[i]))
+					if (tabGrabbable[i]->canBeGrabbed() && canGrab(tabGrabbable[i]))
+					{
 						grabbed = tabGrabbable[i];
+						grabbed->onGrab();
+					}
 			}
 
 			if (grabbed != nullptr)
 			{
-				grabbed->move(x - lastX, y - lastY);
-				
-				grabbed->setOutlineColor(sf::Color::Red);
-				grabbed->updateOnGrab();
+				if (!grabbed->canBeGrabbed()) {
+					grabbed->onRelease();
+					grabbed = nullptr;
+				}
+				else {
+					grabbed->move(x - lastX, y - lastY);
+					grabbed->updateOnGrab();
+				}
 			}
-			else std::cout << "aa" << std::endl;;
 		}
 		else
 		{
+			if (grabbed != nullptr)
+				grabbed->onRelease();
+
 			grabbed = nullptr;
 			isGrabbing = false;
 		}
@@ -215,8 +240,7 @@ namespace Grabber
 		y = Y;
 	}
 
-	template<typename T>
-	inline bool Grabber::find(const T& grab) const
+	inline bool Grabber::find(const Grabbable* grab) const
 	{
 		for (unsigned i(0); i < tabGrabbable.size() ; ++i)
 			if (tabGrabbable[i] == grab)

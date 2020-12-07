@@ -2,11 +2,7 @@
 
 bool BranchePC::Prise::isClose() const
 {
-	return
-		(((getPosition().x >= match->getPosition().x - match->getSize().x / 2) && (getPosition().x <= match->getPosition().x + match->getSize().x / 2)) ||
-		((match->getPosition().x >= getPosition().x - getSize().x / 2) && (match->getPosition().x <= getPosition().x + getSize().x / 2))) &&
-		(((getPosition().y >= match->getPosition().y - match->getSize().y / 2) && (getPosition().y <= match->getPosition().y + match->getSize().y / 2)) ||
-		((match->getPosition().y >= getPosition().y - getSize().y / 2) && (match->getPosition().y <= getPosition().y + getSize().y / 2)));
+	return this->getGlobalBounds().intersects(this->match->getGlobalBounds());
 }
 
 BranchePC::Prise::Prise(Prise* prise, const int& myX, const int& myY) : Grabbable(myX,myY,50,50)
@@ -55,7 +51,7 @@ void BranchePC::Prise::updateOnGrab()
 
 void BranchePC::Prise::draw(sf::RenderWindow& window)
 {
-	sprite.setPosition(getPosition().x - getSize().x / 2, getPosition().y - getSize().y / 2);
+	sprite.setPosition(getPosition().x, getPosition().y);
 	window.draw(sprite);
 	if (this->match != nullptr) this->match->draw(window);
 }
