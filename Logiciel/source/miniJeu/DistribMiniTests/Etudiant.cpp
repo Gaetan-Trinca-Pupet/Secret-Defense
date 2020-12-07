@@ -31,9 +31,6 @@ Etudiant::Etudiant(unsigned numEtu)
 	setTextureRect(newTextureRect);
 	setSize(sf::Vector2f(newTextureRect.width, newTextureRect.height));
 
-
-
-
 	working = false;
 }
 

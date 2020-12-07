@@ -2,6 +2,7 @@
 #define __DISTRIBMINITESTS_H_
 
 #include "../MiniJeu.h"
+#include "../../Chrono.h"
 #include "MiniTest.h"
 #include "Etudiant.h"
 #include <vector>
@@ -29,6 +30,8 @@ private:
 	std::vector<Etudiant> etudiants;
 
 	Grabber::Grabber hand;
+
+	Chrono chrono;
 
 	sf::RectangleShape throwZone;
 

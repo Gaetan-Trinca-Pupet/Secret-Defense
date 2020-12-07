@@ -88,24 +88,24 @@ void Gifle::creerPassants()
 	//haut à gauche
 	pos = sf::Vector2f(-200, 100);
 	pos.x -= rand() % 100;
-	pos.y += rand() % (((app.window.getSize().y - 200) / 2) - 10);
+	pos.y += rand() % ((int(app.window.getView().getSize().y - 200) / 2) - 10);
 	passants.push_back(new Passant(pos, &app.window, 1, cpt++ != numPasdeMasque, app.difficulty));
 	//bas à gauche
-	pos = sf::Vector2f(-200, app.window.getSize().y - 100);
+	pos = sf::Vector2f(-200, app.window.getView().getSize().y - 100);
 	pos.x -= rand() % 100;
-	pos.y -= rand() % (((app.window.getSize().y - 200) / 2) + 10);
+	pos.y -= rand() % ((int(app.window.getView().getSize().y - 200) / 2) + 10);
 	passants.push_back(new Passant(pos, &app.window, 1,cpt++ != numPasdeMasque, app.difficulty));
 
 	//haut à droite
-	pos = sf::Vector2f(app.window.getSize().x + 200, 100);
+	pos = sf::Vector2f(app.window.getView().getSize().x + 200, 100);
 	pos.x += rand() % 100;
-	pos.y += rand() % (((app.window.getSize().y - 200) / 2) - 10);
+	pos.y += rand() % ((int(app.window.getView().getSize().y - 200) / 2) - 10);
 	passants.push_back(new Passant(pos, &app.window, -1, cpt++ != numPasdeMasque, app.difficulty));
 
 	//bas à droite
-	pos = sf::Vector2f(app.window.getSize().x + 200, app.window.getSize().y - 100);
+	pos = sf::Vector2f(app.window.getView().getSize().x + 200, app.window.getView().getSize().y - 100);
 	pos.x += rand() % 100;
-	pos.y -= rand() % (((app.window.getSize().y - 200) / 2) + 10);
+	pos.y -= rand() % ((int(app.window.getView().getSize().y - 200) / 2) + 10);
 	passants.push_back(new Passant(pos, &app.window, -1, cpt++ != numPasdeMasque, app.difficulty));
 
 
