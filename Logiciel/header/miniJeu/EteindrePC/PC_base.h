@@ -93,6 +93,8 @@ namespace EteindrePC{
 			*/
 			PC_base();
 			
+			virtual ~PC_base();
+			
 	};
 	
 	
