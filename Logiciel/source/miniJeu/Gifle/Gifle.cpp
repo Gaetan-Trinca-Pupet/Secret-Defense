@@ -10,11 +10,15 @@ bool comparePassantPtr(Passant* e1, Passant* e2)
 Gifle::Gifle(AppData& appData) : MiniJeu(appData)
 {
 	chrono = Chrono(app.window);
-	chrono.setTempsMax(16);
+	chrono.setTempsMax(22);
 	srand(std::time(NULL));
 
-	erreurCpt = app.difficulty < 3 ? 3 - app.difficulty : 0;
-	timeBetweenWaves = 2;
+	erreurCpt = app.difficulty < 2 ? 2 - app.difficulty : 0;
+	timeBetweenWaves = 2.3 - (app.difficulty / (app.difficulty + 1.6)) * 1.6;
+
+	background.setTexture(AssetManager::getTexture("../ressource/Gifle/background.png"));
+
+	cursor.setTexture(AssetManager::getTexture("../ressource/hand.png"));
 }
 
 Gifle::~Gifle()
@@ -28,6 +32,7 @@ Gifle::~Gifle()
 
 void Gifle::draw()
 {
+	app.window.draw(background);
 
 	for (Passant* e : passants)
 	{
@@ -42,12 +47,10 @@ void Gifle::update()
 	if (chrono.getTimePassed() > chrono.getTempsMax() )
 		isFinished = true;
 
-	if (passants.size() == 0 || chrono.getTimePassed() - wave * timeBetweenWaves > timeBetweenWaves)
+	if (passants.size() == 0 || clockPourDelaiVagues.getElapsedTime().asSeconds()  > timeBetweenWaves)
 	{
-
+		clockPourDelaiVagues.restart();
 		creerPassants();
-
-		++wave;
 		sort(passants.begin(), passants.end(), comparePassantPtr);
 	}
 

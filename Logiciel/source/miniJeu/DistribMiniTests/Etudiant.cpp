@@ -23,7 +23,6 @@ Etudiant::Etudiant(unsigned numEtu)
 {
 	setPosition(etuPos[numEtu]);
 
-	//setFillColor(sf::Color::Transparent);
 	setTexture(&AssetManager::getTexture("../ressource/DistribMiniTests/etu_" + std::to_string(numEtu) + ".png"));
 
 	sf::IntRect newTextureRect = getTextureRect();

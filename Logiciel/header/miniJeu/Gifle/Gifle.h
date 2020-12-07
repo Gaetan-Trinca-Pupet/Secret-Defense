@@ -19,12 +19,17 @@ private:
 
 	void creerPassants();
 
-	int wave;
 	float timeBetweenWaves;
 
 	int erreurCpt;
 
 	Chrono chrono;
+
+	sf::Sprite background;
+
+	sf::Sprite cursor;
+
+	sf::Clock clockPourDelaiVagues;
 	std::vector<Passant*> passants;
 
 

@@ -10,19 +10,28 @@ Passant::Passant(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, bool 
 	window = w;
 	dir = _dir;
 	gifle = false;
-	speed = 2;
+	enFuite = false;
+	speed = 2.2 + (difficulty / (difficulty + 1.7)) * 1.8;
 	speed += (float(rand()) / float(RAND_MAX) - 0.5) * float(speed * 0.3);
 
-	sf::RectangleShape* rect = new sf::RectangleShape(sf::Vector2f(175, 500));
-	setFillColor(sf::Color::Blue);
-	
-	if(masked)
-		setOutlineColor(sf::Color::Green);
-	else
-		setOutlineColor(sf::Color::Red);
+	setFillColor(sf::Color::Transparent);
 
-	setOutlineThickness(4);
-	setSize(sf::Vector2f(175, 85));
+	std::string prefix = masque ? "../ressource/Gifle/masque" : "../ressource/Gifle/pas_masque";
+	sprite.setTexture(AssetManager::getTexture(prefix + std::to_string(rand() % 3) + ".png"));
+
+	sprite.setTextureRect(sf::IntRect(0, 0, sprite.getTextureRect().width / 3, sprite.getTextureRect().height / 2));
+
+	setSize(sf::Vector2f(75, 80));
+
+	
+
+	if (_dir >= 0)
+	{
+		sprite.setOrigin((sprite.getTextureRect().width / 2 + getSize().x / 2 + 10), 0);
+		sprite.setScale(-1, 1);
+	}
+	else
+		sprite.setOrigin(sprite.getTextureRect().width / 2 - getSize().x / 2 + 10, 0);
 }
 
 Passant::~Passant()
@@ -31,23 +40,50 @@ Passant::~Passant()
 
 void Passant::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	sf::RectangleShape rect(*this);
-	rect.setSize(sf::Vector2f(getSize().x, 300));
-	target.draw(rect);
+	target.draw(sprite);
+	target.draw(sf::RectangleShape(*this));
 }
 
 void Passant::update()
 {
 	onClick();
 
-	if (!(gifle && clockPourDelaiFuite.getElapsedTime().asSeconds() < 0.3))
+
+	if (!(gifle && clockPourDelaiFuite.getElapsedTime().asSeconds() < 0.5))
+	{
+
 		move(dir * speed, 0);
+
+		if (clockPourDelaiAnimation.getElapsedTime().asSeconds() > 0.5 / (speed/2) )
+		{
+			clockPourDelaiAnimation.restart();
+
+			sf::IntRect newTextureRect(sprite.getTextureRect());
+			newTextureRect.left = gifle ? newTextureRect.width * 2 : 0;
+			sprite.setTextureRect(newTextureRect);
+
+			if (sprite.getTextureRect().top == 0)
+			{
+
+				newTextureRect.top += newTextureRect.height;
+				sprite.setTextureRect(newTextureRect);
+			}
+			else
+			{
+				newTextureRect.top -= newTextureRect.height;
+				sprite.setTextureRect(newTextureRect);
+			}
+		}
+	}
+
+
+	sprite.setPosition(getPosition());
 }
 
 bool Passant::isOutOfBounds()
 {
-	return (dir > 0) && getPosition().x > window->getSize().x + getOutlineThickness()
-		|| (dir <= 0) && getPosition().x < -getOutlineThickness() - getSize().x;
+	return (dir > 0) && sprite.getPosition().x > window->getSize().x
+		|| (dir <= 0) && sprite.getPosition().x <  - sprite.getTextureRect().width;
 }
 
 bool Passant::isMasked()
@@ -64,11 +100,14 @@ void Passant::actionOnClick()
 {
 	if (gifle) return;
 	gifle = true;
-	speed *= 10;
+	speed *= 6;
 
 	clockPourDelaiFuite.restart();
 
-	//change de sprite;
+	sf::IntRect newTextureRect(sprite.getTextureRect());
+	newTextureRect.left += newTextureRect.width;
+	newTextureRect.top = 0;
+	sprite.setTextureRect(newTextureRect);
 }
 
 bool Passant::operator < (Passant& p2)

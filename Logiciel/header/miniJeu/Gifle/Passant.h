@@ -2,6 +2,7 @@
 #define __PASSANT_H_
 
 #include "../../clickable.h"
+#include "../../AssetManager.h"
 
 class Passant : public Clickable
 {
@@ -18,14 +19,19 @@ public:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:
+	sf::Sprite sprite;
 
 	bool gifle;
 	virtual void actionOnClick();
 	float speed;
 	float dir;
 	bool masked;
+	bool enFuite;
 	sf::RenderWindow* window;
+
 	sf::Clock clockPourDelaiFuite;
+
+	sf::Clock clockPourDelaiAnimation;
 };
 
 

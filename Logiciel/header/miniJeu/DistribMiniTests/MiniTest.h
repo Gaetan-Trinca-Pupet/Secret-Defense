@@ -10,7 +10,7 @@ class MiniTest : public Grabber::Grabbable
 public:
 
 	MiniTest();
-	MiniTest(sf::Vector2f pos, float rotation, sf::FloatRect throwRange, float* _deltaTime, sf::RenderWindow& _window);
+	MiniTest(sf::Vector2f pos, float rotation, sf::FloatRect throwRange, sf::RenderWindow& _window);
 
 	virtual ~MiniTest();
 
@@ -27,7 +27,6 @@ private:
 	bool isThrown;
 	sf::FloatRect throwRange;
 	float throwSpeed;
-	float* deltaTime;
 
 	sf::Vector2f lastPos;
 	sf::Vector2f throwDir;

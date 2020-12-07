@@ -21,6 +21,8 @@ DisitribMiniTests::~DisitribMiniTests()
 	{
 		delete i;
 	}
+
+	app.window.setMouseCursorVisible(true);
 }
 
 void DisitribMiniTests::draw()
@@ -51,8 +53,6 @@ void DisitribMiniTests::update()
 		if (nbADistribuer != 0)
 			app.lives -= 1;
 		isFinished = true;
-
-		std::cout << chrono.getTimePassed() << std::endl;
 	}
 
 	hand.update(app.window);
@@ -126,7 +126,7 @@ void DisitribMiniTests::creerMiniTests()
 		float rotation = (rand() % 31) - 15;
 		if (rotation < 0) rotation += 360;
 
-		miniTests.push_back(new MiniTest(pos, rotation, throwZone.getGlobalBounds(), &deltaTime, app.window));
+		miniTests.push_back(new MiniTest(pos, rotation, throwZone.getGlobalBounds(), app.window));
 
 		hand.add(miniTests.back());
 

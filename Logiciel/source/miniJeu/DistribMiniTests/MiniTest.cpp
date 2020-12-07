@@ -5,10 +5,9 @@ MiniTest::MiniTest()
 
 }
 
-MiniTest::MiniTest(sf::Vector2f pos, float rotation, sf::FloatRect _throwRange, float* _deltaTime, sf::RenderWindow& _window)
+MiniTest::MiniTest(sf::Vector2f pos, float rotation, sf::FloatRect _throwRange, sf::RenderWindow& _window)
 {
 
-	deltaTime = _deltaTime;
 	winSize = _window.getSize();
 	throwRange = _throwRange;
 
@@ -22,7 +21,7 @@ MiniTest::MiniTest(sf::Vector2f pos, float rotation, sf::FloatRect _throwRange, 
 	setOutlineColor(sf::Color::Black);
 
 	isThrown = false;
-	throwSpeed = 150;
+	throwSpeed = 2.5;
 
 	setTexture(&AssetManager::getTexture("../ressource/DistribMiniTests/MiniTest.png"));
 	rTex.create(getSize().y * 2, getSize().y * 2);
@@ -58,13 +57,13 @@ void MiniTest::update()
 	if (isThrown)
 	{
 
-		move(throwDir * (*deltaTime));
-		rotate((*deltaTime) * 650);
+		move(throwDir);
+		rotate(11);
 
 		float scale = getScale().x;
 		if (scale > 0)
 		{
-			float scaleDiff = scale - (*deltaTime) * 0.20;
+			float scaleDiff = scale - 0.003;
 			setScale(scaleDiff, scaleDiff);
 		}
 	}
@@ -74,7 +73,6 @@ void MiniTest::update()
 		if (!throwRange.contains(getPosition()))
 		{
 			isThrown = true;
-
 
 			float hyp = sqrt(pow(getPosition().x - (lastPos.x), 2) + pow(getPosition().y - lastPos.y, 2));
 
