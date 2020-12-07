@@ -257,8 +257,14 @@ void CorrigeCopie::CorrigeCopie::setup()
 	tabBouton.resize(tabLibelle.size());
 	for (unsigned i = 0; i < tabBouton.size() ; ++i)
 	{
+		sf::Texture texture;
+		
 		tabBouton[i].first = new BoutonVF(app.window , true);
+		texture.loadFromFile("../ressource/CorrigeCopie/bon.png");
+		tabBouton[i].first->setSpriteText(texture);
 		tabBouton[i].second = new BoutonVF(app.window , false);
+		texture.loadFromFile("../ressource/CorrigeCopie/faux.png");
+		tabBouton[i].second->setSpriteText(texture);
 	}
 	
 
@@ -349,6 +355,8 @@ void CorrigeCopie::CorrigeCopie::draw()
 			tabBouton[i].first->draw(app.window);
 			tabBouton[i].second->draw(app.window);
 		}
+		else
+			app.window.draw((tabLibelle[i].isCorrect ? tabBouton[i].first : tabBouton[i].second)->getSprite());
 	}
 }
 

@@ -18,6 +18,7 @@ bool CorrigeCopie::BoutonVF::hasBeenClicked()
 void CorrigeCopie::BoutonVF::update()
 {
 	backSquare.setPosition(getPosition().x, getPosition().y);
+	sprite.setPosition(getPosition().x, getPosition().y);
 
 	if (isHovered())
 	{
@@ -49,11 +50,24 @@ void CorrigeCopie::BoutonVF::update()
 			backSquare.setOutlineColor(sf::Color(150, 20, 20));
 		}
 	}
+	
 }
 
 void CorrigeCopie::BoutonVF::draw(sf::RenderWindow& window)const
 {
 	window.draw(backSquare);
+	window.draw(sprite);
+}
+
+void CorrigeCopie::BoutonVF::setSpriteText(const sf::Texture texture)
+{
+	this->texture = texture;
+	sprite.setTexture(this->texture);
+}
+
+sf::Sprite CorrigeCopie::BoutonVF::getSprite()
+{
+	return sprite;
 }
 
 CorrigeCopie::BoutonVF::BoutonVF(sf::RenderWindow& window, const bool& vf, const unsigned x, const unsigned y, const unsigned short& s) : VF(vf), Clickable(sf::Vector2f(x,y), sf::Vector2f(s,s), &window)
