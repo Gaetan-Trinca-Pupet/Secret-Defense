@@ -24,10 +24,6 @@ namespace AmphiReponse
 		unsigned laporteX;
 		unsigned laporteY;
 
-		std::vector<std::string> getTabQ()const;
-		std::vector<std::string> getTabR()const;
-		std::vector<std::string> getTabM()const;
-
 	protected:
 		virtual void setup();
 		virtual void draw();

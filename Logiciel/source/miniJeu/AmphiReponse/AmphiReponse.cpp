@@ -1,6 +1,6 @@
 #include "../../../header/miniJeu/AmphiReponse/AmphiReponse.h"
 
-std::vector<std::string> AmphiReponse::AmphiReponse::getTabQ() const
+std::vector<std::string> getTabQ()
 {
 	std::vector<std::string> tab;
 	tab.push_back("i++ OU ++i ?"); //0
@@ -11,7 +11,7 @@ std::vector<std::string> AmphiReponse::AmphiReponse::getTabQ() const
 	return tab;
 }
 
-std::vector<std::string> AmphiReponse::AmphiReponse::getTabR() const
+std::vector<std::string> getTabR()
 {
 	std::vector<std::string> tab;
 	tab.push_back("++i"); //0
@@ -22,7 +22,7 @@ std::vector<std::string> AmphiReponse::AmphiReponse::getTabR() const
 	return tab;
 }
 
-std::vector<std::string> AmphiReponse::AmphiReponse::getTabM() const
+std::vector<std::string> getTabM()
 {
 	std::vector<std::string> tab;
 	tab.push_back("J'aime les pommes");

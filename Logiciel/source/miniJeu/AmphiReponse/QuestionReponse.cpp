@@ -2,11 +2,7 @@
 
 bool AmphiReponse::QuestionReponse::isClose() const
 {
-	return 
-		(((getPosition().x >= match->getPosition().x - match->getSize().x / 2) && (getPosition().x <= match->getPosition().x + match->getSize().x / 2)) ||
-		((match->getPosition().x >= getPosition().x - getSize().x / 2) && (match->getPosition().x <= getPosition().x + getSize().x / 2))) &&
-		(((getPosition().y >= match->getPosition().y - match->getSize().y / 2) && (getPosition().y <= match->getPosition().y + match->getSize().y / 2)) ||
-		((match->getPosition().y >= getPosition().y - getSize().y / 2) && (match->getPosition().y <= getPosition().y + getSize().y / 2)));
+	return this->getGlobalBounds().intersects(this->match->getGlobalBounds());
 }
 
 AmphiReponse::QuestionReponse::QuestionReponse(QuestionReponse* QR, const std::string& str, const bool& isQuest, const int& myX, const int& myY) : Grabbable(myX, myY)
@@ -49,7 +45,7 @@ AmphiReponse::QuestionReponse::~QuestionReponse()
 
 void AmphiReponse::QuestionReponse::updateOnGrab()
 {
-	if ( match != nullptr && isClose() && !isItMatched)
+	if ( match != nullptr && !isItMatched && isClose())
 	{
 		//sound_plugged.play();
 		isItMatched = true;
@@ -60,9 +56,9 @@ void AmphiReponse::QuestionReponse::draw(sf::RenderWindow& window)
 {
 	if (!isItMatched)
 	{
-		libele.setPosition(getPosition().x + (std::rand() % 3) - getSize().x / 2, getPosition().y + (std::rand() % 3) - getSize().y/ 2);
-		bulle.setPosition(getPosition().x + (std::rand() % 3) - (getSize().x + 3) / 2, getPosition().y + (std::rand() % 3) - (getSize().y + 3) / 2);
-		bord_bulle.setPosition(getPosition().x + (std::rand() % 3) - (getSize().x+10) / 2, getPosition().y + (std::rand() % 3) - (getSize().y+10) / 2);
+		libele.setPosition(getPosition().x + (std::rand() % 3) + 10, getPosition().y + (std::rand() % 3) + 10);
+		bulle.setPosition(getPosition().x + (std::rand() % 3) + 3, getPosition().y + (std::rand() % 3) + 3);
+		bord_bulle.setPosition(getPosition().x + (std::rand() % 3), getPosition().y + (std::rand() % 3));
 
 		window.draw(bord_bulle);
 		window.draw(bulle);
