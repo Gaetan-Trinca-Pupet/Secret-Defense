@@ -4,20 +4,21 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
-enum FramerateMode{
-	eco = 0,
-	middle,
-	high,
-	dyn
+enum FramerateMode : int{
+    eco,
+    middle,
+    high,
+    dyn
 };
 
 class FramerateManager{
 	private :
+        FramerateMode expectedMode;
+        FramerateMode mode;
 		sf::RenderWindow * window;
 		sf::Clock clock;
 		unsigned short int framecount;
-		FramerateMode expectedMode;
-		FramerateMode mode;
+
 		struct{
 			unsigned int ecomode : 2;
 			unsigned int highmode : 1;

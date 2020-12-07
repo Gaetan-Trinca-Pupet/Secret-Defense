@@ -1,36 +1,37 @@
 #include "../header/FramerateManager.h"
+#include <iostream>
 
 FramerateManager::FramerateManager(){
-	expectedMode = dyn;
-	mode = high;
-	reset();
+    expectedMode = dyn;
+    mode = high;
+    //reset();
 }
 
 void FramerateManager::reset(){
-	updatecount.ecomode = 2;
-	updatecount.highmode = 1;
-	updatecount.middlemode = 0;
+    updatecount.ecomode = 0b10;
+    updatecount.highmode = 0b1;
+    updatecount.middlemode = 0b0;
 	framecount = 0;
 	if(expectedMode != dyn)updateMode();
-	else{
-		switch(mode){
-			case eco :
-				window->setFramerateLimit(30);
-				break;
-			case middle :
-				window->setFramerateLimit(45);
-				break;
-			case high :
-				window->setFramerateLimit(60);
-				break;
-		}
+    else{
+        switch(mode){
+            case FramerateMode::eco :
+                window->setFramerateLimit(30);
+                break;
+            case FramerateMode::middle :
+                window->setFramerateLimit(45);
+                break;
+            case FramerateMode::high :
+                window->setFramerateLimit(60);
+                break;
+        }
 	}
 	clock.restart();
 }
 
 bool FramerateManager::mustUpdate(){
 	bool must_update(true);
-	if(mode == high || mode == middle && updatecount.middlemode == 0){
+    if(mode == high || (mode == middle && updatecount.middlemode == 0)){
 		if(updatecount.highmode == 0){
 			must_update = false;
 			updatecount.middlemode = 1;
@@ -61,7 +62,7 @@ void FramerateManager::setWindow(sf::RenderWindow& renderWindow){
 void FramerateManager::updateMode(){
 	if(framecount == 0){
 		mode = expectedMode;
-		switch(mode){
+        switch((unsigned char)mode){
 			case eco :
 				window->setFramerateLimit(30);
 				break;

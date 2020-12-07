@@ -29,7 +29,7 @@ void MiniJeu::play(){
 			
 		}
 		app.window.clear(backgroundColor);
-		while(app.framerateManager.mustUpdate())this->update();
+        while(app.framerateManager.mustUpdate())this->update();
 		this->draw();
 		drawInterface();
 		app.window.display();
@@ -65,4 +65,8 @@ void MiniJeu::drawInterface(){
     app.window.draw(sprite);
 
     app.window.draw(texteScore);
+}
+
+const std::string MiniJeu::getTransitionTxt(){
+    return "rien";
 }

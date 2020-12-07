@@ -87,3 +87,7 @@ void TestProjetPtut::TestProjetPtut::update(){
 	glitchEffect.update();
 	chrono.update();
 }
+
+const std::string TestProjetPtut::TestProjetPtut::getTransitionTxt(){
+    return "rien2";
+}

@@ -13,12 +13,12 @@
 struct AppData{
 	sf::RenderWindow window;
 	FramerateManager framerateManager;
-	sf::Font font;
+    sf::Font font;
 	unsigned int score;
     unsigned short int difficulty;
     unsigned short int lives;
-    unsigned short int selecteur;
-	bool fullscreen;
+    //unsigned short int selecteur;
+    bool fullscreen;
 };
 
 class MiniJeu{
@@ -40,6 +40,7 @@ class MiniJeu{
 	public :
 		MiniJeu(AppData& appData);
         void play();
+        virtual const std::string getTransitionTxt();
 		virtual ~MiniJeu();
 };
 
