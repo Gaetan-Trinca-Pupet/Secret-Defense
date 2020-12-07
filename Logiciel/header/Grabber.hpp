@@ -228,7 +228,7 @@ namespace Grabber
 		window.draw(sprite);
 	}
 
-	// Set the x position of theLocal cursor
+	// Set the x position of the cursor
 	inline void Grabber::setX(const int& X)
 	{
 		x = X;
