@@ -40,7 +40,6 @@ class MiniJeu{
 	public :
 		MiniJeu(AppData& appData);
         void play();
-        virtual const std::string getTransitionTxt();
 		virtual ~MiniJeu();
 };
 

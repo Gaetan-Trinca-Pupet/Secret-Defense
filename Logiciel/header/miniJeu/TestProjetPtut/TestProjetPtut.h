@@ -41,7 +41,6 @@ namespace TestProjetPtut{
 			
 		public :
 			TestProjetPtut(AppData& appData);
-            virtual const std::string getTransitionTxt();
 		
 		
 	};

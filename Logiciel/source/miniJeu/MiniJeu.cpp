@@ -66,7 +66,3 @@ void MiniJeu::drawInterface(){
 
     app.window.draw(texteScore);
 }
-
-const std::string MiniJeu::getTransitionTxt(){
-    return "rien";
-}
