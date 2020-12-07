@@ -1,7 +1,7 @@
 #include "../../../header/miniJeu/EteindrePC/EteindrePC.h"
 
 
-EteindrePC::EteindrePC::EteindrePC(AppData& appData) : MiniJeu(appData), mur1(0,100),mur2(150,240), mur3(440,100), 
+EteindrePC::EteindrePC::EteindrePC(AppData& appData) : MiniJeu(appData), chrono(appData.window), mur1(0,100),mur2(150,240), mur3(440,100), 
 		table1(sf::Vector2f(360,0), sf::Vector2f(600,75)),
 		table2(sf::Vector2f(300,220), sf::Vector2f(660,100)),
 		table3(sf::Vector2f(360,540-75), sf::Vector2f(600,75)){
@@ -21,9 +21,7 @@ void EteindrePC::EteindrePC::setup(){
 	rond.setPosition(sf::Vector2f(0.9,0.9));
 	createPCs();
 	initPCs();
-	temps = 30 - app.difficulty;
-	if(temps < 15)temps = 15;
-	clock.restart();
+	chrono.setTempsMax(15);
 }
 
 void EteindrePC::EteindrePC::draw(){
@@ -42,23 +40,27 @@ void EteindrePC::EteindrePC::draw(){
 	for(PC_base* pc : pcs)pc->draw(app.window);
 	
 	laporte.draw(app.window);
-	app.window.draw(rond);
+	app.window.draw(chrono);
 	
 }
 
 void EteindrePC::EteindrePC::update(){
+	chrono.update();
 	laporte.update();
 	for(PC_base* pc : pcs)pc->update();
-	rond.setDeg(3.14159265359*2*(temps-clock.getElapsedTime().asSeconds())/temps);
-	if(laporte.getPersoView().first->x >= 150) tempsCouloir = clock.getElapsedTime();
-	if(clock.getElapsedTime().asSeconds() > temps || clock.getElapsedTime() - tempsCouloir > sf::seconds(5)){
-		if(laporte.getPersoView().first->x > 150)app.life -= 1;
-		for(PC_base* pc : pcs){
-			if(pc->isOn()){
-				app.life -= 1;
-				break;
+	if(chrono.getTimePassed() > 15){
+		bool win(true);
+		if(laporte.getPersoView().first->x > 150){
+			win=false;
+		}else{
+			for(PC_base* pc : pcs){
+				if(pc->isOn()){
+					win=false;
+					break;
+				}
 			}
 		}
+		if(!win)--app.lives;
 		isFinished=true;
 	}
 }
@@ -70,10 +72,12 @@ EteindrePC::EteindrePC::~EteindrePC(){
 void EteindrePC::EteindrePC::createPCs(){
 	for(unsigned int i(0);i < 9; ++i){
 		{
-			PC_base * pc = new PC_haut;
-			pc->setPosition(sf::Vector2f(360+64*i,75-32));
-			pc->setPersoView(laporte.getPersoView());
-			pcs.push_back(pc);
+			if(i < 7){
+				PC_base * pc = new PC_haut;
+				pc->setPosition(sf::Vector2f(360+64*i,75-32));
+				pc->setPersoView(laporte.getPersoView());
+				pcs.push_back(pc);
+			}
 		}
 		{
 			PC_base * pc = new PC_haut;
@@ -98,12 +102,12 @@ void EteindrePC::EteindrePC::createPCs(){
 
 void EteindrePC::EteindrePC::initPCs(){
 	std::srand(std::time(nullptr));
-	int dif = app.difficulty*5 + std::rand()%9+5;
-	if(dif > 120)dif= 120;
-	while(dif>0){
-		unsigned int id_pc = std::rand()%pcs.size();
-		while(pcs[id_pc]->isOn())id_pc = std::rand()%pcs.size();
-		pcs[id_pc]->setOn(true);
-		dif-=(((id_pc/3)*3)%9)+1;
+	int max_i(int((32.0*app.difficulty/(app.difficulty + 10.0))+1.0));
+	if(max_i>33)max_i=33;
+	std::vector<PC_base*> pcs_copie = pcs;
+	for(int i(max_i);i >= 0;--i){
+		int j = std::rand()%pcs_copie.size();
+		pcs_copie[j]->setOn(true);
+		pcs_copie.erase(pcs_copie.begin()+j);
 	}
 }

@@ -6,6 +6,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "CollisionBox.h"
+#include "../../Controles.h"
 
 namespace EteindrePC{
 	
@@ -28,6 +29,8 @@ namespace EteindrePC{
 		
 		
 		private :
+		
+			Controles controles;
 		
 			sf::Vector2f position;
 			

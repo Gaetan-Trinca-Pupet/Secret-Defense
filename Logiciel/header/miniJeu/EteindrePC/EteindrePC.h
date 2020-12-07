@@ -12,9 +12,9 @@
 #include "Personnage.h"
 #include "Mur.h"
 #include "Table.h"
-#include "../../Filled_arc.h"
 #include "PC_bas.h"
 #include "PC_haut.h"
+#include "../../Chrono.h"
 
 
 namespace EteindrePC{
@@ -29,6 +29,7 @@ namespace EteindrePC{
 		
 		
 		private :
+			Chrono chrono;
 		
 			Mur mur1;
 			Mur mur2;
@@ -44,9 +45,6 @@ namespace EteindrePC{
 			
 			std::vector<PC_base*> pcs;
 			
-			sf::Clock clock;
-			sf::Time tempsCouloir;
-			int temps;
 			
 			/**
 			*  @brief fonction appelée une fois au debut de play (heritée de MiniJeu) destinée à l'initialisation

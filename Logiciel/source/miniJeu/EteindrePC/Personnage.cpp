@@ -4,6 +4,15 @@ EteindrePC::Personnage::Personnage(){
 	direction = EteindrePC::Direction::Bas;
 	texture.loadFromFile("../ressource/EteindrePC/monsieurLAPORTE.png");
 	sprite.setTexture(texture);
+	controles.setUpKey(sf::Keyboard::Key::Up);
+	controles.setUpKey(sf::Keyboard::Key::Z);
+	controles.setDownKey(sf::Keyboard::Key::Down);
+	controles.setDownKey(sf::Keyboard::Key::S);
+	controles.setLeftKey(sf::Keyboard::Key::Left);
+	controles.setLeftKey(sf::Keyboard::Key::Q);
+	controles.setRightKey(sf::Keyboard::Key::Right);
+	controles.setRightKey(sf::Keyboard::Key::D);
+	controles.setActionKey(sf::Keyboard::Key::Space);
 }
 
 void EteindrePC::Personnage::draw(sf::RenderWindow& window){
@@ -13,6 +22,7 @@ void EteindrePC::Personnage::draw(sf::RenderWindow& window){
 }
 
 void EteindrePC::Personnage::update(){
+	controles.update();
 	bool hasMoved(false);
 	if(clock.getElapsedTime() > sf::milliseconds(100)){
 		++sprite_x;
@@ -25,7 +35,7 @@ void EteindrePC::Personnage::update(){
 	constexpr int up_offset = 64-20;
 	constexpr int down_offset = 60;
 	
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && !sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
+	if(controles.isUpPressed() && !controles.isDownPressed()){
 		direction = EteindrePC::Direction::Haut;
 		bool canPass(true);
 		if(position.y -6 < -up_offset)canPass= false;
@@ -38,7 +48,7 @@ void EteindrePC::Personnage::update(){
 		}
 		if(canPass)position.y -= 6;
 		hasMoved = true;
-	}else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Z)){
+	}else if(controles.isDownPressed() && !controles.isUpPressed()){
 		direction = EteindrePC::Direction::Bas;
 		bool canPass(true);
 		if(position.y + 6 > 540-down_offset)canPass= false;
@@ -51,7 +61,7 @@ void EteindrePC::Personnage::update(){
 		}
 		if(canPass)position.y += 6;
 		hasMoved = true;
-	}else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+	}else if(controles.isLeftPressed() && !controles.isRightPressed()){
 		direction = EteindrePC::Direction::Gauche;
 		bool canPass(true);
 		if(position.x - 6 < -left_offset)canPass= false;
@@ -64,7 +74,7 @@ void EteindrePC::Personnage::update(){
 		}
 		if(canPass)position.x -= 6;
 		hasMoved = true;
-	}else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
+	}else if(controles.isRightPressed() && !controles.isLeftPressed()){
 		direction = EteindrePC::Direction::Droite;
 		bool canPass(true);
 		if(position.x + 6 > 960-right_offset)canPass= false;
