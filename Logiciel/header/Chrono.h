@@ -2,6 +2,7 @@
 #define __CHRONO_H_
 
 #include <SFML/Graphics.hpp>
+#include "miniJeu/MiniJeu.h"
 #include "Filled_arc.h"
 #include "AssetManager.h"
 
@@ -18,7 +19,6 @@ public:
 
 	float getTimePassed();
 	void setTempsMax(float _tempsMax);
-	float getTempsMax();
 
 private:
 

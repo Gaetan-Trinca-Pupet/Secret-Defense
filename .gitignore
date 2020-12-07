@@ -15,6 +15,7 @@ Logiciel/bin/debug/Logiciel.exe
 *.autosave
 *.stash
 *.o
+*.exe
 *.o
 Logiciel/bin/Makefile
 *.Debug

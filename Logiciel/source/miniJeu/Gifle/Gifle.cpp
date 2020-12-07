@@ -7,35 +7,26 @@ bool comparePassantPtr(Passant* e1, Passant* e2)
 	return (*e1 < *e2);
 }
 
-Gifle::Gifle(AppData& appData) : MiniJeu(appData)
-{
+Gifle::Gifle(AppData& appData) : MiniJeu(appData) {
+	isFinished = false;
+	tempsMax = 20;
 	chrono = Chrono(app.window);
-	chrono.setTempsMax(22);
+	chrono.setTempsMax(tempsMax);
+	wave = 0;
 	srand(std::time(NULL));
-
-	erreurCpt = app.difficulty < 2 ? 2 - app.difficulty : 0;
-	timeBetweenWaves = 2.3 - (app.difficulty / (app.difficulty + 1.6)) * 1.6;
-
-	background.setTexture(AssetManager::getTexture("../ressource/Gifle/background.png"));
-
-	cursor.setTexture(AssetManager::getTexture("../ressource/hand.png"));
 }
 
-Gifle::~Gifle()
-{
-	for (int i(passants.size()); i != 0;)
-	{
+Gifle::~Gifle() {
+	for (int i(Passants.size()); i != 0;) {
 		--i;
-		delete passants[i];
+		Passants.erase(Passants.begin() + i);
 	}
 }
 
 void Gifle::draw()
 {
-	app.window.draw(background);
 
-	for (Passant* e : passants)
-	{
+	for (Passant* e : Passants) {
 		app.window.draw(*e);
 	}
 
@@ -44,71 +35,54 @@ void Gifle::draw()
 
 void Gifle::update()
 {
-	if (chrono.getTimePassed() > chrono.getTempsMax() )
-		isFinished = true;
+	
 
-	if (passants.size() == 0 || clockPourDelaiVagues.getElapsedTime().asSeconds()  > timeBetweenWaves)
-	{
-		clockPourDelaiVagues.restart();
-		creerPassants();
-		sort(passants.begin(), passants.end(), comparePassantPtr);
+	float timeBetweenWaves = 0.5;
+
+	if (chrono.getTimePassed() - wave > timeBetweenWaves) {
+
+		
+		if (wave % 7 == 1 || wave % 7 == 5) {
+			Passants.push_back(new NonMasque
+			(sf::Vector2f(-rand() % 100 - 175, rand() % (app.window.getSize().y - 180) + 100), &app.window, 1, &deltaTime));
+			Passants.push_back(new Passant
+			(sf::Vector2f(app.window.getSize().x + rand() % 100 + 175, rand() % (app.window.getSize().y - 180) + 100), &app.window, -1, &deltaTime));
+		}
+		else if (wave % 7 == 3 || wave % 7 == 6) {
+			Passants.push_back(new Passant
+			(sf::Vector2f(-rand() % 100 - 175, rand() % (app.window.getSize().y - 180) + 100), &app.window, 1, &deltaTime));
+			Passants.push_back(new NonMasque
+			(sf::Vector2f(app.window.getSize().x + rand() % 100 + 175, rand() % (app.window.getSize().y - 180) + 100), &app.window, -1, &deltaTime));
+		}
+		else {
+			Passants.push_back(new Passant
+				(sf::Vector2f(-rand() % 100 - 175, rand() % (app.window.getSize().y - 180) + 100), &app.window, 1, &deltaTime));
+			Passants.push_back(new Passant
+				(sf::Vector2f(app.window.getSize().x + rand() % 100 + 175, rand() % (app.window.getSize().y - 180) + 100), &app.window,-1, &deltaTime));
+		}
+
+		wave++;
+		sort(Passants.begin(), Passants.end(), comparePassantPtr);
 	}
 
-	for (int i(passants.size()); i != 0 && passants.size() != 0;)
-	{
+	for (int i(Passants.size()); i != 0;) {
+		if (Passants.size() == 0) break;
 		--i;
-		passants[i]->update();
-
-		if (passants[i]->isOutOfBounds())
-		{
-			if ( (!passants[i]->isMasked() && !passants[i]->isGifle()) ||
-			     ( passants[i]->isMasked() &&  passants[i]->isGifle() && erreurCpt <= 0))
-			{
-				app.lives -= 1;
-				isFinished = true;
-			}
-			
-			delete passants[i];
-			passants.erase(passants.begin() + i);
+		Passants[i]->update();
+		if (Passants[i]->isOutOfBounds()) {
+			Passants.erase(Passants.begin() + i);
+			sort(Passants.begin(), Passants.end(), comparePassantPtr);
 		}
 	}
 
+	//if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+	for (std::vector<Passant*>::iterator i(Passants.end()); i != Passants.begin();) {
+		--i;
+		(*i)->onClick();
+	}
+	//}
+
 	chrono.update();
-}
-
-
-void Gifle::creerPassants()
-{
-
-	int numPasdeMasque(rand() % 4);
-	unsigned cpt(0);
-
-	sf::Vector2f pos;
-
-	//haut à gauche
-	pos = sf::Vector2f(-200, 100);
-	pos.x -= rand() % 100;
-	pos.y += rand() % ((int(app.window.getView().getSize().y - 200) / 2) - 10);
-	passants.push_back(new Passant(pos, &app.window, 1, cpt++ != numPasdeMasque, app.difficulty));
-	//bas à gauche
-	pos = sf::Vector2f(-200, app.window.getView().getSize().y - 100);
-	pos.x -= rand() % 100;
-	pos.y -= rand() % ((int(app.window.getView().getSize().y - 200) / 2) + 10);
-	passants.push_back(new Passant(pos, &app.window, 1,cpt++ != numPasdeMasque, app.difficulty));
-
-	//haut à droite
-	pos = sf::Vector2f(app.window.getView().getSize().x + 200, 100);
-	pos.x += rand() % 100;
-	pos.y += rand() % ((int(app.window.getView().getSize().y - 200) / 2) - 10);
-	passants.push_back(new Passant(pos, &app.window, -1, cpt++ != numPasdeMasque, app.difficulty));
-
-	//bas à droite
-	pos = sf::Vector2f(app.window.getView().getSize().x + 200, app.window.getView().getSize().y - 100);
-	pos.x += rand() % 100;
-	pos.y -= rand() % ((int(app.window.getView().getSize().y - 200) / 2) + 10);
-	passants.push_back(new Passant(pos, &app.window, -1, cpt++ != numPasdeMasque, app.difficulty));
-
-
 }
 
 

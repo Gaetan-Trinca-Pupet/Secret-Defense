@@ -1,28 +1,24 @@
 #include"../header/AssetManager.h"
 
 
-std::map<std::string, sf::Texture> AssetManager::textures;
-
-AssetManager::AssetManager()
-{
+AssetManager::AssetManager() {
 }
 
 sf::Texture& AssetManager::getTexture(std::string path)
 {
+    typedef std::map<std::string, sf::Texture>::iterator iter;
 
+    iter pairFound = textures.find(path);
+    if (pairFound != textures.end()) {
 
-	std::map<std::string, sf::Texture>::iterator searchIter = textures.find(path);
-	if (searchIter != textures.end())
-	{
-
-		return searchIter->second;
-	}
-	else
-	{
-		sf::Texture& texture = textures[path];
-		texture.loadFromFile(path);
-		return texture;
-	}
+        return pairFound->second;
+    }
+    else
+    {
+        sf::Texture& texture = textures[path];
+        texture.loadFromFile(path);
+        return texture;
+    }
 }
 
 

@@ -5,23 +5,38 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
-#include <iostream>
-
 namespace Grabber
 {
-	class Grabbable : public sf::RectangleShape
+	class Grabbable
 	{
 	protected:
+		int x;
+		int y;
+
+		int size_x;
+		int size_y;
+
 		
 	public:
 		Grabbable(const int& X = 0, const int& Y = 0, const int& sx = 0, const int& sy = 0);
 		virtual ~Grabbable();
 
-		virtual void updateOnGrab();
-		virtual void onGrab();
-		virtual void onRelease();
+		virtual void updateOnGrab()=0;
 
-		virtual bool canBeGrabbed();
+		void setX(const int& X);
+		void setY(const int& Y);
+
+		void setSizeX(const int& X);
+		void setSizeY(const int& Y);
+
+		void moveX(const int& X);
+		void moveY(const int& Y);
+
+		int getX()const;
+		int getY()const;
+
+		int getSizeX()const;
+		int getSizeY()const;
 
 	};
 
@@ -48,12 +63,12 @@ namespace Grabber
 
 	public:
 		Grabber();
-		Grabber(std::vector<Grabbable*>& tab);
+		template<typename T> Grabber(std::vector<T*>& tab);
 
 		~Grabber();
 
-		void add( Grabbable* grab);
-		void remove(const Grabbable* grab);
+		template<typename T> void add(const T& grab);
+		template<typename T> void remove(const T& grab);
 
 		void setSprite(const sf::Texture& textur);
 
@@ -63,19 +78,17 @@ namespace Grabber
 		void setX(const int& X);
 		void setY(const int& Y);
 
-		bool find(const Grabbable* grab) const;
+		template<typename T> bool find(const T& grab) const;
 	};
 
 
 
 // Definition of Grabbable
 
-	// Constructor of Grabbable++
-
-	inline Grabbable::Grabbable(const int& X, const int& Y, const int& sx, const int& sy) 
+	// Constructor of Grabbable
+	inline Grabbable::Grabbable(const int& X, const int& Y, const int& sx, const int& sy) : x(X), y(Y), size_x(sx), size_y(sy)
 	{
-		setPosition(X, Y);
-		setSize(sf::Vector2f(sx, sy));
+
 	}
 
 	// Detructor of Grabbable
@@ -84,28 +97,72 @@ namespace Grabber
 
 	}
 
-	// virtual function to update the object when it is grabbed.
+	// virtual function to update the object.
 	inline void Grabbable::updateOnGrab()
 	{
 
 	}
 
-	// virtual function called when the object was just grabbed
-	inline void Grabbable::onGrab()
+	// set the position on the x-axis of the object
+	inline void Grabbable::setX(const int& X)
 	{
-
+		x = X;
 	}
 
-	// virtual function called when the object was released
-	inline void Grabbable::onRelease()
+	// set the position on the y-axis of the object
+	inline void Grabbable::setY(const int& Y)
 	{
-		
+		y = Y;
 	}
 
-	inline bool Grabbable::canBeGrabbed()
+	// set the size on the x-axis of the object
+	inline void Grabbable::setSizeX(const int& X)
 	{
-		return true;
+		size_x = X;
 	}
+
+	// set the size on the x-axis of the object
+	inline void Grabbable::setSizeY(const int& Y)
+	{
+		size_y = Y;
+	}
+
+	// Move the object on the x-axis
+	inline void Grabbable::moveX(const int& X)
+	{
+		x += X;
+	}
+
+	// Move the object on the y-axis
+	inline void Grabbable::moveY(const int& Y)
+	{
+		y += Y;
+	}
+
+	// Return the position x of the object
+	inline int Grabbable::getX()const
+	{
+		return x;
+	}
+
+	// Return the position y of the object
+	inline int Grabbable::getY()const
+	{
+		return y;
+	}
+
+	// Return the size_x of the object
+	inline int Grabbable::getSizeX()const
+	{
+		return size_x;
+	}
+
+	// Return the size_y of the object
+	inline int Grabbable::getSizeY()const
+	{
+		return size_y;
+	}
+
 
 
 // Definition of Grabber
@@ -113,7 +170,11 @@ namespace Grabber
 	// canGrab() is used to know if the cursor is hovering over an Grabbable parameter, if it is, it return true
 	inline bool Grabber::canGrab(Grabbable* const grab)const
 	{
-		return grab->getGlobalBounds().contains(sf::Vector2f(x, y));
+		return 
+			(((x >= grab->getX() - grab->getSizeX() / 2) && (x <= grab->getX() + grab->getSizeX() / 2)) ||
+			((grab->getX() >= x - size_x / 2) && (grab->getX() <= x + size_x / 2))) &&
+			(((y >= grab->getY() - grab->getSizeY() / 2) && (y <= grab->getY() + grab->getSizeY() / 2)) ||
+			((grab->getY() >= y - size_y / 2) && (grab->getY() <= y + size_y / 2)));
 	}
 
 	inline Grabber::Grabber()
@@ -124,7 +185,8 @@ namespace Grabber
 	}
 
 	// Constructor of Grabber, it needs a vector of all the Item you can grab
-	inline Grabber::Grabber(std::vector<Grabbable*>& tab)
+	template<typename T>
+	inline Grabber::Grabber(std::vector<T*>& tab)
 	{
 		tabGrabbable.resize(tab.size());
 		for (unsigned i(0) ; i < tab.size() ; ++i)
@@ -142,14 +204,15 @@ namespace Grabber
 			delete tabGrabbable[i];
 	}
 
-	inline void Grabber::add(Grabbable* grab)
+	template<typename T>
+	inline void Grabber::add(const T& grab)
 	{
 		if (!this->find(grab))
 			tabGrabbable.push_back(grab);
 	}
 
-
-	inline void Grabber::remove(const Grabbable* grab)
+	template<typename T>
+	inline void Grabber::remove(const T& grab)
 	{
 		if (this->find(grab))
 			for(unsigned i (0) ; i < tabGrabbable.size() ; ++i)
@@ -184,30 +247,19 @@ namespace Grabber
 			{
 				isGrabbing = true;
 				for (unsigned i(0); i < tabGrabbable.size() && grabbed == nullptr; ++i)
-					if (tabGrabbable[i]->canBeGrabbed() && canGrab(tabGrabbable[i]))
-					{
+					if (canGrab(tabGrabbable[i]))
 						grabbed = tabGrabbable[i];
-						grabbed->onGrab();
-					}
 			}
 
 			if (grabbed != nullptr)
 			{
-				if (!grabbed->canBeGrabbed()) {
-					grabbed->onRelease();
-					grabbed = nullptr;
-				}
-				else {
-					grabbed->move(x - lastX, y - lastY);
-					grabbed->updateOnGrab();
-				}
+				grabbed->moveX(x - lastX);
+				grabbed->moveY(y - lastY);
+				grabbed->updateOnGrab();
 			}
 		}
 		else
 		{
-			if (grabbed != nullptr)
-				grabbed->onRelease();
-
 			grabbed = nullptr;
 			isGrabbing = false;
 		}
@@ -228,7 +280,7 @@ namespace Grabber
 		window.draw(sprite);
 	}
 
-	// Set the x position of theLocal cursor
+	// Set the x position of the cursor
 	inline void Grabber::setX(const int& X)
 	{
 		x = X;
@@ -240,7 +292,8 @@ namespace Grabber
 		y = Y;
 	}
 
-	inline bool Grabber::find(const Grabbable* grab) const
+	template<typename T>
+	inline bool Grabber::find(const T& grab) const
 	{
 		for (unsigned i(0); i < tabGrabbable.size() ; ++i)
 			if (tabGrabbable[i] == grab)

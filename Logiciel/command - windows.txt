@@ -1,1 +1,1 @@
-g++ main.cpp source/miniJeu/*.cpp source/miniJeu/TestProjetPtut/*.cpp source/*.cpp -o bin/app.exe -lsfml-graphics -lsfml-system -lsfml-window -mwindows
+g++ main.cpp source/miniJeu/*.cpp source/miniJeu/EteindrePC/*.cpp source/*.cpp -o bin/app.exe -lsfml-graphics -lsfml-system -lsfml-window -mwindows

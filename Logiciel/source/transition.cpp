@@ -61,7 +61,7 @@ void transition::setup()
         spriteImg.setPosition(positionImg);
     }
     time=2;
-    chrono=Chrono(app.window);
+    chrono=Chrono(time, &clock, app.window);
 }
 
 void transition::draw()

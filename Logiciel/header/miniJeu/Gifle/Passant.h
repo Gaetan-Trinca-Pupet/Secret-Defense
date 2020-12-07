@@ -2,36 +2,33 @@
 #define __PASSANT_H_
 
 #include "../../clickable.h"
-#include "../../AssetManager.h"
 
-class Passant : public Clickable
-{
+class Passant : public Clickable {
+protected:
+
+	bool isGifle;
+	virtual void actionOnClick();
+	float* deltaTime;
+	int speed;
+	float dir;
+
+
 
 public:
-	Passant(const sf::Vector2f& pos, sf::RenderWindow* w, float dir, bool isMasque, unsigned difficulty);
+	Passant(const sf::Vector2f& pos, sf::RenderWindow* w, float dir, float* _deltaTime);
 	virtual ~Passant();
 	void update();
 	bool isOutOfBounds();
-	bool isMasked();
-	bool isGifle();
-	bool operator < (Passant& p2);
 
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+};
 
+class NonMasque : public Passant {
 private:
-	sf::Sprite sprite;
-
-	bool gifle;
 	virtual void actionOnClick();
-	float speed;
-	float dir;
-	bool masked;
-	bool enFuite;
-	sf::RenderWindow* window;
+public:
+	NonMasque(const sf::Vector2f& pos, sf::RenderWindow* w, float dir, float* _deltaTime);
+	virtual ~NonMasque();
 
-	sf::Clock clockPourDelaiFuite;
-
-	sf::Clock clockPourDelaiAnimation;
 };
 
 
