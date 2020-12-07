@@ -16,8 +16,8 @@ Filled_arc::Filled_arc(const sf::Vector2f& position, const sf::Color& col, const
 void Filled_arc::draw(sf::RenderTarget& target, sf::RenderStates states) const{
 	shader.setUniform("radius",int(radius));
 	shader.setUniform("nbangles",int(nbangles));
-	shader.setUniform("width",int(target.getSize().x));
-	shader.setUniform("height",int(target.getSize().y));
+	shader.setUniform("width",int(target.getView().getSize().x));
+	shader.setUniform("height",int(target.getView().getSize().y));
 	shader.setUniform("deg",float(deg));
 	shader.setUniform("color",sf::Glsl::Vec4(point.color.r/255.0,point.color.g/255.0,point.color.b/255.0,point.color.a/255.0));
 	states.shader = &shader;

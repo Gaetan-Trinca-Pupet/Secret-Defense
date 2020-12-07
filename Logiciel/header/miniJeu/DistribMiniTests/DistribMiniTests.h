@@ -2,23 +2,43 @@
 #define __DISTRIBMINITESTS_H_
 
 #include "../MiniJeu.h"
+#include "../../Chrono.h"
 #include "MiniTest.h"
 #include "Etudiant.h"
+#include <vector>
 
-class DisitribMiniTests : public MiniJeu {
+class DisitribMiniTests : public MiniJeu
+{
 public:
 
 	virtual void draw();
 	virtual void update();
+	virtual void setup();
 
-	std::vector<MiniTest> MiniTests;
-	std::vector<Etudiant> Etudiants;
+	void creerEtudiants();
+
+	void creerMiniTests();
+
+	DisitribMiniTests(AppData& appData);
+	virtual ~DisitribMiniTests();
+
+private:
+
+	sf::Sprite backGround;
+
+	std::vector<MiniTest*> miniTests;
+	std::vector<Etudiant> etudiants;
 
 	Grabber::Grabber hand;
 
-private:
-	DisitribMiniTests(AppData& appData);
-	virtual ~DisitribMiniTests();
+	Chrono chrono;
+
+	sf::RectangleShape throwZone;
+
+	unsigned short nbADistribuer;
+
+	float tempsMax;
+
 };
 
 #endif
