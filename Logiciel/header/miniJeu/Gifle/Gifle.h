@@ -6,21 +6,33 @@
 #include "../../clickable.h"
 #include "../../Chrono.h"
 
-class Gifle : public MiniJeu {
-private:
-
-	virtual void draw();
-	virtual void update();
-
-	int wave;
-
-	Chrono chrono;
-
-	std::vector<Passant*> Passants;
-
+class Gifle : public MiniJeu
+{
 public:
 	Gifle(AppData& appData);
 	virtual ~Gifle();
+
+
+private:
+	virtual void draw();
+	virtual void update();
+
+	void creerPassants();
+
+	float timeBetweenWaves;
+
+	int erreurCpt;
+
+	Chrono chrono;
+
+	sf::Sprite background;
+
+	sf::Sprite cursor;
+
+	sf::Clock clockPourDelaiVagues;
+	std::vector<Passant*> passants;
+
+
 };
 
 

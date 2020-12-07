@@ -15,7 +15,7 @@ void main(){
 	float angle = -PI/2;
 	int i = 0;
 	while(angle > -deg - PI/2){
-		vec4 offset = vec4(cos(angle) * radius/width, -sin(angle) * radius/height, 0.0, 0.0);
+		vec4 offset = vec4(cos(angle) * 2*radius/width, -sin(angle) * 2*radius/height, 0.0, 0.0);
 		gl_Position = gl_in[0].gl_Position + offset;
 		EmitVertex();
 		++i;
@@ -25,7 +25,7 @@ void main(){
 		angle = angle - 2*PI/nbangles;
 		++i;
 	}
-	vec4 offsetlastvertex = vec4(cos(-deg-PI/2) * radius/width, -sin(-deg-PI/2) * radius/height, 0.0, 0.0);
+	vec4 offsetlastvertex = vec4(cos(-deg-PI/2) * 2*radius/width, -sin(-deg-PI/2) * 2*radius/height, 0.0, 0.0);
 	gl_Position = gl_in[0].gl_Position + offsetlastvertex;
 	EmitVertex();
 	EndPrimitive();
