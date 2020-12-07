@@ -31,7 +31,7 @@ private:
 	sf::Vector2f lastPos;
 	sf::Vector2f throwDir;
 
-	sf::Vector2u winSize;
+	sf::Vector2f winSize;
 
 	sf::RenderTexture rTex;
 };

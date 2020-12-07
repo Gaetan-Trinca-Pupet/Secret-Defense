@@ -8,7 +8,7 @@ MiniTest::MiniTest()
 MiniTest::MiniTest(sf::Vector2f pos, float rotation, sf::FloatRect _throwRange, sf::RenderWindow& _window)
 {
 
-	winSize = _window.getSize();
+	winSize = _window.getView().getSize();
 	throwRange = _throwRange;
 
 	setPosition(pos);

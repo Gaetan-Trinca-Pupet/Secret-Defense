@@ -93,7 +93,7 @@ void DisitribMiniTests::setup()
 	throwZone.setOutlineColor(sf::Color::Red);
 	throwZone.setOutlineThickness(6);
 	throwZone.setOrigin(throwZone.getSize().x / 2, throwZone.getSize().y);
-	throwZone.setPosition(app.window.getSize().x / 2, app.window.getSize().y);
+	throwZone.setPosition(app.window.getView().getSize().x / 2, app.window.getView().getSize().y);
 
 	nbADistribuer = 4 + (app.difficulty < 2 ? app.difficulty : 2);
 
@@ -120,8 +120,8 @@ void DisitribMiniTests::creerMiniTests()
 	for (unsigned i(0); i < nbMiniTests; ++i)
 	{
 
-		sf::Vector2f pos(app.window.getSize().x / 2 + (rand() % 21) - 10,
-			(app.window.getSize().y - 70 + (rand() % 21) - 10));
+		sf::Vector2f pos(app.window.getView().getSize().x / 2 + (rand() % 21) - 10,
+			(app.window.getView().getSize().y - 70 + (rand() % 21) - 10));
 
 		float rotation = (rand() % 31) - 15;
 		if (rotation < 0) rotation += 360;
