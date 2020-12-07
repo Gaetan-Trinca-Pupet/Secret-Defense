@@ -48,14 +48,6 @@ void gameOverWindow::setup()
     box.setPosition(0,0);
     box.setSize(sf::Vector2f(app.window.getView().getSize().x,app.window.getView().getSize().y));
     box.setFillColor(sf::Color(0,0,0,150));
-
-    spriteHead.setPosition(sf::Vector2f((app.window.getView().getSize().x/2)-200, (app.window.getView().getSize().y/2)-270));
-    spriteHead.setScale(2.0,2.0);
-    if (!soundbuffer.loadFromFile("../ressource/sounds/bowser_laugh_sm64.wav"))
-    {
-        std::cout<<"erreur loadfromfile, son introuvable"<<std::endl;
-    }
-    sound.setBuffer(soundbuffer);
 }
 
 void gameOverWindow::draw()
@@ -65,64 +57,14 @@ void gameOverWindow::draw()
     app.window.draw(text);
 //    app.window.draw(bouton1);
 //    app.window.draw(bouton2);
-    //app.window.draw(bouton);
     app.window.draw(spriteRetry);
     app.window.draw(spriteQuit);
     app.window.draw(prompt);
     txtField.draw(app.window);
-    //app.window.draw(spriteHead);
 }
 
 void gameOverWindow::update()
 {
-//    if ((0<=clock.getElapsedTime().asSeconds()) && (clock.getElapsedTime().asSeconds()<=5))
-//    {
-//        if ((0<=clock.getElapsedTime().asSeconds()) && (clock.getElapsedTime().asSeconds()<=0.5))
-//        {
-//            spriteHead.setTexture(assetmanager.getTexture("../ressource/image/laporteParle.png"));
-//            sf::IntRect rect(0,0,200,270);
-//            spriteHead.setTextureRect(rect);
-//            //sound.play();
-//        }
-//        else if ((0.5<=clock.getElapsedTime().asSeconds()) && (clock.getElapsedTime().asSeconds()<=1))
-//        {
-//            spriteHead.setTexture(assetmanager.getTexture("../ressource/image/laporteParle.png"));
-//            sf::IntRect rect(200,0,200,270);
-//            spriteHead.setTextureRect(rect);
-//            spriteHead.setScale(sf::Vector2f(spriteHead.getScale().x+0.04,spriteHead.getScale().y+0.04));
-//            spriteHead.setPosition(sf::Vector2f(spriteHead.getPosition().x-4,spriteHead.getPosition().y-8.5));
-//        }
-//        else if (((1<=clock.getElapsedTime().asSeconds()) && (clock.getElapsedTime().asSeconds()<=1.4))
-//                 || ((1.8<=clock.getElapsedTime().asSeconds()) && (clock.getElapsedTime().asSeconds()<=2.2))
-//                 )
-//        {
-//            spriteHead.setTexture(assetmanager.getTexture("../ressource/image/laporteParle.png"));
-//            sf::IntRect rect(400,0,200,270);
-//            spriteHead.setTextureRect(rect);
-//            spriteHead.setScale(sf::Vector2f(spriteHead.getScale().x+0.04,spriteHead.getScale().y+0.04));
-//            spriteHead.setPosition(sf::Vector2f(spriteHead.getPosition().x-4,spriteHead.getPosition().y-8.5));
-//        }
-//        else if (((1.4<=clock.getElapsedTime().asSeconds()) && (clock.getElapsedTime().asSeconds()<=1.8))
-//                 || ((2.2<=clock.getElapsedTime().asSeconds()) && (clock.getElapsedTime().asSeconds()<=3))
-//                 )
-//        {
-//            spriteHead.setTexture(assetmanager.getTexture("../ressource/image/laporteParle.png"));
-//            sf::IntRect rect(600,0,200,270);
-//            spriteHead.setTextureRect(rect);
-//            spriteHead.setScale(sf::Vector2f(spriteHead.getScale().x+0.04,spriteHead.getScale().y+0.04));
-//            spriteHead.setPosition(sf::Vector2f(spriteHead.getPosition().x-4,spriteHead.getPosition().y-8.5));
-//        }
-//        else if ((3<=clock.getElapsedTime().asSeconds()) && (clock.getElapsedTime().asSeconds()<=5))
-//        {
-//            //spriteHead.setTexture(assetmanager.getTexture("../ressource/image/laporteParle.png"));
-//            //sf::IntRect rect(0,0,200,270);
-//            //spriteHead.setTextureRect(rect);
-//            spriteHead.setScale(sf::Vector2f(spriteHead.getScale().x+0.09,spriteHead.getScale().y+0.09));
-//            spriteHead.setPosition(sf::Vector2f(spriteHead.getPosition().x-9,spriteHead.getPosition().y-19.125));
-//        }
-//    }
-//    else
-//    {
     std::time_t now = std::time(NULL);
     std::tm * ptm = std::localtime(&now);
     char buffer[32];
@@ -178,5 +120,4 @@ void gameOverWindow::update()
 
         }
     }
-    //}
 }

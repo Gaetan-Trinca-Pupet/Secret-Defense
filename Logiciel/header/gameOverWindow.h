@@ -20,12 +20,9 @@ private:
     Textfield txtField;
 
     AssetManager assetmanager;
-    sf::Sprite spriteHead;
-    sf::Clock clock;
-    sf::SoundBuffer soundbuffer;
+    //sf::Clock clock;
     sf::Sound sound;
 
-    //Button bouton;
 
     sf::Sprite spriteRetry;
     sf::Sprite spriteQuit;
