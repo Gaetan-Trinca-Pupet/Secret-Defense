@@ -25,3 +25,4 @@ sf::Texture& AssetManager::getTexture(std::string path)
 	}
 }
 
+

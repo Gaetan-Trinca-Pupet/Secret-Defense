@@ -3,62 +3,114 @@
 
 
 
-Passant::Passant(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, float* _deltaTime)
+Passant::Passant(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, bool masque, unsigned difficulty)
 	:Clickable(pos, sf::Vector2f(), w)
 {
-	deltaTime = _deltaTime;
+	masked = masque;
+	window = w;
 	dir = _dir;
-	isGifle = false;
-	speed = 110;
+	gifle = false;
+	enFuite = false;
+	speed = 2.2 + (difficulty / (difficulty + 1.7)) * 1.8;
 	speed += (float(rand()) / float(RAND_MAX) - 0.5) * float(speed * 0.3);
+
+	setFillColor(sf::Color::Transparent);
+
+	std::string prefix = masque ? "../ressource/Gifle/masque" : "../ressource/Gifle/pas_masque";
+	sprite.setTexture(AssetManager::getTexture(prefix + std::to_string(rand() % 3) + ".png"));
+
+	sprite.setTextureRect(sf::IntRect(0, 0, sprite.getTextureRect().width / 3, sprite.getTextureRect().height / 2));
+
+	setSize(sf::Vector2f(75, 80));
+
 	
-	sf::RectangleShape* rect = new sf::RectangleShape(sf::Vector2f(175, 500));
-	rect->setFillColor(sf::Color::Blue);
-	rect->setOutlineColor(sf::Color::Green);
-	rect->setOutlineThickness(4);
-	setSprite(rect);
 
-	size = sf::Vector2f(175, 175);
-
+	if (_dir >= 0)
+	{
+		sprite.setOrigin((sprite.getTextureRect().width / 2 + getSize().x / 2 + 10), 0);
+		sprite.setScale(-1, 1);
+	}
+	else
+		sprite.setOrigin(sprite.getTextureRect().width / 2 - getSize().x / 2 + 10, 0);
 }
 
-Passant::~Passant() {
-
+Passant::~Passant()
+{
 }
 
-void Passant::update() {
-	pos.x += dir * speed * (*deltaTime);
+void Passant::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+	target.draw(sprite);
+	target.draw(sf::RectangleShape(*this));
+}
+
+void Passant::update()
+{
+	onClick();
+
+
+	if (!(gifle && clockPourDelaiFuite.getElapsedTime().asSeconds() < 0.5))
+	{
+
+		move(dir * speed, 0);
+
+		if (clockPourDelaiAnimation.getElapsedTime().asSeconds() > 0.5 / (speed/2) )
+		{
+			clockPourDelaiAnimation.restart();
+
+			sf::IntRect newTextureRect(sprite.getTextureRect());
+			newTextureRect.left = gifle ? newTextureRect.width * 2 : 0;
+			sprite.setTextureRect(newTextureRect);
+
+			if (sprite.getTextureRect().top == 0)
+			{
+
+				newTextureRect.top += newTextureRect.height;
+				sprite.setTextureRect(newTextureRect);
+			}
+			else
+			{
+				newTextureRect.top -= newTextureRect.height;
+				sprite.setTextureRect(newTextureRect);
+			}
+		}
+	}
+
+
+	sprite.setPosition(getPosition());
 }
 
 bool Passant::isOutOfBounds()
 {
-	return (dir > 0)  && pos.x >   getWindow()->getSize().x + getSprite()->getOutlineThickness()
-		|| (dir <= 0) && pos.x < - getSprite()->getOutlineThickness() - size.x;
+	return (dir > 0) && sprite.getPosition().x > window->getSize().x
+		|| (dir <= 0) && sprite.getPosition().x <  - sprite.getTextureRect().width;
 }
 
-void Passant::actionOnClick() {
-	if (isGifle) return;
-	isGifle = true;
-	speed *= 8;
-	std::cout << "comment osez vous" << std::endl;
-
-	//change de sprite;
+bool Passant::isMasked()
+{
+	return masked;
 }
 
-NonMasque::NonMasque(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, float* _deltaTime) : Passant(pos, w, _dir, _deltaTime){
-
-	getSprite()->setOutlineColor(sf::Color::Red);
+bool Passant::isGifle()
+{
+	return gifle;
 }
 
-NonMasque::~NonMasque() {
+void Passant::actionOnClick()
+{
+	if (gifle) return;
+	gifle = true;
+	speed *= 6;
 
+	clockPourDelaiFuite.restart();
+
+	sf::IntRect newTextureRect(sprite.getTextureRect());
+	newTextureRect.left += newTextureRect.width;
+	newTextureRect.top = 0;
+	sprite.setTextureRect(newTextureRect);
 }
 
-void NonMasque::actionOnClick() {
-	if (isGifle) return;
-	isGifle = true;
-	speed *= 5;
-	std::cout << "arg" << std::endl;
-
-	//change de sprite;
+bool Passant::operator < (Passant& p2)
+{
+	return getPosition().y < p2.getPosition().y;
 }

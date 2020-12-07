@@ -1,5 +1,7 @@
 #include "../header/clickable.h"
 
+bool Clickable::otherClickableAlreadyClicked = false;
+
 Clickable::Clickable(const sf::Vector2f & pos, const sf::Vector2f & size, sf::RenderWindow* w, sf::Texture* texture) : sf::RectangleShape(size), window(w)
 {
     setPosition(pos);
@@ -12,14 +14,18 @@ void Clickable::onClick()
     if (!mouseIsAlreadyPressed) {
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
-            if (isHovered())
+            if (isHovered() && !otherClickableAlreadyClicked)
             {
                 actionOnClick();
+                otherClickableAlreadyClicked = true;
             }
             mouseIsAlreadyPressed = true;
         }
     }
-    else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)) mouseIsAlreadyPressed = false;
+    else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        mouseIsAlreadyPressed = false;
+        otherClickableAlreadyClicked = false;
+    }
 }
 
 void Clickable::actionOnClick()
@@ -52,5 +58,4 @@ bool Clickable::isHovered()
 
 Clickable::~Clickable()
 {
-    delete window;
 }

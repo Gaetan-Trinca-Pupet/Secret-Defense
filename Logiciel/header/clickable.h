@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+#include "../header/clickable.h"
 
 ///
 /// \brief The Clickable class allows to create an entity with an action if you click on it, and to check if it is clicked or hovered (using the window the clickable is on to know the mouse position)
@@ -14,6 +15,7 @@ class Clickable:public sf::RectangleShape
 private:
     sf::RenderWindow* window;
     bool mouseIsAlreadyPressed;
+    static bool otherClickableAlreadyClicked;
     ///
     /// \brief actionOnClick is the action the button will do if it is clicked when onClick is called
     ///
