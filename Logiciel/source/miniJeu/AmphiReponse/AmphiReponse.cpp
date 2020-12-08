@@ -41,6 +41,8 @@ void AmphiReponse::AmphiReponse::setup()
 	
 	nbQuestion = 2 + (app.difficulty > 3 ? 3 : app.difficulty);
 	const unsigned short nbMauvaiseReponse = (app.difficulty/3 > 6 ? 6 : app.difficulty/3);
+	
+	chrono.setTempsMax(15);
 
 	std::vector<std::string> tabQ = getTabQ();
 	std::vector<std::string> tabR = getTabR();
@@ -115,6 +117,7 @@ void AmphiReponse::AmphiReponse::draw()
 
 	laporteSprite.setPosition(laporteX + (std::rand() % 10), laporteY + (std::rand() % 10));
 	app.window.draw(laporteSprite);
+	app.window.draw(chrono);
 }
 
 void AmphiReponse::AmphiReponse::update()
@@ -126,14 +129,21 @@ void AmphiReponse::AmphiReponse::update()
 			main.remove(prise);
 			--nbQuestion;
 		}
-	if (nbQuestion <= 0 and not isFinished)
+	if (nbQuestion <= 0)
+	{
+		isFinished = true;
+	}
+	
+	chrono.update();
+	
+	if (chrono.getTimePassed() > chrono.getTempsMax() && ! isFinished)
 	{
 		app.lives -= 1;
 		isFinished = true;
 	}
 }
 
-AmphiReponse::AmphiReponse::AmphiReponse(AppData& appData) : MiniJeu(appData)
+AmphiReponse::AmphiReponse::AmphiReponse(AppData& appData) : MiniJeu(appData), chrono(app.window)
 {
 	app.window.sf::Window::setMouseCursorVisible(false);
 	std::srand(std::time(nullptr));

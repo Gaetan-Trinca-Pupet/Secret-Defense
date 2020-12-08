@@ -3,6 +3,7 @@
 
 #include "BoutonVF.h"
 #include "../MiniJeu.h"
+#include "../../Chrono.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
@@ -32,6 +33,7 @@ namespace CorrigeCopie
 	class CorrigeCopie : public MiniJeu
 	{
 	private :
+		Chrono chrono;
 		int posCamera;
 
 		unsigned sizeFeuille;
@@ -40,9 +42,6 @@ namespace CorrigeCopie
 		sf::Font font;
 		std::vector<Reponse> tabLibelle;
 		std::vector<std::pair<BoutonVF*,BoutonVF*>> tabBouton;
-
-		float tempsMax;
-		float tempsPasse;
 
 		void computeTabText();
 	protected:

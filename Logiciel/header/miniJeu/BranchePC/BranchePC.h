@@ -7,12 +7,14 @@
 #include "../MiniJeu.h"
 #include "Prise.h"
 #include "../../Grabber.hpp"
+#include "../../Chrono.h"
 
 namespace BranchePC
 {
 	class BranchePC : public MiniJeu
 	{
 	private:
+		Chrono chrono;
 		unsigned short nbPrise;
 
 		Grabber::Grabber main;

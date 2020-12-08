@@ -4,6 +4,7 @@
 #include "QuestionReponse.h"
 #include "../MiniJeu.h"
 #include "../../Grabber.hpp"
+#include "../../Chrono.h"
 #include <vector>
 
 namespace AmphiReponse
@@ -11,6 +12,7 @@ namespace AmphiReponse
 	class AmphiReponse : public MiniJeu
 	{
 	private:
+		Chrono chrono;
 		unsigned short nbQuestion;
 
 		Grabber::Grabber main;

@@ -2,7 +2,10 @@
 #define GAMEOVERWINDOW_H
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
+#include <fstream>
+#include <chrono>
+#include <time.h>
+#include <sstream>
 #include "miniJeu/MiniJeu.h"
 #include "Textfield.h"
 #include "AssetManager.h"
@@ -21,7 +24,6 @@ private:
 
     AssetManager assetmanager;
     //sf::Clock clock;
-    sf::Sound sound;
 
 
     sf::Sprite spriteRetry;
