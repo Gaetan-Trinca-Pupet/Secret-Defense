@@ -126,8 +126,11 @@ void AmphiReponse::AmphiReponse::update()
 			main.remove(prise);
 			--nbQuestion;
 		}
-	if (nbQuestion <= 0)
+	if (nbQuestion <= 0 and not isFinished)
+	{
+		app.lives -= 1;
 		isFinished = true;
+	}
 }
 
 AmphiReponse::AmphiReponse::AmphiReponse(AppData& appData) : MiniJeu(appData)

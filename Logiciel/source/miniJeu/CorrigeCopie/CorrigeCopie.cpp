@@ -324,8 +324,11 @@ void CorrigeCopie::CorrigeCopie::update()
 		if(tabBouton[i].first->hasBeenClicked() || tabBouton[i].second->hasBeenClicked())
 			if(tabLibelle[i].VF == (tabBouton[i].first->hasBeenClicked() ? tabBouton[i].first->isWhat() : tabBouton[i].second->isWhat()))
 				tabLibelle[i].isCorrect = true;
-			else
+			else if (not isFinished)
+			{
+				app.lives -= 1;
 				isFinished = true;
+			}
 	}
 	unsigned short compte = 0;
 	for(unsigned i = 0 ; i < tabLibelle.size() ; ++i)
@@ -335,7 +338,11 @@ void CorrigeCopie::CorrigeCopie::update()
 		isFinished = true;
 	
 	tempsPasse += 1;
-	if (tempsPasse > tempsMax) isFinished = true;
+	if (tempsPasse > tempsMax and not isFinished)
+	{
+		app.lives -= 1;
+		isFinished = true;
+	}
 }
 
 void CorrigeCopie::CorrigeCopie::draw()
