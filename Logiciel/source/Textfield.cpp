@@ -54,8 +54,10 @@ void Textfield::draw(sf::RenderWindow& window){
 
 void Textfield::update(sf::RenderWindow& window){
 	if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-		if(		sf::Mouse::getPosition(window).x < sprite.getPosition().x || sf::Mouse::getPosition(window).x > sprite.getPosition().x + sprite.getGlobalBounds().width
-			||	sf::Mouse::getPosition(window).y < sprite.getPosition().y || sf::Mouse::getPosition(window).y > sprite.getPosition().y + sprite.getGlobalBounds().height){
+		sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+		sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
+		if(		worldPos.x < sprite.getPosition().x || worldPos.x > sprite.getPosition().x + sprite.getGlobalBounds().width
+			||	worldPos.y < sprite.getPosition().y || worldPos.y > sprite.getPosition().y + sprite.getGlobalBounds().height){
 				focus = false;
 			}else{
 				focus = true;
