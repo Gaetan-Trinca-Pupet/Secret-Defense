@@ -29,6 +29,10 @@ public:
     Button(sf::RenderWindow* w = nullptr, const sf::Vector2f & size = sf::Vector2f(), const sf::Vector2f & pos = sf::Vector2f(),
            const std::string & t = std::string(), const unsigned short textSize = 20, const sf::Color & col = sf::Color());
 
+    ///
+    /// \brief Button is the constructor by copy of button (it copies it and sets the new button's text's font to the new button's font)
+    /// \param button the button to copy
+    ///
     Button(const Button & button);
 
     virtual ~Button();
@@ -52,8 +56,19 @@ public:
     ///
     void setColor(const sf::Color & c);
 
+
+    ///
+    /// \brief getColor gets the color of the outer rect of the button
+    /// \return the color of the outer rect of the button
+    ///
     sf::Color getColor();
 
+
+    ///
+    /// \brief operator = is the operator = of the button (it copies it and sets the left button's text's font to the left button's font)
+    /// \param b the button to copy
+    /// \return the left button
+    ///
     Button & operator= (const Button & b);
 };
 

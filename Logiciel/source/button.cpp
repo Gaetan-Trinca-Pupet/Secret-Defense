@@ -69,4 +69,5 @@ Button &Button::operator=(const Button &b)
     text.setFont(font);
     setWindow(*b.getWindow());
     setPosition(b.getPosition());
+    return *this;
 }
