@@ -169,4 +169,6 @@ AmphiReponse::AmphiReponse::~AmphiReponse()
 {
 	for (unsigned i(0); i < tabQuest.size(); ++i)
 		delete tabQuest[i];
+
+	app.window.setMouseCursorVisible(true);
 }
