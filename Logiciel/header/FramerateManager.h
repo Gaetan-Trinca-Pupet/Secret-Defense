@@ -18,6 +18,7 @@ class FramerateManager{
 		sf::RenderWindow * window;
 		sf::Clock clock;
 		unsigned short int framecount;
+		unsigned short int nbUpdatePerSec;
 
 		struct{
 			unsigned int ecomode : 2;

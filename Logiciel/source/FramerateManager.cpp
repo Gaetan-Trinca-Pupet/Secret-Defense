@@ -12,6 +12,7 @@ void FramerateManager::reset(){
     updatecount.highmode = 0b1;
     updatecount.middlemode = 0b0;
 	framecount = 0;
+	nbUpdatePerSec=0;
 	if(expectedMode != dyn)updateMode();
     else{
         switch(mode){
@@ -47,6 +48,7 @@ bool FramerateManager::mustUpdate(){
 		}
 		--updatecount.ecomode;
 	}
+	if(must_update)++nbUpdatePerSec;
 	if(clock.getElapsedTime().asSeconds() > 1.0)updateMode();
 	return must_update;
 }
@@ -90,6 +92,9 @@ void FramerateManager::updateMode(){
 			}
 		}
 	}
+	std::cout << "framecount : " << framecount << std::endl;
+	std::cout << "nbUpdatePerSec : " << nbUpdatePerSec << std::endl;
 	framecount = 0;
+	nbUpdatePerSec = 0;
 	clock.restart();
 }
