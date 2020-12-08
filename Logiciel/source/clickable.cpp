@@ -51,9 +51,11 @@ bool Clickable::isClicked()
 
 bool Clickable::isHovered()
 {
-    sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
-    return (mousePos.x >= getPosition().x && mousePos.x <= getPosition().x + getSize().x &&
-            mousePos.y >= getPosition().y && mousePos.y <= getPosition().y + getSize().y);
+    sf::Vector2i pixelPos = sf::Mouse::getPosition(*window);
+
+    sf::Vector2f mousePos = window->mapPixelToCoords(pixelPos);
+
+    return (getGlobalBounds().contains(mousePos.x, mousePos.y));
 }
 
 void Clickable::setWindow(sf::RenderWindow &w)

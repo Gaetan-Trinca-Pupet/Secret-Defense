@@ -180,8 +180,11 @@ namespace Grabber
 	// Updates the cursor position (refferring to 'window') and what it is grabbing is left_cliking
 	inline void Grabber::update(sf::RenderWindow& window)
 	{
-		x = sf::Mouse::getPosition(window).x;
-		y = sf::Mouse::getPosition(window).y;
+		sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+
+		sf::Vector2f mousePos = window.mapPixelToCoords(pixelPos);
+		x = mousePos.x;
+		y = mousePos.y;
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 		{
