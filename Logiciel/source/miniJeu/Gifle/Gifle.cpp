@@ -62,10 +62,14 @@ void Gifle::update()
 		if (passants[i]->isOutOfBounds())
 		{
 			if ( (!passants[i]->isMasked() && !passants[i]->isGifle()) ||
-			     ( passants[i]->isMasked() &&  passants[i]->isGifle() && erreurCpt <= 0))
+			     ( passants[i]->isMasked() &&  passants[i]->isGifle()))
 			{
-				app.lives -= 1;
-				isFinished = true;
+
+				if (!passants[i]->isMasked() || --erreurCpt <= 0)
+				{
+					app.lives -= 1;
+					isFinished = true;
+				}
 			}
 			
 			delete passants[i];

@@ -58,6 +58,7 @@ int main()
                 selecteur=rand()%(8-1+1)+1;
             }
         }
+
         switch (selecteur){
         case 0:
         {

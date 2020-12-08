@@ -1,8 +1,5 @@
 #include "../header/gameOverWindow.h"
-#include <fstream>
-#include <chrono>
-#include <ctime>
-#include <sstream>
+
 gameOverWindow::gameOverWindow(AppData& appData) : MiniJeu(appData)
 {
     app.window.display();
@@ -65,18 +62,9 @@ void gameOverWindow::draw()
 
 void gameOverWindow::update()
 {
-    std::time_t now = std::time(NULL);
-    std::tm * ptm = std::localtime(&now);
-    char buffer[32];
-    // Format: Mo, 15.06.2009 20:20:00
-    std::strftime(buffer, 32, "%a, %d.%m.%Y %H:%M:%S", ptm);
-    unsigned i=0;
-    std::string str;
-    while(buffer[i]!=0)
-    {
-        str+=buffer[i];
-        i++;
-    }
+
+    std::time_t currentTime = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+
 
     txtField.update(app.window);
     txtField.setFocus(true);
@@ -92,7 +80,7 @@ void gameOverWindow::update()
             {
                 std::ofstream myfile;
                 myfile.open("../ressource/scores/"+txtField.getString()+".txt", std::ios::app);
-                myfile<<str+" - Score : "+std::to_string(app.score)+"\n\n";
+                myfile<< time(&currentTime) << " - Score : "+std::to_string(app.score)+"\n\n";
                 myfile.close();
                 app.score=0;
                 app.lives=3;
@@ -111,7 +99,7 @@ void gameOverWindow::update()
             {
                 std::ofstream myfile;
                 myfile.open("../ressource/scores/"+txtField.getString()+".txt", std::ios::app);
-                myfile<<str+" - Score : "+std::to_string(app.score)+"\n\n";
+                myfile<< time(&currentTime) +" - Score : "+std::to_string(app.score)+"\n\n";
                 myfile.close();
                 app.window.close(); //enlever ça
                 //app.selecteur=0; //changer pour le chiffre correspondant à l'écran de score final
