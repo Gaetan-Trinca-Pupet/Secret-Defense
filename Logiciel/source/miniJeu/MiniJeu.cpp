@@ -17,7 +17,7 @@ void MiniJeu::play(){
 				if(event.key.code == sf::Keyboard::F11){
 					if(!app.fullscreen){
 						app.window.create(sf::VideoMode(960, 540), "test",sf::Style::Fullscreen);
-						app.window.setView(sf::View(sf::Vector2f(490,270), sf::Vector2f(960,540)));
+						app.window.setView(sf::View(sf::Vector2f(480,270), sf::Vector2f(960,540)));
 						app.fullscreen = true;
 					}else{
 						app.window.create(sf::VideoMode(960, 540), "test");
