@@ -90,7 +90,6 @@ int main()
                 selecteur=rand()%(8-1+1)+1;
             }
         }
-
         switch (selecteur){
         case 0:
         {
@@ -104,7 +103,7 @@ int main()
         {
             std::cout<<"playing trans1!"<<endl;
             sf::Text txt;
-            txt.setString("texte de la transition :\n1");
+            txt.setString("Eteignez tous les PC et sortez de la salle \nControles : ZQSD Espace");
             transition trans1(app,txt);
 
             //Exemple d'ajout de background et d'image
@@ -136,7 +135,7 @@ int main()
         {
             std::cout<<"playing trans2!"<<endl;
             sf::Text txt2;
-            txt2.setString("texte de la transition :\n2");
+            txt2.setString("Distribuez les minitests !\n Controles : Souris");
             transition trans2(app,txt2);
             trans2.play();
             DisitribMiniTests disitribMiniTests(app);
@@ -151,7 +150,7 @@ int main()
         {
             std::cout<<"playing trans3!"<<endl;
             sf::Text txt3;
-            txt3.setString("texte de la transition :\n3");
+            txt3.setString("Giflez ceux qui ne portent pas de masque !\nControles : Souris");
             transition trans3(app,txt3);
             trans3.play();
             Gifle gifle(app);
@@ -166,7 +165,7 @@ int main()
         {
             std::cout<<"playing trans4!"<<endl;
             sf::Text txt4;
-            txt4.setString("texte de la transition :\n4");
+            txt4.setString("Cliquez sur les questions déjà posées !\n4Controles : Souris");
             transition trans4(app,txt4);
             trans4.play();
             memoryQuestions::MemoryQuestions memoryQuestions(app);
@@ -181,7 +180,7 @@ int main()
         {
             std::cout<<"playing trans5!"<<endl;
             sf::Text txt5;
-            txt5.setString("texte de la transition :\n5");
+            txt5.setString("Repondez aux questions !\nControles : Souris");
             transition trans5(app,txt5);
             trans5.play();
             AmphiReponse::AmphiReponse amphiReponse(app);
@@ -196,7 +195,7 @@ int main()
         {
             std::cout<<"playing trans6!"<<endl;
             sf::Text txt6;
-            txt6.setString("texte de la transition :\n6");
+            txt6.setString("Branchez le PC !\nControles : Souris");
             transition trans6(app,txt6);
             trans6.play();
             BranchePC::BranchePC branchePC(app);
@@ -211,7 +210,7 @@ int main()
         {
             std::cout<<"playing trans7!"<<endl;
             sf::Text txt7;
-            txt7.setString("texte de la transition :\n7");
+            txt7.setString("Selectionnez la ligne incorrecte !\nControles : Souris");
             transition trans7(app,txt7);
             trans7.play();
             correctthecode::CorrectTheCode correctTheCode(app);
@@ -226,7 +225,7 @@ int main()
         {
             std::cout<<"playing trans8!"<<endl;
             sf::Text txt8;
-            txt8.setString("texte de la transition :\n8");
+            txt8.setString("Corrigez la copie !\nControles : Souris");
             transition trans8(app,txt8);
             trans8.play();
             CorrigeCopie::CorrigeCopie corrigeCopie(app);
@@ -241,7 +240,7 @@ int main()
         {
             std::cout<<"playing trans99!"<<endl;
             sf::Text txt99;
-            txt99.setString("texte de la transition :\n99");
+            txt99.setString("Testez un PTUT !\nControles : QD Espace");
             transition trans99(app,txt99);
             trans99.play();
             TestProjetPtut::TestProjetPtut testProjetPtut(app);
