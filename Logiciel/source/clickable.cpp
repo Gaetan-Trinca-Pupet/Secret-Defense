@@ -56,6 +56,16 @@ bool Clickable::isHovered()
             mousePos.y >= getPosition().y && mousePos.y <= getPosition().y + getSize().y);
 }
 
+void Clickable::setWindow(sf::RenderWindow &w)
+{
+    window = &w;
+}
+
+sf::RenderWindow* Clickable::getWindow() const
+{
+    return window;
+}
+
 Clickable::~Clickable()
 {
 }

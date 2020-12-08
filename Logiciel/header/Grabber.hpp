@@ -81,7 +81,7 @@ namespace Grabber
 	// Detructor of Grabbable
 	inline Grabbable::~Grabbable()
 	{
-
+		
 	}
 
 	// virtual function to update the object when it is grabbed.
@@ -143,7 +143,6 @@ namespace Grabber
 	// Destructor of Grabber
 	inline Grabber::~Grabber()
 	{
-		delete grabbed;
         //for (unsigned i = 0; i < tabGrabbable.size(); ++i)
             //delete tabGrabbable[i];
 	}

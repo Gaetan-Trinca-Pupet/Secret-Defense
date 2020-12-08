@@ -5,7 +5,7 @@ void BranchePC::BranchePC::setup()
 	
 	nbPrise = (1 + std::rand()%6);
 
-	
+	chrono.setTempsMax(15);
 
 	
 
@@ -62,22 +62,33 @@ void BranchePC::BranchePC::draw()
 	for (unsigned i(0); i < tabPrise.size(); ++i)
 		tabPrise[i]->draw(app.window);
 	main.draw(app.window);
+	app.window.draw(chrono);
 }
 
 void BranchePC::BranchePC::update()
 {
 	main.update(app.window);
 	for (Prise* prise : tabPrise)
-		if (prise->isMatched() and main.find(prise))
+		if (prise->isMatched() && main.find(prise))
 		{
 			main.remove(prise);
 			--nbPrise;
 		}
 	if (nbPrise <= 0)
+	{
 		isFinished = true;
+	}
+	
+	chrono.update();
+	
+	if (chrono.getTimePassed() > chrono.getTempsMax() && ! isFinished)
+	{
+		app.lives -= 1;
+		isFinished = true;
+	}
 }
 
-BranchePC::BranchePC::BranchePC(AppData& appData): MiniJeu(appData)
+BranchePC::BranchePC::BranchePC(AppData& appData): MiniJeu(appData), chrono(app.window)
 {
 	app.window.sf::Window::setMouseCursorVisible(false);
 	std::srand(std::time(nullptr));

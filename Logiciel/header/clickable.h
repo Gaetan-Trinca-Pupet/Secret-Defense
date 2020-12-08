@@ -44,6 +44,16 @@ public:
     /// \return a boolean tellig if the button is hovered
     ///
     bool isHovered();
+    ///
+    /// \brief setWindow sets the clickable's window
+    /// \param w is the pointer to the window
+    ///
+    void setWindow(sf::RenderWindow & w);
+    ///
+    /// \brief getWindow gets the clickable's window
+    /// \return the pointer to the clickable's window
+    ///
+    sf::RenderWindow* getWindow() const;
     virtual ~Clickable();
 };
 

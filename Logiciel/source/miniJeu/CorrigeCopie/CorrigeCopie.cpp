@@ -82,7 +82,7 @@ std::vector<QuestRep> getTabQuest()
 
 
 	//5
-	tabQuest.question = "Marc LAPORTE est-il le meilleur proffesseur du monde ?";
+	tabQuest.question = "Marc LAPORTE est-il le meilleur professeur du monde ?";
 	tabRepVrai.push_back("Bien évidemment !");
 	tabRepVrai.push_back("Ouais, en plus il est beau !");
 	tabRepVrai.push_back("Tout simplement oui !");
@@ -194,7 +194,7 @@ void CorrigeCopie::CorrigeCopie::computeTabText()
 			if ((QR.question.getCharacterSize() + QR.question.getLetterSpacing()) * sizeLine >= feuille.getSize().x)
 			{
 				QR.nbligne += 1;
-				for (i; str[i] != ' ' and i != 0; --i);
+				for (i; str[i] != ' ' && i != 0; --i);
 				sizeLine = 0;
 				str.insert(++i, "\n");
 				i += 1;
@@ -210,7 +210,7 @@ void CorrigeCopie::CorrigeCopie::computeTabText()
 			if (str[i] == '\n') sizeLine = 0;
 			if (QR.reponse.getCharacterSize() * sizeLine + QR.reponse.getLetterSpacing() * sizeLine >= feuille.getSize().x)
 			{
-				for (i; str[i] != ' ' and i != 0; --i);
+				for (i; str[i] != ' ' && i != 0; --i);
 				sizeLine = 0;
 				str.insert(++i, "\n");
 				i += 1;
@@ -222,8 +222,7 @@ void CorrigeCopie::CorrigeCopie::computeTabText()
 
 void CorrigeCopie::CorrigeCopie::setup()
 {
-	tempsMax = 2000;
-	tempsPasse = 0;
+	chrono.setTempsMax(25);
 
 	std::vector<QuestRep> tab = getTabQuest();
 
@@ -291,7 +290,7 @@ void CorrigeCopie::CorrigeCopie::setup()
 
 void CorrigeCopie::CorrigeCopie::update()
 {
-	posCamera = (feuille.getSize().y + (app.window.getSize().y / 2)) * (tempsPasse / tempsMax);
+	posCamera = (feuille.getSize().y + (app.window.getSize().y / 2)) * (chrono.getTimePassed() / chrono.getTempsMax() );
 
 	feuille.setPosition(100, int((app.window.getSize().y / 2) - posCamera));
 	for (unsigned i = 0; i < tabLibelle.size(); ++i)
@@ -324,8 +323,11 @@ void CorrigeCopie::CorrigeCopie::update()
 		if(tabBouton[i].first->hasBeenClicked() || tabBouton[i].second->hasBeenClicked())
 			if(tabLibelle[i].VF == (tabBouton[i].first->hasBeenClicked() ? tabBouton[i].first->isWhat() : tabBouton[i].second->isWhat()))
 				tabLibelle[i].isCorrect = true;
-			else
+			else if (not isFinished)
+			{
+				app.lives -= 1;
 				isFinished = true;
+			}
 	}
 	unsigned short compte = 0;
 	for(unsigned i = 0 ; i < tabLibelle.size() ; ++i)
@@ -334,8 +336,13 @@ void CorrigeCopie::CorrigeCopie::update()
 	if(tabLibelle.size() == compte)
 		isFinished = true;
 	
-	tempsPasse += 1;
-	if (tempsPasse > tempsMax) isFinished = true;
+	chrono.update();
+	
+	if (chrono.getTimePassed() > chrono.getTempsMax() && ! isFinished)
+	{
+		app.lives -= 1;
+		isFinished = true;
+	}
 }
 
 void CorrigeCopie::CorrigeCopie::draw()
@@ -350,7 +357,7 @@ void CorrigeCopie::CorrigeCopie::draw()
 
 	for (unsigned i = 0; i < tabBouton.size(); ++i)
 	{
-		if(not(tabBouton[i].first->hasBeenClicked() or tabBouton[i].second->hasBeenClicked()))
+		if(not(tabBouton[i].first->hasBeenClicked() || tabBouton[i].second->hasBeenClicked()))
 		{
 			tabBouton[i].first->draw(app.window);
 			tabBouton[i].second->draw(app.window);
@@ -358,9 +365,11 @@ void CorrigeCopie::CorrigeCopie::draw()
 		else
 			app.window.draw((tabLibelle[i].isCorrect ? tabBouton[i].first : tabBouton[i].second)->getSprite());
 	}
+	
+	app.window.draw(chrono);
 }
 
-CorrigeCopie::CorrigeCopie::CorrigeCopie(AppData& appData) : MiniJeu(appData)
+CorrigeCopie::CorrigeCopie::CorrigeCopie(AppData& appData) : MiniJeu(appData), chrono(app.window)
 {
 	std::srand(std::time(0));
 	posCamera = 0;
