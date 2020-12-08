@@ -118,7 +118,10 @@ namespace Grabber
 
 	inline Grabber::Grabber()
 	{
-		lastX, lastY, x, y = 0;
+        lastX=0;
+        lastY=0;
+        x=0;
+        y = 0;
 		isGrabbing = false;
 		grabbed = nullptr;
 	}
@@ -129,7 +132,10 @@ namespace Grabber
 		tabGrabbable.resize(tab.size());
 		for (unsigned i(0) ; i < tab.size() ; ++i)
 			tabGrabbable[i] = tab[i];
-		lastX, lastY, x, y = 0;
+        lastX=0;
+        lastY=0;
+        x=0;
+        y = 0;
 		isGrabbing = false;
 		grabbed = nullptr;
 	}
@@ -138,8 +144,8 @@ namespace Grabber
 	inline Grabber::~Grabber()
 	{
 		delete grabbed;
-		for (unsigned i = 0; i < tabGrabbable.size(); ++i)
-			delete tabGrabbable[i];
+        //for (unsigned i = 0; i < tabGrabbable.size(); ++i)
+            //delete tabGrabbable[i];
 	}
 
 	inline void Grabber::add(Grabbable* grab)

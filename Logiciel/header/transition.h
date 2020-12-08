@@ -4,26 +4,32 @@
 #include <SFML/Graphics.hpp>
 #include "miniJeu/MiniJeu.h"
 #include "Chrono.h"
+#include "AssetManager.h"
 
 class transition : public MiniJeu
 {
 private:
     sf::Text text;
-    sf::Color colorText=sf::Color(255,255,255,255);
+    sf::Color colorText=sf::Color(0,0,0,255);
     sf::Texture textureBackGround;
     sf::Texture textureImage;
     bool isTextureBgOn=false;
     bool isTextureImgOn=false;
     sf::Color bgColor=sf::Color();
     sf::Font fontText=app.font;
-    sf::Vector2f positionText=sf::Vector2f((app.window.getSize().x/2)-text.getGlobalBounds().width/2, app.window.getSize().y/6);
+    sf::Vector2f positionText=sf::Vector2f((app.window.getView().getSize().x/2)/*-text.getGlobalBounds().width/2*/, app.window.getView().getSize().y/4);
     sf::Vector2f positionImg;
 
     sf::Sprite spriteBg; //sprite pour le background
     sf::Sprite spriteImg; //sprite pour l'image des controles/astuces
     Chrono chrono;
     float time;
-    sf::Clock clock;
+    //sf::Clock clock;
+
+    AssetManager assetmanager;
+    sf::Sprite spriteChiffre;
+
+    sf::RectangleShape textBox;
 protected:
     virtual void setup();
 

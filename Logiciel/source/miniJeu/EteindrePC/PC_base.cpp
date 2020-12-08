@@ -32,3 +32,7 @@ EteindrePC::PC_base::PC_base(){
 void EteindrePC::PC_base::setOn(bool b){
 	on = b;
 }
+
+EteindrePC::PC_base::~PC_base(){
+	
+}

@@ -34,7 +34,7 @@ void Textfield::setSize(const sf::Vector2u& size){
 	renderTexture.create(size.x,size.y);
 	sprite.setTexture(renderTexture.getTexture());
 	sprite.setTextureRect(sf::Rect<int>(0,0,size.x,size.y));
-	rectangleShape.setSize(sf::Vector2f(size.x,size.y));
+    rectangleShape.setSize(sf::Vector2f(size.x,size.y));
 }
 
 void Textfield::draw(sf::RenderWindow& window){
@@ -66,7 +66,7 @@ void Textfield::update(sf::RenderWindow& window){
 		focus = false;
 		validate = true;
 	}
-	if(focus)updateText();
+    if(focus)updateText();
 	if(curseur.clock.getElapsedTime().asSeconds() > 0.5){
 		curseur.visible = !(curseur.visible) &1;
 		curseur.clock.restart();
@@ -104,12 +104,12 @@ void Textfield::updateText(){
 			text.setString(text.getString()+sf::String(std::string(1,' ')));
 		}
 	}
-	if(touches[sf::Keyboard::BackSpace] && !sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace)){
-		touches[sf::Keyboard::BackSpace]=false;
-	}else if(!touches[sf::Keyboard::BackSpace] && sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace)){
-		touches[sf::Keyboard::BackSpace]=true;
-		if(text.getString().getSize()>0)text.setString(text.getString().substring(0,text.getString().getSize()-1));
-	}
+    if(touches[sf::Keyboard::BackSpace] && !sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace)){
+        touches[sf::Keyboard::BackSpace]=false;
+    }else if(!touches[sf::Keyboard::BackSpace] && sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace)){
+        touches[sf::Keyboard::BackSpace]=true;
+        if(text.getString().getSize()>0)text.setString(text.getString().substring(0,text.getString().getSize()-1));
+    }
 }
 
 void Textfield::setFont(const sf::Font& font){
@@ -126,7 +126,11 @@ void Textfield::setTextSize(const unsigned int size){
 
 void Textfield::setTextColor(const sf::Color& color){
 	text.setFillColor(color);
-	text.setOutlineColor(color);
+    text.setOutlineColor(color);
+}
+
+void Textfield::setFocus(const bool &state){
+    focus=state;
 }
 
 bool Textfield::isFocus()const{

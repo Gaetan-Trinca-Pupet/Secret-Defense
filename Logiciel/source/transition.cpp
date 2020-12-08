@@ -60,23 +60,45 @@ void transition::setup()
         spriteImg.setTexture(textureImage);
         spriteImg.setPosition(positionImg);
     }
-    time=2;
+    time=5;
     chrono=Chrono(app.window);
+    chrono.setTempsMax(time);
+    spriteChiffre.setPosition(sf::Vector2f(app.window.getView().getSize().x/2-80, app.window.getView().getSize().y-300));
+
+    textBox.setSize(sf::Vector2f(400,100));
+    textBox.setPosition(text.getPosition().x-50,text.getPosition().y-10);
+    textBox.setFillColor(sf::Color(211,211,211));
+    textBox.setOutlineColor(sf::Color(255,255,255));
+    textBox.setOutlineThickness(10);
 }
 
 void transition::draw()
 {
     if (isTextureBgOn) app.window.draw(spriteBg);
     if (isTextureImgOn) app.window.draw(spriteImg);
+    app.window.draw(textBox);
     app.window.draw(text);
     app.window.draw(chrono);
+    app.window.draw(spriteChiffre);
 }
 
 void transition::update()
 {
-    if (clock.getElapsedTime().asSeconds()>=time)
+    if (chrono.getTimePassed()>=time)
     {
         isFinished=true;
+    }
+    if ((time-3<chrono.getTimePassed()) && (chrono.getTimePassed()<time-2))
+    {
+        spriteChiffre.setTexture(assetmanager.getTexture("../ressource/image/3.png"));
+    }
+    else if ((time-2<chrono.getTimePassed()) && (chrono.getTimePassed()<time-1))
+    {
+        spriteChiffre.setTexture(assetmanager.getTexture("../ressource/image/2.png"));
+    }
+    else if ((time-1<chrono.getTimePassed()) && (chrono.getTimePassed()<time))
+    {
+        spriteChiffre.setTexture(assetmanager.getTexture("../ressource/image/1.png"));
     }
     chrono.update();
 }

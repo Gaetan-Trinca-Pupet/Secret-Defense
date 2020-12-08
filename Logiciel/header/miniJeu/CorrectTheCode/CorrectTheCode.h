@@ -15,7 +15,7 @@ private :
     std::vector<CodeLine> code;
     float maxTime;
     Chrono chrono;
-    sf::Clock clock;
+    //sf::Clock clock;
     bool isEnding;
 public :
     CorrectTheCode(AppData & appdata);
