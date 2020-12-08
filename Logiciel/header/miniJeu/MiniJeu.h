@@ -10,6 +10,10 @@
 
 //toutes les donnees partagees par les minijeux sont dans cette structure
 
+/**
+*	The AppData struct contains all variables shared by mini games.
+*	@author Erwann Lubrano
+*/
 struct AppData{
 	sf::RenderWindow window;
 	FramerateManager framerateManager;
@@ -21,6 +25,12 @@ struct AppData{
     bool fullscreen;
 };
 
+
+/**
+*	MiniJeu is the abstract base class for mini games
+*	@author Erwann Lubrano
+*	@author Quentin Roubin
+*/
 class MiniJeu{
 	private :
 		sf::Color backgroundColor;
@@ -28,18 +38,61 @@ class MiniJeu{
 		AppData& app;
 		bool isFinished;
 		
+		/**
+		*	setup is called once at the begining of play.
+		*	@author Erwann Lubrano
+		*/
 		virtual void setup();
+		
+		/**
+		*	draw is called by play. It contains all graphics computings
+		*	@author Erwann Lubrano
+		*/
 		virtual void draw()=0;
+		
+		/**
+		*	update is called by play.
+		*	@author Erwann Lubrano
+		*/
 		virtual void update()=0;
 		
+		/**
+		*	@author Quentin Roubin
+		*/
 		void drawInterface();
 		
+		/**
+		*	getter of backgroundColor
+		*	@return the clear color.
+		*	@author Quentin Roubin
+		*/
 		sf::Color getBackgroundColor()const;
+		
+		/**
+		*	@author Erwann Lubrano
+		*	@param color : the color to fill when screen is cleared
+		*/
 		void setBackgroundColor(const sf::Color& color);
 	
 	public :
+	
+		/**
+		*	Contructor of MiniJeu
+		*	@author Erwann Lubrano
+		*	@param appData : the object that contains variables shared by all mini games. Must continue exist.
+		*/
 		MiniJeu(AppData& appData);
+		
+		/**
+		*	Main loop of mini games.
+		*	@author Erwann Lubrano
+		*/
         void play();
+		
+		/**
+		*	Destructor of MiniJeu
+		*	@author Erwann Lubrano
+		*/
 		virtual ~MiniJeu();
 };
 
