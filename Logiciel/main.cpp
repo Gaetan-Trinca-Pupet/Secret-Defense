@@ -90,6 +90,7 @@ int main()
                 selecteur=rand()%(8-1+1)+1;
             }
         }
+        selecteur = 3;
         switch (selecteur){
         case 0:
         {
@@ -103,7 +104,8 @@ int main()
         {
             std::cout<<"playing trans1!"<<endl;
             sf::Text txt;
-            txt.setString("Eteignez tous les PC et sortez de la salle \nControles : ZQSD Espace");
+            txt.setCharacterSize(17);
+            txt.setString("Eteignez tous les PC et sortez !\nControles : ZQSD Espace");
             transition trans1(app,txt);
 
             //Exemple d'ajout de background et d'image
@@ -135,6 +137,7 @@ int main()
         {
             std::cout<<"playing trans2!"<<endl;
             sf::Text txt2;
+            txt2.setCharacterSize(17);
             txt2.setString("Distribuez les minitests !\n Controles : Souris");
             transition trans2(app,txt2);
             trans2.play();
@@ -150,6 +153,7 @@ int main()
         {
             std::cout<<"playing trans3!"<<endl;
             sf::Text txt3;
+            txt3.setCharacterSize(17);
             txt3.setString("Giflez ceux qui ne portent pas de masque !\nControles : Souris");
             transition trans3(app,txt3);
             trans3.play();
@@ -165,7 +169,8 @@ int main()
         {
             std::cout<<"playing trans4!"<<endl;
             sf::Text txt4;
-            txt4.setString("Cliquez sur les questions déjà posées !\n4Controles : Souris");
+            txt4.setCharacterSize(17);
+            txt4.setString("Cliquez sur les questions déjà posées !\nControles : Souris");
             transition trans4(app,txt4);
             trans4.play();
             memoryQuestions::MemoryQuestions memoryQuestions(app);
@@ -180,6 +185,7 @@ int main()
         {
             std::cout<<"playing trans5!"<<endl;
             sf::Text txt5;
+            txt5.setCharacterSize(17);
             txt5.setString("Repondez aux questions !\nControles : Souris");
             transition trans5(app,txt5);
             trans5.play();
@@ -195,6 +201,7 @@ int main()
         {
             std::cout<<"playing trans6!"<<endl;
             sf::Text txt6;
+            txt6.setCharacterSize(17);
             txt6.setString("Branchez le PC !\nControles : Souris");
             transition trans6(app,txt6);
             trans6.play();
@@ -210,6 +217,7 @@ int main()
         {
             std::cout<<"playing trans7!"<<endl;
             sf::Text txt7;
+            txt7.setCharacterSize(17);
             txt7.setString("Selectionnez la ligne incorrecte !\nControles : Souris");
             transition trans7(app,txt7);
             trans7.play();
@@ -225,6 +233,7 @@ int main()
         {
             std::cout<<"playing trans8!"<<endl;
             sf::Text txt8;
+            txt8.setCharacterSize(17);
             txt8.setString("Corrigez la copie !\nControles : Souris");
             transition trans8(app,txt8);
             trans8.play();
@@ -240,6 +249,7 @@ int main()
         {
             std::cout<<"playing trans99!"<<endl;
             sf::Text txt99;
+            txt99.setCharacterSize(17);
             txt99.setString("Testez un PTUT !\nControles : QD Espace");
             transition trans99(app,txt99);
             trans99.play();
