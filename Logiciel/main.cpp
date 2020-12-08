@@ -90,7 +90,7 @@ int main()
                 selecteur=rand()%(8-1+1)+1;
             }
         }
-        selecteur = 3;
+
         switch (selecteur){
         case 0:
         {
@@ -108,21 +108,6 @@ int main()
             txt.setString("Eteignez tous les PC et sortez !\nControles : ZQSD Espace");
             transition trans1(app,txt);
 
-            //Exemple d'ajout de background et d'image
-
-            /*
-            if (!textureBg.loadFromFile("../ressource/image/background.png"))
-            {
-                std::cout<<"erreur loadFromFile"<<std::endl;
-            }
-            if (!textureImg.loadFromFile("../ressource/image/laporte.png"))
-            {
-                std::cout<<"erreur loadFromFile"<<std::endl;
-            }
-            trans1.setTextureBackGround(textureBg);
-            trans1.setTextureImage(textureImg);
-            trans1.setPositionImg(sf::Vector2f(app.window.getView().getSize().x/2, app.window.getView().getSize().y-300));
-            */
 
             trans1.play();
             EteindrePC::EteindrePC eteindrePC(app);
