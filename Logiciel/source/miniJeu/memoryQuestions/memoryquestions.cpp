@@ -4,7 +4,7 @@ using namespace memoryQuestions;
 
 MemoryQuestions::MemoryQuestions(AppData &appData) : MiniJeu(appData), result  (unfinished), questionList(appData.difficulty+1),
     leftQuestionButton(&appData.window, sf::Vector2f(600,50), sf::Vector2f(50,30), "", 20, sf::Color::Cyan),
-    rightQuestionButton(&appData.window, sf::Vector2f(600,50), sf::Vector2f(100,165), "", 20, sf::Color::Cyan), timeBetweenQuestions(2 * pow(0.95, std::max(int(app.difficulty)-15, 0))),
+    rightQuestionButton(&appData.window, sf::Vector2f(600,50), sf::Vector2f(100,165), "", 20, sf::Color::Cyan), timeBetweenQuestions(3 * pow(0.95, std::max(int(app.difficulty)-15, 0))),
     laporte(sf::Vector2f(163,228)), background(sf::Vector2f(960, 540))
 {
     laporte.setTexture(&assetManager.getTexture("../ressource/image/laporte.png"));

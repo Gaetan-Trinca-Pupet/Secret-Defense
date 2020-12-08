@@ -92,8 +92,8 @@ void FramerateManager::updateMode(){
 			}
 		}
 	}
-	std::cout << "framecount : " << framecount << std::endl;
-	std::cout << "nbUpdatePerSec : " << nbUpdatePerSec << std::endl;
+    //std::cout << "framecount : " << framecount << std::endl;
+    //std::cout << "nbUpdatePerSec : " << nbUpdatePerSec << std::endl;
 	framecount = 0;
 	nbUpdatePerSec = 0;
 	clock.restart();
