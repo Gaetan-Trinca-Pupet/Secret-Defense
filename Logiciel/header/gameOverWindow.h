@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <fstream>
 #include <chrono>
-#include <time.h>
+#include <ctime>
 #include <sstream>
 #include "miniJeu/MiniJeu.h"
 #include "Textfield.h"

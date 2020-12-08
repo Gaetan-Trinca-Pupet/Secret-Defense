@@ -63,8 +63,20 @@ void gameOverWindow::draw()
 void gameOverWindow::update()
 {
 
-    std::time_t currentTime = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-
+    std::time_t now = std::time(NULL);
+    std::tm theStruct;
+    localtime_s(&theStruct, &now);
+    char buffer[32];
+    // Format: Mo, 15.06.2009 20:20:00
+    std::strftime(buffer, 32, "%a, %d.%m.%Y %H:%M:%S", &theStruct);
+    unsigned i = 0;
+    std::string str;
+    while (buffer[i] != 0)
+    {
+        str += buffer[i];
+        i++;
+    }
+    
 
     txtField.update(app.window);
     txtField.setFocus(true);
@@ -73,20 +85,23 @@ void gameOverWindow::update()
     {
 //        if ((bouton1.getPosition().x <= sf::Mouse::getPosition(app.window).x && sf::Mouse::getPosition(app.window).x <= bouton1.getPosition().x+bouton1.getRadius()*2)
 //                && (bouton1.getPosition().y <= sf::Mouse::getPosition(app.window).y && sf::Mouse::getPosition(app.window).y <= bouton1.getPosition().y+bouton1.getRadius()*2))
+
         if((spriteRetry.getPosition().x <= sf::Mouse::getPosition(app.window).x && sf::Mouse::getPosition(app.window).x <= spriteRetry.getPosition().x+spriteRetry.getGlobalBounds().width)
                 && (spriteRetry.getPosition().y <= sf::Mouse::getPosition(app.window).y && sf::Mouse::getPosition(app.window).y <= spriteRetry.getPosition().y+spriteRetry.getGlobalBounds().height))
         {
             if (txtField.isValidate())
             {
+
                 std::ofstream myfile;
                 myfile.open("../ressource/scores/"+txtField.getString()+".txt", std::ios::app);
-                myfile<< time(&currentTime) << " - Score : "+std::to_string(app.score)+"\n\n";
+                myfile<< str << " - Score : "+std::to_string(app.score)+"\n\n";
                 myfile.close();
                 app.score=0;
                 app.lives=3;
                 app.difficulty=0;
                 isFinished=true;
             }
+
 
         }
 
@@ -97,9 +112,11 @@ void gameOverWindow::update()
         {
             if (txtField.isValidate())
             {
+
                 std::ofstream myfile;
                 myfile.open("../ressource/scores/"+txtField.getString()+".txt", std::ios::app);
-                myfile<< time(&currentTime) +" - Score : "+std::to_string(app.score)+"\n\n";
+                std::cout << str << std::endl;
+                myfile<< str +" - Score : "+std::to_string(app.score)+"\n\n";
                 myfile.close();
                 app.window.close(); //enlever ça
                 //app.selecteur=0; //changer pour le chiffre correspondant à l'écran de score final
