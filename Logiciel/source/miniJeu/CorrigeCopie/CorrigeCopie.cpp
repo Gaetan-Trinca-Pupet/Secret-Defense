@@ -282,7 +282,7 @@ void CorrigeCopie::CorrigeCopie::setup()
 		tabLibelle[i].reponse.setFillColor(sf::Color::Blue);
 	}
 
-	feuille.setSize(sf::Vector2f(app.window.getSize().x-200, (nbQuestion * sizeQuest) + 100));
+	feuille.setSize(sf::Vector2f(app.window.getView().getSize().x-200, (nbQuestion * sizeQuest) + 100));
 	feuille.setFillColor(sf::Color::White);
 
 	computeTabText();
@@ -290,16 +290,16 @@ void CorrigeCopie::CorrigeCopie::setup()
 
 void CorrigeCopie::CorrigeCopie::update()
 {
-	posCamera = (feuille.getSize().y + (app.window.getSize().y / 2)) * (chrono.getTimePassed() / chrono.getTempsMax() );
+	posCamera = (feuille.getSize().y + (app.window.getView().getSize().y / 2)) * (chrono.getTimePassed() / chrono.getTempsMax() );
 
-	feuille.setPosition(100, int((app.window.getSize().y / 2) - posCamera));
+	feuille.setPosition(100, int((app.window.getView().getSize().y / 2) - posCamera));
 	for (unsigned i = 0; i < tabLibelle.size(); ++i)
 	{
-		tabLibelle[i].question.setPosition(150 , int((app.window.getSize().y / 2) + 50 + (200 * i) - posCamera));
-		tabLibelle[i].reponse.setPosition(150, int((app.window.getSize().y / 2) + 50 + tabLibelle[i].question.getCharacterSize()*(tabLibelle[i].nbligne + 1) + (200 * i) - posCamera));
+		tabLibelle[i].question.setPosition(150 , int((app.window.getView().getSize().y / 2) + 50 + (200 * i) - posCamera));
+		tabLibelle[i].reponse.setPosition(150, int((app.window.getView().getSize().y / 2) + 50 + tabLibelle[i].question.getCharacterSize()*(tabLibelle[i].nbligne + 1) + (200 * i) - posCamera));
 
-		tabBouton[i].first->setPosition(int(feuille.getPosition().x + feuille.getSize().x - 200) , int((app.window.getSize().y / 2) + 50 + (200 * i) - posCamera));
-		tabBouton[i].second->setPosition(int(feuille.getPosition().x + feuille.getSize().x - 100) , int((app.window.getSize().y / 2) + 50 + (200 * i) - posCamera));
+		tabBouton[i].first->setPosition(int(feuille.getPosition().x + feuille.getSize().x - 200) , int((app.window.getView().getSize().y / 2) + 50 + (200 * i) - posCamera));
+		tabBouton[i].second->setPosition(int(feuille.getPosition().x + feuille.getSize().x - 100) , int((app.window.getView().getSize().y / 2) + 50 + (200 * i) - posCamera));
 	}
 
 	for (unsigned i = 0; i < tabBouton.size(); ++i)
