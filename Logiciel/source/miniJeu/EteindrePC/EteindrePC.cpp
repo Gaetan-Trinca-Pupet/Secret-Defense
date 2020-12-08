@@ -50,7 +50,7 @@ void EteindrePC::EteindrePC::update(){
 	for(PC_base* pc : pcs)pc->update();
 	if(chrono.getTimePassed() > 15){
 		bool win(true);
-		if(laporte.getPersoView().first->x > 150){
+		if(laporte.getPersoView().first->x > 100){
 			win=false;
 		}else{
 			for(PC_base* pc : pcs){

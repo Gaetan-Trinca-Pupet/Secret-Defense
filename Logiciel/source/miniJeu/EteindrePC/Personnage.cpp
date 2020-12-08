@@ -2,6 +2,8 @@
 
 EteindrePC::Personnage::Personnage(){
 	direction = EteindrePC::Direction::Bas;
+	position.x += 6*3;
+	position.y += 6*8;
 	texture.loadFromFile("../ressource/EteindrePC/monsieurLAPORTE.png");
 	sprite.setTexture(texture);
 	controles.setUpKey(sf::Keyboard::Key::Up);
