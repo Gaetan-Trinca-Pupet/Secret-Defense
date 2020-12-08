@@ -138,7 +138,7 @@ int main()
             std::cout<<"playing trans2!"<<endl;
             sf::Text txt2;
             txt2.setCharacterSize(17);
-            txt2.setString("Distribuez les minitests !\n Controles : Souris");
+            txt2.setString("Lancez les minitests !\n Controles : Souris");
             transition trans2(app,txt2);
             trans2.play();
             DisitribMiniTests disitribMiniTests(app);

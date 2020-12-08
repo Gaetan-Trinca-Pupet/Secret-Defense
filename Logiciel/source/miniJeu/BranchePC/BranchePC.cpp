@@ -7,11 +7,7 @@ void BranchePC::BranchePC::setup()
 
 	chrono.setTempsMax(15);
 
-	
 
-	
-	
-	
 	
 	tabPrise.resize(nbPrise);
 
@@ -103,4 +99,6 @@ BranchePC::BranchePC::~BranchePC()
 {
 	for (unsigned i(0); i < tabPrise.size(); ++i)
 		delete tabPrise[i];
+
+	app.window.setMouseCursorVisible(true);
 }
