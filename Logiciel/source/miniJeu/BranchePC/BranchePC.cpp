@@ -73,8 +73,11 @@ void BranchePC::BranchePC::update()
 			main.remove(prise);
 			--nbPrise;
 		}
-	if (nbPrise <= 0)
+	if (nbPrise <= 0 and not isFinished)
+	{
+		app.lives -= 1;
 		isFinished = true;
+	}
 }
 
 BranchePC::BranchePC::BranchePC(AppData& appData): MiniJeu(appData)
