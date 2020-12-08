@@ -1,5 +1,5 @@
 #include "../header/FramerateManager.h"
-#include <iostream>
+
 
 FramerateManager::FramerateManager(){
     expectedMode = dyn;

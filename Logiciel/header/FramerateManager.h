@@ -1,6 +1,8 @@
 #ifndef __FRAMERATE_MANAGER_H
 #define __FRAMERATE_MANAGER_H
 
+#include <iostream>
+
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
