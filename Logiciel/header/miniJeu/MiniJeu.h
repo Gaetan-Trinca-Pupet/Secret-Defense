@@ -21,7 +21,6 @@ struct AppData{
 	unsigned int score;
     unsigned short int difficulty;
     unsigned short int lives;
-    //unsigned short int selecteur;
     bool fullscreen;
 };
 

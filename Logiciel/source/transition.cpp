@@ -1,7 +1,6 @@
 #include "../header/transition.h"
-#include <iostream>
 
-transition::transition(AppData & appData, sf::Text txt) : MiniJeu(appData), text(txt){
+transition::transition(AppData & appData, sf::Text txt) : MiniJeu(appData), text(txt), colorText(sf::Color(0,0,0,255)), isTextureBgOn(false), isTextureImgOn(false), fontText(app.font), positionText(sf::Vector2f((app.window.getView().getSize().x/2), app.window.getView().getSize().y/3)){
 
 }
 
@@ -43,7 +42,8 @@ void transition::setPositionImg(const sf::Vector2f &value)
 void transition::setup()
 {
     text.setFont(fontText);
-    text.setPosition(sf::Vector2f(positionText.x-text.getGlobalBounds().width/2,positionText.y));
+    text.setOrigin(sf::Vector2f(text.getGlobalBounds().width/2, text.getGlobalBounds().height/2));
+    text.setPosition(positionText);
     text.setFillColor(colorText);
     if (textureBackGround.getSize()!=sf::Vector2u(0,0)) isTextureBgOn=true;
     if (textureImage.getSize()!=sf::Vector2u(0,0)) isTextureImgOn=true;
@@ -66,7 +66,8 @@ void transition::setup()
     spriteChiffre.setPosition(sf::Vector2f(app.window.getView().getSize().x/2-80, app.window.getView().getSize().y-300));
 
     textBox.setSize(sf::Vector2f(400,100));
-    textBox.setPosition(text.getPosition().x-50,text.getPosition().y-10);
+    textBox.setOrigin(sf::Vector2f(textBox.getSize().x/2,textBox.getSize().y/2));
+    textBox.setPosition(text.getPosition().x,text.getPosition().y);
     textBox.setFillColor(sf::Color(211,211,211));
     textBox.setOutlineColor(sf::Color(255,255,255));
     textBox.setOutlineThickness(10);
