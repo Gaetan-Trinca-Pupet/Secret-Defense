@@ -8,6 +8,8 @@
 
 #include "header/miniJeu/MiniJeu.h"
 #include "header/transition.h"
+#include "header/testMiniJeu.h"
+#include "header/miniJeuQuentin.h"
 #include "header/gameOverWindow.h"
 #include "header/miniJeu/DistribMiniTests/DistribMiniTests.h"
 #include "header/miniJeu/Gifle/Gifle.h"
@@ -55,7 +57,8 @@ int main()
     app.window.create(sf::VideoMode(960, 540), "test");
     app.framerateManager.setWindow(app.window);
 	loadFramerateMode(app.framerateManager);
-    app.difficulty=0; //TODO implémenter la difficulté dans les mini jeux
+    app.difficulty=0;
+    app.score=0;
     app.lives=3;
     if (!app.font.loadFromFile("../ressource/fonts/OpenSans-Regular.ttf"))
     {
@@ -77,7 +80,7 @@ int main()
         }
         else if(nbGamesFinished==5)
         {
-            selecteur=99;                   //Remplacer 99 par le numéro du boss, si plusieurs boss faire un rand entre les numéros des boss
+            selecteur=99;                   //99 numéro du boss, si plusieurs boss on peut faire un rand entre les numéros des boss
         }
         else
         {
@@ -88,6 +91,7 @@ int main()
                 selecteur=rand()%(8-1+1)+1;
             }
         }
+        unsigned short int tempLives(app.lives);
         switch (selecteur){
         case 0:
         {
@@ -243,6 +247,9 @@ int main()
             break;
         }
 
+        }
+        if (tempLives==app.lives){
+            app.score+=1;
         }
     }
 
