@@ -8,8 +8,6 @@
 
 #include "header/miniJeu/MiniJeu.h"
 #include "header/transition.h"
-#include "header/testMiniJeu.h"
-#include "header/miniJeuQuentin.h"
 #include "header/gameOverWindow.h"
 #include "header/miniJeu/DistribMiniTests/DistribMiniTests.h"
 #include "header/miniJeu/Gifle/Gifle.h"
