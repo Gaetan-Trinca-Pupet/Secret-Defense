@@ -222,7 +222,7 @@ void CorrigeCopie::CorrigeCopie::computeTabText()
 
 void CorrigeCopie::CorrigeCopie::setup()
 {
-	chrono.setTempsMax(25);
+	chrono.setTempsMax(31);
 
 	std::vector<QuestRep> tab = getTabQuest();
 
