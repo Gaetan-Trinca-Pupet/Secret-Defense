@@ -113,7 +113,7 @@ namespace Grabber
 	// canGrab() is used to know if the cursor is hovering over an Grabbable parameter, if it is, it return true
 	inline bool Grabber::canGrab(Grabbable* const grab)const
 	{
-		return grab->getGlobalBounds().contains(sf::Vector2f(x, y));
+		return grab->getGlobalBounds().intersects(sf::FloatRect(x, y, size_x, size_y));
 	}
 
 	inline Grabber::Grabber()
@@ -226,7 +226,7 @@ namespace Grabber
 	// Draws the cursor on 'window'
 	inline void Grabber::draw(sf::RenderWindow& window)
 	{
-		sprite.setPosition(x - size_x / 2, y - size_y / 2);
+		sprite.setPosition(x, y);
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 			sprite.setTextureRect(sf::IntRect(size_x, 0, size_x, size_y));

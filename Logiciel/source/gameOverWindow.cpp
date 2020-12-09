@@ -118,7 +118,6 @@ void gameOverWindow::update()
 
                 std::ofstream myfile;
                 myfile.open("../ressource/scores/"+txtField.getString()+".txt", std::ios::app);
-                std::cout << str << std::endl;
                 myfile<< str +" - Score : "+std::to_string(app.score)+"\n\n";
                 myfile.close();
                 app.window.close(); //enlever ça

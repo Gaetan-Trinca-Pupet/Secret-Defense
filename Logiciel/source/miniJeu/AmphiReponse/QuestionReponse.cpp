@@ -19,10 +19,10 @@ AmphiReponse::QuestionReponse::QuestionReponse(QuestionReponse* QR, const std::s
 	//sound_plugged.setVolume(5);
 	//sound_plugged.setPitch(4);
 
-	setSize(sf::Vector2f((str.length()/1.5) * (libele.getCharacterSize() + libele.getLetterSpacing()),libele.getCharacterSize() + 10));
+	setSize(sf::Vector2f((str.length()/1.5) * (libele.getCharacterSize() + libele.getLetterSpacing()) + 10,libele.getCharacterSize() + 20));
 
-	bulle.setSize(sf::Vector2f(getSize().x +3, getSize().y +3));
-	bord_bulle.setSize(sf::Vector2f(getSize().x+10, getSize().y+10));
+	bulle.setSize(sf::Vector2f(getSize().x -7, getSize().y -7));
+	bord_bulle.setSize(sf::Vector2f(getSize().x, getSize().y));
 
 	if (isQuest)
 	{
