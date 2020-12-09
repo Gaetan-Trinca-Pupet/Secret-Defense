@@ -90,7 +90,6 @@ int main()
                 selecteur=rand()%(8-1+1)+1;
             }
         }
-
         switch (selecteur){
         case 0:
         {
@@ -155,7 +154,7 @@ int main()
             std::cout<<"playing trans4!"<<endl;
             sf::Text txt4;
             txt4.setCharacterSize(17);
-            txt4.setString("Cliquez sur les questions déjà posées !\nControles : Souris");
+            txt4.setString("Cliquez sur les questions deja posees !\nControles : Souris");
             transition trans4(app,txt4);
             trans4.play();
             memoryQuestions::MemoryQuestions memoryQuestions(app);
