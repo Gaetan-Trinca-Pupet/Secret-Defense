@@ -83,11 +83,14 @@ void gameOverWindow::update()
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
     {
+		sf::Vector2i pixelPos = sf::Mouse::getPosition(app.window);
+		sf::Vector2f worldPos = app.window.mapPixelToCoords(pixelPos);
+		
 //        if ((bouton1.getPosition().x <= sf::Mouse::getPosition(app.window).x && sf::Mouse::getPosition(app.window).x <= bouton1.getPosition().x+bouton1.getRadius()*2)
 //                && (bouton1.getPosition().y <= sf::Mouse::getPosition(app.window).y && sf::Mouse::getPosition(app.window).y <= bouton1.getPosition().y+bouton1.getRadius()*2))
 
-        if((spriteRetry.getPosition().x <= sf::Mouse::getPosition(app.window).x && sf::Mouse::getPosition(app.window).x <= spriteRetry.getPosition().x+spriteRetry.getGlobalBounds().width)
-                && (spriteRetry.getPosition().y <= sf::Mouse::getPosition(app.window).y && sf::Mouse::getPosition(app.window).y <= spriteRetry.getPosition().y+spriteRetry.getGlobalBounds().height))
+        if((spriteRetry.getPosition().x <= worldPos.x && worldPos.x <= spriteRetry.getPosition().x+spriteRetry.getGlobalBounds().width)
+                && (spriteRetry.getPosition().y <= worldPos.y && worldPos.y <= spriteRetry.getPosition().y+spriteRetry.getGlobalBounds().height))
         {
             if (txtField.isValidate())
             {
@@ -107,8 +110,8 @@ void gameOverWindow::update()
 
 //        if ((bouton2.getPosition().x <= sf::Mouse::getPosition(app.window).x && sf::Mouse::getPosition(app.window).x <= bouton2.getPosition().x+bouton2.getRadius()*2)
 //                && (bouton2.getPosition().y <= sf::Mouse::getPosition(app.window).y && sf::Mouse::getPosition(app.window).y <= bouton2.getPosition().y+bouton2.getRadius()*2))
-        if((spriteQuit.getPosition().x <= sf::Mouse::getPosition(app.window).x && sf::Mouse::getPosition(app.window).x <= spriteQuit.getPosition().x+spriteQuit.getGlobalBounds().width)
-                && (spriteQuit.getPosition().y <= sf::Mouse::getPosition(app.window).y && sf::Mouse::getPosition(app.window).y <= spriteQuit.getPosition().y+spriteQuit.getGlobalBounds().height))
+        if((spriteQuit.getPosition().x <= worldPos.x && worldPos.x <= spriteQuit.getPosition().x+spriteQuit.getGlobalBounds().width)
+                && (spriteQuit.getPosition().y <= worldPos.y && worldPos.y <= spriteQuit.getPosition().y+spriteQuit.getGlobalBounds().height))
         {
             if (txtField.isValidate())
             {

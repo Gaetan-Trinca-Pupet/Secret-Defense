@@ -102,7 +102,7 @@ std::string QuestionList::getQuestion(const unsigned short & rank)
         return "Sur quoi sera le prochain controle ?";
         break;
     }
-	//return ""; //J'ai mis ça decommente ça pour enlever un warning
+	return ""; 
 }
 
 unsigned short QuestionList::getRandomQuestion()

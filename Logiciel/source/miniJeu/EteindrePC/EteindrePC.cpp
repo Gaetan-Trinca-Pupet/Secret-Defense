@@ -5,7 +5,7 @@ EteindrePC::EteindrePC::EteindrePC(AppData& appData) : MiniJeu(appData), chrono(
 		table1(sf::Vector2f(360,0), sf::Vector2f(600,75)),
 		table2(sf::Vector2f(300,220), sf::Vector2f(660,100)),
 		table3(sf::Vector2f(360,540-75), sf::Vector2f(600,75)){
-	
+	app.window.setMouseCursorVisible(false);
 }
 
 void EteindrePC::EteindrePC::setup(){
@@ -66,6 +66,7 @@ void EteindrePC::EteindrePC::update(){
 }
 
 EteindrePC::EteindrePC::~EteindrePC(){
+	app.window.setMouseCursorVisible(true);
 	for(PC_base* pc : pcs)delete pc;
 }
 

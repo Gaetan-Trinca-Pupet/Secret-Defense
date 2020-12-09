@@ -16,19 +16,19 @@ void BranchePC::BranchePC::setup()
 	const unsigned short decalage = 200;
 
 	for (unsigned i(0); i < tabPos1.size(); ++i)
-		tabPos1[i] = decalage + ((app.window.getSize().x - decalage)/nbPrise) * i;
+		tabPos1[i] = decalage + ((app.window.getView().getSize().x - decalage)/nbPrise) * i;
 
 	std::vector<unsigned> tabPos2 = tabPos1;
 
 	for (unsigned i(0); i < tabPrise.size(); ++i)
 	{
 		unsigned rand = std::rand() % tabPos1.size();
-		tabPrise[i] = new Prise(new Prise(nullptr, tabPos1[rand], 50), 0, app.window.getSize().y - 200);
+		tabPrise[i] = new Prise(new Prise(nullptr, tabPos1[rand], 50), 0, app.window.getView().getSize().y - 200);
 		tabPos1[rand] = tabPos1[tabPos1.size() - 1];
 		tabPos1.pop_back();
 
 		rand = std::rand() % tabPos2.size();
-		tabPrise[i]->setPosition(tabPos2[rand] + ((app.window.getSize().x - decalage) / nbPrise) / 2, tabPrise[i]->getPosition().y);
+		tabPrise[i]->setPosition(tabPos2[rand] + ((app.window.getView().getSize().x - decalage) / nbPrise) / 2, tabPrise[i]->getPosition().y);
 		tabPos2[rand] = tabPos2[tabPos2.size() - 1];
 		tabPos2.pop_back();
 	}
@@ -45,8 +45,8 @@ void BranchePC::BranchePC::setup()
 	
 	for (unsigned i = 0; i < tabPrise.size(); ++i)
 		main.add(tabPrise[i]);
-	main.setX(app.window.getSize().x / 2);
-	main.setY(app.window.getSize().y / 2);
+	main.setX(app.window.getView().getSize().x / 2);
+	main.setY(app.window.getView().getSize().y / 2);
 	sf::Texture texture;
 	texture.loadFromFile("../ressource/BranchePC/hand.png");
 	main.setSprite(texture);

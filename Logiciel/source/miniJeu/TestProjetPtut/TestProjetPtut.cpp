@@ -1,6 +1,7 @@
 #include "../../../header/miniJeu/TestProjetPtut/TestProjetPtut.h"
 
 TestProjetPtut::TestProjetPtut::TestProjetPtut(AppData& appData): MiniJeu(appData),chrono(appData.window){
+	app.window.setMouseCursorVisible(false);
 	Invader::balls = &balls;
 	Invader::missiles = &missiles;
 	controles.setLeftKey(sf::Keyboard::Key::Left);
@@ -80,9 +81,11 @@ void TestProjetPtut::TestProjetPtut::update(){
 		--app.lives;
 		++app.difficulty;
 		isFinished = true;
+		app.window.setMouseCursorVisible(true);
 	}else if(chrono.getTimePassed() > 45){
 		++app.difficulty;
 		isFinished = true;
+		app.window.setMouseCursorVisible(true);
 	}
 	glitchEffect.update();
 	chrono.update();
