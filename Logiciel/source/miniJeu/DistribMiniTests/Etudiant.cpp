@@ -8,17 +8,6 @@ Etudiant::Etudiant()
 
 }
 
-Etudiant::Etudiant(sf::Vector2f& pos)
-{
-	setPosition(pos);
-	setSize(sf::Vector2f(120, 175));
-	setOutlineThickness(3);
-	setOutlineColor(sf::Color::Green);
-
-	working = false;
-
-}
-
 Etudiant::Etudiant(unsigned numEtu)
 {
 	setPosition(etuPos[numEtu]);

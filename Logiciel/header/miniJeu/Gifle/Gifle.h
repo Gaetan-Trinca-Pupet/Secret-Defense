@@ -9,6 +9,12 @@
 class Gifle : public MiniJeu
 {
 public:
+
+	/**
+	 * Constructeur de Gifle.
+	 *
+	 * \param appData contiend es données utilse comme la fenêtr, difficulté, ect...
+	 */
 	Gifle(AppData& appData);
 	virtual ~Gifle();
 
@@ -17,6 +23,10 @@ private:
 	virtual void draw();
 	virtual void update();
 
+	/**
+	 * Creer un passant pour coin de l'écran, dont un non masqué.
+	 * 
+	 */
 	void creerPassants();
 
 	float timeBetweenWaves;
@@ -27,14 +37,10 @@ private:
 
 	sf::Sprite background;
 
-	sf::Sprite cursor;
-
 	sf::Clock clockPourDelaiVagues;
-	std::vector<Passant*> passants;
+	std::vector<Passant> passants;
 
 
 };
-
-
 
 #endif

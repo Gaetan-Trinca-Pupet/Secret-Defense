@@ -11,6 +11,15 @@ class MiniTest : public Grabber::Grabbable
 public:
 
 	MiniTest();
+
+	/**
+	 * Constructeur de MiniTest.
+	 * 
+	 * \param pos position intiale
+	 * \param rotation rotation initiale
+	 * \param throwRange zone dans laquelle le mini test n'est pas en mode lancer et peux être attrapé
+	 * \param _window fenêtre
+	 */
 	MiniTest(sf::Vector2f pos, float rotation, sf::FloatRect throwRange, sf::RenderWindow& _window);
 
 	virtual ~MiniTest();
@@ -19,6 +28,10 @@ public:
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
+	/**
+	 * Met a jour le mini test.
+	 * 
+	 */
 	void update();
 
 

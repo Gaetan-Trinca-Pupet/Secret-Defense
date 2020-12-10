@@ -90,6 +90,7 @@ int main()
             }
         }
         unsigned short int tempLives(app.lives);
+
         switch (selecteur){
         case 0:
         {

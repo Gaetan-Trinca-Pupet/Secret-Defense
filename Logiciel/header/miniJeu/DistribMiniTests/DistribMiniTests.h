@@ -15,10 +15,23 @@ public:
 	virtual void update();
 	virtual void setup();
 
+	/**
+	 * Choisis et place les étudiants.
+	 * 
+	 */
 	void creerEtudiants();
 
+	/**
+	 * place les mini test.
+	 * 
+	 */
 	void creerMiniTests();
 
+	/**
+	 * Constructeur de DistribMiniTests.
+	 * 
+	 * \param appData contiend es données utilse comme la fenêtr, difficulté, ect...
+	 */
 	DisitribMiniTests(AppData& appData);
 	virtual ~DisitribMiniTests();
 

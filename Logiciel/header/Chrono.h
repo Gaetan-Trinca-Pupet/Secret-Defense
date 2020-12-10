@@ -9,15 +9,40 @@ class Chrono : public sf::Drawable {
 public:
 
 	Chrono();
+
+	/**
+	 * Constructeur de Chrono.
+	 * 
+	 * \param window la fenêtre permet au chrono de s'afficher au bon endroit
+	 */
 	Chrono(sf::RenderWindow& window);
 	virtual ~Chrono();
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
+	/**
+	 * Met a jour le chrono.
+	 * 
+	 */
 	void update();
 
+	/**
+	 * 
+	 * \return le temps écoulé depuis la création.
+	 */
 	float getTimePassed();
+
+	/**
+	 * Permet d'indiquer la durée du chrono.
+	 * 
+	 * \param _tempsMax durée du chrono
+	 */
 	void setTempsMax(float _tempsMax);
+
+	/**
+	 * 
+	 * \return durée du chrono
+	 */
 	float getTempsMax();
 
 private:

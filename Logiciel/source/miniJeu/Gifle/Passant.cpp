@@ -3,11 +3,11 @@
 
 
 
-Passant::Passant(const sf::Vector2f& pos, sf::RenderWindow* w, float _dir, bool masque, unsigned difficulty)
-	:Clickable(pos, sf::Vector2f(), w)
+Passant::Passant(const sf::Vector2f& pos, sf::RenderWindow* _window, float _dir, bool masque, unsigned difficulty)
+	:Clickable(pos, sf::Vector2f(), _window)
 {
 	masked = masque;
-	window = w;
+	window = _window;
 	dir = _dir;
 	gifle = false;
 	enFuite = false;
