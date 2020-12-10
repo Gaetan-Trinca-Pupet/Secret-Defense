@@ -48,6 +48,7 @@ void DisitribMiniTests::draw()
 
 void DisitribMiniTests::update()
 {
+	//si le temps est écoulé ou  tout les étudiants ont un mini test, finir le minijeu
 	if (chrono.getTimePassed() > tempsMax || nbADistribuer == 0)
 	{
 		if (nbADistribuer != 0)
@@ -65,6 +66,7 @@ void DisitribMiniTests::update()
 
 		miniTests[i]->update();
 
+		//si le mini test est lancé
 		if (!miniTests[i]->canBeGrabbed())
 		{
 
@@ -72,6 +74,7 @@ void DisitribMiniTests::update()
 
 			for (Etudiant& e : etudiants)
 			{
+				//si l'étudiant e peux attraper le minitest, le supprimer
 				if (e.tryToCatch(miniTests[i]->getPosition()))
 				{
 					delete miniTests[i];
@@ -88,6 +91,7 @@ void DisitribMiniTests::setup()
 {
 	srand(std::time(NULL));
 
+	//initialisation de la délimitation de la zone de lancer
 	throwZone.setSize(sf::Vector2f(180, 125));
 	throwZone.setFillColor(sf::Color::Transparent);
 	throwZone.setOutlineColor(sf::Color::Red);
@@ -107,6 +111,7 @@ void DisitribMiniTests::creerEtudiants()
 	std::vector<unsigned> numEtus = { 0, 1, 2, 3, 4, 5 };
 	std::random_shuffle(numEtus.begin(), numEtus.end());
 
+
 	for (unsigned i(0); i < nbADistribuer; ++i)
 		etudiants.push_back(Etudiant(numEtus[i]));
 	std::sort(etudiants.begin(), etudiants.end());
@@ -119,11 +124,12 @@ void DisitribMiniTests::creerMiniTests()
 
 	for (unsigned i(0); i < nbMiniTests; ++i)
 	{
-
+		//générer une position aléatoire
 		sf::Vector2f pos(app.window.getView().getSize().x / 2 + (rand() % 21) - 10,
 			(app.window.getView().getSize().y - 70 + (rand() % 21) - 10));
 
-		float rotation = (rand() % 31) - 15;
+		//générer une rotation aléatoire
+		float rotation = (rand() % 21) - 10;
 		if (rotation < 0) rotation += 360;
 
 		miniTests.push_back(new MiniTest(pos, rotation, throwZone.getGlobalBounds(), app.window));
