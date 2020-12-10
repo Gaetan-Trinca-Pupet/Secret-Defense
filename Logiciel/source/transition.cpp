@@ -1,17 +1,20 @@
 #include "../header/transition.h"
 
-transition::transition(AppData & appData, sf::Text txt) : MiniJeu(appData), text(txt), colorText(sf::Color(0,0,0,255)), isTextureBgOn(false), isTextureImgOn(false), fontText(app.font), positionText(sf::Vector2f((app.window.getView().getSize().x/2), app.window.getView().getSize().y/3)){
+transition::transition(AppData & appData, sf::Text txt) : MiniJeu(appData), text(txt), isTextureBgOn(false), isTextureImgOn(false), fontText(app.font), positionText(sf::Vector2f((app.window.getView().getSize().x/2), app.window.getView().getSize().y/3)), positionImg(sf::Vector2f((app.window.getView().getSize().x/2), app.window.getView().getSize().y/3)){
 
 }
 
-void transition::setTextureBackGround(const sf::Texture &value)
+void transition::setTextureBackGround(const std::string &value)
 {
-    textureBackGround = value;
+    spriteBg.setTexture(assetmanager.getTexture(value));
+    isTextureBgOn=true;
 }
 
-void transition::setTextureImage(const sf::Texture &value)
+void transition::setTextureImage(const std::string &value)
 {
-    textureImage = value;
+    spriteImg.setTexture(assetmanager.getTexture(value));
+    spriteImg.setOrigin(sf::Vector2f(spriteImg.getGlobalBounds().width/2,spriteImg.getGlobalBounds().height/2));
+    isTextureImgOn=true;
 }
 
 void transition::setColorText(const sf::Color &value)
@@ -45,24 +48,14 @@ void transition::setup()
     text.setOrigin(sf::Vector2f(text.getGlobalBounds().width/2, text.getGlobalBounds().height/2));
     text.setPosition(positionText);
     text.setFillColor(colorText);
-    if (textureBackGround.getSize()!=sf::Vector2u(0,0)) isTextureBgOn=true;
-    if (textureImage.getSize()!=sf::Vector2u(0,0)) isTextureImgOn=true;
-    if (isTextureBgOn)
-    {
-        spriteBg.setTexture(textureBackGround);
-    }
-    else
-    {
+    spriteImg.setPosition(positionImg);
+
+    if (isTextureBgOn==false){
         setBackgroundColor(bgColor);
     }
-    if (isTextureImgOn)
-    {
-        spriteImg.setTexture(textureImage);
-        spriteImg.setPosition(positionImg);
-    }
-    time=5;
+
     chrono=Chrono(app.window);
-    chrono.setTempsMax(time);
+    chrono.setTempsMax(5);
     spriteChiffre.setPosition(sf::Vector2f(app.window.getView().getSize().x/2-80, app.window.getView().getSize().y-300));
 
     textBox.setSize(sf::Vector2f(400,100));
@@ -77,27 +70,29 @@ void transition::draw()
 {
     if (isTextureBgOn) app.window.draw(spriteBg);
     if (isTextureImgOn) app.window.draw(spriteImg);
-    app.window.draw(textBox);
-    app.window.draw(text);
+    else{
+        app.window.draw(textBox);
+        app.window.draw(text);
+    }
     app.window.draw(chrono);
     app.window.draw(spriteChiffre);
 }
 
 void transition::update()
 {
-    if (chrono.getTimePassed()>=time)
+    if (chrono.getTimePassed()>=chrono.getTempsMax())
     {
         isFinished=true;
     }
-    if ((time-3<chrono.getTimePassed()) && (chrono.getTimePassed()<time-2))
+    if ((chrono.getTempsMax()-3<chrono.getTimePassed()) && (chrono.getTimePassed()<chrono.getTempsMax()-2))
     {
         spriteChiffre.setTexture(assetmanager.getTexture("../ressource/image/3.png"));
     }
-    else if ((time-2<chrono.getTimePassed()) && (chrono.getTimePassed()<time-1))
+    else if ((chrono.getTempsMax()-2<chrono.getTimePassed()) && (chrono.getTimePassed()<chrono.getTempsMax()-1))
     {
         spriteChiffre.setTexture(assetmanager.getTexture("../ressource/image/2.png"));
     }
-    else if ((time-1<chrono.getTimePassed()) && (chrono.getTimePassed()<time))
+    else if ((chrono.getTempsMax()-1<chrono.getTimePassed()) && (chrono.getTimePassed()<chrono.getTempsMax()))
     {
         spriteChiffre.setTexture(assetmanager.getTexture("../ressource/image/1.png"));
     }
