@@ -56,8 +56,13 @@ void transition::setup()
 
     chrono=Chrono(app.window);
     chrono.setTempsMax(5);
-    spriteChiffre.setPosition(sf::Vector2f(app.window.getView().getSize().x/2-80, app.window.getView().getSize().y-300));
-
+	if (isTextureImgOn){
+        spriteChiffre.setPosition(app.window.getView().getSize().x/2-80,positionImg.y+20);
+    }
+    else{
+        spriteChiffre.setPosition(sf::Vector2f(app.window.getView().getSize().x/2-80, app.window.getView().getSize().y-300));
+    }
+	
     textBox.setSize(sf::Vector2f(400,100));
     textBox.setOrigin(sf::Vector2f(textBox.getSize().x/2,textBox.getSize().y/2));
     textBox.setPosition(text.getPosition().x,text.getPosition().y);
