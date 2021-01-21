@@ -7,7 +7,7 @@
 #include "Etudiant.h"
 #include <vector>
 
-class DisitribMiniTests : public MiniJeu
+class DistribMiniTests : public MiniJeu
 {
 public:
 
@@ -32,8 +32,8 @@ public:
 	 * 
 	 * \param appData contiend es données utilse comme la fenêtr, difficulté, ect...
 	 */
-	DisitribMiniTests(AppData& appData);
-	virtual ~DisitribMiniTests();
+	DistribMiniTests(AppData& appData);
+	virtual ~DistribMiniTests();
 
 private:
 
