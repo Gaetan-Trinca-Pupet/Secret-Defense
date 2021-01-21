@@ -126,9 +126,9 @@ int main()
             txt2.setString("Lancez les minitests !\n Controles : Souris");
             transition trans2(app,txt2);
             trans2.play();
-            DisitribMiniTests disitribMiniTests(app);
+            DistribMiniTests distribMiniTests(app);
             std::cout<<"playing thesecond!"<<std::endl;
-            disitribMiniTests.play();
+            distribMiniTests.play();
             lastPlayed=2;
             nbGamesFinished+=1;
             break;
