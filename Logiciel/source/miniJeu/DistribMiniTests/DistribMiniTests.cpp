@@ -1,7 +1,7 @@
 #include "../../../header/miniJeu/DistribMiniTests/DistribMiniTests.h"
 #include <algorithm>
 
-DisitribMiniTests::DisitribMiniTests(AppData& appData) : MiniJeu(appData)
+DistribMiniTests::DistribMiniTests(AppData& appData) : MiniJeu(appData)
 {
 
 	tempsMax = (1 - (app.difficulty / (app.difficulty + 1.6))) * 5 + 7;
@@ -15,7 +15,7 @@ DisitribMiniTests::DisitribMiniTests(AppData& appData) : MiniJeu(appData)
 	backGround.setTexture(AssetManager::getTexture("../ressource/DistribMiniTests/DistribCopie.png"));
 }
 
-DisitribMiniTests::~DisitribMiniTests()
+DistribMiniTests::~DistribMiniTests()
 {
 	for (MiniTest* i : miniTests)
 	{
@@ -25,7 +25,7 @@ DisitribMiniTests::~DisitribMiniTests()
 	app.window.setMouseCursorVisible(true);
 }
 
-void DisitribMiniTests::draw()
+void DistribMiniTests::draw()
 {
 	app.window.draw(backGround);
 
@@ -46,7 +46,7 @@ void DisitribMiniTests::draw()
 	hand.draw(app.window);
 }
 
-void DisitribMiniTests::update()
+void DistribMiniTests::update()
 {
 	//si le temps est écoulé ou  tout les étudiants ont un mini test, finir le minijeu
 	if (chrono.getTimePassed() > tempsMax || nbADistribuer == 0)
@@ -87,7 +87,7 @@ void DisitribMiniTests::update()
 	}
 }
 
-void DisitribMiniTests::setup()
+void DistribMiniTests::setup()
 {
 	srand(std::time(NULL));
 
@@ -106,7 +106,7 @@ void DisitribMiniTests::setup()
 	creerMiniTests();
 }
 
-void DisitribMiniTests::creerEtudiants()
+void DistribMiniTests::creerEtudiants()
 {
 	std::vector<unsigned> numEtus = { 0, 1, 2, 3, 4, 5 };
 	std::random_shuffle(numEtus.begin(), numEtus.end());
@@ -117,7 +117,7 @@ void DisitribMiniTests::creerEtudiants()
 	std::sort(etudiants.begin(), etudiants.end());
 }
 
-void DisitribMiniTests::creerMiniTests()
+void DistribMiniTests::creerMiniTests()
 {
 	unsigned short nbMiniTests = nbADistribuer + (app.difficulty < 2 ? 2 - app.difficulty : 0);
 
