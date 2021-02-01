@@ -6,6 +6,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "header/miniJeu/FactoryMiniJeu.h"
 #include "header/miniJeu/MiniJeu.h"
 #include "header/transition.h"
 #include "header/gameOverWindow.h"
@@ -70,6 +71,17 @@ int main()
     unsigned int selecteur;
     unsigned int nbGamesFinished=0;
 
+    FactoryMiniJeu amphiReponse ([](AppData& app) -> MiniJeu * { return new AmphiReponse::AmphiReponse(app); }, "Description amphiReponse");
+    sf::Text txt;
+    txt.setCharacterSize(17);
+    txt.setString(amphiReponse.getDescription());
+    transition transtest (app, txt);
+    transtest.play();
+    MiniJeu* miniJeu=amphiReponse.createNewMiniJeu(app);
+    miniJeu->play();
+    transtest.play();
+    delete miniJeu;
+/*
     while(app.window.isOpen())
     {
         if (app.lives==0)
@@ -113,8 +125,8 @@ int main()
             EteindrePC::EteindrePC eteindrePC(app);
             std::cout<<"playing thefirst!"<<std::endl;
             eteindrePC.play();
-            lastPlayed=1; //à mettre avant chaque break, remplacer 1 par le numéro du case
-            nbGamesFinished+=1; //à mettre avant chaque break
+            lastPlayed=1; //�  mettre avant chaque break, remplacer 1 par le numéro du case
+            nbGamesFinished+=1; //�  mettre avant chaque break
             break;
         }
 
@@ -251,6 +263,9 @@ int main()
             app.score+=1;
         }
     }
+    */
+
+
 
     return 0;
 }
