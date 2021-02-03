@@ -8,17 +8,8 @@
 
 #include "header/miniJeu/FactoryMiniJeu.h"
 #include "header/miniJeu/MiniJeu.h"
-#include "header/transition.h"
-#include "header/gameOverWindow.h"
-#include "header/miniJeu/DistribMiniTests/DistribMiniTests.h"
+#include "header/miniJeu/MiniJeuManager.h"
 #include "header/miniJeu/Gifle/Gifle.h"
-#include "header/miniJeu/MemoryQuestions/memoryquestions.h"
-#include "header/miniJeu/TestProjetPtut/TestProjetPtut.h"
-#include "header/miniJeu/EteindrePC/EteindrePC.h"
-#include "header/miniJeu/AmphiReponse/AmphiReponse.h"
-#include "header/miniJeu/BranchePC/BranchePC.h"
-#include "header/miniJeu/CorrectTheCode/CorrectTheCode.h"
-#include "header/miniJeu/CorrigeCopie/CorrigeCopie.h"
 
 using namespace std;
 
@@ -49,6 +40,11 @@ void loadFramerateMode(FramerateManager& framerateManager){
 	}
 }
 
+MiniJeu* createGifle(AppData& app)
+{
+    return new Gifle(app);
+}
+
 int main()
 {
     srand(time(NULL));
@@ -71,16 +67,9 @@ int main()
     unsigned int selecteur;
     unsigned int nbGamesFinished=0;
 
-    FactoryMiniJeu amphiReponse ([](AppData& app) -> MiniJeu * { return new AmphiReponse::AmphiReponse(app); }, "Description amphiReponse");
-    sf::Text txt;
-    txt.setCharacterSize(17);
-    txt.setString(amphiReponse.getDescription());
-    transition transtest (app, txt);
-    transtest.play();
-    MiniJeu* miniJeu=amphiReponse.createNewMiniJeu(app);
-    miniJeu->play();
-    transtest.play();
-    delete miniJeu;
+    MiniJeuManager manager(app);
+    manager.addMiniJeu(createGifle, "Gifle", "DescriptionGifle");
+    manager.play("DistribMiniTests");
 /*
     while(app.window.isOpen())
     {
