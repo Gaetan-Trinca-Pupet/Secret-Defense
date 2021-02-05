@@ -11,7 +11,7 @@ AmphiReponse::QuestionReponse::QuestionReponse(QuestionReponse* QR, const std::s
 	match = QR;
 	libele_font.loadFromFile("../ressource/fonts/unispace rg.ttf");
 	libele.setFont(libele_font);
-	libele.setString(str);
+	libele.setString(sf::String::fromUtf8(str.begin(),str.end()));
 	libele.setCharacterSize(20);
 
 	//sound.loadFromFile("../ressource/BranchePC/correct.wav");

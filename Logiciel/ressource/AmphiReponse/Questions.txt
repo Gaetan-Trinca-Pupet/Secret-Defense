@@ -1,5 +1,5 @@
 i++ OU ++i ?
-Pourquoi ca marche pas ?
-Comment ecrire for ?
-Je peux aller aux toiletteq ?
+Pourquoi ça marche pas ?
+Comment écrire for ?
+Je peux aller aux toilettes ?
 J'arrive pas à voir
