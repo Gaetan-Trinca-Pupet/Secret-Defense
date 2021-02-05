@@ -105,12 +105,14 @@ void CorrigeCopie::CorrigeCopie::setup()
 		if (std::rand() % 2 == 0)
 		{
 			tabLibelle[i].VF = true;
-			tabLibelle[i].reponse.setString(tab[n].tabRepVrai[std::rand() % tab[n].tabRepVrai.size()]);
+			unsigned int randVal = std::rand() % tab[n].tabRepVrai.size();
+			tabLibelle[i].reponse.setString(sf::String::fromUtf8(tab[n].tabRepVrai[randVal].cbegin(),tab[n].tabRepVrai[randVal].cend()));
 		}
 		else
 		{
 			tabLibelle[i].VF = false;
-			tabLibelle[i].reponse.setString(tab[n].tabRepFaux[std::rand() % tab[n].tabRepFaux.size()]);
+			unsigned int randVal = std::rand() % tab[n].tabRepFaux.size();
+			tabLibelle[i].reponse.setString(sf::String::fromUtf8(tab[n].tabRepFaux[randVal].cbegin(),tab[n].tabRepFaux[randVal].cend()));
 		}
 
 		tab.erase(tab.begin() + n);
