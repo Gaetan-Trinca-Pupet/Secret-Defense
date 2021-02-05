@@ -14,6 +14,7 @@ MiniJeuManager::MiniJeuManager(AppData &app_):app(app_)
 
 void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
 {
+
 	buildWave(nbMiniJeu, nbBoss);
     while(app.lives>0 && app.window.isOpen())
     {
@@ -38,7 +39,6 @@ void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
         {
             ++app.score;
         }
-        
         wave.pop_back();
     }
 }

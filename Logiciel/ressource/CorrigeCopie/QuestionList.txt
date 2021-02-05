@@ -1,13 +1,13 @@
-Q Quel est la taille d'une adresse dans la mémoire";
+Q Quel est la taille d'une adresse dans la mémoire ?
 V 8 octets
 V 64 bits
 F 8 bits
 F 64 octets
 F 16 bits
-F 1 octets
+F 1 octet
 F 52 bits
 F 42 octets
-Q Ecrivez une blague drole
+Q Ecrivez une blague drôle
 V Un geek ne crie pas, il URL !
 V Un geek ne descend pas du métro. Il libère la RAM.
 F J'ai fait une blague sur Carrefour, mais elle n'a pas supermarché.
@@ -37,9 +37,9 @@ Q Combien de bits contient un octet ?
 V 8 bits
 F 64 bits
 F Je sais pas.
-Q Combien d'octets dans un bits ?
+Q Combien d'octets dans un bit ?
 V Pas possible.
-V Un octets fait 8 bits mais l'inverse est impossible.
+V Un octet fait 8 bits mais l'inverse est impossible.
 F 8 octets
 F 64 octets
 F 128 octets
