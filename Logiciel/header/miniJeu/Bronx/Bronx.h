@@ -26,8 +26,10 @@ private:
     Chrono chrono;
     sf::Sprite backGround;
 
-    std::vector<Verre*> verres;
-    std::vector<Ingredient*> ingredients;
+    std::vector<Verre*> verresTable;
+    std::vector<Verre*> verresRefrigerateur;
+    std::vector<Ingredient*> ingredientsTiroir;
+    std::vector<Ingredient*> ingredientsTable;
     Shaker shaker;
     Refrigerateur refrigerateur;
 
