@@ -26,7 +26,7 @@ private:
 	sf::Sprite backGround;
 
 	std::vector<Verre> verres;
-	std::vector<Verre> Ingredients;
+	std::vector<Ingredient> ingredients;
 	Shaker shaker;
 	Refrigerateur refrigerateur;
 
