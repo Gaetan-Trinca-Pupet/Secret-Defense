@@ -3,34 +3,41 @@
 std::vector<std::string> getTabQ()
 {
 	std::vector<std::string> tab;
-	tab.push_back("i++ OU ++i ?"); //0
-	tab.push_back("Pourquoi ça marche pas ?"); //1
-	tab.push_back("Comment écrire for ?"); //2
-	tab.push_back("Je peux aller au toilette ?"); //3
-	tab.push_back("J'arrive pas à voir"); //4
+	std::fstream questionFile;
+    questionFile.open("../ressource/AmphiReponse/Questions.txt",std::ios::in);
+    if (questionFile.is_open()) {
+        std::string question;
+        while (std::getline(questionFile, question))
+			tab.push_back(question);
+    }
 	return tab;
 }
 
 std::vector<std::string> getTabR()
 {
 	std::vector<std::string> tab;
-	tab.push_back("++i"); //0
-	tab.push_back("Parce que t'es nul !"); //1
-	tab.push_back("for (;;);"); //2
-	tab.push_back("Non tu restes"); //3
-	tab.push_back("Rapproche toi"); //4
+	std::fstream answerFile;
+    answerFile.open("../ressource/AmphiReponse/Reponses.txt",std::ios::in);
+    if (answerFile.is_open()) {
+		std::cout << "yay" << std::endl;
+        std::string answer;
+        while (std::getline(answerFile, answer))
+			tab.push_back(answer);
+    }
+	else std::cout << "nay" << std::endl;
 	return tab;
 }
 
 std::vector<std::string> getTabM()
 {
 	std::vector<std::string> tab;
-	tab.push_back("J'aime les pommes");
-	tab.push_back("Il faut débrancher le PC");
-	tab.push_back("Demande a Casali");
-	tab.push_back("Où sont mes lunettes");
-	tab.push_back("i++");
-	tab.push_back("Au revoir.");
+	std::fstream diversionFile;
+    diversionFile.open("../ressource/AmphiReponse/Diversions.txt",std::ios::in);
+    if (diversionFile.is_open()) {
+        std::string diversion;
+        while (std::getline(diversionFile, diversion))
+			tab.push_back(diversion);
+    }
 	return tab;
 }
 
