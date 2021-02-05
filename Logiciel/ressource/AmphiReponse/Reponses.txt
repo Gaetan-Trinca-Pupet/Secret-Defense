@@ -1,0 +1,5 @@
+++i
+Parce que t'es nul !
+for (;;)
+Non tu restes
+Rapproche toi

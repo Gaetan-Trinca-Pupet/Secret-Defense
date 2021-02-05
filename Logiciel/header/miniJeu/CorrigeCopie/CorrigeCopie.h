@@ -10,6 +10,7 @@
 #include <vector>
 #include <map>
 #include <ctime>
+#include <fstream>
 
 namespace CorrigeCopie
 {

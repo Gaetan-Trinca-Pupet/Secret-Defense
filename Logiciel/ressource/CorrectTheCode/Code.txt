@@ -1,0 +1,50 @@
+unsigned short score;
+score = 10
+1
+string text;
+text = 'Hello World !';
+1
+string text;
+cout << "Saisissez une chaine de caracteres" << endl;
+cout >> text;
+2
+unsigned randomNumber (rand%100 - 50);
+if (randomNumber == 12)
+    cout << "Gagne !";
+0
+float f1 (12345/100);
+float f2 (0.12345*1000);
+if (f1 == f2)
+    cout << "Gagne !";
+2
+int myNumber (1254);
+myNumber += 12;
+mynumber *=2;
+cout << myNumber << endl;
+2
+vector<unsigned> vect (8,0);
+for (unsigned i = 0; i <= vect.size(); ++i) {
+cout << i << endl;
+vect[i] = i;
+}
+1
+int multiply (const int & a, const int & b) {
+   a *= b;
+   cout << a << endl;
+   return a;
+}
+1
+int power(const int & x, unsigned n) {
+    if (n == 1)
+        return power (x, 1);
+    else
+        return power(x, n-1) * x;
+}
+2
+unsigned add (const int & a, const int & b) {
+   if (a + b >= 0)
+       return a + b;
+   else
+       return "An error has occured : the result is negative";
+}
+4
