@@ -49,7 +49,7 @@ std::string QuestionList::getQuestion(const unsigned short & rank)
         return question;
     }
     else {
-        return "CAMARCHEPAS";
+        return "";
     }
 }
 
