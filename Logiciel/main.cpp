@@ -69,7 +69,7 @@ int main()
 
     MiniJeuManager manager(app);
     manager.addMiniJeu(createGifle, "Gifle", "DescriptionGifle");
-    manager.play();
+    manager.play("EteindrePC");
 
     return 0;
 }

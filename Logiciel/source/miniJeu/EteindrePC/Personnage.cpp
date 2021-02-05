@@ -40,7 +40,7 @@ void EteindrePC::Personnage::update(){
 	if(controles.isUpPressed() && !controles.isDownPressed()){
 		direction = EteindrePC::Direction::Haut;
 		bool canPass(true);
-		if(position.y -6 < -up_offset)canPass= false;
+		if(position.y -6 < -up_offset && position.x > 140 - right_offset)canPass= false;
 		for(CollisionBox* box : collisionList){
 			if(position.y > box->getPosition().y && position.y - 6 + up_offset < box->getPosition().y + box->getSize().y
 					&& position.x + right_offset > box->getPosition().x && position.x + left_offset < box->getPosition().x + box->getSize().x){
@@ -53,7 +53,7 @@ void EteindrePC::Personnage::update(){
 	}else if(controles.isDownPressed() && !controles.isUpPressed()){
 		direction = EteindrePC::Direction::Bas;
 		bool canPass(true);
-		if(position.y + 6 > 540-down_offset)canPass= false;
+		if(position.y + 6 > 540-down_offset && position.x > 140 - right_offset)canPass= false;
 		for(CollisionBox* box : collisionList){
 			if(position.y + down_offset < box->getPosition().y + box->getSize().y && position.y + 6 + down_offset > box->getPosition().y 
 					&& position.x + right_offset > box->getPosition().x && position.x + left_offset < box->getPosition().x + box->getSize().x){
