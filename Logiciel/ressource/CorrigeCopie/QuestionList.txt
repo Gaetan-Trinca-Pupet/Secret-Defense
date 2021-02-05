@@ -1,0 +1,56 @@
+Q Quel est la taille d'une adresse dans la mémoire";
+V 8 octets
+V 64 bits
+F 8 bits
+F 64 octets
+F 16 bits
+F 1 octets
+F 52 bits
+F 42 octets
+Q Ecrivez une blague drole
+V Un geek ne crie pas, il URL !
+V Un geek ne descend pas du métro. Il libère la RAM.
+F J'ai fait une blague sur Carrefour, mais elle n'a pas supermarché.
+F Il n'y a pas de chauve à Ajaccio, mais à Calvi si.
+Q Par défaut, i++ ou ++i ?
+V ++i
+F i++
+Q Je crée une fonction Puissance(const int& n) pour calculer la puissance de n, est-il conseillé d'utiliser la récursivité ?
+V Je peux, mais il est préférable d'éviter.
+V Non je fais une boucle.
+F Oui, c'est une bonne idée.
+F Non pour la calculer je demande à l'utilisateur de le faire.
+Q Marc LAPORTE est-il le meilleur professeur du monde ?
+V Bien évidemment !
+V Ouais, en plus il est beau !
+V Tout simplement oui !
+F Je préfère Java.
+F Je préfère la BD.
+F Non c'est mon papa le meilleur !!!!!!
+F Bah non.
+Q Ecrivez le corps de la fonction find(n,tab) où on recherche n dans tab :
+V for(unsigned i = 0 ; i < tab.size() ;++i)\nif (tab[i] == n) return i;
+F if (n == tab) return true;
+F if (n != tab) return false;
+F return n;
+Q Combien de bits contient un octet ?
+V 8 bits
+F 64 bits
+F Je sais pas.
+Q Combien d'octets dans un bits ?
+V Pas possible.
+V Un octets fait 8 bits mais l'inverse est impossible.
+F 8 octets
+F 64 octets
+F 128 octets
+Q Pète et répète sont sur un bateau, pète tombe à l'eau, qui c'est qui reste sur le bateau ?
+V Répète.
+F Pète.
+F Petit bateau, qui navigue sur les flots.
+Q Écrivez un pointeur sur un int :
+V int* n = new int();
+V int i;\nint* n = &i;
+F int n = new int();
+F int* n = int();
+F int* n = new unsigned();
+F int* n = new unsigned();
