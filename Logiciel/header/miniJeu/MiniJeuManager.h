@@ -2,6 +2,7 @@
 #define MINIJEUMANAGER_H
 
 #include <vector>
+#include <cstdlib>
 #include "MiniJeu.h"
 #include "FactoryMiniJeu.h"
 #include "../transition.h"
@@ -23,7 +24,7 @@ class MiniJeuManager{
     std::vector<FactoryMiniJeu*> wave;
 public:
     MiniJeuManager(AppData& app);
-    void play();
+    void play(unsigned int nbMiniJeu=4, unsigned int nbBoss=1);
     void play(const std::string& title);
     void buildWave(unsigned int nbMiniJeu=4, unsigned int nbBoss=1);
     void addMiniJeu(MiniJeu * (*create_MiniJeu)(AppData& app), const std::string& title, const std::string& desc);

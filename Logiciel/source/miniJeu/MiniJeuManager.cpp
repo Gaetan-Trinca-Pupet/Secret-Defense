@@ -12,9 +12,33 @@ MiniJeuManager::MiniJeuManager(AppData &app_):app(app_)
     addBoss([](AppData& app) -> MiniJeu * { return new TestProjetPtut::TestProjetPtut(app); }, "TestProjetPtut", "descriptionAmphiReponse");
 }
 
-void MiniJeuManager::play()
+void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
 {
+    while(app.lives>0 && app.window.isOpen())
+    {
+        if(wave.size()==0)
+        {
+            buildWave(nbMiniJeu, nbBoss);
+        }
 
+        {
+            sf::Text txt;
+            txt.setCharacterSize(17);
+            txt.setString(wave[wave.size()-1]->getDescription());
+            transition transtest (app, txt);
+            transtest.play();
+        }
+        MiniJeu* miniJeu=wave[wave.size()-1]->createNewMiniJeu(app);
+        unsigned short int lives(app.lives);
+        miniJeu->play();
+        delete miniJeu;
+        if(lives==app.lives)
+        {
+            ++app.score;
+        }
+        ++app.difficulty;
+        wave.pop_back();
+    }
 }
 
 void MiniJeuManager::play(const std::string &title)
@@ -62,6 +86,45 @@ void MiniJeuManager::play(const std::string &title)
 
 void MiniJeuManager::buildWave(unsigned int nbMiniJeu, unsigned int nbBoss)
 {
+    std::vector<unsigned int> tabChoix;
+
+    unsigned int minVal;
+    tabChoix.resize(listBoss.size());
+    for(unsigned int i=0; i<tabChoix.size();++i)
+    {
+        tabChoix[i]=i;
+    }
+    if(nbBoss<listBoss.size()){
+        minVal=nbBoss;
+    }
+    else{
+        minVal=listBoss.size();
+    }
+    for(unsigned int i=0;i<minVal;++i){
+        unsigned int r=rand()%tabChoix.size();
+        wave.push_back(&listBoss[r]);
+        tabChoix.erase(tabChoix.begin()+r);
+    }
+
+    tabChoix.resize(listMiniJeu.size());
+    for(unsigned int i=0; i<tabChoix.size();++i)
+    {
+        tabChoix[i]=i;
+    }
+
+
+    if(nbMiniJeu<listMiniJeu.size()){
+        minVal=nbMiniJeu;
+    }
+    else{
+        minVal=listMiniJeu.size();
+    }
+    for(unsigned int i=0;i<minVal;++i){
+        unsigned int r=rand()%tabChoix.size();
+        wave.push_back(&listMiniJeu[r]);
+        tabChoix.erase(tabChoix.begin()+r);
+    }
+
 
 }
 

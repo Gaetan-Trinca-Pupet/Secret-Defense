@@ -69,7 +69,7 @@ int main()
 
     MiniJeuManager manager(app);
     manager.addMiniJeu(createGifle, "Gifle", "DescriptionGifle");
-    manager.play("DistribMiniTests");
+    manager.play();
 /*
     while(app.window.isOpen())
     {
