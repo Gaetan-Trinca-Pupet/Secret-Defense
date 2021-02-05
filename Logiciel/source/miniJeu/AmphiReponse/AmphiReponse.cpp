@@ -19,12 +19,10 @@ std::vector<std::string> getTabR()
 	std::fstream answerFile;
     answerFile.open("../ressource/AmphiReponse/Reponses.txt",std::ios::in);
     if (answerFile.is_open()) {
-		std::cout << "yay" << std::endl;
         std::string answer;
         while (std::getline(answerFile, answer))
 			tab.push_back(answer);
     }
-	else std::cout << "nay" << std::endl;
 	return tab;
 }
 
