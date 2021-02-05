@@ -1,0 +1,34 @@
+cd obj && g++ -c ../source/miniJeu/AmphiReponse/*.cpp && cd ..
+
+
+cd obj && g++ -c ../source/miniJeu/TestProjetPtut/*.cpp && cd ..
+
+
+cd obj && g++ -c ../source/miniJeu/EteindrePC/*.cpp && cd ..
+
+
+cd obj && g++ -c ../source/miniJeu/BranchePC/*.cpp && cd ..
+
+
+cd obj && g++ -c ../source/miniJeu/CorrectTheCode/*.cpp && cd ..
+
+
+cd obj && g++ -c ../source/miniJeu/CorrigeCopie/*.cpp && cd ..
+
+
+cd obj && g++ -c ../source/miniJeu/memoryQuestions/*.cpp && cd ..
+
+
+cd obj && g++ -c ../source/miniJeu/Gifle/*.cpp && cd ..
+
+
+cd obj && g++ -c ../source/miniJeu/DistribMiniTests/*.cpp && cd ..
+
+
+cd obj && g++ -c ../source/miniJeu/*.cpp && cd ..
+
+
+cd obj && g++ -c ../source/*.cpp && cd ..
+
+
+g++ main.cpp obj/*.o -o bin/secret.exe -lsfml-graphics -lsfml-system -lsfml-window -lsfml-audio -Llib -Iinclude -mwindows 

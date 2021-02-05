@@ -13,7 +13,7 @@ TestProjetPtut::TestProjetPtut::TestProjetPtut(AppData& appData): MiniJeu(appDat
 }
 
 void TestProjetPtut::TestProjetPtut::setup(){
-	chrono.setTempsMax(45);
+	chrono.setTempsMax(30);
 	setBackgroundColor(sf::Color(0,0,0));
 	textureBackground.loadFromFile("../ressource/TestProjetPtut/bg.bmp");
 	textureBackground.setRepeated(true);
@@ -79,11 +79,9 @@ void TestProjetPtut::TestProjetPtut::update(){
 	}
 	if(spaceship.getPv() <= 0){
 		--app.lives;
-		++app.difficulty;
 		isFinished = true;
 		app.window.setMouseCursorVisible(true);
-	}else if(chrono.getTimePassed() > 45){
-		++app.difficulty;
+	}else if(chrono.getTimePassed() > 30){
 		isFinished = true;
 		app.window.setMouseCursorVisible(true);
 	}
