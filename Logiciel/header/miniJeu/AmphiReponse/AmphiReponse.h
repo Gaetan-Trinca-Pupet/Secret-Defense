@@ -6,6 +6,7 @@
 #include "../../Grabber.hpp"
 #include "../../Chrono.h"
 #include <vector>
+#include <fstream>
 
 namespace AmphiReponse
 {

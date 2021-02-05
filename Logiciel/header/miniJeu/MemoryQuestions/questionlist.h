@@ -5,6 +5,7 @@
 #include <random>
 #include <ctime>
 #include <iostream>
+#include <fstream>
 
 namespace memoryQuestions {
 

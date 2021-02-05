@@ -2,7 +2,7 @@
 
 MiniJeuManager::MiniJeuManager(AppData &app_):app(app_)
 {
-    addMiniJeu([](AppData& app) -> MiniJeu * { return new AmphiReponse::AmphiReponse(app); }, "AmphiReponse", "descriptionAmphiReponse");
+    addMiniJeu([](AppData& app) -> MiniJeu * { return new AmphiReponse::AmphiReponse(app); }, "AmphiReponse", "déscription@mphiReponse");
     addMiniJeu([](AppData& app) -> MiniJeu * { return new correctthecode::CorrectTheCode(app); }, "CorrectTheCode", "descriptionCorrectTheCode");
     addMiniJeu([](AppData& app) -> MiniJeu * { return new BranchePC::BranchePC(app); }, "BranchePC", "descriptionAmphiReponse");
     addMiniJeu([](AppData& app) -> MiniJeu * { return new CorrigeCopie::CorrigeCopie(app); }, "CorrigeCopie", "descriptionAmphiReponse");
@@ -24,7 +24,7 @@ void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
         {
             sf::Text txt;
             txt.setCharacterSize(17);
-            txt.setString(wave[wave.size()-1]->getDescription());
+            txt.setString(sf::String::fromUtf8(wave[wave.size()-1]->getDescription().cbegin(),wave[wave.size()-1]->getDescription().cend()));
             transition transtest (app, txt);
             transtest.play();
         }

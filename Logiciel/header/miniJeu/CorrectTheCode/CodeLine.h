@@ -2,6 +2,7 @@
 #define CODELINE_H
 
 #include "../../button.h"
+#include <fstream>
 
 namespace correctthecode {
 class CodeLine : public Button {
