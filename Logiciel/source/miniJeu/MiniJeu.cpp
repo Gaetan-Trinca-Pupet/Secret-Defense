@@ -30,7 +30,7 @@ void MiniJeu::play(){
 
         }
         app.window.clear(backgroundColor);
-        while(app.framerateManager.mustUpdate())this->update();
+        while(app.framerateManager.mustUpdate() && !isFinished)this->update();
         this->draw();
         drawInterface();
         app.window.display();

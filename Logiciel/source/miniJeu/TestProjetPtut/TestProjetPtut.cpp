@@ -79,11 +79,9 @@ void TestProjetPtut::TestProjetPtut::update(){
 	}
 	if(spaceship.getPv() <= 0){
 		--app.lives;
-		++app.difficulty;
 		isFinished = true;
 		app.window.setMouseCursorVisible(true);
 	}else if(chrono.getTimePassed() > 30){
-		++app.difficulty;
 		isFinished = true;
 		app.window.setMouseCursorVisible(true);
 	}
