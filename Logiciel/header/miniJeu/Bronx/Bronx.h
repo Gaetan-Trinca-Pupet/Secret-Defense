@@ -3,6 +3,10 @@
 
 #include "../MiniJeu.h"
 #include "../../Chrono.h"
+#include "Verre.h"
+#include "Refrigerateur.h"
+#include "Shaker.h"
+#include "Ingredient.h"
 #include <vector>
 
 class DistribMiniTests : public MiniJeu
@@ -21,7 +25,10 @@ private:
 	Chrono chrono;
 	sf::Sprite backGround;
 
-	
+	std::vector<Verre> verres;
+	std::vector<Verre> Ingredients;
+	Shaker shaker;
+	Refrigerateur refrigerateur;
 
 };
 
