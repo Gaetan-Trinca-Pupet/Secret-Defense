@@ -48,7 +48,7 @@ float Chrono::getTempsMax()
 void Chrono::setTempsMax(float _tempsMax)
 {
 	tempsMax = _tempsMax;
-	clock.restart();
+    clock.restart();
 }
 
 void Chrono::draw(sf::RenderTarget& target, sf::RenderStates states) const

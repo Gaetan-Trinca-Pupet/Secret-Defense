@@ -5,6 +5,7 @@ MiniJeu::MiniJeu(AppData& appData) : app(appData), isFinished(false), background
 }
 
 void MiniJeu::play(){
+    isFinished=false;
 	this->setup();
 	app.framerateManager.reset();
     while(app.window.isOpen() && !isFinished){
