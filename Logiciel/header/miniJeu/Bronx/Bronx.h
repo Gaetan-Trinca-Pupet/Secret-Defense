@@ -4,33 +4,37 @@
 #include "../MiniJeu.h"
 #include "../../Chrono.h"
 #include "Verre.h"
+#include "Refrigerateur.h"
 #include "Shaker.h"
 #include "Ingredient.h"
 #include <vector>
 
+namespace Bronx {
 class Bronx : public MiniJeu
 {
 public:
 
-	virtual void draw();
-	virtual void update();
-	virtual void setup();
+    virtual void draw();
+    virtual void update();
+    virtual void setup();
 
-	Bronx(AppData& appData);
-	virtual ~Bronx();
+    Bronx(AppData& appData);
+    virtual ~Bronx();
 
 private:
 
-	float getGroundLevel(sf::Vector2f pos);
+    Chrono chrono;
+    sf::Sprite backGround;
 
-	Chrono chrono;
-	sf::Sprite backGround;
-
-	std::vector<Verre> verres;
-	std::vector<Ingredient> ingredients;
-	Shaker shaker;
-	sf::RectangleShape refrigerateur;
+    std::vector<Verre*> verresTable;
+    std::vector<Verre*> verresRefrigerateur;
+    std::vector<Ingredient*> ingredientsTiroir;
+    std::vector<Ingredient*> ingredientsTable;
+    Shaker shaker;
+    Refrigerateur refrigerateur;
 
 };
+}
+
 
 #endif
