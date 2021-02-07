@@ -4,12 +4,11 @@
 #include "../MiniJeu.h"
 #include "../../Chrono.h"
 #include "Verre.h"
-#include "Refrigerateur.h"
 #include "Shaker.h"
 #include "Ingredient.h"
 #include <vector>
 
-class DistribMiniTests : public MiniJeu
+class Bronx : public MiniJeu
 {
 public:
 
@@ -17,10 +16,12 @@ public:
 	virtual void update();
 	virtual void setup();
 
-	DistribMiniTests(AppData& appData);
-	virtual ~DistribMiniTests();
+	Bronx(AppData& appData);
+	virtual ~Bronx();
 
 private:
+
+	float getGroundLevel(sf::Vector2f pos);
 
 	Chrono chrono;
 	sf::Sprite backGround;
@@ -28,7 +29,7 @@ private:
 	std::vector<Verre> verres;
 	std::vector<Ingredient> ingredients;
 	Shaker shaker;
-	Refrigerateur refrigerateur;
+	sf::RectangleShape refrigerateur;
 
 };
 
