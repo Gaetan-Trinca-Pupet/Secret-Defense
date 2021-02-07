@@ -4,8 +4,7 @@ class Deliverable : public Grabber::Grabbable
 {
 public:
 
-	int groundLevel;
-	bool stored;
+
 	sf::RectangleShape* deliverZone;
 
 	Deliverable(const int& X, const int& Y, const int& sx, const int& sy, bool _stored = false);
@@ -22,8 +21,11 @@ public:
 
 	bool isStored();
 
-private:
+	bool isComestible();
 
+private:
+	int groundLevel;
+	bool stored;
 	
 
 };

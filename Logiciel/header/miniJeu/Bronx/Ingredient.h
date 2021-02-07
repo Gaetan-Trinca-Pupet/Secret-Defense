@@ -1,7 +1,10 @@
 
-#include "../../Grabber.hpp"
+#include "Deliverable.h"
 
-class Ingredient: public Grabber::Grabbable{
-
-
+class Ingredient: public Deliverable{
+public:
+	Ingredient(bool _comestible);
+	bool isComestible();
+private:
+	bool comestible;
 };

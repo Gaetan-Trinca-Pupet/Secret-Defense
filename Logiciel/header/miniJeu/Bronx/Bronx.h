@@ -3,8 +3,9 @@
 
 #include "../MiniJeu.h"
 #include "../../Chrono.h"
+#include "../../AssetManager.h"
+#include "Deliverable.h"
 #include "Verre.h"
-#include "Refrigerateur.h"
 #include "Shaker.h"
 #include "Ingredient.h"
 #include <vector>
@@ -26,12 +27,9 @@ private:
     Chrono chrono;
     sf::Sprite backGround;
 
-    std::vector<Verre*> verresTable;
-    std::vector<Verre*> verresRefrigerateur;
-    std::vector<Ingredient*> ingredientsTiroir;
-    std::vector<Ingredient*> ingredientsTable;
+    std::vector<Deliverable*> verres;
+    std::vector<Deliverable*> ingredients;
     Shaker shaker;
-    Refrigerateur refrigerateur;
 
 };
 }
