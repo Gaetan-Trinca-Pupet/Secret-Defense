@@ -5,7 +5,7 @@ void BranchePC::BranchePC::setup()
 	
 	nbPrise = (1 + std::rand()%6);
 
-	chrono.setTempsMax(15);
+    chrono.setTempsMax(3+5*pow(0.95, app.difficulty));
 
 
 	
