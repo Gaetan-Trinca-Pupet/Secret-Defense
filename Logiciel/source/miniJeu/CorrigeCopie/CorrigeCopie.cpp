@@ -89,7 +89,7 @@ void CorrigeCopie::CorrigeCopie::setup()
 
 	std::vector<QuestRep> tab = getTabQuest();
 
-	const unsigned nbQuestion = 2 + std::rand() % (tab.size()-2);
+    const unsigned nbQuestion = std::min(int(tab.size()), int(app.difficulty) + 2);
 	const unsigned short sizeQuest = 200;
 	
 	
