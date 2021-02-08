@@ -1,3 +1,6 @@
+#ifndef __DELIVERABLE_H_
+#define __DELIVERABLE_H_
+
 #include "../../Grabber.hpp"
 
 class Deliverable : public Grabber::Grabbable
@@ -29,3 +32,5 @@ private:
 	
 
 };
+
+#endif

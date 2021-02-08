@@ -1,3 +1,5 @@
+#ifndef __INGREDIENT_H_
+#define __INGREDIENT_H_
 
 #include "Deliverable.h"
 
@@ -8,3 +10,5 @@ public:
 private:
 	bool comestible;
 };
+
+#endif

@@ -1,6 +1,7 @@
-#ifndef __DISTRIBMINITESTS_H_
-#define __DISTRIBMINITESTS_H_
+#ifndef __BRONX_H_
+#define __BRONX_H_
 
+#include <vector>
 #include "../MiniJeu.h"
 #include "../../Chrono.h"
 #include "../../AssetManager.h"
@@ -8,7 +9,7 @@
 #include "Verre.h"
 #include "Shaker.h"
 #include "Ingredient.h"
-#include <vector>
+#include "../../Grabber.hpp"
 
 namespace Bronx {
 class Bronx : public MiniJeu
@@ -27,8 +28,8 @@ private:
     Chrono chrono;
     sf::Sprite backGround;
 
-    std::vector<Deliverable*> verres;
-    std::vector<Deliverable*> ingredients;
+    std::vector<Deliverable> verres;
+    std::vector<Deliverable> ingredients;
     Shaker shaker;
 
 };
