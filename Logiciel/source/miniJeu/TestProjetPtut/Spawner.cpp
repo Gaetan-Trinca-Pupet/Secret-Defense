@@ -4,6 +4,7 @@
 TestProjetPtut::Spawner::Spawner(){
 	y_spawnpoint =  -std::rand()%1000/float(10);
 	waveFinished = false;
+	nbSpawnedInvadersCurrentWave = 0;
 }
 
 void TestProjetPtut::Spawner::update(){
