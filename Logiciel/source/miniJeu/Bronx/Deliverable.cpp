@@ -6,6 +6,7 @@ Deliverable::Deliverable(sf::Texture* texture, bool _stored)
 	setStored(_stored);
 	setTexture(texture);
 	setSize(sf::Vector2f(texture->getSize()));
+	setOrigin(sf::Vector2f(0, texture->getSize().y));
 	deliverZone = nullptr;
 }
 

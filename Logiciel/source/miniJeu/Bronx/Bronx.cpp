@@ -2,6 +2,7 @@
 
 void Bronx::Bronx::setup()
 {
+    srand(std::time(NULL));
 
     for (unsigned int i = 0; i < 8; ++i)
         verres.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/martini_vide.png")));
@@ -41,6 +42,26 @@ void Bronx::Bronx::setup()
     }
 }
 
+void Bronx::Bronx::placeObjects()
+{
+    for (int i(0); i < verres.size(); i++)
+        verres[i].setPosition(180 + i * 50, 480);
+
+    std::random_shuffle(ingredients.begin(), ingredients.end());
+
+    for (int i(0); i < 3; i ++)
+    {
+        for (int j(0); j < 3; j++)
+        {
+            for (int k(0); k < 3; k++)
+            {
+                ingredients[i].setPosition(36 + 211 * j + 30 + k * 42, 27 + i * 137);
+            }
+        }
+    }
+
+}
+
 void Bronx::Bronx::draw()
 {
 
@@ -59,6 +80,9 @@ void Bronx::Bronx::update()
     }
 
 }
+
+
+
 
 Bronx::Bronx::~Bronx()
 {
