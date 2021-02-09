@@ -1,7 +1,7 @@
 #include "../../../header/miniJeu/Bronx/Deliverable.h"
 
 
-Deliverable::Deliverable(sf::Texture* texture, bool _stored)
+Deliverable::Deliverable(sf::Texture* texture, bool _stored): isGrabbable(true)
 {
 	setStored(_stored);
 	setTexture(texture);
@@ -13,6 +13,17 @@ Deliverable::Deliverable(sf::Texture* texture, bool _stored)
 void Deliverable::setTarget(sf::RectangleShape* zone)
 {
 	deliverZone = zone;
+	stored = false;
+}
+
+void Deliverable::setCanBeGrabbed(bool val)
+{
+	isGrabbable = val;
+}
+
+bool Deliverable::canBeGrabbed()
+{
+	return isGrabbable;
 }
 
 void Deliverable::onRelease()

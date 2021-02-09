@@ -14,6 +14,10 @@ public:
 
 	void setTarget(sf::RectangleShape* zone);
 
+	void setCanBeGrabbed(bool val);
+
+	virtual bool canBeGrabbed();
+
 	virtual void onRelease();
 
 	virtual void onGrab();
@@ -30,6 +34,7 @@ private:
 
 	int groundLevel;
 	bool stored;
+	bool isGrabbable;
 
 };
 

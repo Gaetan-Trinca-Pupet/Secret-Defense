@@ -3,7 +3,7 @@
 Ingredient::Ingredient(bool _comestible, sf::Texture* texture)
     :Deliverable(texture, true), comestible(_comestible)
 {
-
+	stored = false;
 }
 
 
