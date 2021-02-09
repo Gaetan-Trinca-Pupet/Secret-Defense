@@ -10,15 +10,26 @@ void Bronx::Bronx::setup()
         verres[i].setTexture(&AssetManager::getTexture("cheminVersLeSpriteDeVerVide"));
     }
 
+    //TODO: remplacer 666 par des vraies valeur de position
+    Ingredient tmpIngredient(true);
+    tmpIngredient.setTexture(&AssetManager::getTexture("cheminVersLeSpriteDeVerDeCinzanoDoux"));
+    tmpIngredient.setSize(sf::Vector2f(666, 666));
+    ingredients.push_back(tmpIngredient);
+
+    tmpIngredient.setTexture(&AssetManager::getTexture("cheminVersLeSpriteDeVerDeCinzanoSec"));
+    tmpIngredient.setSize(sf::Vector2f(666, 666));
+    ingredients.push_back(tmpIngredient);
+
     for (unsigned int i = 0; i < 2; ++i)
     {
-        
         //TODO: remplacer 666 par des vraies valeur de position et taille
         Ingredient tmpIngredient(true);
         tmpIngredient.setTexture(&AssetManager::getTexture("cheminVersLeSpriteDeVerDeGin"));
         tmpIngredient.setSize(sf::Vector2f(666,666));
         ingredients.push_back(tmpIngredient);
     }
+
+
 
     for (unsigned int i = 0; i < 4; ++i)
     {
@@ -50,7 +61,6 @@ void Bronx::Bronx::setup()
                 tmpIngredient.setSize(sf::Vector2f(666, 666));
                 break;
         }
-        
     }
 }
 
