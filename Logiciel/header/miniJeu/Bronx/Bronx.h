@@ -25,6 +25,8 @@ public:
 
 private:
 
+    void placeObjects();
+
     Chrono chrono;
     sf::Sprite backGround;
 

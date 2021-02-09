@@ -18,7 +18,7 @@ public:
 
 	virtual void onGrab();
 
-	virtual void update();
+	void update();
 
 	void setStored(bool val);
 
