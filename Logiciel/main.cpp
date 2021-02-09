@@ -52,7 +52,7 @@ int main()
     app.window.create(sf::VideoMode(960, 540), "test");
     app.framerateManager.setWindow(app.window);
 	loadFramerateMode(app.framerateManager);
-    app.difficulty=0;
+    app.difficulty=1;
     app.score=0;
     app.lives=3;
     if (!app.font.loadFromFile("../ressource/fonts/OpenSans-Regular.ttf"))
@@ -60,16 +60,12 @@ int main()
         std::cout<<"erreur loadFromFile"<<std::endl;
     }
 
-    unsigned int lastPlayed=0; //pour éviter que le même mini jeu soit joué 2 fois d'affilée
-
     sf::Texture textureImg;
     sf::Texture textureBg;
-    unsigned int selecteur;
-    unsigned int nbGamesFinished=0;
 
     MiniJeuManager manager(app);
     manager.addMiniJeu(createGifle, "Gifle", "DescriptionGifle");
-    manager.play("TestProjetPtut");
+    manager.play();
 
     return 0;
 }
