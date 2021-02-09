@@ -4,7 +4,7 @@
 #include "../../Grabber.hpp"
 #include "Etudiant.h"
 #include "../../AssetManager.h"
-#include <math.h>
+#include <cmath>
 
 class MiniTest : public Grabber::Grabbable
 {

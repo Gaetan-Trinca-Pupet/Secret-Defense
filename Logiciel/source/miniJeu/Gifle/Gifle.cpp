@@ -8,7 +8,7 @@
 Gifle::Gifle(AppData& appData) : MiniJeu(appData)
 {
     chrono = Chrono(app.window);
-    chrono.setTempsMax(12);
+    chrono.setTempsMax(17);
     srand(std::time(NULL));
 
     erreurCpt = app.difficulty == 0 ? 1 : 0;
