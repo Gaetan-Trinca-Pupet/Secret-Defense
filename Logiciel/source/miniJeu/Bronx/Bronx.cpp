@@ -6,7 +6,7 @@ void Bronx::Bronx::setup()
     for (unsigned int i = 0; i < 8; ++i)
     {
         //TODO: remplacer 666 par des vraies valeur de position
-        verres.push_back(Deliverable(666 + i * 666, 666, 42, 72));
+        verres.push_back(Deliverable(666 + i * 666, 666));
         verres[i].setTexture(&AssetManager::getTexture("cheminVersLeSpriteDeVerVide"));
     }
 
@@ -80,7 +80,6 @@ void Bronx::Bronx::update()
             break;
         }
     }
-
 
 }
 
