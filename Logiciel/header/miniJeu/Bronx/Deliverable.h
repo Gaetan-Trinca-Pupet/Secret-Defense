@@ -10,7 +10,7 @@ public:
 
 	sf::RectangleShape* deliverZone;
 
-    Deliverable(const int& X, const int& Y, sf::Texture* texture, bool _stored = false);
+    Deliverable(sf::Texture* texture, bool _stored = false);
 
 	void setTarget(sf::RectangleShape* zone);
 
@@ -24,12 +24,12 @@ public:
 
 	bool isStored();
 
-	bool isComestible();
+	void putDown();
 
 private:
+
 	int groundLevel;
 	bool stored;
-	
 
 };
 

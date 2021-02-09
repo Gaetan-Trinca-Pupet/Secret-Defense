@@ -1,10 +1,11 @@
 #include "../../../header/miniJeu/Bronx/Deliverable.h"
 
 
-Deliverable::Deliverable(const int& X, const int& Y, sf::Texture* texture, bool _stored): Grabbable(X,Y,sx,sy)
+Deliverable::Deliverable(sf::Texture* texture, bool _stored)
 {
 	setStored(_stored);
-	groundLevel = Y + sy;
+	setTexture(texture);
+	setSize(sf::Vector2f(texture->getSize()));
 	deliverZone = nullptr;
 }
 
@@ -19,7 +20,6 @@ void Deliverable::onRelease()
 	{
 		setStored(true);
 	}
-		
 }
 
 void Deliverable::onGrab()
@@ -56,8 +56,7 @@ bool Deliverable::isStored()
 	return stored;
 }
 
-void Deliverable::setTexture(const sf::Texture* texture, bool resetRect)
+void Deliverable::putDown()
 {
-    setSize(sf::Vector2f(texture->getSize()));
-    Grabbable::setTexture(texture, resetRect);
+	groundLevel = getPosition().y + getTexture()->getSize().y;
 }
