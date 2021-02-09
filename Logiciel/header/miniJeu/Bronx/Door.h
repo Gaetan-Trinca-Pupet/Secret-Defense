@@ -13,6 +13,8 @@ public:
     void setOpened(bool val);
 
     bool isOpened();
+
+    void update();
 private:
     bool opened;
 };
