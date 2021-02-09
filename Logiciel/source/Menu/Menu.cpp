@@ -6,7 +6,7 @@ Menu::Menu::Menu(AppData& appData) : app(appData){
 
 void Menu::Menu::play(){
 	app.window.setFramerateLimit(30);
-    while(app.window.isOpen()){
+    while(app.window.isOpen()){ 
         sf::Event event;
         while(app.window.pollEvent(event)){
             if(event.type == sf::Event::Closed){
