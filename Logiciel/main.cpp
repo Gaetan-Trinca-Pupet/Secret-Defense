@@ -6,6 +6,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "header/Menu/Menu.h"
+
 #include "header/miniJeu/FactoryMiniJeu.h"
 #include "header/miniJeu/MiniJeu.h"
 #include "header/miniJeu/MiniJeuManager.h"
@@ -66,10 +68,14 @@ int main()
     sf::Texture textureBg;
     unsigned int selecteur;
     unsigned int nbGamesFinished=0;
+	{
+		Menu::Menu menu(app);
+		menu.play();
+	}
 
     MiniJeuManager manager(app);
     manager.addMiniJeu(createGifle, "Gifle", "DescriptionGifle");
-    manager.play("TestProjetPtut");
+    manager.play();
 
     return 0;
 }
