@@ -5,7 +5,7 @@
 
 class Ingredient: public Deliverable{
 public:
-	Ingredient(bool _comestible);
+	Ingredient(bool _comestible, sf::Texture* texture);
 	bool isComestible();
 private:
 	bool comestible;

@@ -78,6 +78,11 @@ namespace Grabber
 		setSize(sf::Vector2f(sx, sy));
 	}
 
+	inline Grabbable::Grabbable(const int& X, const int& Y)
+	{
+		setPosition(X, Y);
+	}
+
 	// Detructor of Grabbable
 	inline Grabbable::~Grabbable()
 	{
