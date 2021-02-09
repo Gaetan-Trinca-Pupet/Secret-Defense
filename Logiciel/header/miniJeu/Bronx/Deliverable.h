@@ -26,6 +26,8 @@ public:
 
 	bool isComestible();
 
+	void setTexture(const sf::Texture* texture, bool resetRect = false);
+
 private:
 	int groundLevel;
 	bool stored;

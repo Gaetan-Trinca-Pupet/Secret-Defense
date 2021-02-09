@@ -7,17 +7,15 @@ void Bronx::Bronx::setup()
     {
         //TODO: remplacer 666 par des vraies valeur de position
         verres.push_back(Deliverable(666 + i * 666, 666, 42, 72));
-        verres[i].setTexture(&AssetManager::getTexture("cheminVersLeSpriteDeVerVide"));
+        verres[i].setTexture(&AssetManager::getTexture("../ressource/Bronx/martini_vide.png"));
     }
 
     //TODO: remplacer 666 par des vraies valeur de position
     Ingredient tmpIngredient(true);
-    tmpIngredient.setTexture(&AssetManager::getTexture("cheminVersLeSpriteDeVerDeCinzanoDoux"));
-    tmpIngredient.setSize(sf::Vector2f(666, 666));
+    tmpIngredient.setTexture(&AssetManager::getTexture("../ressource/Bronx/martini_vide.png"));
     ingredients.push_back(tmpIngredient);
 
     tmpIngredient.setTexture(&AssetManager::getTexture("cheminVersLeSpriteDeVerDeCinzanoSec"));
-    tmpIngredient.setSize(sf::Vector2f(666, 666));
     ingredients.push_back(tmpIngredient);
 
     for (unsigned int i = 0; i < 2; ++i)
@@ -25,7 +23,6 @@ void Bronx::Bronx::setup()
         //TODO: remplacer 666 par des vraies valeur de position et taille
         Ingredient tmpIngredient(true);
         tmpIngredient.setTexture(&AssetManager::getTexture("cheminVersLeSpriteDeVerDeGin"));
-        tmpIngredient.setSize(sf::Vector2f(666,666));
         ingredients.push_back(tmpIngredient);
     }
 
@@ -36,7 +33,6 @@ void Bronx::Bronx::setup()
         //TODO: remplacer 666 par des vraies valeur de position
         Ingredient tmpIngredient(true);
         tmpIngredient.setTexture(&AssetManager::getTexture("cheminVersLeSpriteDeVerDeJusDOrange"));
-        tmpIngredient.setSize(sf::Vector2f(666, 666));
         ingredients.push_back(tmpIngredient);
     }
 
@@ -46,19 +42,16 @@ void Bronx::Bronx::setup()
         Ingredient tmpIngredient(true);
         ingredients.push_back(tmpIngredient);
 
-        switch (rand() % 777)
+        switch (rand() % 3)
         {
             case 0:
                 tmpIngredient.setTexture(&AssetManager::getTexture("cheminVersLeSpriteDeTrucPasComestible0"));
-                tmpIngredient.setSize(sf::Vector2f(666, 666));
                 break;
             case 1:
                 tmpIngredient.setTexture(&AssetManager::getTexture("cheminVersLeSpriteDeTrucPasComestible1"));
-                tmpIngredient.setSize(sf::Vector2f(666, 666));
                 break;
             case 2:
                 tmpIngredient.setTexture(&AssetManager::getTexture("cheminVersLeSpriteDeTrucPasComestible2"));
-                tmpIngredient.setSize(sf::Vector2f(666, 666));
                 break;
         }
     }
