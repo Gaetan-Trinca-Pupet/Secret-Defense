@@ -33,7 +33,7 @@ void Bronx::Bronx::setup()
                 break;
         }
 
-    backGround.setTexture(AssetManager::getTexture("background.png"));
+    backGround.setTexture(AssetManager::getTexture("../ressource/Bronx/background.png"));
 
     placeObjects();
 }
