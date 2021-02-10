@@ -68,8 +68,8 @@ int main()
     unsigned int nbGamesFinished=0;
 
     MiniJeuManager manager(app);
-    manager.addMiniJeu(createGifle, "Gifle", "DescriptionGifle");
-    manager.play();
+	manager.addMiniJeu(createGifle, "Gifle", "DescriptionGifle");
+    manager.play("Bronx");
 
     return 0;
 }

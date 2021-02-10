@@ -33,8 +33,11 @@ public:
 private:
 
 	int groundLevel;
-	bool stored;
 	bool isGrabbable;
+
+protected:
+
+	bool stored;
 
 };
 

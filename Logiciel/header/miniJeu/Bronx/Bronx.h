@@ -31,8 +31,9 @@ private:
     sf::Sprite backGround;
 
     std::vector<Deliverable> verres;
-    std::vector<Deliverable> ingredients;
+    std::vector<Ingredient> ingredients;
     Shaker shaker;
+    std::vector<std::vector<Door>> placards;
 
 };
 }

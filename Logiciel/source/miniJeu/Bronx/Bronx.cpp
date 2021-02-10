@@ -5,7 +5,9 @@ void Bronx::Bronx::setup()
     srand(std::time(NULL));
 
     for (unsigned int i = 0; i < 8; ++i)
+    {
         verres.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/martini_vide.png")));
+    }
 
     ingredients.push_back(Ingredient(true, &AssetManager::getTexture("../ressource/Bronx/cinzano_doux.png")));
 
@@ -24,44 +26,56 @@ void Bronx::Bronx::setup()
                 ingredients.push_back(Ingredient(false, &AssetManager::getTexture("../ressource/Bronx/poison.png")));
                 break;
             case 1:
-                ingredients.push_back(Ingredient(false, &AssetManager::getTexture("../ressource/Bronx/bleach.png")));
+                ingredients.push_back(Ingredient(false, &AssetManager::getTexture("../ressource/Bronx/bleche.png")));
                 break;
             case 2:
                 ingredients.push_back(Ingredient(false, &AssetManager::getTexture("../ressource/Bronx/champignon.png")));
                 break;
         }
+
+    backGround.setTexture(AssetManager::getTexture("background.png"));
+
+    placeObjects();
 }
 
 void Bronx::Bronx::placeObjects()
 {
-    for (int i(0); i < verres.size(); i++)
+
+
+    for (int i(0); i < verres.size(); ++i)
         verres[i].setPosition(180 + i * 50, 480);
+
+    for (int i(0); i < 3; ++i)
+        for (int j(0); j < 3; ++i)
+            placards.pushback()
 
     std::random_shuffle(ingredients.begin(), ingredients.end());
 
-    for (int i(0); i < 3; i ++)
-        for (int j(0); j < 3; j++)
+    for (int i(0); i < 3; ++i)
+    {
+        for (int j(0); j < 3; ++j)
         {
             //TODO: placer porte placard
-            for (int k(0); k < 3; k++)
+            for (int k(0); k < 3; ++k)
             {
-                ingredients[i].setPosition(36 + 211 * j + 30 + k * 42, 27 + i * 137);
-                ingredients[i].setCanBeGrabbed(false);
+                ingredients[i * 9 + j * 3 + k].setPosition(36 + 211 * j + 30 + k * 42, 27 + i * 137 + 102);
+                ingredients[i * 9 + j * 3 + k].setCanBeGrabbed(false);
             }
-                
+
         }
-
-
+    }
 }
 
 void Bronx::Bronx::draw()
 {
+    app.window.draw(backGround);
+
     for (Deliverable& v : verres)
     {
         app.window.draw(v);
     }
 
-    for (Deliverable& i : ingredients)
+    for (Ingredient& i : ingredients)
     {
         app.window.draw(i);
     }
@@ -79,6 +93,10 @@ void Bronx::Bronx::update()
         }
     }
 
+}
+
+Bronx::Bronx::Bronx(AppData& appData): MiniJeu(appData)
+{
 }
 
 Bronx::Bronx::~Bronx()
