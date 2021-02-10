@@ -55,9 +55,10 @@ void Bronx::Bronx::placeObjects()
     {
         for (int j(0); j < 3; ++j)
         {
-            //TODO: placer porte placard
+            placards[i][j].setPosition(36 + 211 * j, 27 + i * 137);
             for (int k(0); k < 3; ++k)
             {
+                
                 ingredients[i * 9 + j * 3 + k].setPosition(36 + 211 * j + 30 + k * 42, 27 + i * 137 + 102);
                 ingredients[i * 9 + j * 3 + k].setCanBeGrabbed(false);
             }
@@ -70,14 +71,29 @@ void Bronx::Bronx::draw()
 {
     app.window.draw(backGround);
 
-    for (Deliverable& v : verres)
+    for (Ingredient& i : ingredients)
     {
-        app.window.draw(v);
+        if (i.isStored())
+            app.window.draw(i);
+    }
+
+    for (std::vector<Door>& row : placards)
+    {
+        for (Door& d : row)
+        {
+            app.window.draw(d);
+        }
     }
 
     for (Ingredient& i : ingredients)
     {
-        app.window.draw(i);
+        if (!i.isStored())
+            app.window.draw(i);
+    }
+
+    for (Deliverable& v : verres)
+    {
+        app.window.draw(v);
     }
 }
 
