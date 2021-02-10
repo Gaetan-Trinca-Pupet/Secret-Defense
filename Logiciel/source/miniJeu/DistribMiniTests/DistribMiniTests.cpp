@@ -119,7 +119,7 @@ void DistribMiniTests::creerEtudiants()
 
 void DistribMiniTests::creerMiniTests()
 {
-	unsigned short nbMiniTests = nbADistribuer + (app.difficulty < 2 ? 2 - app.difficulty : 0);
+    unsigned short nbMiniTests = nbADistribuer + (app.difficulty < 4 ? 1 : 0);
 
 
 	for (unsigned i(0); i < nbMiniTests; ++i)

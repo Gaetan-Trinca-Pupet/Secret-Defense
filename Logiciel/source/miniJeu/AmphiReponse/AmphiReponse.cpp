@@ -47,7 +47,7 @@ void AmphiReponse::AmphiReponse::setup()
 	nbQuestion = 2 + (app.difficulty > 3 ? 3 : app.difficulty);
 	const unsigned short nbMauvaiseReponse = (app.difficulty/3 > 6 ? 6 : app.difficulty/3);
 	
-    chrono.setTempsMax(10);
+    chrono.setTempsMax(3+5*std::pow(0.95, int(app.difficulty)));
 
 	std::vector<std::string> tabQ = getTabQ();
 	std::vector<std::string> tabR = getTabR();
