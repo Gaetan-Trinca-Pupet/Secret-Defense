@@ -47,7 +47,7 @@ void Bronx::Bronx::placeObjects()
 
     for (int i(0); i < 3; ++i)
         for (int j(0); j < 3; ++i)
-            placards.pushback()
+            placards[i].push_back(Door(0, 0, app, &AssetManager::getTexture("../ressource/Bronx/porte_placard.png")));
 
     std::random_shuffle(ingredients.begin(), ingredients.end());
 

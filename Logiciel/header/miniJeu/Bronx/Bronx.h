@@ -9,6 +9,7 @@
 #include "Verre.h"
 #include "Shaker.h"
 #include "Ingredient.h"
+#include "Door.h"
 #include "../../Grabber.hpp"
 
 namespace Bronx {
