@@ -68,7 +68,7 @@ void Bronx::Bronx::placeObjects()
             for (int k(0); k < 3; ++k)
             {
                 
-                ingredients[i * 9 + j * 3 + k].setPosition(36 + 211 * j + 25 + k * 42, 27 + i * 137 + 102);
+                ingredients[i * 9 + j * 3 + k].setPosition(36 + 211 * j + 20 + k * 42, 27 + i * 137 + 102);
                 ingredients[i * 9 + j * 3 + k].setCanBeGrabbed(false);
             }
 
@@ -108,6 +108,10 @@ void Bronx::Bronx::draw()
 
 void Bronx::Bronx::update()
 {
+    for (std::vector<Door>& row : placards)
+        for (Door& d : row)
+            d.update();
+
     bool verresOk=true;
     for(unsigned int i=0; i<verres.size(); ++i)
     {

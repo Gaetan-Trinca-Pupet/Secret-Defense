@@ -20,9 +20,13 @@ void Door::setOpened(bool value)
 
 void Door::update()
 {
-    if(isHovered())
+    if (!opened && isHovered())
     {
-        setFillColor(sf::Color(0,0,0,0));
-        setOutlineColor(sf::Color(0,0,0,0));
+        setFillColor(sf::Color(0, 0, 0, 0));
+    }
+
+    if (opened && !isHovered())
+    {
+        setFillColor(sf::Color(255,255,255, 255));
     }
 }
