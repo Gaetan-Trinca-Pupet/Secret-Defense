@@ -65,7 +65,7 @@ int main()
 
     MiniJeuManager manager(app);
     manager.addMiniJeu(createGifle, "Gifle", "Giflez les étudiants ne portant pas de masque !\nCOntrôles : Souris");
-    manager.play("Gifle");
+    manager.play();
 
     return 0;
 }
