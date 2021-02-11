@@ -31,6 +31,8 @@ private:
     Chrono chrono;
     sf::Sprite backGround;
 
+    Grabber::Grabber hand;
+
     std::vector<Deliverable> verres;
     std::vector<Ingredient> ingredients;
     Shaker shaker;

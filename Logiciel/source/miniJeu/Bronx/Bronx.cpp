@@ -2,6 +2,8 @@
 
 void Bronx::Bronx::setup()
 {
+    hand.setSprite(AssetManager::getTexture("../ressource/hand.png"));
+
     srand(std::time(NULL));
 
     for (unsigned int i = 0; i < 8; ++i)
@@ -36,18 +38,25 @@ void Bronx::Bronx::setup()
     backGround.setTexture(AssetManager::getTexture("../ressource/Bronx/background.png"));
 
     placeObjects();
+
 }
 
 void Bronx::Bronx::placeObjects()
 {
 
-
     for (int i(0); i < verres.size(); ++i)
         verres[i].setPosition(180 + i * 50, 480);
 
+
     for (int i(0); i < 3; ++i)
-        for (int j(0); j < 3; ++i)
+    {
+        placards.push_back(std::vector<Door>());
+        for (int j(0); j < 3; ++j)
+        {
+            std::cout << i << "  " <<placards.size() << std::endl;
             placards[i].push_back(Door(0, 0, app, &AssetManager::getTexture("../ressource/Bronx/porte_placard.png")));
+        }    
+    }
 
     std::random_shuffle(ingredients.begin(), ingredients.end());
 
@@ -59,7 +68,7 @@ void Bronx::Bronx::placeObjects()
             for (int k(0); k < 3; ++k)
             {
                 
-                ingredients[i * 9 + j * 3 + k].setPosition(36 + 211 * j + 30 + k * 42, 27 + i * 137 + 102);
+                ingredients[i * 9 + j * 3 + k].setPosition(36 + 211 * j + 25 + k * 42, 27 + i * 137 + 102);
                 ingredients[i * 9 + j * 3 + k].setCanBeGrabbed(false);
             }
 
