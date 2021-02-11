@@ -9,6 +9,7 @@ class Door: public Clickable
 public:
     Door(const int& x, const int& y, AppData& app, sf::Texture* texture, bool _opened = false);
 
+    Door();
 
     void setOpened(bool val);
 

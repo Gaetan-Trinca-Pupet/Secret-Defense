@@ -8,6 +8,11 @@ Door::Door(const int& x, const int& y, AppData& app, sf::Texture* texture, bool 
     setPosition(x, y);
 }
 
+Door::Door() : opened(false)
+{
+
+}
+
 bool Door::isOpened()
 {
     return opened;
