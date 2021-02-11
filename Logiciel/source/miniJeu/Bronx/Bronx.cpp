@@ -53,9 +53,8 @@ void Bronx::Bronx::placeObjects()
         placards.push_back(std::vector<Door>());
         for (int j(0); j < 3; ++j)
         {
-            std::cout << i << "  " <<placards.size() << std::endl;
             placards[i].push_back(Door(0, 0, app, &AssetManager::getTexture("../ressource/Bronx/porte_placard.png")));
-        }    
+        }
     }
 
     std::random_shuffle(ingredients.begin(), ingredients.end());
