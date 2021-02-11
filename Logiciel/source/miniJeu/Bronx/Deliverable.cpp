@@ -24,7 +24,6 @@ void Deliverable::setCanBeGrabbed(bool val)
 
 bool Deliverable::canBeGrabbed()
 {
-	std::cout << isGrabbable << std::endl;
 	return isGrabbable;
 }
 
