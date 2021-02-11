@@ -3,7 +3,7 @@
 void BranchePC::BranchePC::setup()
 {
 	
-    nbPrise = (std::min((unsigned)app.difficulty+1, (unsigned)7));
+    nbPrise = (std::min((unsigned)app.difficulty+1, (unsigned)6));
 
     chrono.setTempsMax(4.5+3.5*std::pow(0.95, int(app.difficulty)));
 
