@@ -205,6 +205,7 @@ namespace Grabber
 					grabbed->onRelease();
 					grabbed = nullptr;
 				}
+
 				else {
 					grabbed->move(x - lastX, y - lastY);
 					grabbed->updateOnGrab();
@@ -214,7 +215,9 @@ namespace Grabber
 		else
 		{
 			if (grabbed != nullptr)
+			{
 				grabbed->onRelease();
+			}
 
 			grabbed = nullptr;
 			isGrabbing = false;

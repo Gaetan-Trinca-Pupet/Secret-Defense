@@ -26,7 +26,7 @@ void Door::update()
         opened = true;
     }
 
-    if (opened && !isHovered())
+    else if (opened && !isHovered())
     {
         setFillColor(sf::Color(255,255,255, 255));
         opened = false;

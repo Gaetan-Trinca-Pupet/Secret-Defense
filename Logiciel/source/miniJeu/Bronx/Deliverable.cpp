@@ -1,8 +1,9 @@
 #include "../../../header/miniJeu/Bronx/Deliverable.h"
 
 
-Deliverable::Deliverable(sf::Texture* texture, bool _stored): isGrabbable(true)
+Deliverable::Deliverable(sf::Texture* texture, bool _stored)
 {
+	isGrabbable = true;
 	setStored(_stored);
 	setTexture(texture);
 	setSize(sf::Vector2f(texture->getSize()));
@@ -23,15 +24,14 @@ void Deliverable::setCanBeGrabbed(bool val)
 
 bool Deliverable::canBeGrabbed()
 {
+	std::cout << isGrabbable << std::endl;
 	return isGrabbable;
 }
 
 void Deliverable::onRelease()
 {
-	if (getGlobalBounds().intersects(deliverZone->getGlobalBounds()))
-	{
+	if (deliverZone != nullptr && getGlobalBounds().intersects(deliverZone->getGlobalBounds()))
 		setStored(true);
-	}
 }
 
 void Deliverable::onGrab()
@@ -53,13 +53,11 @@ void Deliverable::setStored(bool val)
 	{
 		stored = true;
 		setFillColor(sf::Color(190, 190, 190));
-		setScale(0.8, 0.8);
 	}
 	else
 	{
 		stored = false;
 		setFillColor(sf::Color(255, 255, 255));
-		setScale(1, 1);
 	}
 }
 

@@ -6,9 +6,15 @@ void Bronx::Bronx::setup()
 
     srand(std::time(NULL));
 
+    frigoZone.setPosition(725, 310);
+    frigoZone.setSize(sf::Vector2f(500, 500));
+    frigoZone.setFillColor(sf::Color::Transparent);
+
     for (unsigned int i = 0; i < 8; ++i)
     {
-        verres.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/martini_vide.png")));
+        Deliverable tmp = Deliverable(&AssetManager::getTexture("../ressource/Bronx/martini_vide.png"));
+        tmp.setTarget(&frigoZone);
+        verres.push_back(tmp);
     }
 
     ingredients.push_back(Ingredient(true, &AssetManager::getTexture("../ressource/Bronx/cinzano_doux.png")));
@@ -36,8 +42,16 @@ void Bronx::Bronx::setup()
         }
 
     backGround.setTexture(AssetManager::getTexture("../ressource/Bronx/background.png"));
-
+    
     placeObjects();
+
+    for (Deliverable& v : verres)
+        hand.add(&v);
+
+    for (Deliverable& i : ingredients)
+        hand.add(&i);
+
+    hand.add(&shaker);
 
 }
 
@@ -46,7 +60,6 @@ void Bronx::Bronx::placeObjects()
 
     for (int i(0); i < verres.size(); ++i)
         verres[i].setPosition(180 + i * 50, 480);
-
 
     for (int i(0); i < 3; ++i)
     {
@@ -66,13 +79,16 @@ void Bronx::Bronx::placeObjects()
             placards[i][j].setPosition(36 + 211 * j, 27 + i * 137);
             for (int k(0); k < 3; ++k)
             {
-                
-                ingredients[i * 9 + j * 3 + k].setPosition(36 + 211 * j + 20 + k * 42, 27 + i * 137 + 102);
-                ingredients[i * 9 + j * 3 + k].setCanBeGrabbed(false);
+                ingredients[i * 9 + j * 3 + k].setPosition(36 + 211 * j + 16 + k * 42, 27 + i * 137 + 102);
+                //ingredients[i * 9 + j * 3 + k].setCanBeGrabbed(false);
             }
 
         }
     }
+
+    shaker.setPosition(35, 492);
+
+    
 }
 
 void Bronx::Bronx::draw()
@@ -103,10 +119,14 @@ void Bronx::Bronx::draw()
     {
         app.window.draw(v);
     }
+
+    app.window.draw(shaker);
 }
 
 void Bronx::Bronx::update()
 {
+    hand.update(app.window);
+
     for (std::vector<Door>& row : placards)
         for (Door& d : row)
             d.update();

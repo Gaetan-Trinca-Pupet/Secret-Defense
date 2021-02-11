@@ -33,6 +33,8 @@ private:
 
     Grabber::Grabber hand;
 
+    sf::RectangleShape frigoZone;
+
     std::vector<Deliverable> verres;
     std::vector<Ingredient> ingredients;
     Shaker shaker;
