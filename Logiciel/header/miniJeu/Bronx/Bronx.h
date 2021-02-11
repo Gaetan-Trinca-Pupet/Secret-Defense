@@ -29,6 +29,7 @@ private:
     void placeObjects();
 
     Chrono chrono;
+    float tempsMax;
     sf::Sprite backGround;
 
     Grabber::Grabber hand;
@@ -39,7 +40,7 @@ private:
     std::vector<Ingredient> ingredients;
     Shaker shaker;
     std::vector<std::vector<Door>> placards;
-
+    Door frigo;
 };
 }
 

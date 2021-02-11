@@ -2,6 +2,7 @@
 
 void Bronx::Bronx::setup()
 {
+    chrono.setTempsMax(20);
     hand.setSprite(AssetManager::getTexture("../ressource/hand.png"));
 
     srand(std::time(NULL));
@@ -70,6 +71,8 @@ void Bronx::Bronx::placeObjects()
         }
     }
 
+    frigo=Door(683, 238, app, &AssetManager::getTexture("../ressource/Bronx/porte_frigo.png"));
+
     std::random_shuffle(ingredients.begin(), ingredients.end());
 
     for (int i(0); i < 3; ++i)
@@ -120,16 +123,28 @@ void Bronx::Bronx::draw()
         app.window.draw(v);
     }
 
+
     app.window.draw(shaker);
+    app.window.draw(frigo);
+    app.window.draw(chrono);
 }
 
 void Bronx::Bronx::update()
 {
     hand.update(app.window);
+    if(chrono.getTimePassed()>tempsMax)
+    {
+        app.lives-=1;
+        isFinished=true;
+    }
+
+    chrono.update();
 
     for (std::vector<Door>& row : placards)
         for (Door& d : row)
             d.update();
+
+    frigo.update();
 
     bool verresOk=true;
     for(unsigned int i=0; i<verres.size(); ++i)
@@ -143,7 +158,7 @@ void Bronx::Bronx::update()
 
 }
 
-Bronx::Bronx::Bronx(AppData& appData): MiniJeu(appData)
+Bronx::Bronx::Bronx(AppData& appData): MiniJeu(appData), chrono(app.window), tempsMax(30)
 {
 }
 
