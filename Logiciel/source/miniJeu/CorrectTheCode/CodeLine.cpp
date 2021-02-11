@@ -19,7 +19,7 @@ void CodeLine::initCodeLine()
             codeLinesVector[i].resize(i / 2 + 2);
             for (unsigned j = 0; j < i/ 2 + 2; ++j) {
                 if (!std::getline(file, line)) std::cerr << "Fichier ressource de CorrectTheCode invalide";
-                codeLinesVector[i][j] = line;
+                codeLinesVector[i][j] = sf::String::fromUtf8(line.begin(),line.end());
             }
             std::getline(file, line);
             wrongLine[i] = stoi(line);

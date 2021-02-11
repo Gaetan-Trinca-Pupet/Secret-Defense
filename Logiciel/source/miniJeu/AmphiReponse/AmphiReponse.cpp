@@ -8,7 +8,7 @@ std::vector<std::string> getTabQ()
     if (questionFile.is_open()) {
         std::string question;
         while (std::getline(questionFile, question))
-			tab.push_back(question);
+            tab.push_back(sf::String::fromUtf8(question.begin(),question.end()));
     }
 	return tab;
 }
@@ -21,7 +21,7 @@ std::vector<std::string> getTabR()
     if (answerFile.is_open()) {
         std::string answer;
         while (std::getline(answerFile, answer))
-			tab.push_back(answer);
+            tab.push_back(sf::String::fromUtf8(answer.begin(),answer.end()));
     }
 	return tab;
 }
@@ -34,7 +34,7 @@ std::vector<std::string> getTabM()
     if (diversionFile.is_open()) {
         std::string diversion;
         while (std::getline(diversionFile, diversion))
-			tab.push_back(diversion);
+            tab.push_back(sf::String::fromUtf8(diversion.begin(),diversion.end()));
     }
 	return tab;
 }

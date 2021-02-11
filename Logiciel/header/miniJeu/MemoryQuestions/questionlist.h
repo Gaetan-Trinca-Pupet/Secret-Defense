@@ -6,6 +6,7 @@
 #include <ctime>
 #include <iostream>
 #include <fstream>
+#include <SFML/Graphics.hpp>
 
 namespace memoryQuestions {
 

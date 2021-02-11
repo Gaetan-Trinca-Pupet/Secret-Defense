@@ -22,6 +22,7 @@ std::vector<QuestRep> getTabQuest()
 			tabQuest.question = line.substr(2, std::string::npos);
 		}
         while (std::getline(file, line)) {
+            line = sf::String::fromUtf8(line.begin(),line.end());
 			if (line[0] == 'Q') {
 				tabQuest.tabRepVrai = tabRepVrai;
 				tabQuest.tabRepFaux = tabRepFaux;

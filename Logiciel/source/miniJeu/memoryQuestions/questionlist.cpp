@@ -46,7 +46,7 @@ std::string QuestionList::getQuestion(const unsigned short & rank)
         std::string question;
         for (unsigned i = 0; i <= rank; ++i)
             std::getline(questionFile, question);
-        return question;
+        return sf::String::fromUtf8(question.begin(),question.end());
     }
     else {
         return "";
