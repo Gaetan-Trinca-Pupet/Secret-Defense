@@ -62,7 +62,7 @@ void Bronx::Bronx::setup()
 void Bronx::Bronx::placeObjects()
 {
 
-    for (int i(0); i < verres.size(); ++i)
+    for (unsigned long long i(0); i < verres.size(); ++i)
         verres[i].setPosition(180 + i * 50, 480);
 
     for (int i(0); i < 3; ++i)
@@ -96,7 +96,7 @@ void Bronx::Bronx::placeObjects()
             for (int k(0); k < 3; ++k)
             {
                 ingredientsTmp[i * 9 + j * 3 + k]->setPosition(36 + 211 * j + 16 + k * 42, 27 + i * 137 + 102);
-                //ingredients[i * 9 + j * 3 + k].setCanBeGrabbed(false);
+                ingredientsTmp[i * 9 + j * 3 + k]->setCanBeGrabbed(false);
             }
 
         }
@@ -168,8 +168,6 @@ void Bronx::Bronx::update()
         for (Door& d : row)
             d.update();
 
-    frigo.update();
-
 
 
 
@@ -180,6 +178,7 @@ void Bronx::Bronx::update()
     {
     case 1:
     {
+        frigo.update();
         bool verresStockes=true;
         for(unsigned int i=0; i<verres.size(); ++i)
         {
@@ -190,11 +189,49 @@ void Bronx::Bronx::update()
             }
         }
         if(verresStockes==true)
+        {
             ++etape;
+            for(Deliverable& ingredient : ingredientsComestibles)
+            {
+                ingredient.setTarget(&shaker);
+                ingredient.setCanBeGrabbed(true);
+            }
+
+            for(Deliverable& ingredient : ingredientsNonComestibles)
+            {
+                ingredient.setTarget(&shaker);
+                ingredient.setCanBeGrabbed(true);
+            }
+            frigo.setOpened(false);
+        }
         break;
     }
     case 2:
+        for (int i(ingredientsComestibles.size()); i != 0 && ingredientsComestibles.size() != 0;)
+        {
+            --i;
+            if(ingredientsComestibles[i].isInTargetZone())
+            {
+                hand.remove(&ingredientsComestibles[i]);
+                ingredientsComestibles.erase(ingredientsComestibles.begin() + i);
+            }
+        }
+        for (int i(ingredientsNonComestibles.size()); i != 0 && ingredientsNonComestibles.size() != 0;)
+        {
+            --i;
+            if(ingredientsNonComestibles[i].isInTargetZone())
+            {
+                --app.lives;
+                isFinished=true;
+                break;
+            }
+        }
 
+        if(ingredientsComestibles.size()==0)
+        {
+            ++etape;
+            shaker.startShaking();
+        }
         break;
     case 3:
         if(shaker.isShakingFinished())
@@ -220,6 +257,7 @@ void Bronx::Bronx::update()
     case 5:
         break;
     case 6:
+        frigo.update();
         break;
     }
 

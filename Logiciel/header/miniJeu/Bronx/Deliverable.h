@@ -6,10 +6,6 @@
 class Deliverable : public Grabber::Grabbable
 {
 public:
-
-
-	sf::RectangleShape* deliverZone;
-
     Deliverable(sf::Texture* texture, bool _stored);
 
 	void setTarget(sf::RectangleShape* zone);
@@ -28,17 +24,15 @@ public:
 
 	bool isStored();
 
-	void putDown();
+    bool isInTargetZone();
 
 private:
-
-	int groundLevel;
 	bool isGrabbable;
 
 protected:
+    sf::RectangleShape* targetZone;
 
 	bool stored;
-
 };
 
 #endif
