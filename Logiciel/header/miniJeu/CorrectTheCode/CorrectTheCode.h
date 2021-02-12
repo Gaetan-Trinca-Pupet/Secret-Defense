@@ -2,7 +2,6 @@
 #define CORRECTTHECODE_H
 
 #include <vector>
-#include <cmath>
 
 #include "../MiniJeu.h"
 #include "../../button.h"

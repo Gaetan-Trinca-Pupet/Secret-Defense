@@ -7,7 +7,6 @@
 #include "../../Chrono.h"
 #include <vector>
 #include <fstream>
-#include <math.h>
 
 namespace AmphiReponse
 {
