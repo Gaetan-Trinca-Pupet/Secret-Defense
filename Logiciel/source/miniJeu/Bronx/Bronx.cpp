@@ -90,8 +90,6 @@ void Bronx::Bronx::placeObjects()
     }
 
     shaker.setPosition(35, 492);
-
-    
 }
 
 void Bronx::Bronx::draw()

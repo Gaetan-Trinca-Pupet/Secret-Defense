@@ -2,8 +2,9 @@
 #define __DELIVERABLE_H_
 
 #include "../../Grabber.hpp"
+#include "../../GravityAffected.h"
 
-class Deliverable : public Grabber::Grabbable
+class Deliverable : public Grabber::Grabbable, public GravityAffected
 {
 public:
 
@@ -32,7 +33,6 @@ public:
 
 private:
 
-	int groundLevel;
 	bool isGrabbable;
 
 protected:

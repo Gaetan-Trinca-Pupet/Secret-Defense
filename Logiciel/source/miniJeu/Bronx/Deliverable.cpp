@@ -7,7 +7,7 @@ Deliverable::Deliverable(sf::Texture* texture, bool _stored)
 	setStored(_stored);
 	setTexture(texture);
 	setSize(sf::Vector2f(texture->getSize()));
-	setOrigin(sf::Vector2f(0, texture->getSize().y));
+	sf::RectangleShape::setOrigin(sf::Vector2f(0, texture->getSize().y));
 	deliverZone = nullptr;
 }
 
@@ -40,10 +40,7 @@ void Deliverable::onGrab()
 
 void Deliverable::update()
 {
-	if (!stored && getPosition().y + getSize().y > groundLevel)
-	{
-		//TODO: gravité
-	}
+
 }
 
 void Deliverable::setStored(bool val)
@@ -65,7 +62,3 @@ bool Deliverable::isStored()
 	return stored;
 }
 
-void Deliverable::putDown()
-{
-	groundLevel = getPosition().y + getTexture()->getSize().y;
-}
