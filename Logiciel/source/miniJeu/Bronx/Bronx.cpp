@@ -13,7 +13,7 @@ void Bronx::Bronx::setup()
 
     for (unsigned int i = 0; i < 8; ++i)
     {
-        Deliverable tmp = Deliverable(&AssetManager::getTexture("../ressource/Bronx/martini_vide.png"));
+        Verre tmp = Verre(&AssetManager::getTexture("../ressource/Bronx/martini_vide.png"));
         tmp.setTarget(&frigoZone);
         verres.push_back(tmp);
     }
@@ -46,10 +46,10 @@ void Bronx::Bronx::setup()
     
     placeObjects();
 
-    for (Deliverable& v : verres)
+    for (Verre& v : verres)
         hand.add(&v);
 
-    for (Deliverable& i : ingredients)
+    for (Ingredient& i : ingredients)
         hand.add(&i);
 
     hand.add(&shaker);
@@ -118,7 +118,7 @@ void Bronx::Bronx::draw()
             app.window.draw(i);
     }
 
-    for (Deliverable& v : verres)
+    for (Verre& v : verres)
     {
         app.window.draw(v);
     }
@@ -132,7 +132,7 @@ void Bronx::Bronx::draw()
 void Bronx::Bronx::update()
 {
     hand.update(app.window);
-    if(chrono.getTimePassed()>tempsMax)
+    if(chrono.getTimePassed()>chrono.getTempsMax())
     {
         app.lives-=1;
         isFinished=true;
@@ -146,19 +146,62 @@ void Bronx::Bronx::update()
 
     frigo.update();
 
-    bool verresOk=true;
-    for(unsigned int i=0; i<verres.size(); ++i)
+
+
+
+
+
+
+    switch(etape)
     {
-        if(!verres[i].isStored())
+    case 1:
+    {
+        bool verresStockes=true;
+        for(unsigned int i=0; i<verres.size(); ++i)
         {
-            verresOk=false;
-            break;
+            if(!verres[i].isStored())
+            {
+                verresStockes=false;
+                break;
+            }
         }
+        if(verresStockes==true)
+            ++etape;
+        break;
+    }
+    case 2:
+
+        break;
+    case 3:
+        if(shaker.isShakingFinished())
+        {
+            ++etape;
+        }
+        break;
+    case 4:
+    {
+        bool verresPleins=true;
+        for(unsigned int i=0; i<verres.size();++i)
+        {
+            if(!verres[i].isFull())
+            {
+                verresPleins=false;
+                break;
+            }
+        }
+        if(verresPleins==true)
+            ++etape;
+        break;
+    }
+    case 5:
+        break;
+    case 6:
+        break;
     }
 
 }
 
-Bronx::Bronx::Bronx(AppData& appData): MiniJeu(appData), chrono(app.window), tempsMax(30)
+Bronx::Bronx::Bronx(AppData& appData): MiniJeu(appData), chrono(app.window), etape(1)
 {
 }
 

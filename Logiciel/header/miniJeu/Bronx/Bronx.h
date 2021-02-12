@@ -29,14 +29,14 @@ private:
     void placeObjects();
 
     Chrono chrono;
-    float tempsMax;
     sf::Sprite backGround;
+    int etape;
 
     Grabber::Grabber hand;
 
     sf::RectangleShape frigoZone;
 
-    std::vector<Deliverable> verres;
+    std::vector<Verre> verres;
     std::vector<Ingredient> ingredients;
     Shaker shaker;
     std::vector<std::vector<Door>> placards;
