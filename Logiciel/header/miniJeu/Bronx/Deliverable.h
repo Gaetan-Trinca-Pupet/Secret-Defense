@@ -10,7 +10,7 @@ public:
 
 	sf::RectangleShape* deliverZone;
 
-    Deliverable(sf::Texture* texture, bool _stored = false);
+    Deliverable(sf::Texture* texture, bool _stored);
 
 	void setTarget(sf::RectangleShape* zone);
 

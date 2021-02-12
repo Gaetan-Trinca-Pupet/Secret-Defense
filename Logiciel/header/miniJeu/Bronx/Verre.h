@@ -6,7 +6,7 @@
 class Verre: public Deliverable
 {
 public:
-    Verre(sf::Texture* texture, bool _full=0);
+    Verre(sf::Texture* texture, bool _full=false);
     bool isFull();
 private:
     bool full;

@@ -18,27 +18,27 @@ void Bronx::Bronx::setup()
         verres.push_back(tmp);
     }
 
-    ingredients.push_back(Ingredient(true, &AssetManager::getTexture("../ressource/Bronx/cinzano_doux.png")));
+    ingredientsComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/cinzano_doux.png"), true));
 
-    ingredients.push_back(Ingredient(true, &AssetManager::getTexture("../ressource/Bronx/cinzano_sec.png")));
+    ingredientsComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/cinzano_sec.png"), true));
 
     for (unsigned int i = 0; i < 2; ++i)
-        ingredients.push_back(Ingredient(true, &AssetManager::getTexture("../ressource/Bronx/gin.png")));
+        ingredientsComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/gin.png"), true));
 
     for (unsigned int i = 0; i < 4; ++i)
-        ingredients.push_back(Ingredient(true, &AssetManager::getTexture("../ressource/Bronx/jus_orange.png")));
+        ingredientsComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/jus_orange.png"), true));
 
     for (unsigned int i = 0; i < 19; ++i)
         switch (rand() % 3)
         {
             case 0:
-                ingredients.push_back(Ingredient(false, &AssetManager::getTexture("../ressource/Bronx/poison.png")));
+                ingredientsNonComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/poison.png"), true));
                 break;
             case 1:
-                ingredients.push_back(Ingredient(false, &AssetManager::getTexture("../ressource/Bronx/bleche.png")));
+                ingredientsNonComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/bleche.png"), true));
                 break;
             case 2:
-                ingredients.push_back(Ingredient(false, &AssetManager::getTexture("../ressource/Bronx/champignon.png")));
+                ingredientsNonComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/champignon.png"), true));
                 break;
         }
 
@@ -49,7 +49,10 @@ void Bronx::Bronx::setup()
     for (Verre& v : verres)
         hand.add(&v);
 
-    for (Ingredient& i : ingredients)
+    for (Deliverable& i : ingredientsComestibles)
+        hand.add(&i);
+
+    for (Deliverable& i : ingredientsNonComestibles)
         hand.add(&i);
 
     hand.add(&shaker);
@@ -67,13 +70,23 @@ void Bronx::Bronx::placeObjects()
         placards.push_back(std::vector<Door>());
         for (int j(0); j < 3; ++j)
         {
-            placards[i].push_back(Door(0, 0, app, &AssetManager::getTexture("../ressource/Bronx/porte_placard.png")));
+            placards[i].push_back(Door(0, 0, app, &AssetManager::getTexture("../ressource/Bronx/porte_placard.png"), true));
         }
     }
 
     frigo=Door(683, 238, app, &AssetManager::getTexture("../ressource/Bronx/porte_frigo.png"));
 
-    std::random_shuffle(ingredients.begin(), ingredients.end());
+    std::vector<Deliverable*> ingredientsTmp;
+    for(Deliverable &ingredient : ingredientsComestibles)
+    {
+        ingredientsTmp.push_back(&ingredient);
+    }
+    for(Deliverable &ingredient : ingredientsNonComestibles)
+    {
+        ingredientsTmp.push_back(&ingredient);
+    }
+
+    std::random_shuffle(ingredientsTmp.begin(), ingredientsTmp.end());
 
     for (int i(0); i < 3; ++i)
     {
@@ -82,7 +95,7 @@ void Bronx::Bronx::placeObjects()
             placards[i][j].setPosition(36 + 211 * j, 27 + i * 137);
             for (int k(0); k < 3; ++k)
             {
-                ingredients[i * 9 + j * 3 + k].setPosition(36 + 211 * j + 16 + k * 42, 27 + i * 137 + 102);
+                ingredientsTmp[i * 9 + j * 3 + k]->setPosition(36 + 211 * j + 16 + k * 42, 27 + i * 137 + 102);
                 //ingredients[i * 9 + j * 3 + k].setCanBeGrabbed(false);
             }
 
@@ -98,10 +111,16 @@ void Bronx::Bronx::draw()
 {
     app.window.draw(backGround);
 
-    for (Ingredient& i : ingredients)
+    for (Deliverable& ingredient : ingredientsComestibles)
     {
-        if (i.isStored())
-            app.window.draw(i);
+        if (ingredient.isStored())
+            app.window.draw(ingredient);
+    }
+
+    for (Deliverable& ingredient : ingredientsNonComestibles)
+    {
+        if (ingredient.isStored())
+            app.window.draw(ingredient);
     }
 
     for (std::vector<Door>& row : placards)
@@ -112,10 +131,15 @@ void Bronx::Bronx::draw()
         }
     }
 
-    for (Ingredient& i : ingredients)
+    for (Deliverable& ingredient : ingredientsComestibles)
     {
-        if (!i.isStored())
-            app.window.draw(i);
+        if (!ingredient.isStored())
+            app.window.draw(ingredient);
+    }
+    for (Deliverable& ingredient : ingredientsNonComestibles)
+    {
+        if (!ingredient.isStored())
+            app.window.draw(ingredient);
     }
 
     for (Verre& v : verres)
@@ -150,7 +174,7 @@ void Bronx::Bronx::update()
 
 
 
-
+    // PAS FINI
 
     switch(etape)
     {

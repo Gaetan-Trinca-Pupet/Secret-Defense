@@ -8,7 +8,6 @@
 #include "Deliverable.h"
 #include "Verre.h"
 #include "Shaker.h"
-#include "Ingredient.h"
 #include "Door.h"
 #include "../../Grabber.hpp"
 
@@ -37,7 +36,8 @@ private:
     sf::RectangleShape frigoZone;
 
     std::vector<Verre> verres;
-    std::vector<Ingredient> ingredients;
+    std::vector<Deliverable> ingredientsComestibles;
+    std::vector<Deliverable> ingredientsNonComestibles;
     Shaker shaker;
     std::vector<std::vector<Door>> placards;
     Door frigo;
