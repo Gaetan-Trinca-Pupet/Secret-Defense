@@ -16,12 +16,13 @@ class Bronx : public MiniJeu
 {
 public:
 
+    Bronx(AppData& appData);
+    virtual ~Bronx();
+
     virtual void draw();
     virtual void update();
     virtual void setup();
 
-    Bronx(AppData& appData);
-    virtual ~Bronx();
 
 private:
 
@@ -36,8 +37,8 @@ private:
     sf::RectangleShape frigoZone;
 
     std::vector<Verre> verres;
-    std::vector<Deliverable> ingredientsComestibles;
-    std::vector<Deliverable> ingredientsNonComestibles;
+    std::vector<Deliverable*> ingredientsComestibles;
+    std::vector<Deliverable*> ingredientsNonComestibles;
     Shaker shaker;
     std::vector<std::vector<Door>> placards;
     Door frigo;

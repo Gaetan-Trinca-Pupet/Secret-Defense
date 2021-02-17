@@ -1,7 +1,20 @@
 #include "../../../header/miniJeu/Bronx/Bronx.h"
 
+Bronx::Bronx::Bronx(AppData& appData) : MiniJeu(appData), chrono(app.window), etape(1)
+{
+}
+
+Bronx::Bronx::~Bronx()
+{
+    for (Deliverable* i : ingredientsComestibles)
+        delete i;
+    for (Deliverable* i : ingredientsNonComestibles)
+        delete i;
+}
+
 void Bronx::Bronx::setup()
 {
+
     chrono.setTempsMax(20);
     hand.setSprite(AssetManager::getTexture("../ressource/hand.png"));
 
@@ -18,29 +31,34 @@ void Bronx::Bronx::setup()
         verres.push_back(tmp);
     }
 
-    ingredientsComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/cinzano_doux.png"), true));
+    ingredientsComestibles.push_back(new Deliverable(&AssetManager::getTexture("../ressource/Bronx/cinzano_doux.png"), true));
 
-    ingredientsComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/cinzano_sec.png"), true));
+    ingredientsComestibles.push_back(new Deliverable(&AssetManager::getTexture("../ressource/Bronx/cinzano_sec.png"), true));
 
     for (unsigned int i = 0; i < 2; ++i)
-        ingredientsComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/gin.png"), true));
+        ingredientsComestibles.push_back(new Deliverable(&AssetManager::getTexture("../ressource/Bronx/gin.png"), true));
 
     for (unsigned int i = 0; i < 4; ++i)
-        ingredientsComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/jus_orange.png"), true));
+        ingredientsComestibles.push_back(new Deliverable(&AssetManager::getTexture("../ressource/Bronx/jus_orange.png"), true));
 
     for (unsigned int i = 0; i < 19; ++i)
+    {
+        std::string sprite;
         switch (rand() % 3)
         {
-            case 0:
-                ingredientsNonComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/poison.png"), true));
-                break;
-            case 1:
-                ingredientsNonComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/bleche.png"), true));
-                break;
-            case 2:
-                ingredientsNonComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/champignon.png"), true));
-                break;
+        case 0:
+            sprite = "../ressource/Bronx/poison.png";
+            break;
+        case 1:
+            sprite = "../ressource/Bronx/bleche.png";
+            break;
+        case 2:
+            sprite = "../ressource/Bronx/champignon.png";
+            break;
         }
+        ingredientsNonComestibles.push_back(new Deliverable(&AssetManager::getTexture(sprite), true));
+    }
+        
 
     backGround.setTexture(AssetManager::getTexture("../ressource/Bronx/background.png"));
     
@@ -49,11 +67,11 @@ void Bronx::Bronx::setup()
     for (Verre& v : verres)
         hand.add(&v);
 
-    for (Deliverable& i : ingredientsComestibles)
-        hand.add(&i);
+    for (Deliverable* i : ingredientsComestibles)
+        hand.add(i);
 
-    for (Deliverable& i : ingredientsNonComestibles)
-        hand.add(&i);
+    for (Deliverable* i : ingredientsNonComestibles)
+        hand.add(i);
 
     hand.add(&shaker);
 
@@ -77,13 +95,13 @@ void Bronx::Bronx::placeObjects()
     frigo=Door(683, 238, app, &AssetManager::getTexture("../ressource/Bronx/porte_frigo.png"));
 
     std::vector<Deliverable*> ingredientsTmp;
-    for(Deliverable &ingredient : ingredientsComestibles)
+    for(Deliverable* ingredient : ingredientsComestibles)
     {
-        ingredientsTmp.push_back(&ingredient);
+        ingredientsTmp.push_back(ingredient);
     }
-    for(Deliverable &ingredient : ingredientsNonComestibles)
+    for(Deliverable* ingredient : ingredientsNonComestibles)
     {
-        ingredientsTmp.push_back(&ingredient);
+        ingredientsTmp.push_back(ingredient);
     }
 
     std::random_shuffle(ingredientsTmp.begin(), ingredientsTmp.end());
@@ -109,16 +127,16 @@ void Bronx::Bronx::draw()
 {
     app.window.draw(backGround);
 
-    for (Deliverable& ingredient : ingredientsComestibles)
+    for (Deliverable* ingredient : ingredientsComestibles)
     {
-        if (ingredient.isStored())
-            app.window.draw(ingredient);
+        if (ingredient->isStored())
+            app.window.draw(*ingredient);
     }
 
-    for (Deliverable& ingredient : ingredientsNonComestibles)
+    for (Deliverable* ingredient : ingredientsNonComestibles)
     {
-        if (ingredient.isStored())
-            app.window.draw(ingredient);
+        if (ingredient->isStored())
+            app.window.draw(*ingredient);
     }
 
     for (std::vector<Door>& row : placards)
@@ -129,24 +147,24 @@ void Bronx::Bronx::draw()
         }
     }
 
-    for (Deliverable& ingredient : ingredientsComestibles)
+    app.window.draw(shaker);
+
+    for (Deliverable* ingredient : ingredientsComestibles)
     {
-        if (!ingredient.isStored())
-            app.window.draw(ingredient);
+        if (!ingredient->isStored())
+            app.window.draw(*ingredient);
     }
-    for (Deliverable& ingredient : ingredientsNonComestibles)
+    for (Deliverable* ingredient : ingredientsNonComestibles)
     {
-        if (!ingredient.isStored())
-            app.window.draw(ingredient);
+        if (!ingredient->isStored())
+            app.window.draw(*ingredient);
     }
 
     for (Verre& v : verres)
     {
         app.window.draw(v);
     }
-
-
-    app.window.draw(shaker);
+    
     app.window.draw(frigo);
     app.window.draw(chrono);
 }
@@ -189,16 +207,16 @@ void Bronx::Bronx::update()
         if(verresStockes==true)
         {
             ++etape;
-            for(Deliverable& ingredient : ingredientsComestibles)
+            for(Deliverable* ingredient : ingredientsComestibles)
             {
-                ingredient.setTarget(&shaker);
-                ingredient.setCanBeGrabbed(true);
+                ingredient->setTarget(&shaker);
+                ingredient->setCanBeGrabbed(true);
             }
 
-            for(Deliverable& ingredient : ingredientsNonComestibles)
+            for(Deliverable* ingredient : ingredientsNonComestibles)
             {
-                ingredient.setTarget(&shaker);
-                ingredient.setCanBeGrabbed(true);
+                ingredient->setTarget(&shaker);
+                ingredient->setCanBeGrabbed(true);
             }
             frigo.setOpened(false);
         }
@@ -208,16 +226,16 @@ void Bronx::Bronx::update()
         for (int i(ingredientsComestibles.size()); i != 0 && ingredientsComestibles.size() != 0;)
         {
             --i;
-            if(ingredientsComestibles[i].isDelivered())
+            if(ingredientsComestibles[i]->isDelivered())
             {
-                hand.remove(&ingredientsComestibles[i]);
+                hand.remove(ingredientsComestibles[i]);
                 ingredientsComestibles.erase(ingredientsComestibles.begin() + i);
             }
         }
         for (int i(ingredientsNonComestibles.size()); i != 0 && ingredientsNonComestibles.size() != 0;)
         {
             --i;
-            if(ingredientsNonComestibles[i].isDelivered())
+            if(ingredientsNonComestibles[i]->isDelivered())
             {
                 --app.lives;
                 isFinished=true;
@@ -261,11 +279,4 @@ void Bronx::Bronx::update()
 
 }
 
-Bronx::Bronx::Bronx(AppData& appData): MiniJeu(appData), chrono(app.window), etape(1)
-{
-}
 
-Bronx::Bronx::~Bronx()
-{
-
-}
