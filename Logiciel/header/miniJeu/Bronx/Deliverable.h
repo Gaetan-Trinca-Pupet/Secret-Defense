@@ -4,7 +4,7 @@
 #include "../../Grabber.hpp"
 #include "../../GravityAffected.h"
 
-class Deliverable : public Grabber::Grabbable, public GravityAffected
+class Deliverable : public GravityAffected
 {
 public:
     Deliverable(sf::Texture* texture, bool _stored);
@@ -25,7 +25,7 @@ public:
 
 	bool isStored();
 
-    bool isInTargetZone();
+	bool isDelivered();
 
 private:
 	bool isGrabbable;
@@ -34,6 +34,7 @@ protected:
     sf::RectangleShape* targetZone;
 
 	bool stored;
+	bool delivered;
 };
 
 #endif

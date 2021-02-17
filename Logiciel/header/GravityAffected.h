@@ -2,8 +2,9 @@
 #define __GRAVITYAFFECTED_H_
 
 #include <SFML/Graphics.hpp>
+#include "Grabber.hpp"
 
-class GravityAffected: public sf::Transformable
+class GravityAffected: public Grabber::Grabbable
 {
 public:
 
@@ -14,6 +15,7 @@ public:
 private:
 
 	void applyGravity();
+	float (*getGroundLevel)(sf::Vector2f);
 	float groundLevel;
 	float speed;
 	float velocity;

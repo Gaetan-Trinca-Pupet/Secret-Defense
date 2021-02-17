@@ -180,7 +180,7 @@ void Bronx::Bronx::update()
         bool verresStockes=true;
         for(unsigned int i=0; i<verres.size(); ++i)
         {
-            if(!verres[i].isStored())
+            if(!verres[i].isDelivered())
             {
                 verresStockes=false;
                 break;
@@ -208,7 +208,7 @@ void Bronx::Bronx::update()
         for (int i(ingredientsComestibles.size()); i != 0 && ingredientsComestibles.size() != 0;)
         {
             --i;
-            if(ingredientsComestibles[i].isInTargetZone())
+            if(ingredientsComestibles[i].isDelivered())
             {
                 hand.remove(&ingredientsComestibles[i]);
                 ingredientsComestibles.erase(ingredientsComestibles.begin() + i);
@@ -217,7 +217,7 @@ void Bronx::Bronx::update()
         for (int i(ingredientsNonComestibles.size()); i != 0 && ingredientsNonComestibles.size() != 0;)
         {
             --i;
-            if(ingredientsNonComestibles[i].isInTargetZone())
+            if(ingredientsNonComestibles[i].isDelivered())
             {
                 --app.lives;
                 isFinished=true;
