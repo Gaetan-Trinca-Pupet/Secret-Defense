@@ -13,32 +13,32 @@ void Bronx::Bronx::setup()
 
     for (unsigned int i = 0; i < 8; ++i)
     {
-        Deliverable tmp = Deliverable(&AssetManager::getTexture("../ressource/Bronx/martini_vide.png"));
+        Verre tmp = Verre(&AssetManager::getTexture("../ressource/Bronx/martini_vide.png"));
         tmp.setTarget(&frigoZone);
         verres.push_back(tmp);
     }
 
-    ingredients.push_back(Ingredient(true, &AssetManager::getTexture("../ressource/Bronx/cinzano_doux.png")));
+    ingredientsComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/cinzano_doux.png"), true));
 
-    ingredients.push_back(Ingredient(true, &AssetManager::getTexture("../ressource/Bronx/cinzano_sec.png")));
+    ingredientsComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/cinzano_sec.png"), true));
 
     for (unsigned int i = 0; i < 2; ++i)
-        ingredients.push_back(Ingredient(true, &AssetManager::getTexture("../ressource/Bronx/gin.png")));
+        ingredientsComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/gin.png"), true));
 
     for (unsigned int i = 0; i < 4; ++i)
-        ingredients.push_back(Ingredient(true, &AssetManager::getTexture("../ressource/Bronx/jus_orange.png")));
+        ingredientsComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/jus_orange.png"), true));
 
     for (unsigned int i = 0; i < 19; ++i)
         switch (rand() % 3)
         {
             case 0:
-                ingredients.push_back(Ingredient(false, &AssetManager::getTexture("../ressource/Bronx/poison.png")));
+                ingredientsNonComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/poison.png"), true));
                 break;
             case 1:
-                ingredients.push_back(Ingredient(false, &AssetManager::getTexture("../ressource/Bronx/bleche.png")));
+                ingredientsNonComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/bleche.png"), true));
                 break;
             case 2:
-                ingredients.push_back(Ingredient(false, &AssetManager::getTexture("../ressource/Bronx/champignon.png")));
+                ingredientsNonComestibles.push_back(Deliverable(&AssetManager::getTexture("../ressource/Bronx/champignon.png"), true));
                 break;
         }
 
@@ -46,10 +46,13 @@ void Bronx::Bronx::setup()
     
     placeObjects();
 
-    for (Deliverable& v : verres)
+    for (Verre& v : verres)
         hand.add(&v);
 
-    for (Deliverable& i : ingredients)
+    for (Deliverable& i : ingredientsComestibles)
+        hand.add(&i);
+
+    for (Deliverable& i : ingredientsNonComestibles)
         hand.add(&i);
 
     hand.add(&shaker);
@@ -59,7 +62,7 @@ void Bronx::Bronx::setup()
 void Bronx::Bronx::placeObjects()
 {
 
-    for (int i(0); i < verres.size(); ++i)
+    for (unsigned long long i(0); i < verres.size(); ++i)
         verres[i].setPosition(180 + i * 50, 480);
 
     for (int i(0); i < 3; ++i)
@@ -67,13 +70,23 @@ void Bronx::Bronx::placeObjects()
         placards.push_back(std::vector<Door>());
         for (int j(0); j < 3; ++j)
         {
-            placards[i].push_back(Door(0, 0, app, &AssetManager::getTexture("../ressource/Bronx/porte_placard.png")));
+            placards[i].push_back(Door(0, 0, app, &AssetManager::getTexture("../ressource/Bronx/porte_placard.png"), true));
         }
     }
 
     frigo=Door(683, 238, app, &AssetManager::getTexture("../ressource/Bronx/porte_frigo.png"));
 
-    std::random_shuffle(ingredients.begin(), ingredients.end());
+    std::vector<Deliverable*> ingredientsTmp;
+    for(Deliverable &ingredient : ingredientsComestibles)
+    {
+        ingredientsTmp.push_back(&ingredient);
+    }
+    for(Deliverable &ingredient : ingredientsNonComestibles)
+    {
+        ingredientsTmp.push_back(&ingredient);
+    }
+
+    std::random_shuffle(ingredientsTmp.begin(), ingredientsTmp.end());
 
     for (int i(0); i < 3; ++i)
     {
@@ -82,8 +95,8 @@ void Bronx::Bronx::placeObjects()
             placards[i][j].setPosition(36 + 211 * j, 27 + i * 137);
             for (int k(0); k < 3; ++k)
             {
-                ingredients[i * 9 + j * 3 + k].setPosition(36 + 211 * j + 16 + k * 42, 27 + i * 137 + 102);
-                //ingredients[i * 9 + j * 3 + k].setCanBeGrabbed(false);
+                ingredientsTmp[i * 9 + j * 3 + k]->setPosition(36 + 211 * j + 16 + k * 42, 27 + i * 137 + 102);
+                ingredientsTmp[i * 9 + j * 3 + k]->setCanBeGrabbed(false);
             }
 
         }
@@ -96,10 +109,16 @@ void Bronx::Bronx::draw()
 {
     app.window.draw(backGround);
 
-    for (Ingredient& i : ingredients)
+    for (Deliverable& ingredient : ingredientsComestibles)
     {
-        if (i.isStored())
-            app.window.draw(i);
+        if (ingredient.isStored())
+            app.window.draw(ingredient);
+    }
+
+    for (Deliverable& ingredient : ingredientsNonComestibles)
+    {
+        if (ingredient.isStored())
+            app.window.draw(ingredient);
     }
 
     for (std::vector<Door>& row : placards)
@@ -110,13 +129,18 @@ void Bronx::Bronx::draw()
         }
     }
 
-    for (Ingredient& i : ingredients)
+    for (Deliverable& ingredient : ingredientsComestibles)
     {
-        if (!i.isStored())
-            app.window.draw(i);
+        if (!ingredient.isStored())
+            app.window.draw(ingredient);
+    }
+    for (Deliverable& ingredient : ingredientsNonComestibles)
+    {
+        if (!ingredient.isStored())
+            app.window.draw(ingredient);
     }
 
-    for (Deliverable& v : verres)
+    for (Verre& v : verres)
     {
         app.window.draw(v);
     }
@@ -130,7 +154,7 @@ void Bronx::Bronx::draw()
 void Bronx::Bronx::update()
 {
     hand.update(app.window);
-    if(chrono.getTimePassed()>tempsMax)
+    if(chrono.getTimePassed()>chrono.getTempsMax())
     {
         app.lives-=1;
         isFinished=true;
@@ -142,21 +166,102 @@ void Bronx::Bronx::update()
         for (Door& d : row)
             d.update();
 
-    frigo.update();
 
-    bool verresOk=true;
-    for(unsigned int i=0; i<verres.size(); ++i)
+
+
+
+    // PAS FINI
+
+    switch(etape)
     {
-        if(!verres[i].isStored())
+    case 1:
+    {
+        frigo.update();
+        bool verresStockes=true;
+        for(unsigned int i=0; i<verres.size(); ++i)
         {
-            verresOk=false;
-            break;
+            if(!verres[i].isStored())
+            {
+                verresStockes=false;
+                break;
+            }
         }
+        if(verresStockes==true)
+        {
+            ++etape;
+            for(Deliverable& ingredient : ingredientsComestibles)
+            {
+                ingredient.setTarget(&shaker);
+                ingredient.setCanBeGrabbed(true);
+            }
+
+            for(Deliverable& ingredient : ingredientsNonComestibles)
+            {
+                ingredient.setTarget(&shaker);
+                ingredient.setCanBeGrabbed(true);
+            }
+            frigo.setOpened(false);
+        }
+        break;
+    }
+    case 2:
+        for (int i(ingredientsComestibles.size()); i != 0 && ingredientsComestibles.size() != 0;)
+        {
+            --i;
+            if(ingredientsComestibles[i].isInTargetZone())
+            {
+                hand.remove(&ingredientsComestibles[i]);
+                ingredientsComestibles.erase(ingredientsComestibles.begin() + i);
+            }
+        }
+        for (int i(ingredientsNonComestibles.size()); i != 0 && ingredientsNonComestibles.size() != 0;)
+        {
+            --i;
+            if(ingredientsNonComestibles[i].isInTargetZone())
+            {
+                --app.lives;
+                isFinished=true;
+                break;
+            }
+        }
+
+        if(ingredientsComestibles.size()==0)
+        {
+            ++etape;
+            shaker.startShaking();
+        }
+        break;
+    case 3:
+        if(shaker.isShakingFinished())
+        {
+            ++etape;
+        }
+        break;
+    case 4:
+    {
+        bool verresPleins=true;
+        for(unsigned int i=0; i<verres.size();++i)
+        {
+            if(!verres[i].isFull())
+            {
+                verresPleins=false;
+                break;
+            }
+        }
+        if(verresPleins==true)
+            ++etape;
+        break;
+    }
+    case 5:
+        break;
+    case 6:
+        frigo.update();
+        break;
     }
 
 }
 
-Bronx::Bronx::Bronx(AppData& appData): MiniJeu(appData), chrono(app.window), tempsMax(30)
+Bronx::Bronx::Bronx(AppData& appData): MiniJeu(appData), chrono(app.window), etape(1)
 {
 }
 

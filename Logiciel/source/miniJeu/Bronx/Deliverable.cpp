@@ -7,14 +7,13 @@ Deliverable::Deliverable(sf::Texture* texture, bool _stored)
 	setStored(_stored);
 	setTexture(texture);
 	setSize(sf::Vector2f(texture->getSize()));
-	sf::RectangleShape::setOrigin(sf::Vector2f(0, texture->getSize().y));
-	deliverZone = nullptr;
+	setOrigin(sf::Vector2f(0, texture->getSize().y));
+    targetZone = nullptr;
 }
 
 void Deliverable::setTarget(sf::RectangleShape* zone)
 {
-	deliverZone = zone;
-	stored = false;
+    targetZone = zone;
 }
 
 void Deliverable::setCanBeGrabbed(bool val)
@@ -29,7 +28,7 @@ bool Deliverable::canBeGrabbed()
 
 void Deliverable::onRelease()
 {
-	if (deliverZone != nullptr && getGlobalBounds().intersects(deliverZone->getGlobalBounds()))
+    if (targetZone != nullptr && getGlobalBounds().intersects(targetZone->getGlobalBounds()))
 		setStored(true);
 }
 
@@ -40,7 +39,6 @@ void Deliverable::onGrab()
 
 void Deliverable::update()
 {
-
 }
 
 void Deliverable::setStored(bool val)
@@ -59,6 +57,10 @@ void Deliverable::setStored(bool val)
 
 bool Deliverable::isStored()
 {
-	return stored;
+    return stored;
 }
 
+bool Deliverable::isInTargetZone()
+{
+    return getGlobalBounds().intersects(targetZone->getGlobalBounds());
+}

@@ -8,7 +8,6 @@
 #include "Deliverable.h"
 #include "Verre.h"
 #include "Shaker.h"
-#include "Ingredient.h"
 #include "Door.h"
 #include "../../Grabber.hpp"
 
@@ -29,15 +28,16 @@ private:
     void placeObjects();
 
     Chrono chrono;
-    float tempsMax;
     sf::Sprite backGround;
+    int etape;
 
     Grabber::Grabber hand;
 
     sf::RectangleShape frigoZone;
 
-    std::vector<Deliverable> verres;
-    std::vector<Ingredient> ingredients;
+    std::vector<Verre> verres;
+    std::vector<Deliverable> ingredientsComestibles;
+    std::vector<Deliverable> ingredientsNonComestibles;
     Shaker shaker;
     std::vector<std::vector<Door>> placards;
     Door frigo;
