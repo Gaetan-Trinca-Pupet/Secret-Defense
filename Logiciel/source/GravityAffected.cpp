@@ -1,17 +1,36 @@
 #include "../header/GravityAffected.h"
 
-GravityAffected::GravityAffected(): velocity(0), groundLevel(540), speed(1)
+float (*GravityAffected::getGroundLevel)(sf::Vector2f) = nullptr;
+
+GravityAffected::GravityAffected()
+	: velocity(0), speed(0.1), groundLevel(490)
 {
+}
+
+void GravityAffected::onRelease()
+{
+	groundLevel = (*getGroundLevel)(getPosition());
 	
 }
 
 void GravityAffected::applyVelocity()
 {
-	if(getPosition().y <= groundLevel) return
+	
+	if (getPosition().y >= groundLevel || isGrabbed) return;
 
+	applyGravity();
 	move(0, velocity * speed);
 
-	if (getPosition().y < groundLevel) setPosition(getPosition().x, getPosition().y);
+	if (getPosition().y > groundLevel)
+	{
+		velocity = 0;
+		setPosition(getPosition().x, groundLevel);
+	}
+}
+
+void GravityAffected::setGetGroundLevelFunc(float (*_getGroundLevel)(sf::Vector2f))
+{
+	getGroundLevel = _getGroundLevel;
 }
 
 void GravityAffected::applyGravity()

@@ -9,6 +9,7 @@ class Shaker: public Grabber::Grabbable
 {
 public:
 	Shaker();
+	virtual ~Shaker();
 
 	bool isShakingFinished();
 

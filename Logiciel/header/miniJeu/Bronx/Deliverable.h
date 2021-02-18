@@ -1,7 +1,6 @@
 #ifndef __DELIVERABLE_H_
 #define __DELIVERABLE_H_
 
-#include "../../Grabber.hpp"
 #include "../../GravityAffected.h"
 
 class Deliverable : public GravityAffected

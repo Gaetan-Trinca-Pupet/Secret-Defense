@@ -6,7 +6,11 @@ Shaker::Shaker(): canBeShaked(false), shakeAmount(0)
 	setSize(sf::Vector2f(getTexture()->getSize()));
 	setOrigin(sf::Vector2f(0, getTexture()->getSize().y));
 
-	shakeTreshold = 999; //TODO: ajuster avec difficulté
+	shakeTreshold = 30000; //TODO: ajuster avec difficulté
+}
+
+Shaker::~Shaker()
+{
 }
 
 void Shaker::onGrab()
@@ -23,8 +27,10 @@ void Shaker::updateOnGrab()
 	if (dist > 20)
 	{
 		shakeAmount += dist;
-		std::cout << dist << std::endl;
 	}
+	std::cout << (isShakingFinished() ? "finis" : std::to_string(shakeAmount)) << std::endl;
+
+	lastpos = getPosition();
 }
 
 bool Shaker::isShakingFinished()

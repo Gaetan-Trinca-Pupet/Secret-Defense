@@ -29,12 +29,15 @@ bool Deliverable::canBeGrabbed()
 
 void Deliverable::onRelease()
 {
+
 	if (targetZone != nullptr && getGlobalBounds().intersects(targetZone->getGlobalBounds()))
 	{
 		setStored(true);
 		delivered = true;
+		return;
 	}
-		
+
+	GravityAffected::onRelease();
 }
 
 void Deliverable::onGrab()
@@ -44,6 +47,7 @@ void Deliverable::onGrab()
 
 void Deliverable::update()
 {
+	if(!stored) applyVelocity();
 }
 
 void Deliverable::setStored(bool val)

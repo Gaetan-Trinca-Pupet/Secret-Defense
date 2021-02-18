@@ -12,7 +12,7 @@ namespace Grabber
 	class Grabbable : public sf::RectangleShape
 	{
 	protected:
-		
+		bool isGrabbed;
 	public:
 		Grabbable(const int& X = 0, const int& Y = 0, const int& sx = 0, const int& sy = 0);
 		virtual ~Grabbable();
@@ -23,6 +23,7 @@ namespace Grabber
 
 		virtual bool canBeGrabbed();
 
+		virtual void setIsGrabbed(bool val);
 	};
 
 	class Grabber
@@ -105,6 +106,11 @@ namespace Grabber
 	inline bool Grabbable::canBeGrabbed()
 	{
 		return true;
+	}
+
+	inline void Grabbable::setIsGrabbed(bool val)
+	{
+		isGrabbed = val;
 	}
 
 
@@ -196,6 +202,7 @@ namespace Grabber
 					{
 						grabbed = tabGrabbable[i];
 						grabbed->onGrab();
+						grabbed->setIsGrabbed(true);
 					}
 			}
 
@@ -203,6 +210,7 @@ namespace Grabber
 			{
 				if (!grabbed->canBeGrabbed()) {
 					grabbed->onRelease();
+					grabbed->setIsGrabbed(false);
 					grabbed = nullptr;
 				}
 
@@ -217,6 +225,7 @@ namespace Grabber
 			if (grabbed != nullptr)
 			{
 				grabbed->onRelease();
+				grabbed->setIsGrabbed(false);
 			}
 
 			grabbed = nullptr;

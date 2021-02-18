@@ -15,8 +15,10 @@ Bronx::Bronx::~Bronx()
 void Bronx::Bronx::setup()
 {
 
-    chrono.setTempsMax(20);
+    chrono.setTempsMax(120);
     hand.setSprite(AssetManager::getTexture("../ressource/hand.png"));
+
+    GravityAffected::setGetGroundLevelFunc(&getGroundLevel);
 
     srand(std::time(NULL));
 
@@ -24,7 +26,7 @@ void Bronx::Bronx::setup()
     frigoZone.setSize(sf::Vector2f(500, 500));
     frigoZone.setFillColor(sf::Color::Transparent);
 
-    for (unsigned int i = 0; i < 8; ++i)
+    for (unsigned int i = 0; i < 7; ++i)
     {
         Verre tmp = Verre(&AssetManager::getTexture("../ressource/Bronx/martini_vide.png"));
         tmp.setTarget(&frigoZone);
@@ -123,6 +125,11 @@ void Bronx::Bronx::placeObjects()
     shaker.setPosition(35, 492);
 }
 
+float Bronx::Bronx::getGroundLevel(sf::Vector2f pos)
+{
+    return (pos.x < 695 && pos.y < 501 ? 490 : 999999);
+}
+
 void Bronx::Bronx::draw()
 {
     app.window.draw(backGround);
@@ -139,6 +146,12 @@ void Bronx::Bronx::draw()
             app.window.draw(*ingredient);
     }
 
+    for (Verre& v : verres)
+    {
+        if (v.isStored())
+            app.window.draw(v);
+    }
+
     for (std::vector<Door>& row : placards)
     {
         for (Door& d : row)
@@ -146,6 +159,7 @@ void Bronx::Bronx::draw()
             app.window.draw(d);
         }
     }
+    app.window.draw(frigo);
 
     app.window.draw(shaker);
 
@@ -162,15 +176,28 @@ void Bronx::Bronx::draw()
 
     for (Verre& v : verres)
     {
-        app.window.draw(v);
+        if (!v.isStored())
+            app.window.draw(v);
     }
+
     
-    app.window.draw(frigo);
+
     app.window.draw(chrono);
 }
 
 void Bronx::Bronx::update()
 {
+    for (Deliverable* ingredient : ingredientsComestibles)
+        ingredient->update();
+
+    for (Deliverable* ingredient : ingredientsNonComestibles)
+        ingredient->update();
+
+    for (Deliverable& verre : verres)
+        verre.update();
+
+
+
     hand.update(app.window);
     if(chrono.getTimePassed()>chrono.getTempsMax())
     {
@@ -183,10 +210,6 @@ void Bronx::Bronx::update()
     for (std::vector<Door>& row : placards)
         for (Door& d : row)
             d.update();
-
-
-
-
 
     // PAS FINI
 
@@ -207,6 +230,10 @@ void Bronx::Bronx::update()
         if(verresStockes==true)
         {
             ++etape;
+            for (Verre& verre : verres)
+            {
+                verre.setCanBeGrabbed(false);
+            }
             for(Deliverable* ingredient : ingredientsComestibles)
             {
                 ingredient->setTarget(&shaker);
@@ -247,6 +274,15 @@ void Bronx::Bronx::update()
         {
             ++etape;
             shaker.startShaking();
+
+            for (Deliverable* ingredient : ingredientsNonComestibles)
+            {
+
+                ingredient->setTarget(nullptr);
+
+                if (ingredient->isStored())
+                    ingredient->setCanBeGrabbed(false);
+            }
         }
         break;
     case 3:

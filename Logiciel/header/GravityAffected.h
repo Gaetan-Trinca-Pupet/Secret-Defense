@@ -9,13 +9,15 @@ class GravityAffected: public Grabber::Grabbable
 public:
 
 	GravityAffected();
+	virtual void onRelease();
 	void applyVelocity();
 	void putDown();
+	static void setGetGroundLevelFunc(float (*_getGroundLevel)(sf::Vector2f));
 
 private:
 
 	void applyGravity();
-	float (*getGroundLevel)(sf::Vector2f);
+	static float (*getGroundLevel)(sf::Vector2f);
 	float groundLevel;
 	float speed;
 	float velocity;

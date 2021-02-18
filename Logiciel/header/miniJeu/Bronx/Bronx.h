@@ -18,7 +18,6 @@ public:
 
     Bronx(AppData& appData);
     virtual ~Bronx();
-
     virtual void draw();
     virtual void update();
     virtual void setup();
@@ -27,6 +26,7 @@ public:
 private:
 
     void placeObjects();
+    static float getGroundLevel(sf::Vector2f pos);
 
     Chrono chrono;
     sf::Sprite backGround;
@@ -42,6 +42,7 @@ private:
     Shaker shaker;
     std::vector<std::vector<Door>> placards;
     Door frigo;
+
 };
 }
 
