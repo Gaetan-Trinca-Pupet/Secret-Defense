@@ -14,17 +14,25 @@ public:
 	bool isShakingFinished();
 
 	void startShaking();
+    void startFilling();
+
+    void fillUp();
 
 	virtual void onGrab();
 	virtual void updateOnGrab();
+    virtual void onRelease();
 
 private:
 
 	sf::RenderWindow* window;
 	bool canBeShaked;
+    bool canFill;
 	sf::Vector2f lastpos;
 	int shakeAmount;
 	int shakeTreshold;
+
+protected:
+    std::vector<sf::RectangleShape*> verresToFill;
 
 };
 

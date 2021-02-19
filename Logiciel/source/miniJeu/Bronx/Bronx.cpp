@@ -295,6 +295,10 @@ void Bronx::Bronx::update()
         if(shaker.isShakingFinished())
         {
             ++etape;
+            for (Verre& verre : verres)
+            {
+                verre.setCanBeGrabbed(true);
+            }
         }
         break;
 
@@ -313,10 +317,18 @@ void Bronx::Bronx::update()
         if (verresSortis == true)
         {
             ++etape;
+            shaker.startFilling();
             frigo.setOpened(false);
         }
     }
     case 5:
+
+
+        for(Verre& v: verres)
+        {
+            v.update();
+        }
+
         bool verresPleins = true;
         for (unsigned int i = 0; i < verres.size(); ++i)
         {
