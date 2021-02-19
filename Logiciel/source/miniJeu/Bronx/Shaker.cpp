@@ -24,7 +24,7 @@ void Shaker::updateOnGrab()
 
 	int dist = sqrt(pow(getPosition().x - lastpos.x, 2) + pow(getPosition().y - lastpos.y, 2));
 
-	if (dist > 20)
+	if (dist > 30)
 	{
 		shakeAmount += dist;
 	}

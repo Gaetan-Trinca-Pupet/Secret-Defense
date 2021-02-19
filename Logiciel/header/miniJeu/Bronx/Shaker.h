@@ -1,11 +1,11 @@
 #ifndef __SHAKER_H_
 #define __SHAKER_H_
 
-#include "../../Grabber.hpp"
+#include "../../GravityAffected.h"
 #include "../../AssetManager.h"
 #include <math.h>
 
-class Shaker: public Grabber::Grabbable
+class Shaker: public GravityAffected
 {
 public:
 	Shaker(sf::RenderWindow* w);
@@ -17,6 +17,7 @@ public:
 
 	virtual void onGrab();
 	virtual void updateOnGrab();
+
 
 private:
 

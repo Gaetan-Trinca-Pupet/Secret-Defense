@@ -25,6 +25,8 @@ public:
 
 private:
 
+    sf::Text hint;
+
     void placeObjects();
     static float getGroundLevel(sf::Vector2f pos);
 

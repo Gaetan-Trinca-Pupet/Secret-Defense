@@ -7,6 +7,8 @@ Bronx::Bronx::Bronx(AppData& appData)
 
 Bronx::Bronx::~Bronx()
 {
+    app.window.setMouseCursorVisible(true);
+
     for (Deliverable* i : ingredientsComestibles)
         delete i;
     for (Deliverable* i : ingredientsNonComestibles)
@@ -15,6 +17,14 @@ Bronx::Bronx::~Bronx()
 
 void Bronx::Bronx::setup()
 {
+    app.window.setMouseCursorVisible(false);
+
+    hint.setString("  Mettez les verres\n         au frigo");
+    hint.setFillColor(sf::Color::Black);
+    hint.setStyle(sf::Text::Bold);
+    hint.setCharacterSize(17);
+    hint.setLineSpacing(0.8);
+    hint.setFont(app.font);
 
     chrono.setTempsMax(120);
     hand.setSprite(AssetManager::getTexture("../ressource/hand.png"));
@@ -84,7 +94,7 @@ void Bronx::Bronx::placeObjects()
 {
 
     for (unsigned long long i(0); i < verres.size(); ++i)
-        verres[i].setPosition(180 + i * 50, 480);
+        verres[i].setPosition(180 + i * 50, 490);
 
     for (int i(0); i < 3; ++i)
     {
@@ -123,7 +133,9 @@ void Bronx::Bronx::placeObjects()
         }
     }
 
-    shaker.setPosition(35, 492);
+    shaker.setPosition(35, 490);
+
+    hint.setPosition(750, 130);
 }
 
 float Bronx::Bronx::getGroundLevel(sf::Vector2f pos)
@@ -134,6 +146,7 @@ float Bronx::Bronx::getGroundLevel(sf::Vector2f pos)
 void Bronx::Bronx::draw()
 {
     app.window.draw(backGround);
+    app.window.draw(hint);
 
     for (Deliverable* ingredient : ingredientsComestibles)
     {
@@ -181,9 +194,9 @@ void Bronx::Bronx::draw()
             app.window.draw(v);
     }
 
-    
-
     app.window.draw(chrono);
+
+    hand.draw(app.window);
 }
 
 void Bronx::Bronx::update()
@@ -196,7 +209,7 @@ void Bronx::Bronx::update()
 
     for (Deliverable& verre : verres)
         verre.update();
-
+    shaker.applyVelocity();
 
 
     hand.update(app.window);
@@ -243,6 +256,7 @@ void Bronx::Bronx::update()
                 ingredient->setCanBeGrabbed(true);
             }
             frigo.setOpened(false);
+            hint.setString("          Mettez les\n   ingrédients dans\n           le shaker");
         }
         break;
     }
@@ -288,6 +302,7 @@ void Bronx::Bronx::update()
                 if (ingredient->isStored())
                     ingredient->setCanBeGrabbed(false);
             }
+            hint.setString("\n     Agitez le shaker");
         }
         break;
     case 3:
@@ -295,6 +310,7 @@ void Bronx::Bronx::update()
         if(shaker.isShakingFinished())
         {
             ++etape;
+            hint.setString("          Sortez les\n     verres du frigo");
         }
         break;
 
@@ -314,6 +330,7 @@ void Bronx::Bronx::update()
         {
             ++etape;
             frigo.setOpened(false);
+            hint.setString("Servez");
         }
     }
     case 5:
