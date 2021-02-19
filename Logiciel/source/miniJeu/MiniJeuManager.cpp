@@ -14,7 +14,7 @@ MiniJeuManager::MiniJeuManager(AppData &app_):app(app_)
 
 void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
 {
-
+	reset();
 	buildWave(nbMiniJeu, nbBoss);
     while(app.lives>0 && app.window.isOpen())
     {
@@ -45,6 +45,7 @@ void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
 
 void MiniJeuManager::play(const std::string &title)
 {
+	reset();
     FactoryMiniJeu* factoryMiniJeu(nullptr);
     for(FactoryMiniJeu& f: listMiniJeu)
     {
@@ -138,4 +139,10 @@ void MiniJeuManager::addMiniJeu(MiniJeu *(*create_MiniJeu)(AppData &), const std
 void MiniJeuManager::addBoss(MiniJeu *(*create_MiniJeu)(AppData &), const std::string &title, const std::string &desc)
 {
     listBoss.push_back(FactoryMiniJeu((*create_MiniJeu),title,desc));
+}
+
+void MiniJeuManager::reset(){
+	app.difficulty=0;
+    app.score=0;
+    app.lives=3;
 }

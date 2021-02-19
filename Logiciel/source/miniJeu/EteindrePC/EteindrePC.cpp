@@ -48,7 +48,7 @@ void EteindrePC::EteindrePC::update(){
 	chrono.update();
 	laporte.update();
 	for(PC_base* pc : pcs)pc->update();
-	if(chrono.getTimePassed() > 15 || laporte.getPersoView().first->y < 0 || laporte.getPersoView().first->y > 540){
+	if(chrono.getTimePassed() > 15 || laporte.getPersoView().first->y < -70 || laporte.getPersoView().first->y > 540){
 		bool win(true);
 		if(laporte.getPersoView().first->x > 100){
 			win=false;

@@ -62,20 +62,18 @@ int main()
         std::cout<<"erreur loadFromFile"<<std::endl;
     }
 
-    unsigned int lastPlayed=0; //pour éviter que le même mini jeu soit joué 2 fois d'affilée
-
-    sf::Texture textureImg;
-    sf::Texture textureBg;
-    unsigned int selecteur;
-    unsigned int nbGamesFinished=0;
-	{
-		Menu::Menu menu(app);
+	Menu::Menu menu(app);
+	while(menu.getMenu() != Menu::Menus::quitter && app.window.isOpen()){
 		menu.play();
+		if(menu.getMenu() == Menu::Menus::jeu){
+			MiniJeuManager manager(app);
+			manager.addMiniJeu(createGifle, "Gifle", "DescriptionGifle");
+			manager.play("EteindrePC");
+			menu.setMenu(Menu::Menus::principal);
+		}
 	}
 
-    MiniJeuManager manager(app);
-    manager.addMiniJeu(createGifle, "Gifle", "DescriptionGifle");
-    manager.play();
+    
 
     return 0;
 }

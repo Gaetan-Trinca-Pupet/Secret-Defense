@@ -2,11 +2,15 @@
 
 Menu::Menu::Menu(AppData& appData) : app(appData){
 	connexion.setFont(app.font);
+	menuPrincipal.setFont(app.font);
+	menu = Menus::principal;
+	finished = false;
 }
 
 void Menu::Menu::play(){
+	finished = false;
 	app.window.setFramerateLimit(30);
-    while(app.window.isOpen()){ 
+    while(app.window.isOpen() && !finished){ 
         sf::Event event;
         while(app.window.pollEvent(event)){
             if(event.type == sf::Event::Closed){
@@ -37,9 +41,20 @@ void Menu::Menu::play(){
 }
 
 void Menu::Menu::update(){
-	connexion.update(app.window);
+	if(menu == Menus::connexion)connexion.update(app.window, menu);
+	else if(menu == Menus::principal)menuPrincipal.update(app.window, menu);
+	else if(menu == Menus::jeu || menu == Menus::quitter)finished=true;
 }
 
 void Menu::Menu::draw(){
-	connexion.draw(app.window);
+	if(menu == Menus::connexion)connexion.draw(app.window);
+	else if(menu == Menus::principal)menuPrincipal.draw(app.window);
+}
+
+Menu::Menus Menu::Menu::getMenu()const{
+	return menu;
+}
+
+void Menu::Menu::setMenu(const Menus m){
+	menu = m;
 }
