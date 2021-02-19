@@ -71,10 +71,10 @@ void Bronx::Bronx::setup()
         }
         ingredientsNonComestibles.push_back(new Deliverable(&AssetManager::getTexture(sprite), true));
     }
-        
+
 
     backGround.setTexture(AssetManager::getTexture("../ressource/Bronx/background.png"));
-    
+
     placeObjects();
 
     for (Verre& v : verres)
@@ -105,14 +105,14 @@ void Bronx::Bronx::placeObjects()
         }
     }
 
-    frigo=Door(683, 238, app, &AssetManager::getTexture("../ressource/Bronx/porte_frigo.png"));
+    frigo = Door(683, 238, app, &AssetManager::getTexture("../ressource/Bronx/porte_frigo.png"));
 
     std::vector<Deliverable*> ingredientsTmp;
-    for(Deliverable* ingredient : ingredientsComestibles)
+    for (Deliverable* ingredient : ingredientsComestibles)
     {
         ingredientsTmp.push_back(ingredient);
     }
-    for(Deliverable* ingredient : ingredientsNonComestibles)
+    for (Deliverable* ingredient : ingredientsNonComestibles)
     {
         ingredientsTmp.push_back(ingredient);
     }
@@ -213,10 +213,10 @@ void Bronx::Bronx::update()
 
 
     hand.update(app.window);
-    if(chrono.getTimePassed()>chrono.getTempsMax())
+    if (chrono.getTimePassed() > chrono.getTempsMax())
     {
-        app.lives-=1;
-        isFinished=true;
+        app.lives -= 1;
+        isFinished = true;
     }
 
     chrono.update();
@@ -224,39 +224,39 @@ void Bronx::Bronx::update()
 
     // PAS FINI
 
-    switch(etape)
+    switch (etape)
     {
     case 1:
     {
         frigo.update();
-        bool verresStockes=true;
-        for(unsigned int i=0; i<verres.size(); ++i)
+        bool verresStockes = true;
+        for (unsigned int i = 0; i < verres.size(); ++i)
         {
-            if(!verres[i].isDelivered())
+            if (!verres[i].isDelivered())
             {
-                verresStockes=false;
+                verresStockes = false;
                 break;
             }
         }
-        if(verresStockes==true)
+        if (verresStockes == true)
         {
             ++etape;
             for (Verre& verre : verres)
             {
                 verre.setCanBeGrabbed(false);
             }
-            for(Deliverable* ingredient : ingredientsComestibles)
+            for (Deliverable* ingredient : ingredientsComestibles)
             {
                 ingredient->setTarget(&shaker);
                 ingredient->setCanBeGrabbed(true);
             }
-            for(Deliverable* ingredient : ingredientsNonComestibles)
+            for (Deliverable* ingredient : ingredientsNonComestibles)
             {
                 ingredient->setTarget(&shaker);
                 ingredient->setCanBeGrabbed(true);
             }
             frigo.setOpened(false);
-            hint.setString("          Mettez les\n   ingrï¿½dients dans\n           le shaker");
+            hint.setString("          Mettez les\n   ingrédients dans\n           le shaker");
         }
         break;
     }
@@ -269,7 +269,7 @@ void Bronx::Bronx::update()
         for (int i(ingredientsComestibles.size()); i != 0 && ingredientsComestibles.size() != 0;)
         {
             --i;
-            if(ingredientsComestibles[i]->isDelivered())
+            if (ingredientsComestibles[i]->isDelivered())
             {
                 hand.remove(ingredientsComestibles[i]);
                 ingredientsComestibles.erase(ingredientsComestibles.begin() + i);
@@ -278,15 +278,15 @@ void Bronx::Bronx::update()
         for (int i(ingredientsNonComestibles.size()); i != 0 && ingredientsNonComestibles.size() != 0;)
         {
             --i;
-            if(ingredientsNonComestibles[i]->isDelivered())
+            if (ingredientsNonComestibles[i]->isDelivered())
             {
                 --app.lives;
-                isFinished=true;
+                isFinished = true;
                 break;
             }
         }
 
-        if(ingredientsComestibles.size()==0)
+        if (ingredientsComestibles.size() == 0)
         {
             ++etape;
             shaker.startShaking();
@@ -307,7 +307,7 @@ void Bronx::Bronx::update()
         break;
     case 3:
 
-        if(shaker.isShakingFinished())
+        if (shaker.isShakingFinished())
         {
             ++etape;
             hint.setString("          Sortez les\n     verres du frigo");
@@ -341,7 +341,7 @@ void Bronx::Bronx::update()
     case 5:
 
 
-        for(Verre& v: verres)
+        for (Verre& v : verres)
         {
             v.update();
         }
