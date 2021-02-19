@@ -10,7 +10,7 @@ GravityAffected::GravityAffected()
 void GravityAffected::onRelease()
 {
 	groundLevel = (*getGroundLevel)(getPosition());
-	
+	velocity = 0;
 }
 
 void GravityAffected::applyVelocity()
@@ -22,10 +22,7 @@ void GravityAffected::applyVelocity()
 	move(0, velocity * speed);
 
 	if (getPosition().y > groundLevel)
-	{
-		velocity = 0;
 		setPosition(getPosition().x, groundLevel);
-	}
 }
 
 void GravityAffected::setGetGroundLevelFunc(float (*_getGroundLevel)(sf::Vector2f))

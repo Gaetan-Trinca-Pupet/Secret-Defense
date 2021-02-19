@@ -8,7 +8,7 @@
 class Shaker: public Grabber::Grabbable
 {
 public:
-	Shaker();
+	Shaker(sf::RenderWindow* w);
 	virtual ~Shaker();
 
 	bool isShakingFinished();
@@ -20,6 +20,7 @@ public:
 
 private:
 
+	sf::RenderWindow* window;
 	bool canBeShaked;
 	sf::Vector2f lastpos;
 	int shakeAmount;

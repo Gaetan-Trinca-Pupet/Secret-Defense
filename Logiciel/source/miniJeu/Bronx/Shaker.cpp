@@ -1,12 +1,12 @@
 #include "..\..\..\header\miniJeu\Bronx\Shaker.h"
 
-Shaker::Shaker(): canBeShaked(false), shakeAmount(0)
+Shaker::Shaker(sf::RenderWindow* w): canBeShaked(false), shakeAmount(0), window(w)
 {
 	setTexture(&AssetManager::getTexture("../ressource/Bronx/shaker.png"));
 	setSize(sf::Vector2f(getTexture()->getSize()));
 	setOrigin(sf::Vector2f(0, getTexture()->getSize().y));
 
-	shakeTreshold = 30000; //TODO: ajuster avec difficulté
+	shakeTreshold = 25000; //TODO: ajuster avec difficulté
 }
 
 Shaker::~Shaker()

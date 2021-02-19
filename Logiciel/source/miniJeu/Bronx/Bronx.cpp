@@ -1,6 +1,7 @@
 #include "../../../header/miniJeu/Bronx/Bronx.h"
 
-Bronx::Bronx::Bronx(AppData& appData) : MiniJeu(appData), chrono(app.window), etape(1)
+Bronx::Bronx::Bronx(AppData& appData)
+    : MiniJeu(appData), chrono(app.window), etape(1), shaker(&app.window)
 {
 }
 
@@ -90,7 +91,7 @@ void Bronx::Bronx::placeObjects()
         placards.push_back(std::vector<Door>());
         for (int j(0); j < 3; ++j)
         {
-            placards[i].push_back(Door(0, 0, app, &AssetManager::getTexture("../ressource/Bronx/porte_placard.png"), true));
+            placards[i].push_back(Door(0, 0, app, &AssetManager::getTexture("../ressource/Bronx/porte_placard.png"), false));
         }
     }
 
@@ -207,9 +208,6 @@ void Bronx::Bronx::update()
 
     chrono.update();
 
-    for (std::vector<Door>& row : placards)
-        for (Door& d : row)
-            d.update();
 
     // PAS FINI
 
@@ -239,7 +237,6 @@ void Bronx::Bronx::update()
                 ingredient->setTarget(&shaker);
                 ingredient->setCanBeGrabbed(true);
             }
-
             for(Deliverable* ingredient : ingredientsNonComestibles)
             {
                 ingredient->setTarget(&shaker);
@@ -250,6 +247,11 @@ void Bronx::Bronx::update()
         break;
     }
     case 2:
+
+        for (std::vector<Door>& row : placards)
+            for (Door& d : row)
+                d.update();
+
         for (int i(ingredientsComestibles.size()); i != 0 && ingredientsComestibles.size() != 0;)
         {
             --i;
@@ -275,9 +277,12 @@ void Bronx::Bronx::update()
             ++etape;
             shaker.startShaking();
 
+            for (std::vector<Door>& row : placards)
+                for (Door& d : row)
+                    d.setOpened(false);
+
             for (Deliverable* ingredient : ingredientsNonComestibles)
             {
-
                 ingredient->setTarget(nullptr);
 
                 if (ingredient->isStored())
@@ -286,30 +291,43 @@ void Bronx::Bronx::update()
         }
         break;
     case 3:
+
         if(shaker.isShakingFinished())
         {
             ++etape;
         }
         break;
+
     case 4:
     {
-        bool verresPleins=true;
-        for(unsigned int i=0; i<verres.size();++i)
+        frigo.update();
+        bool verresSortis = true;
+        for (unsigned int i = 0; i < verres.size(); ++i)
         {
-            if(!verres[i].isFull())
+            if (verres[i].isStored())
             {
-                verresPleins=false;
+                verresSortis = false;
                 break;
             }
         }
-        if(verresPleins==true)
+        if (verresSortis == true)
+        {
             ++etape;
-        break;
+            frigo.setOpened(false);
+        }
     }
     case 5:
-        break;
-    case 6:
-        frigo.update();
+        bool verresPleins = true;
+        for (unsigned int i = 0; i < verres.size(); ++i)
+        {
+            if (!verres[i].isFull())
+            {
+                verresPleins = false;
+                break;
+            }
+        }
+        if (verresPleins == true)
+            ++etape;
         break;
     }
 
