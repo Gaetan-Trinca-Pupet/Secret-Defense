@@ -256,7 +256,7 @@ void Bronx::Bronx::update()
                 ingredient->setCanBeGrabbed(true);
             }
             frigo.setOpened(false);
-            hint.setString("          Mettez les\n   ingrédients dans\n           le shaker");
+            hint.setString("          Mettez les\n   ingrï¿½dients dans\n           le shaker");
         }
         break;
     }
@@ -311,6 +311,10 @@ void Bronx::Bronx::update()
         {
             ++etape;
             hint.setString("          Sortez les\n     verres du frigo");
+            for (Verre& verre : verres)
+            {
+                verre.setCanBeGrabbed(true);
+            }
         }
         break;
 
@@ -329,11 +333,19 @@ void Bronx::Bronx::update()
         if (verresSortis == true)
         {
             ++etape;
+            shaker.startFilling();
             frigo.setOpened(false);
             hint.setString("Servez");
         }
     }
     case 5:
+
+
+        for(Verre& v: verres)
+        {
+            v.update();
+        }
+
         bool verresPleins = true;
         for (unsigned int i = 0; i < verres.size(); ++i)
         {

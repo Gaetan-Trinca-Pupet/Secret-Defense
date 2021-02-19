@@ -1,6 +1,6 @@
 #include "..\..\..\header\miniJeu\Bronx\Shaker.h"
 
-Shaker::Shaker(sf::RenderWindow* w): canBeShaked(false), shakeAmount(0), window(w)
+Shaker::Shaker(sf::RenderWindow* w): canBeShaked(false), canFill(false), shakeAmount(0), window(w)
 {
 	setTexture(&AssetManager::getTexture("../ressource/Bronx/shaker.png"));
 	setSize(sf::Vector2f(getTexture()->getSize()));
@@ -28,9 +28,14 @@ void Shaker::updateOnGrab()
 	{
 		shakeAmount += dist;
 	}
-	std::cout << (isShakingFinished() ? "finis" : std::to_string(shakeAmount)) << std::endl;
 
-	lastpos = getPosition();
+    lastpos = getPosition();
+}
+
+//changer le onRelease et mettre quelque chose qui vérifie si on est au dessus d'un verre, sans avoir à le lâcher
+void Shaker::onRelease()
+{
+    if(!canFill) return;
 }
 
 bool Shaker::isShakingFinished()
@@ -42,5 +47,10 @@ void Shaker::startShaking()
 {
 	canBeShaked = true;
 
-	shakeAmount = 0;
+    shakeAmount = 0;
+}
+
+void Shaker::startFilling()
+{
+    canFill=true;
 }

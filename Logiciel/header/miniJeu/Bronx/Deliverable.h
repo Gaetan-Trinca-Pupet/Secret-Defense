@@ -2,6 +2,7 @@
 #define __DELIVERABLE_H_
 
 #include "../../GravityAffected.h"
+#include "../../AssetManager.h"
 
 class Deliverable : public GravityAffected
 {
