@@ -8,7 +8,8 @@ MiniJeuManager::MiniJeuManager(AppData &app_):app(app_)
     addMiniJeu([](AppData& app) -> MiniJeu * { return new CorrigeCopie::CorrigeCopie(app); }, "CorrigeCopie", "descriptionAmphiReponse");
     addMiniJeu([](AppData& app) -> MiniJeu * { return new DistribMiniTests(app); }, "DistribMiniTests", "descriptionAmphiReponse");
     addMiniJeu([](AppData& app) -> MiniJeu * { return new EteindrePC::EteindrePC(app); }, "EteindrePC", "descriptionAmphiReponse");
-    addMiniJeu([](AppData& app) -> MiniJeu * { return new memoryQuestions::MemoryQuestions(app); }, "MemoryQuestions", "descriptionAmphiReponse");
+    addMiniJeu([](AppData& app) -> MiniJeu* { return new memoryQuestions::MemoryQuestions(app); }, "MemoryQuestions", "descriptionAmphiReponse");
+    addMiniJeu([](AppData& app) -> MiniJeu* { return new Gifle::Gifle(app); }, "Gifle", /*app.option.secretMode ? */"descriptionGifle"/* : "descriptionOuEstSansMasque*/);
     addBoss([](AppData& app) -> MiniJeu* { return new TestProjetPtut::TestProjetPtut(app); }, "TestProjetPtut", "descriptionAmphiReponse");
     addBoss([](AppData& app) -> MiniJeu* { return new Bronx::Bronx(app); }, "Bronx", "descriptionBronx");
 }

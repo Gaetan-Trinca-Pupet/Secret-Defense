@@ -5,7 +5,7 @@
 
 
 
-Gifle::Gifle(AppData& appData) : MiniJeu(appData)
+Gifle::Gifle::Gifle(AppData& appData) : MiniJeu(appData)
 {
 	chrono = Chrono(app.window);
 	chrono.setTempsMax(22);
@@ -18,11 +18,11 @@ Gifle::Gifle(AppData& appData) : MiniJeu(appData)
 	background.setTexture(AssetManager::getTexture("../ressource/Gifle/background.png"));
 }
 
-Gifle::~Gifle()
+Gifle::Gifle::~Gifle()
 {
 }
 
-void Gifle::draw()
+void Gifle::Gifle::draw()
 {
 	app.window.draw(background);
 
@@ -34,7 +34,7 @@ void Gifle::draw()
 	app.window.draw(chrono);
 }
 
-void Gifle::update()
+void Gifle::Gifle::update()
 {
 	//Si le temps est écoulé, fin du minijeu
 	if (chrono.getTimePassed() > chrono.getTempsMax() )
@@ -76,7 +76,7 @@ void Gifle::update()
 	chrono.update();
 }
 
-void Gifle::creerPassants()
+void Gifle::Gifle::creerPassants()
 {
 
 	int numPasdeMasque(rand() % 4); //choix de celui sans masque

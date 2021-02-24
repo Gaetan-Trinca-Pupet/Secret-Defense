@@ -9,7 +9,6 @@
 #include "header/miniJeu/FactoryMiniJeu.h"
 #include "header/miniJeu/MiniJeu.h"
 #include "header/miniJeu/MiniJeuManager.h"
-#include "header/miniJeu/Gifle/Gifle.h"
 
 using namespace std;
 
