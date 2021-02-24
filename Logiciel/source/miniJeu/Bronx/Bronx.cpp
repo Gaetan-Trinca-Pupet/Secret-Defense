@@ -129,7 +129,6 @@ void Bronx::Bronx::placeObjects()
                 ingredientsTmp[i * 9 + j * 3 + k]->setPosition(36 + 211 * j + 16 + k * 42, 27 + i * 137 + 102);
                 ingredientsTmp[i * 9 + j * 3 + k]->setCanBeGrabbed(false);
             }
-
         }
     }
 

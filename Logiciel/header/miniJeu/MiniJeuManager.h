@@ -16,6 +16,7 @@
 #include "BranchePC/BranchePC.h"
 #include "CorrectTheCode/CorrectTheCode.h"
 #include "CorrigeCopie/CorrigeCopie.h"
+#include "Gifle/Gifle.h"
 #include "Bronx/Bronx.h"
 
 class MiniJeuManager{
