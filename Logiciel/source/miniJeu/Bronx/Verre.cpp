@@ -22,3 +22,8 @@ void Verre::setFull(bool val)
 {
     full=val;
 }
+
+bool Verre::isUnderShaker(const sf::Vector2f& point)
+{
+    return (getPosition().x <= point.x && point.x <= getPosition().x+getSize().x && getPosition().y>=point.y /*&& point.y>=getPosition().y-200*/);
+}

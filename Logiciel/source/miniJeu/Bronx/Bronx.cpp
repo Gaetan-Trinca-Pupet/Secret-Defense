@@ -336,10 +336,11 @@ void Bronx::Bronx::update()
             frigo.setOpened(false);
             hint.setString("Servez");
         }
+        break;
     }
     case 5:
 
-
+        shaker.fillUp(verres);
         for (Verre& v : verres)
         {
             v.update();
