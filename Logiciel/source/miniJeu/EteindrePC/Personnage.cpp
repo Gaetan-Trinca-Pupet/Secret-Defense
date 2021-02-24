@@ -1,5 +1,7 @@
 #include "../../../header/miniJeu/EteindrePC/Personnage.h"
 
+//test
+
 EteindrePC::Personnage::Personnage(){
 	direction = EteindrePC::Direction::Bas;
 	texture.loadFromFile("../ressource/EteindrePC/monsieurLAPORTE.png");
