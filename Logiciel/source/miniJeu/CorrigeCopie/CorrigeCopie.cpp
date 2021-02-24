@@ -14,171 +14,34 @@ std::vector<QuestRep> getTabQuest()
 	std::vector<std::string> tabRepVrai;
 	std::vector<std::string> tabRepFaux;
 
+	std::fstream file;
+    file.open("../ressource/CorrigeCopie/QuestionList.txt",std::ios::in);
+    if (file.is_open()) {
+        std::string line;
+		if (std::getline(file, line)) {
+			tabQuest.question = line.substr(2, std::string::npos);
+		}
+        while (std::getline(file, line)) {
+			if (line[0] == 'Q') {
+				tabQuest.tabRepVrai = tabRepVrai;
+				tabQuest.tabRepFaux = tabRepFaux;
 
-	//1
-	tabQuest.question = "Quel est la taille d'une adresse dans la mémoire";
-	tabRepVrai.push_back("8 octets");
-	tabRepVrai.push_back("64 bits");
-	tabRepFaux.push_back("8 bits");
-	tabRepFaux.push_back("64 octets");
-	tabRepFaux.push_back("16 bits");
-	tabRepFaux.push_back("1 octets");
-	tabRepFaux.push_back("52 bits");
-	tabRepFaux.push_back("42 octets");
+				tabRepVrai.resize(0);
+				tabRepFaux.resize(0);
 
-	tabQuest.tabRepVrai = tabRepVrai;
-	tabQuest.tabRepFaux = tabRepFaux;
-
-	tabRepVrai.resize(0);
-	tabRepFaux.resize(0);
-
-	tab.push_back(tabQuest);
-
-
-	//2
-	tabQuest.question = "Ecrivez une blague drole";
-	tabRepVrai.push_back("Un geek ne crie pas, il URL !");
-	tabRepVrai.push_back("Un geek ne descend pas du métro. Il libère la RAM.");
-	tabRepFaux.push_back("J'ai fait une blague sur Carrefour, mais elle n'a pas supermarché.");
-	tabRepFaux.push_back("Il n'y a pas de chauve à Ajaccio, mais à Calvi si.");
-
-	tabQuest.tabRepVrai = tabRepVrai;
-	tabQuest.tabRepFaux = tabRepFaux;
-
-	tabRepVrai.resize(0);
-	tabRepFaux.resize(0);
-
-	tab.push_back(tabQuest);
-
-
-	//3
-	tabQuest.question = "Par défaut, i++ ou ++i ?";
-	tabRepVrai.push_back("++i");
-	tabRepFaux.push_back("i++");
-
-	tabQuest.tabRepVrai = tabRepVrai;
-	tabQuest.tabRepFaux = tabRepFaux;
-
-	tabRepVrai.resize(0);
-	tabRepFaux.resize(0);
-
-	tab.push_back(tabQuest);
-
-
-	//4
-	tabQuest.question = "Je crée une fonction Puissance(const int& n) pour calculer la puissance de n, est-il conseillé d'utiliser la récursivité ?";
-	tabRepVrai.push_back("Je peux, mais il est préférable d'éviter.");
-	tabRepVrai.push_back("Non je fais une boucle.");
-	tabRepFaux.push_back("Oui, c'est une bonne idée.");
-	tabRepFaux.push_back("Non pour la calculer je demande à l'utilisateur de le faire.");
-
-	tabQuest.tabRepVrai = tabRepVrai;
-	tabQuest.tabRepFaux = tabRepFaux;
-
-	tabRepVrai.resize(0);
-	tabRepFaux.resize(0);
-
-	tab.push_back(tabQuest);
-
-
-	//5
-	tabQuest.question = "Marc LAPORTE est-il le meilleur professeur du monde ?";
-	tabRepVrai.push_back("Bien évidemment !");
-	tabRepVrai.push_back("Ouais, en plus il est beau !");
-	tabRepVrai.push_back("Tout simplement oui !");
-	tabRepFaux.push_back("Je préfère Java.");
-	tabRepFaux.push_back("Je préfère la BD.");
-	tabRepFaux.push_back("Non c'est mon papa le meilleur !!!!!!");
-	tabRepFaux.push_back("Bah non.");
-
-	tabQuest.tabRepVrai = tabRepVrai;
-	tabQuest.tabRepFaux = tabRepFaux;
-
-	tabRepVrai.resize(0);
-	tabRepFaux.resize(0);
-
-	tab.push_back(tabQuest);
-
-
-	//6
-	tabQuest.question = "Ecrivez le corps de la fonction find(n,tab) où on recherche n dans tab :";
-	tabRepVrai.push_back("for(unsigned i = 0 ; i < tab.size() ;++i)\nif (tab[i] == n) return i;");
-	tabRepFaux.push_back("if (n == tab) return true;");
-	tabRepFaux.push_back("if (n != tab) return false;");
-	tabRepFaux.push_back("return n;");
-
-	tabQuest.tabRepVrai = tabRepVrai;
-	tabQuest.tabRepFaux = tabRepFaux;
-
-	tabRepVrai.resize(0);
-	tabRepFaux.resize(0);
-
-	tab.push_back(tabQuest);
-
-	//7
-	tabQuest.question = "Combien de bits contient un octet ?";
-	tabRepVrai.push_back("8 bits");
-	tabRepFaux.push_back("64 bits");
-	tabRepFaux.push_back("Je sais pas.");
-
-	tabQuest.tabRepVrai = tabRepVrai;
-	tabQuest.tabRepFaux = tabRepFaux;
-
-	tabRepVrai.resize(0);
-	tabRepFaux.resize(0);
-
-	tab.push_back(tabQuest);
-
-
-	//8
-	tabQuest.question = "Combien d'octets dans un bits ?";
-	tabRepVrai.push_back("Pas possible.");
-	tabRepVrai.push_back("Un octets fait 8 bits mais l'inverse est impossible.");
-	tabRepFaux.push_back("8 octets");
-	tabRepFaux.push_back("64 octets");
-	tabRepFaux.push_back("128 octets");
-
-	tabQuest.tabRepVrai = tabRepVrai;
-	tabQuest.tabRepFaux = tabRepFaux;
-
-	tabRepVrai.resize(0);
-	tabRepFaux.resize(0);
-
-	tab.push_back(tabQuest);
-
-
-	//9
-	tabQuest.question = "Pète et répète sont sur un bateau, pète tombe à l'eau, qui c'est qui reste sur le bateau ?";
-	tabRepVrai.push_back("Répète.");
-	tabRepFaux.push_back("Pète.");
-	tabRepFaux.push_back("Petit bateau, qui navigue sur les flots.");
-
-	tabQuest.tabRepVrai = tabRepVrai;
-	tabQuest.tabRepFaux = tabRepFaux;
-
-	tabRepVrai.resize(0);
-	tabRepFaux.resize(0);
-
-	tab.push_back(tabQuest);
-
-	//10
-	tabQuest.question = "Écrivez un pointeur sur un int :";
-	tabRepVrai.push_back("int* n = new int();");
-	tabRepVrai.push_back("int i;\nint* n = &i;");
-	tabRepFaux.push_back("int n = new int();");
-	tabRepFaux.push_back("int* n = int();");
-	tabRepFaux.push_back("int* n = new unsigned();");
-
-	tabQuest.tabRepVrai = tabRepVrai;
-	tabQuest.tabRepFaux = tabRepFaux;
-
-	tabRepVrai.resize(0);
-	tabRepFaux.resize(0);
-
-	tab.push_back(tabQuest);
-
+				tab.push_back(tabQuest);
+				
+				tabQuest.question = line.substr(2, std::string::npos);
+			}
+			if (line[0] == 'V') {
+				tabRepVrai.push_back(line.substr(2, std::string::npos));
+			}
+			if (line[0] == 'F') {
+				tabRepFaux.push_back(line.substr(2, std::string::npos));
+			}
+		}
+	}
 	return tab;
-
 }
 
 void CorrigeCopie::CorrigeCopie::computeTabText()
@@ -226,7 +89,7 @@ void CorrigeCopie::CorrigeCopie::setup()
 
 	std::vector<QuestRep> tab = getTabQuest();
 
-	const unsigned nbQuestion = 2 + std::rand() % (tab.size()-2);
+    const unsigned nbQuestion = std::min(int(tab.size()), int(app.difficulty) + 2);
 	const unsigned short sizeQuest = 200;
 	
 	
@@ -242,12 +105,14 @@ void CorrigeCopie::CorrigeCopie::setup()
 		if (std::rand() % 2 == 0)
 		{
 			tabLibelle[i].VF = true;
-			tabLibelle[i].reponse.setString(tab[n].tabRepVrai[std::rand() % tab[n].tabRepVrai.size()]);
+			unsigned int randVal = std::rand() % tab[n].tabRepVrai.size();
+			tabLibelle[i].reponse.setString(sf::String::fromUtf8(tab[n].tabRepVrai[randVal].cbegin(),tab[n].tabRepVrai[randVal].cend()));
 		}
 		else
 		{
 			tabLibelle[i].VF = false;
-			tabLibelle[i].reponse.setString(tab[n].tabRepFaux[std::rand() % tab[n].tabRepFaux.size()]);
+			unsigned int randVal = std::rand() % tab[n].tabRepFaux.size();
+			tabLibelle[i].reponse.setString(sf::String::fromUtf8(tab[n].tabRepFaux[randVal].cbegin(),tab[n].tabRepFaux[randVal].cend()));
 		}
 
 		tab.erase(tab.begin() + n);

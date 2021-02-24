@@ -25,7 +25,8 @@ void TestProjetPtut::Spaceship::update(){
 		if(sprite.getPosition().x > positionLimit.y)sprite.setPosition(sf::Vector2f(positionLimit.y, sprite.getPosition().y));
 	}
 	shield.update();
-	if(controles->isActionClicked())shield.turnOnOff();
+	if(controles->isActionPressed() && shield.isActive())shield.turnOnOff();
+	else if(!controles->isActionPressed()  && !shield.isActive())shield.turnOnOff();
 	if(!shield.isActive() && cooldown.getElapsedTime().asSeconds() > cooldown_duration()){
 		cooldown.restart();
 		missiles->push_back(sprite.getPosition());

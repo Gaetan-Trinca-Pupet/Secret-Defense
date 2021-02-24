@@ -4,6 +4,7 @@
 TestProjetPtut::Spawner::Spawner(){
 	y_spawnpoint =  -std::rand()%1000/float(10);
 	waveFinished = false;
+	nbSpawnedInvadersCurrentWave = 0;
 }
 
 void TestProjetPtut::Spawner::update(){
@@ -12,7 +13,7 @@ void TestProjetPtut::Spawner::update(){
 		invaders->push_back(Invader(sf::Vector2f(windowWidth/2,y_spawnpoint)));
 		++nbSpawnedInvadersCurrentWave;
 		cooldown.restart();
-	}else if(nbSpawnedInvadersCurrentWave == nbMaxInvaderPerWave && invaders->size() == 0){
+	}else if(nbSpawnedInvadersCurrentWave >= nbMaxInvaderPerWave && invaders->size() == 0){
 		nbSpawnedInvadersCurrentWave = 0;
 		y_spawnpoint =  -std::rand()%1000/float(10);
 		waveFinished = true;
@@ -30,6 +31,7 @@ void TestProjetPtut::Spawner::setDifficulty(unsigned int difficulty){
 	nbMaxInvaderPerWave = difficulty + 2;
 	if(nbMaxInvaderPerWave > limitNbMaxInvaderPerWave)nbMaxInvaderPerWave = limitNbMaxInvaderPerWave;
 	if(difficulty > 10)cooldownDuration = limitMaxCooldownDuration-(difficulty-limitNbMaxInvaderPerWave)/float(10);
+	else cooldownDuration = limitMaxCooldownDuration;
 	if(cooldownDuration < limitMinCooldownDuration)cooldownDuration = limitMinCooldownDuration;
 	waveFinished = false;
 	cooldown.restart();

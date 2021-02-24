@@ -48,7 +48,7 @@ void EteindrePC::EteindrePC::update(){
 	chrono.update();
 	laporte.update();
 	for(PC_base* pc : pcs)pc->update();
-	if(chrono.getTimePassed() > 15){
+	if(chrono.getTimePassed() > 15 || laporte.getPersoView().first->y < 0 || laporte.getPersoView().first->y > 540){
 		bool win(true);
 		if(laporte.getPersoView().first->x > 100){
 			win=false;
@@ -103,7 +103,7 @@ void EteindrePC::EteindrePC::createPCs(){
 
 void EteindrePC::EteindrePC::initPCs(){
 	std::srand(std::time(nullptr));
-	int max_i(int((32.0*app.difficulty/(app.difficulty + 10.0))+1.0));
+    int max_i(int((32.0*app.difficulty/(app.difficulty + 10.0))+4.0)); //Nombre de PC qui seront allumés
 	if(max_i>33)max_i=33;
 	std::vector<PC_base*> pcs_copie = pcs;
 	for(int i(max_i);i >= 0;--i){

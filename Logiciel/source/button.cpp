@@ -45,7 +45,7 @@ void Button::draw(sf::RenderTarget &target, sf::RenderStates states) const
 void Button::setText(const std::string &s)
 {
     text.setPosition(text.getPosition().x + text.getLocalBounds().width/2, text.getPosition().y + text.getLocalBounds().height/2);
-    text.setString(s);
+    text.setString(sf::String::fromUtf8(s.begin(),s.end()));
     text.setPosition(text.getPosition().x - text.getLocalBounds().width/2, text.getPosition().y - text.getLocalBounds().height/2);
 }
 

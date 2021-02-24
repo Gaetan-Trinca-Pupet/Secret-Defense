@@ -1,0 +1,20 @@
+Est ce que je peux faire un cin ?
+Est ce que je peux faire un goto ?
+Vous pouvez repeter la question ?
+Je ne comprend pas pourquoi mon code ne marche pas ici.
+Pourquoi mon code ne marche pas ?
+Pourquoi vous avez mis cette condition ici ?
+Est ce qu'on aurait pas pu inverser les conditions ?
+Quelle est la difference entre & et && ?
+Quelle est la difference entre | et || ?
+Est ce que je peux faire un cout ?
+Je peux utiliser i++ ici ?
+Je peux utiliser ++i ici ?
+Quelle est la difference entre ++i et i++ ?
+Quelle est la difference entre un pointeur et une reference ?
+Quelle est la difference entre * et & ?
+Pourquoi on utilise const & ?
+Est ce qu'on utilise la recursivite ?
+Comment marche la recursivite ?
+On peut utiliser nos PC pour programmer ?
+Sur quoi sera le prochain controle ?

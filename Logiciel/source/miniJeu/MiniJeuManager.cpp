@@ -21,13 +21,14 @@ void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
     {
         if(wave.size()==0)
         {
-            ++app.difficulty;
+			++app.difficulty;
+            buildWave(nbMiniJeu, nbBoss);
         }
 
         {
             sf::Text txt;
             txt.setCharacterSize(17);
-            txt.setString(wave[wave.size()-1]->getDescription());
+            txt.setString(sf::String::fromUtf8(wave[wave.size()-1]->getDescription().cbegin(),wave[wave.size()-1]->getDescription().cend()));
             transition transtest (app, txt);
             transtest.play();
         }
@@ -38,7 +39,7 @@ void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
         if(lives==app.lives)
         {
             ++app.score;
-        }        
+        }
         wave.pop_back();
     }
 }
