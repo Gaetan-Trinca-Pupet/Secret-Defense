@@ -3,6 +3,7 @@
 
 #include "../../GravityAffected.h"
 #include "../../AssetManager.h"
+#include "Verre.h"
 #include <math.h>
 
 class Shaker: public GravityAffected
@@ -16,7 +17,7 @@ public:
 	void startShaking();
     void startFilling();
 
-    void fillUp();
+    void fillUp(std::vector<Verre>& verres);
 
 	virtual void onGrab();
 	virtual void updateOnGrab();
@@ -33,7 +34,7 @@ private:
 	int shakeTreshold;
 
 protected:
-    std::vector<sf::RectangleShape*> verresToFill;
+    std::vector<sf::FloatRect> hitBoxesToFill;
 
 };
 

@@ -10,6 +10,8 @@ public:
     void update();
     bool isFull();
     void setFull(bool val);
+    bool isUnderShaker(const sf::Vector2f& point);
+
 private:
     bool full;
 };

@@ -16,6 +16,11 @@ Shaker::~Shaker()
 void Shaker::onGrab()
 {
 	lastpos = getPosition();
+    if(canFill)
+    {
+        setRotation(90);
+        setPosition(getPosition().x,getPosition().y-getSize().y);
+    }
 }
 
 void Shaker::updateOnGrab()
@@ -36,6 +41,7 @@ void Shaker::updateOnGrab()
 void Shaker::onRelease()
 {
     if(!canFill) return;
+    setRotation(0);
 }
 
 bool Shaker::isShakingFinished()
@@ -53,4 +59,14 @@ void Shaker::startShaking()
 void Shaker::startFilling()
 {
     canFill=true;
+}
+
+void Shaker::fillUp(std::vector<Verre> &verres)
+{
+    sf::Vector2f point (getGlobalBounds().left+getGlobalBounds().width, getGlobalBounds().top+getGlobalBounds().height);
+    for (Verre &v : verres)
+    {
+        if(v.isUnderShaker(point))
+            v.setFull(true);
+    }
 }
