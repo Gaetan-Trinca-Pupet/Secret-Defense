@@ -39,11 +39,6 @@ void loadFramerateMode(FramerateManager& framerateManager){
 	}
 }
 
-MiniJeu* createGifle(AppData& app)
-{
-    return new Gifle(app);
-}
-
 int main()
 {
     srand(time(NULL));
@@ -63,7 +58,6 @@ int main()
     sf::Texture textureBg;
 
     MiniJeuManager manager(app);
-    manager.addMiniJeu(createGifle, "Gifle", "Giflez les étudiants ne portant pas de masque !\nContrôles : Souris");
     manager.play();
 
     return 0;
