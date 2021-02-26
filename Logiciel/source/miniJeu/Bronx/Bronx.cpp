@@ -356,7 +356,9 @@ void Bronx::Bronx::update()
             }
         }
         if (verresPleins == true)
-            ++etape;
+        {
+            isFinished=true;
+        }
         break;
     }
 

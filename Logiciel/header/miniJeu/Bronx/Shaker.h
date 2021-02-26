@@ -12,6 +12,8 @@ public:
 	Shaker(sf::RenderWindow* w);
 	virtual ~Shaker();
 
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
 	bool isShakingFinished();
 
 	void startShaking();
@@ -32,6 +34,9 @@ private:
 	sf::Vector2f lastpos;
 	int shakeAmount;
 	int shakeTreshold;
+    sf::Sprite pisse1;
+    sf::Sprite pisse2;
+    bool isFilling;
 
 protected:
     std::vector<sf::FloatRect> hitBoxesToFill;
