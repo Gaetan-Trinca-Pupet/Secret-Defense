@@ -6,9 +6,10 @@ MiniJeu::MiniJeu(AppData& appData) : app(appData), isFinished(false), background
 
 void MiniJeu::play(){
     isFinished=false;
+    over = false;
 	this->setup();
 	app.framerateManager.reset();
-    while(app.window.isOpen() && !isFinished){
+    while(app.window.isOpen() && !over){
         sf::Event event;
         while(app.window.pollEvent(event)){
             if(event.type == sf::Event::Closed){
@@ -30,7 +31,11 @@ void MiniJeu::play(){
 
         }
         app.window.clear(backgroundColor);
-        while(app.framerateManager.mustUpdate() && !isFinished)this->update();
+        while (app.framerateManager.mustUpdate())
+        {
+            if (!isFinished) this->update();
+            else this->updateOnEnd();
+        }
         this->draw();
         drawInterface();
         app.window.display();
@@ -39,6 +44,14 @@ void MiniJeu::play(){
 
 void MiniJeu::setup(){
 	
+}
+
+void MiniJeu::end(bool won)
+{
+    if (isFinished) return;
+    endDelay.restart();
+    isFinished = true;
+    if (!won) app.lives -= 1;
 }
 
 MiniJeu::~MiniJeu(){
@@ -51,6 +64,16 @@ sf::Color MiniJeu::getBackgroundColor()const{
 
 void MiniJeu::setBackgroundColor(const sf::Color& color){
 	backgroundColor = color;
+}
+
+void MiniJeu::updateOnEnd()
+{
+    if (endDelay.getElapsedTime().asSeconds() > 1.5)
+    {
+        over = true;
+        return;
+    }
+    update();
 }
 
 void MiniJeu::drawInterface(){

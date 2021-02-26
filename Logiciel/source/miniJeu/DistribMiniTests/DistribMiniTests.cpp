@@ -51,9 +51,7 @@ void DistribMiniTests::update()
 	//si le temps est écoulé ou  tout les étudiants ont un mini test, finir le minijeu
 	if (chrono.getTimePassed() > tempsMax || nbADistribuer == 0)
 	{
-		if (nbADistribuer != 0)
-			app.lives -= 1;
-		isFinished = true;
+		end(nbADistribuer == 0);
 	}
 
 	hand.update(app.window);

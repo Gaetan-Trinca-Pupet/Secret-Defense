@@ -136,15 +136,14 @@ void AmphiReponse::AmphiReponse::update()
 		}
 	if (nbQuestion <= 0)
 	{
-		isFinished = true;
+		end(true);
 	}
 	
 	chrono.update();
 	
 	if (chrono.getTimePassed() > chrono.getTempsMax() && ! isFinished)
 	{
-		app.lives -= 1;
-		isFinished = true;
+		end(false);
 	}
 }
 

@@ -79,10 +79,10 @@ void TestProjetPtut::TestProjetPtut::update(){
 	}
 	if(spaceship.getPv() <= 0){
 		--app.lives;
-		isFinished = true;
+		over = true;
 		app.window.setMouseCursorVisible(true);
 	}else if(chrono.getTimePassed() > 30){
-		isFinished = true;
+		over = true;
 		app.window.setMouseCursorVisible(true);
 	}
 	glitchEffect.update();

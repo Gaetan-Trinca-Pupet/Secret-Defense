@@ -60,8 +60,7 @@ void EteindrePC::EteindrePC::update(){
 				}
 			}
 		}
-		if(!win)--app.lives;
-		isFinished=true;
+		end(win);
 	}
 }
 

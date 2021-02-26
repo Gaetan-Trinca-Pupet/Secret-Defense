@@ -2,9 +2,6 @@
 #include <iostream>
 #include <time.h>
 
-
-
-
 Gifle::Gifle::Gifle(AppData& appData) : MiniJeu(appData)
 {
     chrono = Chrono(app.window);
@@ -37,8 +34,8 @@ void Gifle::Gifle::draw()
 void Gifle::Gifle::update()
 {
     //Si le temps est ?coul?, fin du minijeu
-    if (chrono.getTimePassed() > chrono.getTempsMax() )
-        isFinished = true;
+    if (chrono.getTimePassed() > chrono.getTempsMax())
+        end(true);
 
     //si le minijeu viens de commencer ou que le temps entre les vagues est ?coul?, en cr?er une
     if (passants.size() == 0 || clockPourDelaiVagues.getElapsedTime().asSeconds()  > timeBetweenWaves)
@@ -65,8 +62,7 @@ void Gifle::Gifle::update()
             if ( (!passants[i].isMasked() && !passants[i].isGifle()) ||
                  ( passants[i].isMasked() &&  passants[i].isGifle() && erreurCpt-- <= 0))
             {
-                app.lives -= 1;
-                isFinished = true;
+                end(false);
             }
 
             passants.erase(passants.begin() + i);
@@ -109,5 +105,3 @@ void Gifle::Gifle::creerPassants()
 
 
 }
-
-

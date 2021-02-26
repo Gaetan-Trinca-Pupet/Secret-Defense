@@ -94,10 +94,8 @@ void memoryQuestions::MemoryQuestions::update()
     }
     else {
         if (clock.getElapsedTime().asSeconds() > 2) {
-            if (result == lostBoth || result == lostLeft || result == lostRight) {
-                app.lives -= 1;
-            }
-            isFinished = true;
+
+            end(!(result == lostBoth || result == lostLeft || result == lostRight));
         }
     }
 }
