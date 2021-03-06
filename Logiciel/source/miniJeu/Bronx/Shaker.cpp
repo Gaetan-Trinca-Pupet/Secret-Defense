@@ -1,13 +1,14 @@
 #include "..\..\..\header\miniJeu\Bronx\Shaker.h"
 
-Shaker::Shaker(sf::RenderWindow* w): canBeShaked(false), canFill(false), shakeAmount(0), isFilling(false), window(w)
+Shaker::Shaker(sf::RenderWindow* w): canBeShaked(false), canFill(false), shakeAmount(0), incrementChute(0), incrementAnim(20), isFilling(false), window(w)
 {
 	setTexture(&AssetManager::getTexture("../ressource/Bronx/shaker.png"));
 	setSize(sf::Vector2f(getTexture()->getSize()));
 	setOrigin(sf::Vector2f(0, getTexture()->getSize().y));
 
-    pisse1.setTexture(AssetManager::getTexture("../ressource/Bronx/liquid_start.png"));
-    pisse2.setTexture(AssetManager::getTexture("../ressource/Bronx/liquid.png"));
+    liquide1.setTexture(AssetManager::getTexture("../ressource/Bronx/liquid_start.png"));
+    liquide2.setTexture(AssetManager::getTexture("../ressource/Bronx/liquid.png"));
+    liquide2.setTextureRect(sf::IntRect(0,0,15,60));
     AssetManager::getTexture("../ressource/Bronx/liquid.png").setRepeated(true);
 
 	shakeTreshold = 25000; //TODO: ajuster avec difficulté
@@ -22,8 +23,8 @@ void Shaker::draw(sf::RenderTarget &target, sf::RenderStates states) const
     target.draw(sf::RectangleShape(*this));
     if(isFilling)
     {
-        window->draw(pisse1);
-        window->draw(pisse2);
+        window->draw(liquide1);
+        window->draw(liquide2);
     }
 }
 
@@ -77,17 +78,28 @@ void Shaker::startFilling()
 
 void Shaker::fillUp(std::vector<Verre> &verres)
 {
+    isFilling=false;
+    if(!isGrabbed)
+        return;
     sf::Vector2f point (getGlobalBounds().left+getGlobalBounds().width, getGlobalBounds().top+getGlobalBounds().height);
     for (Verre &v : verres)
     {
-        isFilling=false;
         if(v.isUnderShaker(point))
         {
+            incrementChute+=20;
+            incrementAnim-=1;
+            if(incrementChute>v.getGlobalBounds().top-point.y+10)
+                incrementChute=v.getGlobalBounds().top-point.y+10;
+            if(incrementAnim<0)
+                incrementAnim=20;
             isFilling=true;
-            pisse1.setPosition(point.x+15,point.y);
+            liquide1.setPosition(point.x-10,point.y-25);
 
-            pisse2.setPosition(point.x+15,point.y+20);
+            liquide2.setPosition(point.x-10,point.y-5);
+            liquide2.setTextureRect(sf::IntRect(0,incrementAnim,15,incrementChute+10));
             v.setFull(true);
         }
     }
+    if(!isFilling)
+        incrementChute=0;
 }

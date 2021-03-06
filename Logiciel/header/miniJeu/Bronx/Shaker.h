@@ -34,9 +34,11 @@ private:
 	sf::Vector2f lastpos;
 	int shakeAmount;
 	int shakeTreshold;
-    sf::Sprite pisse1;
-    sf::Sprite pisse2;
+    sf::Sprite liquide1;
+    sf::Sprite liquide2;
     bool isFilling;
+    int incrementChute;
+    int incrementAnim;
 
 protected:
     std::vector<sf::FloatRect> hitBoxesToFill;

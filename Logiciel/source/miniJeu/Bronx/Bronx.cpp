@@ -339,7 +339,6 @@ void Bronx::Bronx::update()
         break;
     }
     case 5:
-
         shaker.fillUp(verres);
         for (Verre& v : verres)
         {
