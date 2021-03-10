@@ -55,6 +55,7 @@ void Shaker::updateOnGrab()
 //changer le onRelease et mettre quelque chose qui vérifie si on est au dessus d'un verre, sans avoir à le lâcher
 void Shaker::onRelease()
 {
+    GravityAffected::onRelease();
     if(!canFill) return;
     setRotation(0);
 }
