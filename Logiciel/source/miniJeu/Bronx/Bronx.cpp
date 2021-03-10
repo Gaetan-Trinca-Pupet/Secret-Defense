@@ -205,8 +205,7 @@ void Bronx::Bronx::update()
         ingredient->update();
         if(ingredient->getPosition().y > (app.window.getSize().y + ingredient->getSize().y))
         {
-            app.lives-=1;
-            isFinished=true;
+            end(false);
         }
     }
 
@@ -216,9 +215,7 @@ void Bronx::Bronx::update()
     for (Deliverable& verre : verres)
     {
         verre.update();
-<<<<<<< Updated upstream
     shaker.applyVelocity();
-=======
         if(verre.getPosition().y > (app.window.getSize().y + verre.getSize().y))
         {
             app.lives-=1;
@@ -226,7 +223,6 @@ void Bronx::Bronx::update()
         }
     }
 
->>>>>>> Stashed changes
 
 
     hand.update(app.window);
@@ -374,7 +370,7 @@ void Bronx::Bronx::update()
         }
         if (verresPleins == true)
         {
-            isFinished=true;
+            end(true);
         }
         break;
     }
