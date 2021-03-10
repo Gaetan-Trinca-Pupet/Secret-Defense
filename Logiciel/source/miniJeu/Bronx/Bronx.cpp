@@ -201,15 +201,27 @@ void Bronx::Bronx::draw()
 void Bronx::Bronx::update()
 {
     for (Deliverable* ingredient : ingredientsComestibles)
+    {
         ingredient->update();
+        if(ingredient->getPosition().y > (app.window.getSize().y + ingredient->getSize().y))
+        {
+            end(false);
+        }
+    }
 
     for (Deliverable* ingredient : ingredientsNonComestibles)
         ingredient->update();
 
     for (Deliverable& verre : verres)
+    {
         verre.update();
-    shaker.applyVelocity();
+        if(verre.getPosition().y > (app.window.getSize().y + verre.getSize().y))
+        {
+            end(false);
+        }
+    }
 
+    shaker.applyVelocity();
 
     hand.update(app.window);
     if (chrono.getTimePassed() > chrono.getTempsMax())
@@ -356,7 +368,7 @@ void Bronx::Bronx::update()
         }
         if (verresPleins == true)
         {
-            isFinished=true;
+            end(true);
         }
         break;
     }
