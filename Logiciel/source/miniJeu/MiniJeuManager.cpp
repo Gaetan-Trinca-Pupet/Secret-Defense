@@ -28,13 +28,14 @@ void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
         {
             sf::Text txt;
             txt.setCharacterSize(17);
-            txt.setString(sf::String::fromUtf8(wave[wave.size()-1]->getDescription().cbegin(),wave[wave.size()-1]->getDescription().cend()));
+            std::string transitionMessage = lastMsg + '\n' + wave[wave.size()-1]->getDescription();
+            txt.setString(sf::String::fromUtf8(transitionMessage.cbegin(),transitionMessage.cend()));
             transition transtest (app, txt);
             transtest.play();
         }
         MiniJeu* miniJeu=wave[wave.size()-1]->createNewMiniJeu(app);
         unsigned short int lives(app.lives);
-        miniJeu->play();
+        lastMsg = miniJeu->play();
         delete miniJeu;
         if(lives==app.lives)
         {

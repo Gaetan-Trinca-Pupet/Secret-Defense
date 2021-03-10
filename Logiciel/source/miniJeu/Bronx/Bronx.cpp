@@ -217,8 +217,7 @@ void Bronx::Bronx::update()
         verre.update();
         if(verre.getPosition().y > (app.window.getSize().y + verre.getSize().y))
         {
-            app.lives-=1;
-            isFinished=true;
+            end(false);
         }
     }
 

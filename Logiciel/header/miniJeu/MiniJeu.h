@@ -38,6 +38,7 @@ class MiniJeu{
 		bool isFinished;
 		bool over;
 		sf::Clock endDelay;
+        std::string endMsg = "";
 		
 		/**
 		*	setup is called once at the begining of play.
@@ -100,7 +101,7 @@ class MiniJeu{
 		*	Main loop of mini games.
 		*	@author Erwann Lubrano
 		*/
-        void play();
+        std::string play();
 		
 		/**
 		*	Destructor of MiniJeu
