@@ -212,6 +212,7 @@ void Bronx::Bronx::update()
     for (Deliverable* ingredient : ingredientsNonComestibles)
         ingredient->update();
 
+    int i=0;
     for (Deliverable& verre : verres)
     {
         verre.update();
@@ -219,6 +220,37 @@ void Bronx::Bronx::update()
         {
             end(false);
         }
+        if(!verre.getIsGrabbed())
+        {
+            for(int y=i+1; y<verres.size();++y)
+            {
+                if(verres[y].getIsGrabbed()) continue;
+                if(y!=i)
+                {
+                    if(verre.getGlobalBounds().intersects(verres[y].getGlobalBounds()))
+                    //if(verres[y].getGlobalBounds().left<verre.getGlobalBounds().left+verre.getGlobalBounds().width && verre.getGlobalBounds().left<verres[y].getGlobalBounds().left+verres[y].getGlobalBounds().width)
+                    {
+                        verre.setGetGroundLevelFunc([](sf::Vector2f position)->float{return (position.x < 695 && position.y < 501 ? 490 : 999999);});
+                        verres[y].setGetGroundLevelFunc([](sf::Vector2f position)->float{return (position.x < 695 && position.y < 501 ? 490 : 999999);});
+                        verre.setDelivered(false);
+                        verres[y].setDelivered(false);
+                        verre.setStored(false);
+                        verres[y].setStored(false);
+                        if(verre.getPosition().x<verres[y].getPosition().x)
+                        {
+                            verre.move(-5,0);
+                            verres[y].move(5,0);
+                        }
+                        else {
+                            verre.move(5,0);
+                            verres[y].move(-5,0);
+                        }
+
+                    }
+                }
+            }
+        }
+        i+=1;
     }
 
     shaker.applyVelocity();

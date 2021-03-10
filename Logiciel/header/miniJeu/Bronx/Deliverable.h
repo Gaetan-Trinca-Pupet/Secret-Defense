@@ -27,6 +27,8 @@ public:
 
 	bool isDelivered();
 
+    void setDelivered(bool state);
+
 private:
 	bool isGrabbable;
 

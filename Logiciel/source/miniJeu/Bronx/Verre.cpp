@@ -2,7 +2,7 @@
 
 Verre::Verre(sf::Texture *texture, bool _full):Deliverable(texture, false), full(_full)
 {
-
+    setFillColor(sf::Color(255,0,0));
 }
 
 void Verre::update()

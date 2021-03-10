@@ -12,7 +12,7 @@ namespace Grabber
 	class Grabbable : public sf::RectangleShape
 	{
 	protected:
-		bool isGrabbed;
+        bool isGrabbed;
 	public:
 		Grabbable(const int& X = 0, const int& Y = 0, const int& sx = 0, const int& sy = 0);
 		virtual ~Grabbable();
@@ -24,11 +24,12 @@ namespace Grabber
 		virtual bool canBeGrabbed();
 
 		virtual void setIsGrabbed(bool val);
-	};
+        bool getIsGrabbed() const;
+    };
 
-	class Grabber
-	{
-	private:
+    class Grabber
+    {
+    private:
 		std::vector<Grabbable*> tabGrabbable;
 		Grabbable* grabbed;
 
@@ -73,10 +74,16 @@ namespace Grabber
 
 	// Constructor of Grabbable++
 
-	inline Grabbable::Grabbable(const int& X, const int& Y, const int& sx, const int& sy) 
+    inline bool Grabbable::getIsGrabbed() const
+    {
+        return isGrabbed;
+    }
+
+inline Grabbable::Grabbable(const int& X, const int& Y, const int& sx, const int& sy)
 	{
 		setPosition(X, Y);
 		setSize(sf::Vector2f(sx, sy));
+        isGrabbed=false;
 	}
 
 	// Detructor of Grabbable
@@ -111,7 +118,7 @@ namespace Grabber
 	inline void Grabbable::setIsGrabbed(bool val)
 	{
 		isGrabbed = val;
-	}
+    }
 
 
 // Definition of Grabber
