@@ -4,7 +4,7 @@ MiniJeu::MiniJeu(AppData& appData) : app(appData), isFinished(false), background
 	AssetManager::getTexture("../ressource/image/coeur.png").setRepeated(true);
 }
 
-void MiniJeu::play(){
+std::string MiniJeu::play(){
     isFinished=false;
     over = false;
 	this->setup();
@@ -14,7 +14,7 @@ void MiniJeu::play(){
         while(app.window.pollEvent(event)){
             if(event.type == sf::Event::Closed){
                 app.window.close();
-                return;
+                return "";
             }else if(event.type == sf::Event::KeyPressed){
                 if(event.key.code == sf::Keyboard::F11){
                     if(!app.fullscreen){
@@ -40,6 +40,7 @@ void MiniJeu::play(){
         drawInterface();
         app.window.display();
     }
+    return endMsg;
 }
 
 void MiniJeu::setup(){

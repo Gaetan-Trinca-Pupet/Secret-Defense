@@ -24,6 +24,7 @@ class MiniJeuManager{
     std::vector<FactoryMiniJeu> listMiniJeu;
     std::vector<FactoryMiniJeu> listBoss;
     std::vector<FactoryMiniJeu*> wave;
+    std::string lastMsg = "Début de la partie";
 public:
     MiniJeuManager(AppData& app);
     void play(unsigned int nbMiniJeu=4, unsigned int nbBoss=1);
