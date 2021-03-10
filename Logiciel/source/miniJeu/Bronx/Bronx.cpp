@@ -201,14 +201,32 @@ void Bronx::Bronx::draw()
 void Bronx::Bronx::update()
 {
     for (Deliverable* ingredient : ingredientsComestibles)
+    {
         ingredient->update();
+        if(ingredient->getPosition().y > (app.window.getSize().y + ingredient->getSize().y))
+        {
+            app.lives-=1;
+            isFinished=true;
+        }
+    }
 
     for (Deliverable* ingredient : ingredientsNonComestibles)
         ingredient->update();
 
     for (Deliverable& verre : verres)
+    {
         verre.update();
+<<<<<<< Updated upstream
     shaker.applyVelocity();
+=======
+        if(verre.getPosition().y > (app.window.getSize().y + verre.getSize().y))
+        {
+            app.lives-=1;
+            isFinished=true;
+        }
+    }
+
+>>>>>>> Stashed changes
 
 
     hand.update(app.window);
