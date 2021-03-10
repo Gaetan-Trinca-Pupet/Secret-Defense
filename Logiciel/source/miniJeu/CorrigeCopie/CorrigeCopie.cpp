@@ -191,6 +191,7 @@ void CorrigeCopie::CorrigeCopie::update()
 				tabLibelle[i].isCorrect = true;
 			else if (not isFinished)
 			{
+                endMsg = "Votre correction est fausse.";
 				end(false);
 			}
 	}
@@ -205,6 +206,7 @@ void CorrigeCopie::CorrigeCopie::update()
 	
 	if (chrono.getTimePassed() > chrono.getTempsMax() && ! isFinished)
 	{
+        endMsg = "Le temps est écoulé.";
 		end(false);
 	}
 }

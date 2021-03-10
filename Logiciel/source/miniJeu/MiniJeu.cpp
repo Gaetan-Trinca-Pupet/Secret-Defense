@@ -53,6 +53,7 @@ void MiniJeu::end(bool won)
     endDelay.restart();
     isFinished = true;
     if (!won) app.lives -= 1;
+    else endMsg = "Victoire !";
 }
 
 MiniJeu::~MiniJeu(){

@@ -58,7 +58,7 @@ int main()
     sf::Texture textureBg;
 
     MiniJeuManager manager(app);
-    manager.play("Bronx");
+    manager.play();
 
     return 0;
 }

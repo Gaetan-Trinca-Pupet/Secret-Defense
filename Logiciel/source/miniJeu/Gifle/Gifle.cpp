@@ -62,6 +62,8 @@ void Gifle::Gifle::update()
             if ( (!passants[i].isMasked() && !passants[i].isGifle()) ||
                  ( passants[i].isMasked() &&  passants[i].isGifle() && erreurCpt-- <= 0))
             {
+                if (!passants[i].isMasked() && !passants[i].isGifle()) endMsg = "Vous avez laissé un passant non masqué passer.";
+                else endMsg = "Vous avez giflé un passant masqué.";
                 end(false);
             }
 

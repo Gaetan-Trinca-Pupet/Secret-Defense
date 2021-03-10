@@ -35,6 +35,7 @@ void CorrectTheCode::update()
                 end(true);
             }
             else {
+                endMsg = "La ligne était correcte.";
                 end(false);
                 codeline.setColor(sf::Color::Red);
             }
@@ -46,6 +47,7 @@ void CorrectTheCode::update()
             if (codeline.isWrong())
                 codeline.setColor(sf::Color::Red);
         }
+        endMsg = "Le temps est écoulé.";
         end(false);
     }
 }
