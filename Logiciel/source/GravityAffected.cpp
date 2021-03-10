@@ -11,7 +11,6 @@ void GravityAffected::onRelease()
 {
 	groundLevel = (*getGroundLevel)(getPosition());
 	velocity = 0;
-	std::cout << velocity << std::endl;
 }
 
 void GravityAffected::applyVelocity()

@@ -226,8 +226,7 @@ void Bronx::Bronx::update()
     hand.update(app.window);
     if (chrono.getTimePassed() > chrono.getTempsMax())
     {
-        app.lives -= 1;
-        isFinished = true;
+        end(false);
     }
 
     chrono.update();
@@ -291,8 +290,7 @@ void Bronx::Bronx::update()
             --i;
             if (ingredientsNonComestibles[i]->isDelivered())
             {
-                --app.lives;
-                isFinished = true;
+                end(false);
                 break;
             }
         }
