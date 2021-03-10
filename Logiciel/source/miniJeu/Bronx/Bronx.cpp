@@ -215,15 +215,13 @@ void Bronx::Bronx::update()
     for (Deliverable& verre : verres)
     {
         verre.update();
-    shaker.applyVelocity();
         if(verre.getPosition().y > (app.window.getSize().y + verre.getSize().y))
         {
-            app.lives-=1;
-            isFinished=true;
+            end(false);
         }
     }
 
-
+    shaker.applyVelocity();
 
     hand.update(app.window);
     if (chrono.getTimePassed() > chrono.getTempsMax())
