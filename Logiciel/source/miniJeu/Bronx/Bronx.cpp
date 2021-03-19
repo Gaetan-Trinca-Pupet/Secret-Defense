@@ -224,7 +224,7 @@ void Bronx::Bronx::update()
         {
             for(int y=i+1; y<verres.size();++y)
             {
-                if(verres[y].getIsGrabbed()) continue;
+                if(verres[y].getIsGrabbed() || verres[y].isDelivered()) continue;
                 if(y!=i)
                 {
                     if(verre.getGlobalBounds().intersects(verres[y].getGlobalBounds()))
@@ -232,10 +232,6 @@ void Bronx::Bronx::update()
                     {
                         verre.setGetGroundLevelFunc([](sf::Vector2f position)->float{return (position.x < 695 && position.y < 501 ? 490 : 999999);});
                         verres[y].setGetGroundLevelFunc([](sf::Vector2f position)->float{return (position.x < 695 && position.y < 501 ? 490 : 999999);});
-                        verre.setDelivered(false);
-                        verres[y].setDelivered(false);
-                        verre.setStored(false);
-                        verres[y].setStored(false);
                         if(verre.getPosition().x<verres[y].getPosition().x)
                         {
                             verre.move(-5,0);
@@ -263,8 +259,6 @@ void Bronx::Bronx::update()
 
     chrono.update();
 
-
-    // PAS FINI
 
     switch (etape)
     {

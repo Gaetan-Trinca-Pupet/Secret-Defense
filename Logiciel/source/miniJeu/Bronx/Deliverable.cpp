@@ -29,8 +29,6 @@ bool Deliverable::canBeGrabbed()
 
 void Deliverable::onRelease()
 {
-    std::cout<<"onRelease deliverable"<<std::endl;
-
 	if (targetZone != nullptr && getGlobalBounds().intersects(targetZone->getGlobalBounds()))
 	{
 		setStored(true);
