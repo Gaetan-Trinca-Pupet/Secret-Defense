@@ -10,6 +10,7 @@ void Verre::update()
     {
         setTexture(&AssetManager::getTexture("../ressource/Bronx/martini_plein.png"));
     }
+    Deliverable::update();
 }
 
 bool Verre::isFull()

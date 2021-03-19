@@ -46,6 +46,7 @@ void Deliverable::onGrab()
 
 void Deliverable::update()
 {
+    updateGroundLevel();
 	if(!stored) applyVelocity();
 }
 

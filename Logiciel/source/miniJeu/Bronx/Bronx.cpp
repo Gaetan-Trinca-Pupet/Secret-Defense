@@ -246,8 +246,8 @@ void Bronx::Bronx::update()
                     if(verre.getGlobalBounds().intersects(verres[y].getGlobalBounds()))
                     //if(verres[y].getGlobalBounds().left<verre.getGlobalBounds().left+verre.getGlobalBounds().width && verre.getGlobalBounds().left<verres[y].getGlobalBounds().left+verres[y].getGlobalBounds().width)
                     {
-                        verre.setGetGroundLevelFunc([](sf::Vector2f position)->float{return (position.x < 695 && position.y < 501 ? 490 : 999999);});
-                        verres[y].setGetGroundLevelFunc([](sf::Vector2f position)->float{return (position.x < 695 && position.y < 501 ? 490 : 999999);});
+                        //verre.setGetGroundLevelFunc([](sf::Vector2f position)->float{return (position.x < 695 && position.y < 501 ? 490 : 999999);});
+                        //verres[y].setGetGroundLevelFunc([](sf::Vector2f position)->float{return (position.x < 695 && position.y < 501 ? 490 : 999999);});
                         //verre.setDelivered(false);
                         //verres[y].setDelivered(false);
                         verre.setStored(false);
@@ -267,6 +267,43 @@ void Bronx::Bronx::update()
             }
         }
         i+=1;
+    }
+
+
+    int x=0;
+    for (Deliverable* &ingredient : ingredientsNonComestibles)
+    {
+        if(!ingredient->getIsGrabbed())
+        {
+            for(int y=x+1; y<ingredientsNonComestibles.size();++y)
+            {
+                if(ingredientsNonComestibles[y]->getIsGrabbed() || ingredientsNonComestibles[y]->isStored()) continue;
+                if(y!=x)
+                {
+                    if(ingredient->getGlobalBounds().intersects(ingredientsNonComestibles[y]->getGlobalBounds()))
+                    //if(verres[y].getGlobalBounds().left<verre.getGlobalBounds().left+verre.getGlobalBounds().width && verre.getGlobalBounds().left<verres[y].getGlobalBounds().left+verres[y].getGlobalBounds().width)
+                    {
+                        //verre.setGetGroundLevelFunc([](sf::Vector2f position)->float{return (position.x < 695 && position.y < 501 ? 490 : 999999);});
+                        //verres[y].setGetGroundLevelFunc([](sf::Vector2f position)->float{return (position.x < 695 && position.y < 501 ? 490 : 999999);});
+                        //verre.setDelivered(false);
+                        //ingredients[y].setDelivered(false);
+                        ingredient->setStored(false);
+                        ingredientsNonComestibles[y]->setStored(false);
+                        if(ingredient->getPosition().x<ingredientsNonComestibles[y]->getPosition().x)
+                        {
+                            ingredient->move(-5,0);
+                            ingredientsNonComestibles[y]->move(5,0);
+                        }
+                        else {
+                            ingredient->move(5,0);
+                            ingredientsNonComestibles[y]->move(-5,0);
+                        }
+
+                    }
+                }
+            }
+        }
+        x+=1;
     }
 
     shaker.applyVelocity();

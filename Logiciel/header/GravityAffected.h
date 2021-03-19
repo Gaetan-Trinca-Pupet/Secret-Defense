@@ -13,6 +13,7 @@ public:
 	void applyVelocity();
 	void putDown();
 	static void setGetGroundLevelFunc(float (*_getGroundLevel)(sf::Vector2f));
+    void updateGroundLevel();
 
 private:
 

@@ -9,7 +9,6 @@ GravityAffected::GravityAffected()
 
 void GravityAffected::onRelease()
 {
-	groundLevel = (*getGroundLevel)(getPosition());
 	velocity = 0;
 }
 
@@ -33,4 +32,9 @@ void GravityAffected::setGetGroundLevelFunc(float (*_getGroundLevel)(sf::Vector2
 void GravityAffected::applyGravity()
 {
 	velocity += 9.81;
+}
+
+void GravityAffected::updateGroundLevel()
+{
+    groundLevel = (*getGroundLevel)(getPosition());
 }
