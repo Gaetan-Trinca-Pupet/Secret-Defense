@@ -205,6 +205,7 @@ void Bronx::Bronx::update()
         ingredient->update();
         if(ingredient->getPosition().y > (app.window.getSize().y + ingredient->getSize().y))
         {
+            endMsg = "Vous avez fait tomber un ingrédient...";
             end(false);
         }
     }
@@ -218,6 +219,7 @@ void Bronx::Bronx::update()
         verre.update();
         if(verre.getPosition().y > (app.window.getSize().y + verre.getSize().y))
         {
+            endMsg = "Vous avez fait tomber un ingrédient...";
             end(false);
         }
         if(!verre.getIsGrabbed())
@@ -258,6 +260,7 @@ void Bronx::Bronx::update()
     hand.update(app.window);
     if (chrono.getTimePassed() > chrono.getTempsMax())
     {
+        endMsg = "Vous avez fait tomber un verre...";
         end(false);
     }
 
@@ -322,6 +325,7 @@ void Bronx::Bronx::update()
             --i;
             if (ingredientsNonComestibles[i]->isDelivered())
             {
+                endMsg = "Vous avez mis un mauvais ingrédient...";
                 end(false);
                 break;
             }

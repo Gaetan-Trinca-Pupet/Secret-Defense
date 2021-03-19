@@ -59,6 +59,5 @@ int main()
 
     MiniJeuManager manager(app);
     manager.play();
-
     return 0;
 }
