@@ -203,11 +203,22 @@ void Bronx::Bronx::update()
     for (Deliverable* ingredient : ingredientsComestibles)
     {
         ingredient->update();
-        if(ingredient->getPosition().y > (app.window.getSize().y + ingredient->getSize().y))
+        if(((ingredient->getGlobalBounds().top > app.window.getSize().y)
+            || (ingredient->getGlobalBounds().left > app.window.getSize().x)
+            || ((ingredient->getGlobalBounds().left+ingredient->getGlobalBounds().width) < 0))
+            && (!ingredient->getIsGrabbed()))
         {
             endMsg = "Vous avez fait tomber un ingrédient...";
             end(false);
         }
+    }
+
+    if(((shaker.getGlobalBounds().top > app.window.getSize().y)
+        || (shaker.getGlobalBounds().left > app.window.getSize().x)
+        || ((shaker.getGlobalBounds().left+shaker.getGlobalBounds().width) < 0))
+        && (!shaker.getIsGrabbed()))
+    {
+        end(false);
     }
 
     for (Deliverable* ingredient : ingredientsNonComestibles)
@@ -217,7 +228,10 @@ void Bronx::Bronx::update()
     for (Deliverable& verre : verres)
     {
         verre.update();
-        if(verre.getPosition().y > (app.window.getSize().y + verre.getSize().y))
+        if(((verre.getGlobalBounds().top > app.window.getSize().y)
+            || (verre.getGlobalBounds().left > app.window.getSize().x)
+            || ((verre.getGlobalBounds().left+verre.getGlobalBounds().width) < 0))
+            && (!verre.getIsGrabbed()))
         {
             endMsg = "Vous avez fait tomber un ingrédient...";
             end(false);
@@ -226,7 +240,7 @@ void Bronx::Bronx::update()
         {
             for(int y=i+1; y<verres.size();++y)
             {
-                if(verres[y].getIsGrabbed() || verres[y].isDelivered()) continue;
+                if(verres[y].getIsGrabbed() || verres[y].isStored()) continue;
                 if(y!=i)
                 {
                     if(verre.getGlobalBounds().intersects(verres[y].getGlobalBounds()))
@@ -234,6 +248,10 @@ void Bronx::Bronx::update()
                     {
                         verre.setGetGroundLevelFunc([](sf::Vector2f position)->float{return (position.x < 695 && position.y < 501 ? 490 : 999999);});
                         verres[y].setGetGroundLevelFunc([](sf::Vector2f position)->float{return (position.x < 695 && position.y < 501 ? 490 : 999999);});
+                        //verre.setDelivered(false);
+                        //verres[y].setDelivered(false);
+                        verre.setStored(false);
+                        verres[y].setStored(false);
                         if(verre.getPosition().x<verres[y].getPosition().x)
                         {
                             verre.move(-5,0);
