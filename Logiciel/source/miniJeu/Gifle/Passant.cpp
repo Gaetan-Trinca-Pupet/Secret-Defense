@@ -107,6 +107,7 @@ void Passant::actionOnClick()
 	sf::IntRect newTextureRect(sprite.getTextureRect());
 	newTextureRect.left += newTextureRect.width;
 	newTextureRect.top = 0;
+	//newTextureRect.top = app.option.secretMode ? newTextureRect.height : 0;
 	sprite.setTextureRect(newTextureRect);
 }
 

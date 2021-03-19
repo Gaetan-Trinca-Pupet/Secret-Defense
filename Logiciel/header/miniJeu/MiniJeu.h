@@ -36,12 +36,21 @@ class MiniJeu{
 	protected :
 		AppData& app;
 		bool isFinished;
+		bool over;
+		sf::Clock endDelay;
+        std::string endMsg = "";
 		
 		/**
 		*	setup is called once at the begining of play.
 		*	@author Erwann Lubrano
 		*/
 		virtual void setup();
+
+		/**
+		*	end is called when the minigame has been won or lost.
+		*	@author Ugo Larsonneur
+		*/
+		void end(bool won);
 		
 		/**
 		*	draw is called by play. It contains all graphics computings
@@ -53,7 +62,13 @@ class MiniJeu{
 		*	update is called by play.
 		*	@author Erwann Lubrano
 		*/
-		virtual void update()=0;
+		virtual void update() = 0;
+
+		/**
+		*	updateOnEnd is called by play when the minigame is won or lost.
+		*	@author Erwann Lubrano
+		*/
+		virtual void updateOnEnd();
 		
 		/**
 		*	@author Quentin Roubin
@@ -86,7 +101,7 @@ class MiniJeu{
 		*	Main loop of mini games.
 		*	@author Erwann Lubrano
 		*/
-        void play();
+        std::string play();
 		
 		/**
 		*	Destructor of MiniJeu

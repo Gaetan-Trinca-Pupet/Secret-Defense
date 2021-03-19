@@ -9,7 +9,6 @@
 #include "header/miniJeu/FactoryMiniJeu.h"
 #include "header/miniJeu/MiniJeu.h"
 #include "header/miniJeu/MiniJeuManager.h"
-#include "header/miniJeu/Gifle/Gifle.h"
 
 using namespace std;
 
@@ -40,11 +39,6 @@ void loadFramerateMode(FramerateManager& framerateManager){
 	}
 }
 
-MiniJeu* createGifle(AppData& app)
-{
-    return new Gifle(app);
-}
-
 int main()
 {
     srand(time(NULL));
@@ -64,8 +58,7 @@ int main()
     sf::Texture textureBg;
 
     MiniJeuManager manager(app);
-    manager.addMiniJeu(createGifle, "Gifle", "Giflez les étudiants ne portant pas de masque !\nContrôles : Souris");
-    manager.play();
+    manager.play("Bronx");
 
     return 0;
 }

@@ -2,20 +2,21 @@
 
 MiniJeuManager::MiniJeuManager(AppData &app_):app(app_)
 {
-    addMiniJeu([](AppData& app) -> MiniJeu * { return new AmphiReponse::AmphiReponse(app); }, "AmphiReponse", "Répondez aux questions !\nContrôles : Souris");
-    addMiniJeu([](AppData& app) -> MiniJeu * { return new correctthecode::CorrectTheCode(app); }, "CorrectTheCode", "Trouvez la ligne incorrecte !\nContrôles : Souris");
-    addMiniJeu([](AppData& app) -> MiniJeu * { return new BranchePC::BranchePC(app); }, "BranchePC", "Branchez les PC !\nContrôles : Souris");
-    addMiniJeu([](AppData& app) -> MiniJeu * { return new CorrigeCopie::CorrigeCopie(app); }, "CorrigeCopie", "Corrigez la copie !\nContrôles : Couris");
-    addMiniJeu([](AppData& app) -> MiniJeu * { return new DistribMiniTests(app); }, "DistribMiniTests", "Distribuez les tests !\nContrôles : Souris");
-    addMiniJeu([](AppData& app) -> MiniJeu * { return new EteindrePC::EteindrePC(app); }, "EteindrePC", "Éteignez les PC !\nContrôles : Pavé directionnel + Espace");
-    addMiniJeu([](AppData& app) -> MiniJeu * { return new memoryQuestions::MemoryQuestions(app); }, "MemoryQuestions", "Trouvez la questions déjà posée !\nContrôles : Souris");
-    addBoss([](AppData& app) -> MiniJeu * { return new TestProjetPtut::TestProjetPtut(app); }, "TestProjetPtut", "Testez le Space Invaders customisé !\nContrôles : Gauche, Droite, Espace");
+    addMiniJeu([](AppData& app) -> MiniJeu * { return new AmphiReponse::AmphiReponse(app); }, "AmphiReponse", "descriptionAmphiReponse");
+    addMiniJeu([](AppData& app) -> MiniJeu * { return new correctthecode::CorrectTheCode(app); }, "CorrectTheCode", "descriptionCorrectTheCode");
+    addMiniJeu([](AppData& app) -> MiniJeu * { return new BranchePC::BranchePC(app); }, "BranchePC", "descriptionAmphiReponse");
+    addMiniJeu([](AppData& app) -> MiniJeu * { return new CorrigeCopie::CorrigeCopie(app); }, "CorrigeCopie", "descriptionAmphiReponse");
+    addMiniJeu([](AppData& app) -> MiniJeu * { return new DistribMiniTests(app); }, "DistribMiniTests", "descriptionAmphiReponse");
+    addMiniJeu([](AppData& app) -> MiniJeu * { return new EteindrePC::EteindrePC(app); }, "EteindrePC", "descriptionAmphiReponse");
+    addMiniJeu([](AppData& app) -> MiniJeu* { return new memoryQuestions::MemoryQuestions(app); }, "MemoryQuestions", "descriptionAmphiReponse");
+    addMiniJeu([](AppData& app) -> MiniJeu* { return new Gifle::Gifle(app); }, "Gifle", /*app.option.secretMode ? */"descriptionGifle"/* : "descriptionOuEstSansMasque*/);
+    addBoss([](AppData& app) -> MiniJeu* { return new TestProjetPtut::TestProjetPtut(app); }, "TestProjetPtut", "descriptionAmphiReponse");
+    addBoss([](AppData& app) -> MiniJeu* { return new Bronx::Bronx(app); }, "Bronx", "descriptionBronx");
 }
 
 void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
 {
-
-	buildWave(nbMiniJeu, nbBoss);
+    buildWave(nbMiniJeu, nbBoss);
     while(app.lives>0 && app.window.isOpen())
     {
         if(wave.size()==0)
@@ -27,13 +28,14 @@ void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
         {
             sf::Text txt;
             txt.setCharacterSize(17);
-            txt.setString(sf::String::fromUtf8(wave[wave.size()-1]->getDescription().cbegin(),wave[wave.size()-1]->getDescription().cend()));
+            std::string transitionMessage = lastMsg + '\n' + wave[wave.size()-1]->getDescription();
+            txt.setString(sf::String::fromUtf8(transitionMessage.cbegin(),transitionMessage.cend()));
             transition transtest (app, txt);
             transtest.play();
         }
         MiniJeu* miniJeu=wave[wave.size()-1]->createNewMiniJeu(app);
         unsigned short int lives(app.lives);
-        miniJeu->play();
+        lastMsg = miniJeu->play();
         delete miniJeu;
         if(lives==app.lives)
         {

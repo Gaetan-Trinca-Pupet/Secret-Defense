@@ -72,15 +72,15 @@ void BranchePC::BranchePC::update()
 		}
 	if (nbPrise <= 0)
 	{
-		isFinished = true;
+		end(true);
 	}
 	
 	chrono.update();
 	
 	if (chrono.getTimePassed() > chrono.getTempsMax() && ! isFinished)
 	{
-		app.lives -= 1;
-		isFinished = true;
+        endMsg = "Le temps est écoulé.";
+		end(false);
 	}
 }
 

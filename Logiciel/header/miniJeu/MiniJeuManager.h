@@ -16,12 +16,15 @@
 #include "BranchePC/BranchePC.h"
 #include "CorrectTheCode/CorrectTheCode.h"
 #include "CorrigeCopie/CorrigeCopie.h"
+#include "Gifle/Gifle.h"
+#include "Bronx/Bronx.h"
 
 class MiniJeuManager{
     AppData& app;
     std::vector<FactoryMiniJeu> listMiniJeu;
     std::vector<FactoryMiniJeu> listBoss;
     std::vector<FactoryMiniJeu*> wave;
+    std::string lastMsg = "Début de la partie";
 public:
     MiniJeuManager(AppData& app);
     void play(unsigned int nbMiniJeu=4, unsigned int nbBoss=1);
