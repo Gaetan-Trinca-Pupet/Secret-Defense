@@ -33,10 +33,13 @@ void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
             transition transtest (app, txt);
             transtest.play();
         }
+
         MiniJeu* miniJeu=wave[wave.size()-1]->createNewMiniJeu(app);
         unsigned short int lives(app.lives);
         lastMsg = miniJeu->play();
         delete miniJeu;
+
+
         if(lives==app.lives)
         {
             ++app.score;
@@ -47,6 +50,9 @@ void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
 
 void MiniJeuManager::play(const std::string &title)
 {
+
+
+
     FactoryMiniJeu* factoryMiniJeu(nullptr);
     for(FactoryMiniJeu& f: listMiniJeu)
     {
@@ -72,13 +78,14 @@ void MiniJeuManager::play(const std::string &title)
         {
             sf::Text txt;
             txt.setCharacterSize(17);
-            txt.setString(factoryMiniJeu->getDescription());
+            std::string transitionMessage = lastMsg + '\n' + factoryMiniJeu->getDescription();
+            txt.setString(sf::String::fromUtf8(transitionMessage.cbegin(), transitionMessage.cend()));
             transition transtest (app, txt);
             transtest.play();
         }
         MiniJeu* miniJeu=factoryMiniJeu->createNewMiniJeu(app);
         unsigned short int lives(app.lives);
-        miniJeu->play();
+        lastMsg = miniJeu->play();
         delete miniJeu;
         if(lives==app.lives)
         {

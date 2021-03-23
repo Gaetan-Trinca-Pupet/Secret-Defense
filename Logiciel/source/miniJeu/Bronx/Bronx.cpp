@@ -431,7 +431,7 @@ void Bronx::Bronx::update()
             ++etape;
             shaker.startFilling();
             frigo.setOpened(false);
-            hint.setString("Servez");
+            hint.setString("\n      Servez");
         }
         break;
     }
