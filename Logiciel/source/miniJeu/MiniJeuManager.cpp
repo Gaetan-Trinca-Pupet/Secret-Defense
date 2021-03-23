@@ -41,8 +41,9 @@ void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
             transition transtest (app, txt);
             transtest.play();
         }
-
+        std::cout<<"size: "<<wave.size()<<std::endl;
         MiniJeu* miniJeu=wave[wave.size()-1]->createNewMiniJeu(app);
+        wave.pop_back();
         unsigned short int lives(app.lives);
 
         if(!app.mainMusique.openFromFile(std::string("../ressource/audio/etapes/minijeu")+phaseMusique+".wav"))
@@ -61,7 +62,7 @@ void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
         {
             ++app.score;
         }
-        wave.pop_back();
+
     }
 }
 
@@ -130,7 +131,7 @@ void MiniJeuManager::buildWave(unsigned int nbMiniJeu, unsigned int nbBoss)
     }
     for(unsigned int i=0;i<minVal;++i){
         unsigned int r=rand()%tabChoix.size();
-        wave.push_back(&listBoss[r]);
+        wave.push_back(&listBoss[tabChoix[r]]);
         tabChoix.erase(tabChoix.begin()+r);
     }
 
@@ -148,7 +149,7 @@ void MiniJeuManager::buildWave(unsigned int nbMiniJeu, unsigned int nbBoss)
     }
     for(unsigned int i=0;i<minVal;++i){
         unsigned int r=rand()%tabChoix.size();
-        wave.push_back(&listMiniJeu[r]);
+        wave.push_back(&listMiniJeu[tabChoix[r]]);
         tabChoix.erase(tabChoix.begin()+r);
     }
 
