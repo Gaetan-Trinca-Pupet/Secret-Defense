@@ -2,6 +2,8 @@
 
 MiniJeuManager::MiniJeuManager(AppData &app_):app(app_)
 {
+    phaseMusique='1';
+
     addMiniJeu([](AppData& app) -> MiniJeu * { return new AmphiReponse::AmphiReponse(app); }, "AmphiReponse", "descriptionAmphiReponse");
     addMiniJeu([](AppData& app) -> MiniJeu * { return new correctthecode::CorrectTheCode(app); }, "CorrectTheCode", "descriptionCorrectTheCode");
     addMiniJeu([](AppData& app) -> MiniJeu * { return new BranchePC::BranchePC(app); }, "BranchePC", "descriptionAmphiReponse");
@@ -30,12 +32,27 @@ void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
             txt.setCharacterSize(17);
             std::string transitionMessage = lastMsg + '\n' + wave[wave.size()-1]->getDescription();
             txt.setString(sf::String::fromUtf8(transitionMessage.cbegin(),transitionMessage.cend()));
+            app.mainMusique.stop();
+            if(!app.mainMusique.openFromFile("../ressource/audio/transition.wav"))
+                std::cerr<<"erreur openFromFile musique de transition"<<std::endl;
+
+            app.mainMusique.setLoop(false);
+            app.mainMusique.play();
             transition transtest (app, txt);
             transtest.play();
         }
 
         MiniJeu* miniJeu=wave[wave.size()-1]->createNewMiniJeu(app);
         unsigned short int lives(app.lives);
+
+        if(!app.mainMusique.openFromFile(std::string("../ressource/audio/etapes/minijeu")+phaseMusique+".wav"))
+            std::cerr<<"erreur openFromFile audio"<<std::endl;
+        app.mainMusique.play();
+        app.mainMusique.setLoop(true);
+
+        if(++phaseMusique>'5')
+            phaseMusique='1';
+
         lastMsg = miniJeu->play();
         delete miniJeu;
 
@@ -122,7 +139,6 @@ void MiniJeuManager::buildWave(unsigned int nbMiniJeu, unsigned int nbBoss)
     {
         tabChoix[i]=i;
     }
-
 
     if(nbMiniJeu<listMiniJeu.size()){
         minVal=nbMiniJeu;

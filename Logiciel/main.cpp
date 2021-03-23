@@ -59,10 +59,11 @@ int main()
 
     MiniJeuManager manager(app);
     if(!app.mainMusique.openFromFile("../ressource/audio/etapes/minijeu1.wav"))
-        std::cout<<"erreur openFromFile audio"<<std::endl;
-    app.mainMusique.play();
+        std::cerr<<"erreur openFromFile audio"<<std::endl;
+    app.mainMusique.setVolume(50);
     app.mainMusique.setLoop(true);
-    manager.play("Bronx");
+    app.mainMusique.play();
+    manager.play();
 
     return 0;
 }

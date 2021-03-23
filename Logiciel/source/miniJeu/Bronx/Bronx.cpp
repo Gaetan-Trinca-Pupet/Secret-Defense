@@ -3,6 +3,7 @@
 Bronx::Bronx::Bronx(AppData& appData)
     : MiniJeu(appData), chrono(app.window), etape(1), shaker(&app.window)
 {
+
 }
 
 Bronx::Bronx::~Bronx()
@@ -17,6 +18,13 @@ Bronx::Bronx::~Bronx()
 
 void Bronx::Bronx::setup()
 {
+    app.mainMusique.stop();
+    if(!app.mainMusique.openFromFile("../ressource/audio/bronx.wav"))
+        std::cerr<<"erreur openFromFile musique de bronx"<<std::endl;
+
+    app.mainMusique.setLoop(true);
+    app.mainMusique.play();
+
     app.window.setMouseCursorVisible(false);
 
     hint.setString("  Mettez les verres\n         au frigo");
