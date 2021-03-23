@@ -2,20 +2,23 @@
 #define __TEXTFIELD_H_
 
 #include <SFML/Network.hpp>
+#include <iostream>
+#include <sstream>
 
+typedef std::pair<std::string, int> Score;
 
 class ScoreServer
 {
 public:
 
+	static bool error;
 	static std::string name;
-	static bool sendScore(int score);
-	static bool getBestScore();
-	static std::vector<std::pair<std::string, int>> get10BestScores();
+	static void sendScore(int score);
+	static int getBestScore();
+	static std::vector<Score> get10BestScores();
 
 private:
-	static sf::TcpSocket serverSocket;
-	static bool connect();
+	static sf::Http server;
 };
 
 
