@@ -22,6 +22,7 @@ struct AppData{
     unsigned short int difficulty;
     unsigned short int lives;
     bool fullscreen;
+    sf::Music mainMusique;
 };
 
 

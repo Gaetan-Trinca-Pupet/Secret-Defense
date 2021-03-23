@@ -58,6 +58,10 @@ int main()
     sf::Texture textureBg;
 
     MiniJeuManager manager(app);
+    if(!app.mainMusique.openFromFile("../ressource/audio/etapes/minijeu1.wav"))
+        std::cout<<"erreur openFromFile audio"<<std::endl;
+    app.mainMusique.play();
+    app.mainMusique.setLoop(true);
     manager.play("Bronx");
 
     return 0;
