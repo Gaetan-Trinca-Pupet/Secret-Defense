@@ -72,6 +72,12 @@ void Bronx::Bronx::setup()
         ingredientsNonComestibles.push_back(new Deliverable(&AssetManager::getTexture(sprite), true));
     }
 
+    ingredients = ingredientsComestibles;
+    for(int i=0; i<ingredientsNonComestibles.size(); ++i)
+    {
+        ingredients.push_back(ingredientsNonComestibles[i]);
+    }
+
 
     backGround.setTexture(AssetManager::getTexture("../ressource/Bronx/background.png"));
 
@@ -271,32 +277,27 @@ void Bronx::Bronx::update()
 
 
     int x=0;
-    for (Deliverable* &ingredient : ingredientsNonComestibles)
+    for (Deliverable* &ingredient : ingredients)
     {
         if(!ingredient->getIsGrabbed())
         {
-            for(int y=x+1; y<ingredientsNonComestibles.size();++y)
+            for(int y=x+1; y<ingredients.size();++y)
             {
-                if(ingredientsNonComestibles[y]->getIsGrabbed() || ingredientsNonComestibles[y]->isStored()) continue;
+                if(ingredients[y]->getIsGrabbed() || ingredients[y]->isStored()) continue;
                 if(y!=x)
                 {
-                    if(ingredient->getGlobalBounds().intersects(ingredientsNonComestibles[y]->getGlobalBounds()))
-                    //if(verres[y].getGlobalBounds().left<verre.getGlobalBounds().left+verre.getGlobalBounds().width && verre.getGlobalBounds().left<verres[y].getGlobalBounds().left+verres[y].getGlobalBounds().width)
+                    if(ingredient->getGlobalBounds().intersects(ingredients[y]->getGlobalBounds()))
                     {
-                        //verre.setGetGroundLevelFunc([](sf::Vector2f position)->float{return (position.x < 695 && position.y < 501 ? 490 : 999999);});
-                        //verres[y].setGetGroundLevelFunc([](sf::Vector2f position)->float{return (position.x < 695 && position.y < 501 ? 490 : 999999);});
-                        //verre.setDelivered(false);
-                        //ingredients[y].setDelivered(false);
                         ingredient->setStored(false);
-                        ingredientsNonComestibles[y]->setStored(false);
-                        if(ingredient->getPosition().x<ingredientsNonComestibles[y]->getPosition().x)
+                        ingredients[y]->setStored(false);
+                        if(ingredient->getPosition().x<ingredients[y]->getPosition().x)
                         {
                             ingredient->move(-5,0);
-                            ingredientsNonComestibles[y]->move(5,0);
+                            ingredients[y]->move(5,0);
                         }
                         else {
                             ingredient->move(5,0);
-                            ingredientsNonComestibles[y]->move(-5,0);
+                            ingredients[y]->move(-5,0);
                         }
 
                     }
@@ -305,6 +306,7 @@ void Bronx::Bronx::update()
         }
         x+=1;
     }
+
 
     shaker.applyVelocity();
 

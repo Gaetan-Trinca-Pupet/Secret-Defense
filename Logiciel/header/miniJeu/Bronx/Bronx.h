@@ -42,6 +42,7 @@ private:
     std::vector<Verre> verres;
     std::vector<Deliverable*> ingredientsComestibles;
     std::vector<Deliverable*> ingredientsNonComestibles;
+    std::vector<Deliverable*> ingredients;
     Shaker shaker;
     std::vector<std::vector<Door>> placards;
     Door frigo;
