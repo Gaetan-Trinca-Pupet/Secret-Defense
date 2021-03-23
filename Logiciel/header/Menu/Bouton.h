@@ -6,10 +6,11 @@
 #include "MenusEnum.h"
 
 namespace Menu{
+	/*
 	enum background_type{
 		color,
 		texture
-	};
+	};*/
 	
 	class Bouton{
 		private :

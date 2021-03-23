@@ -5,6 +5,7 @@
 #include "Connexion.h"
 #include "MenusEnum.h"
 #include "MenuPrincipal.h"
+#include "MenuOptions.h"
 
 namespace Menu{
 	
@@ -14,6 +15,7 @@ namespace Menu{
 			AppData& app;
 			Connexion connexion;
 			MenuPrincipal menuPrincipal;
+			MenuOptions menuOptions;
 			Menus menu;
 			bool finished;
 			void update();

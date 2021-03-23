@@ -53,6 +53,23 @@ class Controles{
 		void setActionKey(sf::Keyboard::Key key);
 		
 		void shuffle();
+		
+		class Builder{
+			private :
+				sf::Keyboard::Key upKey;
+				sf::Keyboard::Key downKey;
+				sf::Keyboard::Key rightKey;
+				sf::Keyboard::Key leftKey;
+				sf::Keyboard::Key actionKey;
+			public :
+				Controles build();
+				Builder& setUpKey(sf::Keyboard::Key key);
+				Builder& setDownKey(sf::Keyboard::Key key);
+				Builder& setLeftKey(sf::Keyboard::Key key);
+				Builder& setRightKey(sf::Keyboard::Key key);
+				Builder& setActionKey(sf::Keyboard::Key key);
+				
+		};
 };
 
 #endif
