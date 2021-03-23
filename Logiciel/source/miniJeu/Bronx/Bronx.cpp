@@ -453,7 +453,7 @@ void Bronx::Bronx::update()
         }
         if (verresPleins == true)
         {
-            std::cout <<chrono.getTimePassed() << std::endl;
+            if(!over)std::cout << chrono.getTimePassed() << std::endl;
             end(true);
         }
         break;
