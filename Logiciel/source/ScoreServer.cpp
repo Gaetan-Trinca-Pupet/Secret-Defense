@@ -1,11 +1,14 @@
 #include "../header/ScoreServer.h"
 
-sf::Http ScoreServer::server = sf::Http("bite.com");
+std::string ScoreServer::name;
 
 bool ScoreServer::error = false;
 
 void ScoreServer::sendScore(int score)
 {
+	sf::Http server;
+	server.setHost("a.com");
+
 	sf::Http::Request request("/handleRequest.php");
 	request.setField("action", "addScore");
 	request.setField("score", std::to_string(score));
@@ -25,6 +28,9 @@ void ScoreServer::sendScore(int score)
 
 int ScoreServer::getBestScore()
 {
+	sf::Http server;
+	server.setHost("a.com");
+
 	sf::Http::Request request("/handleRequest.php");
 	request.setField("action", "getBestScore");
 	request.setField("name", name);
@@ -43,6 +49,9 @@ int ScoreServer::getBestScore()
 
 std::vector<Score> ScoreServer::get10BestScores()
 {
+	sf::Http server;
+	server.setHost("a.com");
+
 	sf::Http::Request request("/handleRequest.php");
 	request.setField("action", "get10BestScores");
 	sf::Http::Response response = server.sendRequest(request);
@@ -56,10 +65,9 @@ std::vector<Score> ScoreServer::get10BestScores()
 	}
 
 	std::stringstream stream(response.getBody());
-	std::string name;
 	while (true)
 	{
-		std::string name;
+
 		int score;
 		stream >> name;
 		stream >> score;

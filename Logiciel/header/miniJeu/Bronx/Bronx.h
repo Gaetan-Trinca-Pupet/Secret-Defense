@@ -25,6 +25,7 @@ public:
 
 private:
 
+
     sf::Text hint;
 
     void placeObjects();

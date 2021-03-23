@@ -4,6 +4,7 @@
 #include <SFML/Network.hpp>
 #include <iostream>
 #include <sstream>
+#include <string>
 
 typedef std::pair<std::string, int> Score;
 
@@ -17,8 +18,9 @@ public:
 	static int getBestScore();
 	static std::vector<Score> get10BestScores();
 
+
 private:
-	static sf::Http server;
+
 };
 
 
