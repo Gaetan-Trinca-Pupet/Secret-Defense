@@ -37,6 +37,7 @@ class Textfield{
         void setFocus(const bool& state);
 		bool isFocus()const;
 		bool isValidate()const;
+		void setString(const std::string& str);
 };
 
 

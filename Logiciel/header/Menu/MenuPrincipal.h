@@ -11,7 +11,7 @@ namespace Menu{
 	class MenuPrincipal{
 		private :
 			Bouton bt_quitter;
-			Bouton bt_connexion;
+			//Bouton bt_connexion;
 			Bouton bt_jouer;
 			Bouton bt_options;
 		public :

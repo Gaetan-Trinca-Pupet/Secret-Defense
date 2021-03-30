@@ -98,3 +98,7 @@ void FramerateManager::updateMode(){
 	nbUpdatePerSec = 0;
 	clock.restart();
 }
+
+FramerateMode FramerateManager::getFramerateMode()const{
+	return expectedMode;
+}

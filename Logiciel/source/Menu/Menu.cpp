@@ -1,7 +1,7 @@
 #include "../../header/Menu/Menu.h"
 
 Menu::Menu::Menu(AppData& appData) : app(appData){
-	connexion.setFont(app.font);
+	//connexion.setFont(app.font);
 	menuPrincipal.setFont(app.font);
 	menuOptions.setFont(app.font);
 	menuOptions.setup(app);
@@ -19,7 +19,7 @@ void Menu::Menu::play(){
                 app.window.close();
                 return;
             }else if(event.type == sf::Event::KeyPressed){
-				connexion.updateText();
+				menuOptions.updateText();
                 if(event.key.code == sf::Keyboard::F11){
 					
                     if(!app.fullscreen){
@@ -43,15 +43,15 @@ void Menu::Menu::play(){
 }
 
 void Menu::Menu::update(){
-	if(menu == Menus::connexion)connexion.update(app.window, menu);
-	else if(menu == Menus::principal)menuPrincipal.update(app.window, menu);
+	//if(menu == Menus::connexion)connexion.update(app.window, menu);
+	if(menu == Menus::principal)menuPrincipal.update(app.window, menu);
 	else if(menu == Menus::jeu || menu == Menus::quitter)finished=true;
 	else if(menu == Menus::options)menuOptions.update(app.window, menu, app);
 }
 
 void Menu::Menu::draw(){
-	if(menu == Menus::connexion)connexion.draw(app.window);
-	else if(menu == Menus::principal)menuPrincipal.draw(app.window);
+	//if(menu == Menus::connexion)connexion.draw(app.window);
+	if(menu == Menus::principal)menuPrincipal.draw(app.window);
 	else if(menu == Menus::options)menuOptions.draw(app.window);
 }
 

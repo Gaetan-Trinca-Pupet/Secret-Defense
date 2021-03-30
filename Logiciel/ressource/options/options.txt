@@ -1,2 +1,2 @@
-mode : dyn
-ctrl : zqsd
+mode : high
+pseudo :anonyme

@@ -13,7 +13,7 @@ namespace Menu{
 		
 		private :
 			AppData& app;
-			Connexion connexion;
+			//Connexion connexion;
 			MenuPrincipal menuPrincipal;
 			MenuOptions menuOptions;
 			Menus menu;

@@ -129,3 +129,7 @@ bool Textfield::isFocus()const{
 bool Textfield::isValidate()const{
 	return validate;
 }
+
+void Textfield::setString(const std::string& str){
+	text.setString(str);
+}

@@ -2,6 +2,7 @@
 #define __MINIJEU_H_
 
 #include <iostream>
+#include <string>
 
 #include <SFML/Graphics.hpp>
 
