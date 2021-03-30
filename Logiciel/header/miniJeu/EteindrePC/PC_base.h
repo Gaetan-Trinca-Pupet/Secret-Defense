@@ -8,6 +8,7 @@
 #include <SFML/System.hpp>
 
 #include "Personnage.h"
+#include "../../AssetManager.h"
 
 namespace EteindrePC{
 	

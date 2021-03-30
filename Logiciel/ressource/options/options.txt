@@ -1,2 +1,2 @@
-mode : high
-pseudo :anonyme
+mode : eco
+pseudo :il faut que jy pense

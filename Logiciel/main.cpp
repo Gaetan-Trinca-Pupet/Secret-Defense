@@ -43,7 +43,7 @@ int main()
 		if(menu.getMenu() == Menu::Menus::jeu){
 			MiniJeuManager manager(app);
 			manager.addMiniJeu(createGifle, "Gifle", "DescriptionGifle");
-			manager.play();
+			manager.play("EteindrePC");
 			menu.setMenu(Menu::Menus::principal);
 		}
 	}

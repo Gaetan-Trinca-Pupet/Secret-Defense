@@ -17,8 +17,8 @@ namespace EteindrePC{
 	enum Direction{
 		Bas=0,
 		Gauche=1,
-		Droite=2,
-		Haut=3
+		Droite=3,
+		Haut=2
 	};
 	
 	/**

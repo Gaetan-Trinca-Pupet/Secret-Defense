@@ -2,7 +2,6 @@
 #define __MENU__H_
 
 #include "../miniJeu/MiniJeu.h"
-#include "Connexion.h"
 #include "MenusEnum.h"
 #include "MenuPrincipal.h"
 #include "MenuOptions.h"
