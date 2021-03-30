@@ -9,6 +9,7 @@ GravityAffected::GravityAffected()
 
 void GravityAffected::onRelease()
 {
+	updateGroundLevel();
 	velocity = 0;
 }
 

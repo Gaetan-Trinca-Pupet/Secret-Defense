@@ -69,12 +69,13 @@ std::vector<Score> ScoreServer::get10BestScores()
 	{
 
 		int score;
-		stream >> name;
+		std::string nom;
+		std::getline(std::cin, nom);
 		stream >> score;
 		if (!stream.good())
 			break;
 
-		result.push_back(Score(name, score));
+		result.push_back(Score(nom, score));
 	}
 
 	error = false;

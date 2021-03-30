@@ -9,7 +9,7 @@
 class Shaker: public GravityAffected
 {
 public:
-	Shaker(sf::RenderWindow* w);
+	Shaker(sf::RenderWindow* w, int difficuty);
 	virtual ~Shaker();
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

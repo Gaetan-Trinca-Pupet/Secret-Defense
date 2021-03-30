@@ -63,7 +63,7 @@ int main()
     app.mainMusique.setVolume(50);
     app.mainMusique.setLoop(true);
     app.mainMusique.play();
-    manager.play();
+    manager.play("Bronx");
 
     return 0;
 }

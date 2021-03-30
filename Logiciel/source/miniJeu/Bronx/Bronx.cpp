@@ -1,9 +1,9 @@
 #include "../../../header/miniJeu/Bronx/Bronx.h"
 
 Bronx::Bronx::Bronx(AppData& appData)
-    : MiniJeu(appData), chrono(app.window), etape(1), shaker(&app.window)
+    : MiniJeu(appData), chrono(app.window), etape(1), shaker(&app.window, app.difficulty)
 {
-
+    chrono.setTempsMax((1 - (app.difficulty / (app.difficulty + 0.5))) * 45 + 34);
 }
 
 Bronx::Bronx::~Bronx()
@@ -232,6 +232,7 @@ void Bronx::Bronx::update()
         || ((shaker.getGlobalBounds().left+shaker.getGlobalBounds().width) < 0))
         && (!shaker.getIsGrabbed()))
     {
+        endMsg = "Vous avez fait tomber le shaker...";
         end(false);
     }
 
@@ -439,7 +440,7 @@ void Bronx::Bronx::update()
             ++etape;
             shaker.startFilling();
             frigo.setOpened(false);
-            hint.setString("\n      Servez");
+            hint.setString("\n           Servez");
         }
         break;
     }
@@ -461,7 +462,7 @@ void Bronx::Bronx::update()
         }
         if (verresPleins == true)
         {
-            if(!over)std::cout << chrono.getTimePassed() << std::endl;
+            if(!isFinished)std::cout << chrono.getTimePassed() << std::endl;
             end(true);
         }
         break;

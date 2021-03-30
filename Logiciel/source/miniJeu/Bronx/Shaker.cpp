@@ -1,6 +1,6 @@
 #include "..\..\..\header\miniJeu\Bronx\Shaker.h"
 
-Shaker::Shaker(sf::RenderWindow* w): canBeShaked(false), canFill(false), shakeAmount(0), incrementChute(0), incrementAnim(20), isFilling(false), window(w)
+Shaker::Shaker(sf::RenderWindow* w, int difficulty): canBeShaked(false), canFill(false), shakeAmount(0), incrementChute(0), incrementAnim(20), isFilling(false), window(w)
 {
 	setTexture(&AssetManager::getTexture("../ressource/Bronx/shaker.png"));
 	setSize(sf::Vector2f(getTexture()->getSize()));
@@ -11,7 +11,7 @@ Shaker::Shaker(sf::RenderWindow* w): canBeShaked(false), canFill(false), shakeAm
     liquide2.setTextureRect(sf::IntRect(0,0,15,60));
     AssetManager::getTexture("../ressource/Bronx/liquid.png").setRepeated(true);
 
-	shakeTreshold = 25000; //TODO: ajuster avec difficulté
+	shakeTreshold = (difficulty / (1 + difficulty)) * 14000 + 16000;
 }
 
 Shaker::~Shaker()
