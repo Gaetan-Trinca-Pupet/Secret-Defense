@@ -26,38 +26,29 @@ void CorrectTheCode::draw()
 
 void CorrectTheCode::update()
 {
-    if (!isEnding) {
-        chrono.update();
-        for (CodeLine & codeline : code) {
-            if (codeline.isClicked()) {
-                if (codeline.isWrong()){
-                    codeline.setColor(sf::Color::Green);
-                }
-                else {
-                    --app.lives;
-                    codeline.setColor(sf::Color::Red);
-                }
-                chrono.setTempsMax(1);
-                //clock.restart();
-                isEnding = true;
-            }
-        }
 
-        if (chrono.getTimePassed() > maxTime){
-            for (CodeLine & codeline : code) {
-                if (codeline.isWrong())
-                    codeline.setColor(sf::Color::Red);
+    chrono.update();
+    for (CodeLine & codeline : code) {
+        if (codeline.isClicked()) {
+            if (codeline.isWrong()){
+                codeline.setColor(sf::Color::Green);
+                end(true);
             }
-            --app.lives;
-            isEnding = true;
-            chrono.setTempsMax(1);
-            //clock.restart();
+            else {
+                endMsg = "La ligne était correcte.";
+                end(false);
+                codeline.setColor(sf::Color::Red);
+            }
         }
     }
-    else {
-        if (chrono.getTimePassed() > 1) {
-            isFinished = true;
+
+    if (chrono.getTimePassed() > maxTime){
+        for (CodeLine & codeline : code) {
+            if (codeline.isWrong())
+                codeline.setColor(sf::Color::Red);
         }
+        endMsg = "Le temps est écoulé.";
+        end(false);
     }
 }
 

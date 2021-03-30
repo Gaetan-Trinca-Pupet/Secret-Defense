@@ -14,8 +14,7 @@ private :
     std::vector<CodeLine> code;
     float maxTime;
     Chrono chrono;
-    //sf::Clock clock;
-    bool isEnding;
+
 public :
     ///
     /// \brief CorrectTheCode initializes the minigame

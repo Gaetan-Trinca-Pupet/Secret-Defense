@@ -1,7 +1,6 @@
 #include "../header/transition.h"
 
 transition::transition(AppData & appData, sf::Text txt) : MiniJeu(appData), text(txt), isTextureBgOn(false), isTextureImgOn(false), fontText(app.font), positionText(sf::Vector2f((app.window.getView().getSize().x/2), app.window.getView().getSize().y/3)), positionImg(sf::Vector2f((app.window.getView().getSize().x/2), app.window.getView().getSize().y/3)){
-
 }
 
 void transition::setTextureBackGround(const std::string &value)

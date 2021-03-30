@@ -50,18 +50,23 @@ void EteindrePC::EteindrePC::update(){
 	for(PC_base* pc : pcs)pc->update();
 	if(chrono.getTimePassed() > 15 || laporte.getPersoView().first->y < 0 || laporte.getPersoView().first->y > 540){
 		bool win(true);
+        bool atLeastAPcOn = false;
 		if(laporte.getPersoView().first->x > 100){
 			win=false;
 		}else{
 			for(PC_base* pc : pcs){
 				if(pc->isOn()){
+                    atLeastAPcOn = true;
 					win=false;
 					break;
 				}
 			}
 		}
-		if(!win)--app.lives;
-		isFinished=true;
+        if (!win) {
+            if (atLeastAPcOn) endMsg = "Il reste des ordinateurs allumés.";
+            else endMsg = "Vous êtes encore dans la salle";
+        }
+		end(win);
 	}
 }
 

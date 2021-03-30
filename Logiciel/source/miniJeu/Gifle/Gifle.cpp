@@ -2,10 +2,7 @@
 #include <iostream>
 #include <time.h>
 
-
-
-
-Gifle::Gifle(AppData& appData) : MiniJeu(appData)
+Gifle::Gifle::Gifle(AppData& appData) : MiniJeu(appData)
 {
     chrono = Chrono(app.window);
     chrono.setTempsMax(17);
@@ -18,11 +15,11 @@ Gifle::Gifle(AppData& appData) : MiniJeu(appData)
     background.setTexture(AssetManager::getTexture("../ressource/Gifle/background.png"));
 }
 
-Gifle::~Gifle()
+Gifle::Gifle::~Gifle()
 {
 }
 
-void Gifle::draw()
+void Gifle::Gifle::draw()
 {
     app.window.draw(background);
 
@@ -34,11 +31,11 @@ void Gifle::draw()
     app.window.draw(chrono);
 }
 
-void Gifle::update()
+void Gifle::Gifle::update()
 {
     //Si le temps est ?coul?, fin du minijeu
-    if (chrono.getTimePassed() > chrono.getTempsMax() )
-        isFinished = true;
+    if (chrono.getTimePassed() > chrono.getTempsMax())
+        end(true);
 
     //si le minijeu viens de commencer ou que le temps entre les vagues est ?coul?, en cr?er une
     if (passants.size() == 0 || clockPourDelaiVagues.getElapsedTime().asSeconds()  > timeBetweenWaves)
@@ -65,8 +62,9 @@ void Gifle::update()
             if ( (!passants[i].isMasked() && !passants[i].isGifle()) ||
                  ( passants[i].isMasked() &&  passants[i].isGifle() && erreurCpt-- <= 0))
             {
-                app.lives -= 1;
-                isFinished = true;
+                if (!passants[i].isMasked() && !passants[i].isGifle()) endMsg = "Vous avez laissé un passant non masqué passer.";
+                else endMsg = "Vous avez giflé un passant masqué.";
+                end(false);
             }
 
             passants.erase(passants.begin() + i);
@@ -76,7 +74,7 @@ void Gifle::update()
     chrono.update();
 }
 
-void Gifle::creerPassants()
+void Gifle::Gifle::creerPassants()
 {
 
     int numPasdeMasque(rand() % 4); //choix de celui sans masque
@@ -109,5 +107,3 @@ void Gifle::creerPassants()
 
 
 }
-
-

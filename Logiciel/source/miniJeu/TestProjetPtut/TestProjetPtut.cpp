@@ -13,6 +13,13 @@ TestProjetPtut::TestProjetPtut::TestProjetPtut(AppData& appData): MiniJeu(appDat
 }
 
 void TestProjetPtut::TestProjetPtut::setup(){
+    app.mainMusique.stop();
+    if(!app.mainMusique.openFromFile("../ressource/audio/testProjetPtut.wav"))
+        std::cerr<<"erreur openFromFile musique de testProjetPtut"<<std::endl;
+
+    app.mainMusique.setLoop(true);
+    app.mainMusique.play();
+
 	chrono.setTempsMax(30);
 	setBackgroundColor(sf::Color(0,0,0));
 	textureBackground.loadFromFile("../ressource/TestProjetPtut/bg.bmp");
@@ -79,10 +86,10 @@ void TestProjetPtut::TestProjetPtut::update(){
 	}
 	if(spaceship.getPv() <= 0){
 		--app.lives;
-		isFinished = true;
+		over = true;
 		app.window.setMouseCursorVisible(true);
 	}else if(chrono.getTimePassed() > 30){
-		isFinished = true;
+		over = true;
 		app.window.setMouseCursorVisible(true);
 	}
 	glitchEffect.update();
