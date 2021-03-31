@@ -1,2 +1,2 @@
 mode : eco
-pseudo :il faut que jy pense
+pseudo :moi

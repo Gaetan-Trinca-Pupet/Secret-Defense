@@ -15,10 +15,9 @@ Menu::MenuOptions::MenuOptions(){
 	selecteurFramrateMode.pushOption("je sais pas quoi mettre");
 	selecteurFramrateMode.pushOption("performance");
 	selecteurFramrateMode.pushOption("dynamique");
-	bt_valider.getText().setString("valider");
-	bt_valider.getBody().setSize(sf::Vector2f(75,15));
-	bt_valider.getBody().setPosition(sf::Vector2f(windowWidth_u/2,500));
-	bt_valider.getBody().setOrigin(sf::Vector2f(75/2, 15/2));
+	bt_valider.setString("valider");
+	bt_valider.setSize(sf::Vector2f(100,50));
+	bt_valider.setPosition(sf::Vector2f(windowWidth_u/2,450));
 }
 
 
@@ -44,6 +43,7 @@ void Menu::MenuOptions::update(sf::RenderWindow& window, Menus& menu, AppData& a
 			app.framerateManager.setMode(dyn);
 		}
 		storeOptions(app);
+		if(pseudoField.getString() == "")pseudoField.setString("anonyme");
 		menu=principal;
 	}
 }
@@ -57,6 +57,7 @@ void Menu::MenuOptions::draw(sf::RenderWindow& window){
 void Menu::MenuOptions::setFont(sf::Font& f){
 	pseudoField.setFont(f);
 	selecteurFramrateMode.setFont(f);
+	bt_valider.setFont(f);
 }
 
 void Menu::MenuOptions::loadOptions(AppData& app){

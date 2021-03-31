@@ -4,7 +4,7 @@ Menu::Bouton::Bouton(){
 	body.setOutlineThickness(1);
 	body.setOutlineColor(sf::Color(0,0,0));
 	text.setFillColor(sf::Color(0,0,0));
-	value = quitter;
+	//value = quitter;
 	flags.enable = true;
 	flags.clicked = false;
 	flags.pressed = false;
@@ -72,13 +72,13 @@ sf::RectangleShape& Menu::Bouton::getBody(){
 	return body;
 }
 
-const Menu::Menus& Menu::Bouton::getValue()const{
+/*const Menu::Menus& Menu::Bouton::getValue()const{
 	return value;
 }
 
 void Menu::Bouton::setValue(Menus menu){
 	value = menu;
-}
+}*/
 
 bool Menu::Bouton::isFocus()const{
 	return flags.focus;
@@ -122,4 +122,29 @@ void Menu::Bouton::setBackground(const sf::Color& color){
 
 void Menu::Bouton::setBackground(sf::Texture& texture){
 	body.setTexture(&texture,true);
+}
+
+void Menu::Bouton::setString(const std::string& str){
+	text.setString(str);
+}
+
+void Menu::Bouton::setSize(const sf::Vector2f& size){
+	body.setSize(size);
+	body.setOrigin(sf::Vector2f(body.getSize().x/2, body.getSize().y/2));
+	updateText();
+}
+
+void Menu::Bouton::setPosition(const sf::Vector2f& position){
+	body.setPosition(position);
+	updateText();
+}
+/*
+void Menu::Bouton::setOrigin(const sf::Vector2f& origin){
+	body.setOrigin(origin);
+	updateText();
+}*/
+
+void Menu::Bouton::setFont(const sf::Font& font){
+	text.setFont(font);
+	updateText();
 }
