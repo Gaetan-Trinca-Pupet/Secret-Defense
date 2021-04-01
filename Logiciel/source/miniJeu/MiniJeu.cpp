@@ -5,6 +5,7 @@ MiniJeu::MiniJeu(AppData& appData) : app(appData), isFinished(false), background
 }
 
 std::string MiniJeu::play(){
+
     isFinished=false;
     over = false;
 	this->setup();
@@ -50,6 +51,8 @@ void MiniJeu::setup(){
 void MiniJeu::end(bool won)
 {
     if (isFinished) return;
+    app.mainMusique.stop();
+    AssetManager::playSound("../ressource/audio/" + std::string(won ? "success" : "defeat") + ".wav");
     endDelay.restart();
     isFinished = true;
     if (!won) app.lives -= 1;
