@@ -14,11 +14,6 @@ Textfield::Textfield(){
 	setFillColor(sf::Color(0,0,0,0));
 	validate = false;
 	focus = false;
-	for(sf::Keyboard::Key i(sf::Keyboard::A); i < 36;incrementAnything(&i)){
-		touches[i] = false;
-	}
-	touches[sf::Keyboard::Space]=false;
-	touches[sf::Keyboard::BackSpace]=false;
 }
 
 std::string Textfield::getString()const{
@@ -68,7 +63,7 @@ void Textfield::update(sf::RenderWindow& window){
 		focus = false;
 		validate = true;
 	}
-    if(focus)updateText();
+    
 	if(curseur.clock.getElapsedTime().asSeconds() > 0.5){
 		curseur.visible = !(curseur.visible) &1;
 		curseur.clock.restart();
@@ -88,28 +83,20 @@ void Textfield::setOutlineThickness(const float thickness){
 }
 	
 void Textfield::updateText(){
+	if(!focus)return;
 	char offsetChar = (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)||sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))?65:97;
 	if(max_length == 0 || max_length > text.getString().getSize()){
 		for(sf::Keyboard::Key i(sf::Keyboard::A); i < 36;incrementAnything(&i)){
 			if(i == sf::Keyboard::Num0)offsetChar=22;
-			if(!touches[i] && sf::Keyboard::isKeyPressed(i)){
+			if(sf::Keyboard::isKeyPressed(i)){
 				text.setString(text.getString()+sf::String(std::string(1,((char)i)+offsetChar)));
-				touches[i]=true;
-			}else if(touches[i] && !sf::Keyboard::isKeyPressed(i)){
-				touches[i]=false;
 			}
 		}
-		if(touches[sf::Keyboard::Space] && !sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-			touches[sf::Keyboard::Space]=false;
-		}else if(!touches[sf::Keyboard::Space] && sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-			touches[sf::Keyboard::Space]=true;
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
 			text.setString(text.getString()+sf::String(std::string(1,' ')));
 		}
 	}
-    if(touches[sf::Keyboard::BackSpace] && !sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace)){
-        touches[sf::Keyboard::BackSpace]=false;
-    }else if(!touches[sf::Keyboard::BackSpace] && sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace)){
-        touches[sf::Keyboard::BackSpace]=true;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace)){
         if(text.getString().getSize()>0)text.setString(text.getString().substring(0,text.getString().getSize()-1));
     }
 }
@@ -141,4 +128,8 @@ bool Textfield::isFocus()const{
 
 bool Textfield::isValidate()const{
 	return validate;
+}
+
+void Textfield::setString(const std::string& str){
+	text.setString(str);
 }

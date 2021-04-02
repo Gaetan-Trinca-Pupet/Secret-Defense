@@ -28,7 +28,16 @@ cd obj && g++ -c ../source/miniJeu/DistribMiniTests/*.cpp && cd ..
 cd obj && g++ -c ../source/miniJeu/*.cpp && cd ..
 
 
+cd obj && g++ -c ../source/Menu/*.cpp && cd ..
+
+
 cd obj && g++ -c ../source/*.cpp && cd ..
 
 
+
+
 g++ main.cpp obj/*.o -o bin/secret.exe -lsfml-graphics -lsfml-system -lsfml-window -lsfml-audio -Llib -Iinclude -mwindows 
+
+
+
+cd obj && g++ -c ../source/miniJeu/AmphiReponse/*.cpp && g++ -c ../source/miniJeu/TestProjetPtut/*.cpp && g++ -c ../source/miniJeu/EteindrePC/*.cpp &&  g++ -c ../source/miniJeu/BranchePC/*.cpp && g++ -c ../source/miniJeu/CorrectTheCode/*.cpp && g++ -c ../source/miniJeu/CorrigeCopie/*.cpp && g++ -c ../source/miniJeu/memoryQuestions/*.cpp && g++ -c ../source/miniJeu/Gifle/*.cpp && g++ -c ../source/miniJeu/DistribMiniTests/*.cpp && g++ -c ../source/miniJeu/*.cpp && g++ -c ../source/Menu/*.cpp && g++ -c ../source/*.cpp && cd ..
