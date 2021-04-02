@@ -16,7 +16,7 @@ void BranchePC::BranchePC::setup()
 	const unsigned short decalage = 200;
 
 	for (unsigned i(0); i < tabPos1.size(); ++i)
-		tabPos1[i] = decalage + ((app.window.getView().getSize().x - decalage)/nbPrise) * i;
+        tabPos1[i] = decalage + ((app.window.getView().getSize().x*0.8 - decalage)/nbPrise) * i;
 
 	std::vector<unsigned> tabPos2 = tabPos1;
 
