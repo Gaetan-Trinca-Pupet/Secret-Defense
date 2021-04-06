@@ -5,14 +5,14 @@ constexpr unsigned int windowHeight_u = 540;
 constexpr const char * options_filename = "../ressource/options/options.txt";
 
 Menu::MenuOptions::MenuOptions(){
-	pseudoField.setPosition(sf::Vector2f(windowWidth_u/2,windowHeight_u/2));
+	pseudoField.setPosition(sf::Vector2f(windowWidth_u/2-100,windowHeight_u/2));
 	pseudoField.setFillColor(sf::Color(128,128,128));
 	pseudoField.setSize(sf::Vector2u(200,50));
-	pseudoField.setTextSize(14);
-	selecteurFramrateMode.setSize(sf::Vector2f(200,50));
-	selecteurFramrateMode.setPosition(sf::Vector2f(200,75));
+	pseudoField.setTextSize(24);
+	selecteurFramrateMode.setSize(sf::Vector2f(200,40));
+	selecteurFramrateMode.setPosition(sf::Vector2f(480,75));
 	selecteurFramrateMode.pushOption("economique");
-	selecteurFramrateMode.pushOption("je sais pas quoi mettre");
+	selecteurFramrateMode.pushOption("moyen");
 	selecteurFramrateMode.pushOption("performance");
 	selecteurFramrateMode.pushOption("dynamique");
 	bt_valider.setString("valider");
@@ -33,7 +33,7 @@ void Menu::MenuOptions::update(sf::RenderWindow& window, Menus& menu, AppData& a
 		std::string choix = selecteurFramrateMode.getSelected();
 		if(choix == "economique"){
 			app.framerateManager.setMode(eco);
-		}else if(choix == "je sais pas quoi mettre"){
+		}else if(choix == "moyen"){
 			app.framerateManager.setMode(middle);
 		}else if(choix == "performance"){
 			app.framerateManager.setMode(high);
@@ -79,7 +79,7 @@ void Menu::MenuOptions::loadOptions(AppData& app){
 					selecteurFramrateMode.setSelected("economique");
 				}else if(std::regex_search(str,reg_middle)){
 					app.framerateManager.setMode(middle);
-					selecteurFramrateMode.setSelected("je sais pas quoi mettre");
+					selecteurFramrateMode.setSelected("moyen");
 				}else if(std::regex_search(str,reg_high)){
 					app.framerateManager.setMode(high);
 					selecteurFramrateMode.setSelected("performance");
@@ -97,6 +97,8 @@ void Menu::MenuOptions::loadOptions(AppData& app){
 			}
 		}
 	}
+	ifs.close();
+	app.pseudo = pseudoField.getString();
 }
 
 void Menu::MenuOptions::storeOptions(AppData& app){
@@ -118,7 +120,12 @@ void Menu::MenuOptions::storeOptions(AppData& app){
 	std::ofstream optionsFile;
 	optionsFile.open(options_filename);
 	optionsFile << str_framerate_mode << std::endl;
-	optionsFile << "pseudo :" << (pseudoField.getString().size() != 0?pseudoField.getString():"anonyme") << std::endl;
+	if(pseudoField.getString().size() != 0){
+		app.pseudo = pseudoField.getString();
+	}else{
+		app.pseudo = "anonyme";
+	}
+	optionsFile << "pseudo :" << app.pseudo << std::endl;
 	optionsFile.close();
 	
 }

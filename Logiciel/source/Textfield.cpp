@@ -16,7 +16,7 @@ Textfield::Textfield(){
 	focus = false;
 }
 
-std::string Textfield::getString()const{
+std::string Textfield::getString(){
 	return text.getString().toAnsiString();
 }
 

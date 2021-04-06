@@ -1,10 +1,13 @@
 #ifndef __MENU__H_
 #define __MENU__H_
 
+#include <SFML/Graphics.hpp>
+
 #include "../miniJeu/MiniJeu.h"
 #include "MenusEnum.h"
 #include "MenuPrincipal.h"
 #include "MenuOptions.h"
+#include "MenuGameOver.h"
 
 namespace Menu{
 	
@@ -13,8 +16,10 @@ namespace Menu{
 		private :
 			AppData& app;
 			//Connexion connexion;
+			sf::Sprite background;
 			MenuPrincipal menuPrincipal;
 			MenuOptions menuOptions;
+			MenuGameOver menuGameOver;
 			Menus menu;
 			bool finished;
 			void update();

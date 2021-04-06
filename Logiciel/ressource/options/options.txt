@@ -1,2 +1,2 @@
 mode : eco
-pseudo :moi
+pseudo :ble
