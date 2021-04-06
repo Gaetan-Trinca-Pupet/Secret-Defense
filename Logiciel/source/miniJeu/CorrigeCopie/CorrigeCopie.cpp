@@ -2,19 +2,19 @@
 
 struct QuestRep
 {
-	std::string question;
-	std::vector<std::string> tabRepVrai;
-	std::vector<std::string> tabRepFaux;
+    std::string question;
+    std::vector<std::string> tabRepVrai;
+    std::vector<std::string> tabRepFaux;
 };
 
 std::vector<QuestRep> getTabQuest()
 {
 	std::vector<QuestRep> tab;
 	QuestRep tabQuest;
-	std::vector<std::string> tabRepVrai;
-	std::vector<std::string> tabRepFaux;
+    std::vector<std::string> tabRepVrai;
+    std::vector<std::string> tabRepFaux;
 
-	std::fstream file;
+    std::fstream file;
     file.open("../ressource/CorrigeCopie/QuestionList.txt",std::ios::in);
     if (file.is_open()) {
         std::string line;
@@ -85,7 +85,6 @@ void CorrigeCopie::CorrigeCopie::computeTabText()
 
 void CorrigeCopie::CorrigeCopie::setup()
 {
-	chrono.setTempsMax(31);
 
 	std::vector<QuestRep> tab = getTabQuest();
 	std::cout << tab.size() << std::endl;
@@ -93,7 +92,7 @@ void CorrigeCopie::CorrigeCopie::setup()
     const unsigned nbQuestion = std::min(int(tab.size()), int(app.difficulty) + 2);
 	const unsigned short sizeQuest = 200;
 	
-	
+    chrono.setTempsMax((8+3*nbQuestion)*pow(0.95, std::max(app.difficulty+2-(int)tab.size(), 0)));
 
 	tabLibelle.resize(nbQuestion);
 

@@ -5,6 +5,7 @@
 #include <string>
 
 #include <SFML/Graphics.hpp>
+#include <cmath>
 
 #include "../FramerateManager.h"
 #include "../AssetManager.h"
