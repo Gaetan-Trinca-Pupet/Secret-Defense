@@ -41,7 +41,6 @@ int main()
 		menu.play();
 		if(menu.getMenu() == Menu::Menus::jeu){
 			MiniJeuManager manager(app);
-			manager.addMiniJeu(createGifle, "Gifle", "DescriptionGifle");
 			manager.play();
 			menu.setMenu(Menu::Menus::gameOver);
 		}

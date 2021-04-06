@@ -9,6 +9,7 @@ Menu::MenuOptions::MenuOptions(){
 	pseudoField.setFillColor(sf::Color(128,128,128));
 	pseudoField.setSize(sf::Vector2u(200,50));
 	pseudoField.setTextSize(24);
+	pseudoField.setMaxLength(16);
 	selecteurFramrateMode.setSize(sf::Vector2f(200,40));
 	selecteurFramrateMode.setPosition(sf::Vector2f(480,75));
 	selecteurFramrateMode.pushOption("economique");
