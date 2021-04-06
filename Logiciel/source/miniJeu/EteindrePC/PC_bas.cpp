@@ -5,17 +5,15 @@ bool EteindrePC::PC_bas::isPersonnageLookingAt(){
 }
 
 void EteindrePC::PC_bas::drawWhenIsOn(sf::RenderWindow& window){
-	sf::RectangleShape r(sf::Vector2f(56,32));
-	r.setFillColor(sf::Color(255,255,255,255));
-	r.setPosition(position);
-	r.move(4,0);
-	window.draw(r);
+	sf::Sprite sprite;
+	sprite.setTexture(AssetManager::getTexture("../ressource/EteindrePC/PC_bas_ON.png"));
+	sprite.setPosition(position);
+	window.draw(sprite);
 }
 
 void EteindrePC::PC_bas::drawWhenIsOff(sf::RenderWindow& window){
-	sf::RectangleShape r(sf::Vector2f(56,32));
-	r.setFillColor(sf::Color(0,0,0,255));
-	r.setPosition(position);
-	r.move(4,0);
-	window.draw(r);
+	sf::Sprite sprite;
+	sprite.setTexture(AssetManager::getTexture("../ressource/EteindrePC/PC_bas_OFF.png"));
+	sprite.setPosition(position);
+	window.draw(sprite);
 }

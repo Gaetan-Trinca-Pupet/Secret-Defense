@@ -1,1 +1,2 @@
-mode : dyn
+mode : high
+pseudo :Je te chie dessu

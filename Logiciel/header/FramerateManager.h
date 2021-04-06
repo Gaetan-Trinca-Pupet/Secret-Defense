@@ -34,6 +34,7 @@ class FramerateManager{
 		void setMode(FramerateMode framerateMode);
 		void setWindow(sf::RenderWindow& renderWindow);
 		void updateMode();
+		FramerateMode getFramerateMode()const;
 		
 };
 

@@ -33,6 +33,7 @@ public:
     void buildWave(unsigned int nbMiniJeu=4, unsigned int nbBoss=1);
     void addMiniJeu(MiniJeu * (*create_MiniJeu)(AppData& app), const std::string& title, const std::string& desc);
     void addBoss(MiniJeu * (*create_MiniJeu)(AppData& app), const std::string& title, const std::string& desc);
+	void reset();
 };
 
 #endif // MINIJEUMANAGER_H

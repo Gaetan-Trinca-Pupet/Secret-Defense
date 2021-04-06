@@ -2,7 +2,7 @@
 #define __TEXTFIELD_H_
 
 #include <string>
-#include <map>
+#include <vector>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -10,7 +10,6 @@
 
 class Textfield{
 	private :
-		std::map<sf::Keyboard::Key,bool> touches;
 		sf::RenderTexture renderTexture;
 		sf::Sprite sprite;
 		sf::RectangleShape rectangleShape;
@@ -22,7 +21,7 @@ class Textfield{
 		
 	public :
 		Textfield();
-		std::string getString()const;
+		std::string getString();
 		void setPosition(const sf::Vector2f& pos);
         void setSize(const sf::Vector2u& size);
 		void draw(sf::RenderWindow& window);
@@ -38,6 +37,7 @@ class Textfield{
         void setFocus(const bool& state);
 		bool isFocus()const;
 		bool isValidate()const;
+		void setString(const std::string& str);
 };
 
 

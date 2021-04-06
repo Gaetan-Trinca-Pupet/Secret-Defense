@@ -2,6 +2,7 @@
 #define __MINIJEU_H_
 
 #include <iostream>
+#include <string>
 
 #include <SFML/Graphics.hpp>
 
@@ -18,6 +19,7 @@ struct AppData{
 	sf::RenderWindow window;
 	FramerateManager framerateManager;
     sf::Font font;
+	std::string pseudo;
 	unsigned int score;
     unsigned short int difficulty;
     unsigned short int lives;

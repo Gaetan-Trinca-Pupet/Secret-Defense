@@ -167,3 +167,34 @@ void Controles::shuffle(){
 		keys.erase(keys.begin()+i);
 	}
 }
+
+
+Controles Controles::Builder::build(){
+	return Controles();
+}
+
+Controles::Builder& Controles::Builder::setUpKey(sf::Keyboard::Key key){
+	upKey = key;
+	return *this;
+}
+
+Controles::Builder& Controles::Builder::setDownKey(sf::Keyboard::Key key){
+	downKey = key;
+	return *this;
+}
+
+Controles::Builder& Controles::Builder::setLeftKey(sf::Keyboard::Key key){
+	leftKey = key;
+	return *this;
+}
+
+Controles::Builder& Controles::Builder::setRightKey(sf::Keyboard::Key key){
+	rightKey = key;
+	return *this;
+}
+
+Controles::Builder& Controles::Builder::setActionKey(sf::Keyboard::Key key){
+	actionKey = key;
+	return *this;
+}
+
