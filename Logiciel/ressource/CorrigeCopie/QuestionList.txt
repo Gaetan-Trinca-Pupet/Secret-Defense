@@ -29,7 +29,7 @@ F Je préfère la BD.
 F Non c'est mon papa le meilleur !!!!!!
 F Bah non.
 Q Ecrivez le corps de la fonction find(n,tab) où on recherche n dans tab :
-V for(unsigned i = 0 ; i < tab.size() ;++i)\nif (tab[i] == n) return i;
+V for (unsigned i = 0 ; i < tab.size() ;++i) if (tab[i] == n) return i;
 F if (n == tab) return true;
 F if (n != tab) return false;
 F return n;

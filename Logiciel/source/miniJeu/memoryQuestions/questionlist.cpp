@@ -5,11 +5,11 @@ using namespace memoryQuestions;
 QuestionList::QuestionList(unsigned short difficulty)
 {
     std::srand(std::time(NULL));
-    if (difficulty + 4 > 20) availableQuestions.resize(20,true);
+    if (difficulty + 3 > 20) availableQuestions.resize(20,true);
     else {
         availableQuestions.resize(20);
         unsigned short nbAvailable (0);
-        while (nbAvailable < difficulty + 4 && nbAvailable < availableQuestions.size()) {
+        while (nbAvailable < difficulty + 3 && nbAvailable < availableQuestions.size()) {
             unsigned short rank = rand()%availableQuestions.size();
             if (!availableQuestions[rank]) {
                 availableQuestions[rank] = true;
@@ -44,7 +44,7 @@ std::string QuestionList::getQuestion(const unsigned short & rank)
     questionFile.open("../ressource/MemoryQuestions/QuestionList.txt",std::ios::in);
     if (questionFile.is_open()) {
         std::string question;
-        for (unsigned i = 0; i < rank; ++i)
+        for (unsigned i = 0; i <= rank; ++i)
             std::getline(questionFile, question);
         return question;
     }

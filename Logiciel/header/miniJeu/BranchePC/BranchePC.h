@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstdlib>
 #include <SFML/Window.hpp>
+#include <cmath>
 #include "../MiniJeu.h"
 #include "Prise.h"
 #include "../../Grabber.hpp"

@@ -1,7 +1,11 @@
 #include"../header/AssetManager.h"
+#include<iostream>
 
 
 std::map<std::string, sf::Texture> AssetManager::textures;
+std::map<std::string, sf::SoundBuffer> AssetManager::soundBuffers;
+std::vector<sf::Sound> AssetManager::sounds;
+
 
 AssetManager::AssetManager()
 {
@@ -19,9 +23,44 @@ sf::Texture& AssetManager::getTexture(std::string path)
 	}
 	else
 	{
-		sf::Texture& texture = textures[path];
+		sf::Texture texture;
 		texture.loadFromFile(path);
-		return texture;
+		textures[path] = texture;
+		return textures[path];
+	}
+	
+}
+
+void AssetManager::playSound(std::string path)
+{
+	for (int i(sounds.size()); i != 0 && sounds.size() != 0;)
+	{
+		--i;
+		if (sounds[i].getStatus() == sf::Sound::Stopped)
+		{
+			sounds.erase(sounds.begin()+i);
+		}
+	}
+
+	sounds.push_back(sf::Sound(getSoundBuffer(path)));
+	sounds.back().play();
+}
+
+sf::SoundBuffer& AssetManager::getSoundBuffer(std::string path)
+{
+
+
+	std::map<std::string, sf::SoundBuffer>::iterator searchIter = soundBuffers.find(path);
+	if (searchIter != soundBuffers.end())
+	{
+		return searchIter->second;
+	}
+	else
+	{
+		sf::SoundBuffer soundBuff;
+		soundBuff.loadFromFile(path);
+		soundBuffers[path] = soundBuff;
+		return soundBuffers[path];
 	}
 }
 

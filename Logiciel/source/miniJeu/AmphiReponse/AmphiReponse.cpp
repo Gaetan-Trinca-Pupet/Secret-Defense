@@ -41,13 +41,13 @@ std::vector<std::string> getTabM()
 
 void AmphiReponse::AmphiReponse::setup()
 {
-	const unsigned short decalage = 250;
+    const unsigned short decalage = 200;
 	
 	
 	nbQuestion = 2 + (app.difficulty > 3 ? 3 : app.difficulty);
 	const unsigned short nbMauvaiseReponse = (app.difficulty/3 > 6 ? 6 : app.difficulty/3);
 	
-	chrono.setTempsMax(15);
+    chrono.setTempsMax(4.5+3.5*std::pow(0.95, int(app.difficulty)));
 
 	std::vector<std::string> tabQ = getTabQ();
 	std::vector<std::string> tabR = getTabR();
@@ -90,15 +90,30 @@ void AmphiReponse::AmphiReponse::setup()
 	tabNum.resize(tabQuest.size());
 	for (unsigned i = 0; i < tabNum.size(); ++i)
 		tabNum[i] = i;
+    std::vector<unsigned short> posx; //Génération d'un vecteur pour les positions x
+    for (unsigned short x = 0; x < 8; ++x)
+        posx.push_back(x);
+    std::random_shuffle(posx.begin(), posx.end());
+    std::vector<unsigned short> posy; //Génération d'un vecteur pour les positions y
+    for (unsigned short y = 0; y < 8; ++y)
+        posy.push_back(y);
+    std::random_shuffle(posy.begin(), posy.end());
 	for (unsigned i = 0; i < tabQuest.size(); ++i)
 	{
 		unsigned short n = std::rand() % tabNum.size();
-		tabQuest[tabNum[n]]->setPosition((decalage + ((app.window.getView().getSize().x - decalage) / tabQuest.size()) * i) + ((app.window.getView().getSize().x - decalage) / tabQuest.size())/2, app.window.getView().getSize().y - (i % 2 == 0 ? 100 + (i % 4 == 0 ? 150 : 0) : 150 + (i % 3 == 0 ? 50 : 0)));
+        tabQuest[tabNum[n]]->setPosition(decalage + posx[i]*(app.window.getView().getSize().x - 2.5*decalage)/posx.size(), app.window.getView().getSize().y - (posy[i]+2) * 30);
 		tabNum.erase(tabNum.begin() + n);
 	}
 
 	// Set position des Questions de facon random
 	tabNum.resize(tabQuest.size());
+    posx.resize(0); //Génération d'un vecteur pour les positions
+    for (unsigned short x = 0; x < 8; ++x)
+        posx.push_back(x);
+    std::random_shuffle(posx.begin(), posx.end());
+    posy.resize(0); //Génération d'un vecteur pour les positions
+    for (unsigned short y = 0; y < 6; ++y)
+        posy.push_back(y);
 	for (unsigned i = 0; i < tabNum.size(); ++i)
 		tabNum[i] = i;
 	for (unsigned i = 0; i < tabQuest.size(); ++i)
@@ -106,7 +121,7 @@ void AmphiReponse::AmphiReponse::setup()
 		unsigned short n = std::rand() % tabNum.size();
 		if (tabQuest[tabNum[n]]->getMatch() != nullptr)
 		{
-			tabQuest[tabNum[n]]->getMatch()->setPosition(decalage + (((app.window.getView().getSize().x - decalage) / tabQuest.size()) * i), (i % 2 == 0 ? 50 + (i % 4 == 0 ? 150 : 0) : 100 + (i%3 == 0 ? 50 : 0)));
+            tabQuest[tabNum[n]]->getMatch()->setPosition(posx[i]*(decalage + app.window.getView().getSize().x - 2.5*decalage)/posx.size(), (posy[i]+1) * 35);
 		}
 		tabNum.erase(tabNum.begin() + n);
 	}
@@ -136,15 +151,15 @@ void AmphiReponse::AmphiReponse::update()
 		}
 	if (nbQuestion <= 0)
 	{
-		isFinished = true;
+		end(true);
 	}
 	
 	chrono.update();
 	
 	if (chrono.getTimePassed() > chrono.getTempsMax() && ! isFinished)
 	{
-		app.lives -= 1;
-		isFinished = true;
+        endMsg = "Le temps est écoulé.";
+		end(false);
 	}
 }
 

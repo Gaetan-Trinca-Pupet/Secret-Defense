@@ -50,18 +50,23 @@ void EteindrePC::EteindrePC::update(){
 	for(PC_base* pc : pcs)pc->update();
 	if(chrono.getTimePassed() > 15 || laporte.getPersoView().first->y < -70 || laporte.getPersoView().first->y > 540){
 		bool win(true);
+        bool atLeastAPcOn = false;
 		if(laporte.getPersoView().first->x > 100){
 			win=false;
 		}else{
 			for(PC_base* pc : pcs){
 				if(pc->isOn()){
+                    atLeastAPcOn = true;
 					win=false;
 					break;
 				}
 			}
 		}
-		if(!win)--app.lives;
-		isFinished=true;
+        if (!win) {
+            if (atLeastAPcOn) endMsg = "Il reste des ordinateurs allumés.";
+            else endMsg = "Vous êtes encore dans la salle";
+        }
+		end(win);
 	}
 }
 
@@ -103,7 +108,7 @@ void EteindrePC::EteindrePC::createPCs(){
 
 void EteindrePC::EteindrePC::initPCs(){
 	std::srand(std::time(nullptr));
-	int max_i(int((32.0*app.difficulty/(app.difficulty + 10.0))+1.0));
+    int max_i(int((32.0*app.difficulty/(app.difficulty + 10.0))+4.0)); //Nombre de PC qui seront allumés
 	if(max_i>33)max_i=33;
 	std::vector<PC_base*> pcs_copie = pcs;
 	for(int i(max_i);i >= 0;--i){

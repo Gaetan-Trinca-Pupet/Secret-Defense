@@ -11,16 +11,10 @@
 #include "header/miniJeu/FactoryMiniJeu.h"
 #include "header/miniJeu/MiniJeu.h"
 #include "header/miniJeu/MiniJeuManager.h"
-#include "header/miniJeu/Gifle/Gifle.h"
 
 using namespace std;
 
 
-
-MiniJeu* createGifle(AppData& app)
-{
-    return new Gifle(app);
-}
 
 int main()
 {
@@ -28,15 +22,20 @@ int main()
     AppData app;
     app.window.create(sf::VideoMode(960, 540), "test");
     app.framerateManager.setWindow(app.window);
-	//loadFramerateMode(app.framerateManager);
-    app.difficulty=0;
+
+    app.difficulty=1;
+
     app.score=0;
     app.lives=3;
     if (!app.font.loadFromFile("../ressource/fonts/OpenSans-Regular.ttf"))
     {
         std::cout<<"erreur loadFromFile"<<std::endl;
     }
-
+	if(!app.mainMusique.openFromFile("../ressource/audio/etapes/minijeu1.wav"))
+        std::cerr<<"erreur openFromFile audio"<<std::endl;
+    app.mainMusique.setVolume(50);
+    app.mainMusique.setLoop(true);
+    app.mainMusique.play();
 	Menu::Menu menu(app);
 	while(menu.getMenu() != Menu::Menus::quitter && app.window.isOpen()){
 		menu.play();
@@ -47,8 +46,6 @@ int main()
 			menu.setMenu(Menu::Menus::gameOver);
 		}
 	}
-
-    
 
     return 0;
 }

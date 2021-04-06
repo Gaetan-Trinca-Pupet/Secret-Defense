@@ -3,9 +3,9 @@
 void BranchePC::BranchePC::setup()
 {
 	
-	nbPrise = (1 + std::rand()%6);
+    nbPrise = (std::min((unsigned)app.difficulty+1, (unsigned)6));
 
-	chrono.setTempsMax(15);
+    chrono.setTempsMax(4.5+3.5*std::pow(0.95, int(app.difficulty)));
 
 
 	
@@ -16,7 +16,7 @@ void BranchePC::BranchePC::setup()
 	const unsigned short decalage = 200;
 
 	for (unsigned i(0); i < tabPos1.size(); ++i)
-		tabPos1[i] = decalage + ((app.window.getView().getSize().x - decalage)/nbPrise) * i;
+        tabPos1[i] = decalage + ((app.window.getView().getSize().x*0.8 - decalage)/nbPrise) * i;
 
 	std::vector<unsigned> tabPos2 = tabPos1;
 
@@ -72,15 +72,15 @@ void BranchePC::BranchePC::update()
 		}
 	if (nbPrise <= 0)
 	{
-		isFinished = true;
+		end(true);
 	}
 	
 	chrono.update();
 	
 	if (chrono.getTimePassed() > chrono.getTempsMax() && ! isFinished)
 	{
-		app.lives -= 1;
-		isFinished = true;
+        endMsg = "Le temps est écoulé.";
+		end(false);
 	}
 }
 

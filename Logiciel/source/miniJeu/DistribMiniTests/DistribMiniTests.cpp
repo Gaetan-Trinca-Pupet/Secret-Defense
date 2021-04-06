@@ -51,9 +51,8 @@ void DistribMiniTests::update()
 	//si le temps est écoulé ou  tout les étudiants ont un mini test, finir le minijeu
 	if (chrono.getTimePassed() > tempsMax || nbADistribuer == 0)
 	{
-		if (nbADistribuer != 0)
-			app.lives -= 1;
-		isFinished = true;
+        if (nbADistribuer != 0) endMsg = "Le temps est écoulé.";
+		end(nbADistribuer == 0);
 	}
 
 	hand.update(app.window);
@@ -119,7 +118,7 @@ void DistribMiniTests::creerEtudiants()
 
 void DistribMiniTests::creerMiniTests()
 {
-	unsigned short nbMiniTests = nbADistribuer + (app.difficulty < 2 ? 2 - app.difficulty : 0);
+    unsigned short nbMiniTests = nbADistribuer + (app.difficulty < 4 ? 1 : 0);
 
 
 	for (unsigned i(0); i < nbMiniTests; ++i)

@@ -2,18 +2,23 @@
 
 MiniJeuManager::MiniJeuManager(AppData &app_):app(app_)
 {
-    addMiniJeu([](AppData& app) -> MiniJeu * { return new AmphiReponse::AmphiReponse(app); }, "AmphiReponse", "déscription@mphiReponse");
+    phaseMusique='1';
+
+    addMiniJeu([](AppData& app) -> MiniJeu * { return new AmphiReponse::AmphiReponse(app); }, "AmphiReponse", "descriptionAmphiReponse");
     addMiniJeu([](AppData& app) -> MiniJeu * { return new correctthecode::CorrectTheCode(app); }, "CorrectTheCode", "descriptionCorrectTheCode");
     addMiniJeu([](AppData& app) -> MiniJeu * { return new BranchePC::BranchePC(app); }, "BranchePC", "descriptionAmphiReponse");
     addMiniJeu([](AppData& app) -> MiniJeu * { return new CorrigeCopie::CorrigeCopie(app); }, "CorrigeCopie", "descriptionAmphiReponse");
     addMiniJeu([](AppData& app) -> MiniJeu * { return new DistribMiniTests(app); }, "DistribMiniTests", "descriptionAmphiReponse");
     addMiniJeu([](AppData& app) -> MiniJeu * { return new EteindrePC::EteindrePC(app); }, "EteindrePC", "descriptionAmphiReponse");
-    addMiniJeu([](AppData& app) -> MiniJeu * { return new memoryQuestions::MemoryQuestions(app); }, "MemoryQuestions", "descriptionAmphiReponse");
-    addBoss([](AppData& app) -> MiniJeu * { return new TestProjetPtut::TestProjetPtut(app); }, "TestProjetPtut", "descriptionAmphiReponse");
+    addMiniJeu([](AppData& app) -> MiniJeu* { return new memoryQuestions::MemoryQuestions(app); }, "MemoryQuestions", "descriptionAmphiReponse");
+    addMiniJeu([](AppData& app) -> MiniJeu* { return new Gifle::Gifle(app); }, "Gifle", /*app.option.secretMode ? */"descriptionGifle"/* : "descriptionOuEstSansMasque*/);
+    addBoss([](AppData& app) -> MiniJeu* { return new TestProjetPtut::TestProjetPtut(app); }, "TestProjetPtut", "descriptionAmphiReponse");
+    addBoss([](AppData& app) -> MiniJeu* { return new Bronx::Bronx(app); }, "Bronx", "descriptionBronx");
 }
 
 void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
 {
+
 	reset();
 	buildWave(nbMiniJeu, nbBoss);
     while(app.lives>0 && app.window.isOpen())
@@ -27,19 +32,39 @@ void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
         {
             sf::Text txt;
             txt.setCharacterSize(17);
-            txt.setString(sf::String::fromUtf8(wave[wave.size()-1]->getDescription().cbegin(),wave[wave.size()-1]->getDescription().cend()));
+            std::string transitionMessage = lastMsg + '\n' + wave[wave.size()-1]->getDescription();
+            txt.setString(sf::String::fromUtf8(transitionMessage.cbegin(),transitionMessage.cend()));
+            app.mainMusique.stop();
+            if(!app.mainMusique.openFromFile("../ressource/audio/transition.wav"))
+                std::cerr<<"erreur openFromFile musique de transition"<<std::endl;
+
+            app.mainMusique.setLoop(false);
+            app.mainMusique.play();
             transition transtest (app, txt);
             transtest.play();
         }
+        std::cout<<"size: "<<wave.size()<<std::endl;
         MiniJeu* miniJeu=wave[wave.size()-1]->createNewMiniJeu(app);
+        wave.pop_back();
         unsigned short int lives(app.lives);
-        miniJeu->play();
+
+        if(!app.mainMusique.openFromFile(std::string("../ressource/audio/etapes/minijeu")+phaseMusique+".wav"))
+            std::cerr<<"erreur openFromFile audio"<<std::endl;
+        app.mainMusique.play();
+        app.mainMusique.setLoop(true);
+
+        if(++phaseMusique>'5')
+            phaseMusique='1';
+
+        lastMsg = miniJeu->play();
         delete miniJeu;
+
+
         if(lives==app.lives)
         {
             ++app.score;
         }
-        wave.pop_back();
+
     }
 }
 
@@ -71,13 +96,14 @@ void MiniJeuManager::play(const std::string &title)
         {
             sf::Text txt;
             txt.setCharacterSize(17);
-            txt.setString(factoryMiniJeu->getDescription());
+            std::string transitionMessage = lastMsg + '\n' + factoryMiniJeu->getDescription();
+            txt.setString(sf::String::fromUtf8(transitionMessage.cbegin(), transitionMessage.cend()));
             transition transtest (app, txt);
             transtest.play();
         }
         MiniJeu* miniJeu=factoryMiniJeu->createNewMiniJeu(app);
         unsigned short int lives(app.lives);
-        miniJeu->play();
+        lastMsg = miniJeu->play();
         delete miniJeu;
         if(lives==app.lives)
         {
@@ -105,7 +131,7 @@ void MiniJeuManager::buildWave(unsigned int nbMiniJeu, unsigned int nbBoss)
     }
     for(unsigned int i=0;i<minVal;++i){
         unsigned int r=rand()%tabChoix.size();
-        wave.push_back(&listBoss[r]);
+        wave.push_back(&listBoss[tabChoix[r]]);
         tabChoix.erase(tabChoix.begin()+r);
     }
 
@@ -115,7 +141,6 @@ void MiniJeuManager::buildWave(unsigned int nbMiniJeu, unsigned int nbBoss)
         tabChoix[i]=i;
     }
 
-
     if(nbMiniJeu<listMiniJeu.size()){
         minVal=nbMiniJeu;
     }
@@ -124,7 +149,7 @@ void MiniJeuManager::buildWave(unsigned int nbMiniJeu, unsigned int nbBoss)
     }
     for(unsigned int i=0;i<minVal;++i){
         unsigned int r=rand()%tabChoix.size();
-        wave.push_back(&listMiniJeu[r]);
+        wave.push_back(&listMiniJeu[tabChoix[r]]);
         tabChoix.erase(tabChoix.begin()+r);
     }
 
