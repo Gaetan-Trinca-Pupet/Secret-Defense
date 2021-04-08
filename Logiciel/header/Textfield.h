@@ -21,7 +21,7 @@ class Textfield{
 		
 	public :
 		Textfield();
-		std::string getString()const;
+		std::string getString();
 		void setPosition(const sf::Vector2f& pos);
         void setSize(const sf::Vector2u& size);
 		void draw(sf::RenderWindow& window);

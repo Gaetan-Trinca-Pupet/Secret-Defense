@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "MenusEnum.h"
+#include "../AssetManager.h"
 
 namespace Menu{
 	/*

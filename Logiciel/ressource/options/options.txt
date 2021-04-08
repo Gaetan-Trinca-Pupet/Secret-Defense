@@ -1,2 +1,2 @@
-mode : eco
-pseudo :moi
+mode : high
+pseudo :Je te chie dessu

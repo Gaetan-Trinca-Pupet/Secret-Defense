@@ -20,6 +20,7 @@ struct AppData{
 	sf::RenderWindow window;
 	FramerateManager framerateManager;
     sf::Font font;
+	std::string pseudo;
 	unsigned int score;
     unsigned short int difficulty;
     unsigned short int lives;

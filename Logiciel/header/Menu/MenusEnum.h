@@ -7,7 +7,8 @@ namespace Menu{
 		jeu,
 		options,
 		connexion,
-		quitter
+		quitter,
+		gameOver
 	};
 }
 

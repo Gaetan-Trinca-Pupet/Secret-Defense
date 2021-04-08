@@ -65,7 +65,7 @@ void Menu::Selecteur::drawCase(sf::RenderWindow& window, unsigned int& index){
 	}
 	rectangle.setPosition(sf::Vector2f(position.x, position.y+size.y*index));
 	rectangle.setOrigin(sf::Vector2f(size.x/2, size.y/2));
-	text.setOrigin(sf::Vector2f(text.getGlobalBounds().width/2, text.getGlobalBounds().height/2));
+	text.setOrigin(sf::Vector2f(text.getGlobalBounds().width/2, text.getGlobalBounds().height*2/3));
 	text.setPosition(sf::Vector2f(position.x, position.y+size.y*index));
 	rectangle.setOutlineThickness(1);
 	rectangle.setOutlineColor(sf::Color(0, 0, 0));

@@ -29,23 +29,20 @@ int main()
     {
         std::cout<<"erreur loadFromFile"<<std::endl;
     }
-
+	if(!app.mainMusique.openFromFile("../ressource/audio/etapes/minijeu1.wav"))
+        std::cerr<<"erreur openFromFile audio"<<std::endl;
+    app.mainMusique.setVolume(50);
+    app.mainMusique.setLoop(true);
+    app.mainMusique.play();
 	Menu::Menu menu(app);
 	while(menu.getMenu() != Menu::Menus::quitter && app.window.isOpen()){
 		menu.play();
 		if(menu.getMenu() == Menu::Menus::jeu){
 			MiniJeuManager manager(app);
-            if(!app.mainMusique.openFromFile("../ressource/audio/etapes/minijeu1.wav"))
-                std::cerr<<"erreur openFromFile audio"<<std::endl;
-            app.mainMusique.setVolume(50);
-            app.mainMusique.setLoop(true);
-            app.mainMusique.play();
-            manager.play("TrouveSansMasque");
-			menu.setMenu(Menu::Menus::principal);
+			manager.play();
+			menu.setMenu(Menu::Menus::gameOver);
 		}
 	}
-
-    
 
     return 0;
 }
