@@ -222,8 +222,7 @@ void Bronx::Bronx::update()
             || ((ingredient->getGlobalBounds().left+ingredient->getGlobalBounds().width) < 0))
             && (!ingredient->getIsGrabbed()))
         {
-            endMsg = "Vous avez fait tomber un ingrédient...";
-            end(false);
+            end(false, "Vous avez fait tomber un ingrédient...");
         }
     }
 
@@ -232,8 +231,7 @@ void Bronx::Bronx::update()
         || ((shaker.getGlobalBounds().left+shaker.getGlobalBounds().width) < 0))
         && (!shaker.getIsGrabbed()))
     {
-        endMsg = "Vous avez fait tomber le shaker...";
-        end(false);
+        end(false, "Vous avez fait tomber le shaker...");
     }
 
     for (Deliverable* ingredient : ingredientsNonComestibles)
@@ -248,8 +246,7 @@ void Bronx::Bronx::update()
             || ((verre.getGlobalBounds().left+verre.getGlobalBounds().width) < 0))
             && (!verre.getIsGrabbed()))
         {
-            endMsg = "Vous avez fait tomber un ingrédient...";
-            end(false);
+            end(false, "Vous avez fait tomber un ingrédient...");
         }
         if(!verre.getIsGrabbed())
         {
@@ -283,7 +280,7 @@ void Bronx::Bronx::update()
     int x=0;
     for (Deliverable* &ingredient : ingredients)
     {
-        if(!ingredient->getIsGrabbed())
+        if(!ingredient->getIsGrabbed() && !ingredient->isStored())
         {
             for(int y=x+1; y<ingredients.size();++y)
             {
@@ -317,8 +314,7 @@ void Bronx::Bronx::update()
     hand.update(app.window);
     if (chrono.getTimePassed() > chrono.getTempsMax())
     {
-        endMsg = "Vous avez fait tomber un verre...";
-        end(false);
+        end(false, "Vous avez fait tomber un verre...");
     }
 
     chrono.update();
@@ -381,8 +377,7 @@ void Bronx::Bronx::update()
             --i;
             if (ingredientsNonComestibles[i]->isDelivered())
             {
-                endMsg = "Vous avez mis un mauvais ingrédient...";
-                end(false);
+                end(false, "Vous avez mis un mauvais ingrédient...");
                 break;
             }
         }

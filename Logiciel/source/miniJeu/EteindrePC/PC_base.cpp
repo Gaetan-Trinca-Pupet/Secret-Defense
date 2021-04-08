@@ -7,6 +7,7 @@ bool EteindrePC::PC_base::isOn() const{
 void EteindrePC::PC_base::update(){
 	if((!notFirstTime || clock.getElapsedTime().asSeconds() >= 1.2) && this->isPersonnageLookingAt() && sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
 		on = (!on) & 1;
+		AssetManager::playSound("../ressource/audio/" + std::string(on ? "bong" : "bing") + ".wav");
 		clock.restart();
 		notFirstTime = true;
 	}
@@ -31,6 +32,7 @@ EteindrePC::PC_base::PC_base(){
 
 void EteindrePC::PC_base::setOn(bool b){
 	on = b;
+	
 }
 
 EteindrePC::PC_base::~PC_base(){

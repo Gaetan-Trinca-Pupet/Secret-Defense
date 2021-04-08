@@ -79,8 +79,7 @@ void BranchePC::BranchePC::update()
 	
 	if (chrono.getTimePassed() > chrono.getTempsMax() && ! isFinished)
 	{
-        endMsg = "Le temps est écoulé.";
-		end(false);
+		end(false, "Le temps est écoulé.");
 	}
 }
 

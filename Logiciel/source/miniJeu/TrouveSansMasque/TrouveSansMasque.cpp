@@ -60,12 +60,13 @@ void TrouveSansMasque::TrouveSansMasque::update()
 
             // si c'est un passant non masqué et non clické
             // ou si il est masqué mais clické et le nombre d'erreurs est dépassé, le joueur a perdu
-            if ( (!passants[i].isMasked() && !passants[i].isTrouve()) ||
-                 ( passants[i].isMasked() &&  passants[i].isTrouve() && erreurCpt-- <= 0))
+            if (!passants[i].isMasked() && !passants[i].isTrouve())
             {
-                if (!passants[i].isMasked() && !passants[i].isTrouve()) endMsg = "Vous avez raté passant non masqué.";
-                else endMsg = "Vous avez clické sur un passant masqué.";
-                end(false);
+                end(false, "Vous avez raté passant non masqué.");
+            }
+            else if (passants[i].isMasked() && passants[i].isTrouve() && erreurCpt-- <= 0)
+            {
+                end(false, "Vous avez clické sur un passant masqué.");
             }
 
             passants.erase(passants.begin() + i);

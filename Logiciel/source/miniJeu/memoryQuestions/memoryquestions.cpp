@@ -95,7 +95,7 @@ void memoryQuestions::MemoryQuestions::update()
     else {
         if (clock.getElapsedTime().asSeconds() > 2) {
             if ((result == lostBoth || result == lostLeft || result == lostRight))
-                endMsg = "Une question vous avait déjà été posée.";
+                end(false, "Une question vous avait déjà été posée.");
             end(!(result == lostBoth || result == lostLeft || result == lostRight));
         }
     }

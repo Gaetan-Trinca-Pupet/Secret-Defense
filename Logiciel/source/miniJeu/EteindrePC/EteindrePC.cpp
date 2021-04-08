@@ -63,10 +63,10 @@ void EteindrePC::EteindrePC::update(){
 			}
 		}
         if (!win) {
-            if (atLeastAPcOn) endMsg = "Il reste des ordinateurs allumés.";
-            else endMsg = "Vous êtes encore dans la salle";
+            if (atLeastAPcOn) end(false, "Il reste des ordinateurs allumés.");
+            else end(false, "Vous êtes encore dans la salle");
         }
-		end(win);
+		end(true);
 	}
 }
 

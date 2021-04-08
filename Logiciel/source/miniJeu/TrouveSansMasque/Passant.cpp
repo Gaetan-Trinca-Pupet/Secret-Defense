@@ -1,4 +1,4 @@
-#include "../../../header/miniJeu/TrouveSansMasque/TrouveSansMasque.h"
+#include "../../../header/miniJeu/TrouveSansMasque/Passant.h"
 #include <iostream>
 
 
@@ -99,7 +99,7 @@ bool Passant::isTrouve()
 void Passant::actionOnClick()
 {
 	if (trouve) return;
-	AssetManager::playSound("../ressource/audio/" + std::string(masked ? "bing" : "bong") + "wav");
+	AssetManager::playSound("../ressource/audio/" + std::string(masked ? "bong" : "bing") + ".wav");
 	trouve = true;
 	speed *= 6;
 

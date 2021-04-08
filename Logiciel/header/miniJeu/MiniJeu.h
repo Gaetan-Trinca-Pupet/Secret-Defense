@@ -54,7 +54,7 @@ class MiniJeu{
 		*	end is called when the minigame has been won or lost.
 		*	@author Ugo Larsonneur
 		*/
-		void end(bool won);
+		void end(bool won, std::string messsage = "Victoire !");
 		
 		/**
 		*	draw is called by play. It contains all graphics computings

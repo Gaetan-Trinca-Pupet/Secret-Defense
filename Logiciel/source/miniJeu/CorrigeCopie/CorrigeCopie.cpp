@@ -87,7 +87,6 @@ void CorrigeCopie::CorrigeCopie::setup()
 {
 
 	std::vector<QuestRep> tab = getTabQuest();
-	std::cout << tab.size() << std::endl;
 
     const unsigned nbQuestion = std::min(int(tab.size()), int(app.difficulty) + 2);
 	const unsigned short sizeQuest = 200;
@@ -190,8 +189,7 @@ void CorrigeCopie::CorrigeCopie::update()
 				tabLibelle[i].isCorrect = true;
 			else if (not isFinished)
 			{
-                endMsg = "Votre correction est fausse.";
-				end(false);
+				end(false, "Votre correction est fausse.");
 			}
 	}
 	unsigned short compte = 0;
@@ -205,8 +203,7 @@ void CorrigeCopie::CorrigeCopie::update()
 	
 	if (chrono.getTimePassed() > chrono.getTempsMax() && ! isFinished)
 	{
-        endMsg = "Le temps est écoulé.";
-		end(false);
+		end(false, "Le temps est écoulé.");
 	}
 }
 
