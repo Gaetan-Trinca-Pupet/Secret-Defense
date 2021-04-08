@@ -1,17 +1,18 @@
 #include "../header/transition.h"
 
 transition::transition(AppData & appData, sf::Text txt) : MiniJeu(appData), text(txt), isTextureBgOn(false), isTextureImgOn(false), fontText(app.font), positionText(sf::Vector2f((app.window.getView().getSize().x/2), app.window.getView().getSize().y/3)), positionImg(sf::Vector2f((app.window.getView().getSize().x/2), app.window.getView().getSize().y/3)){
+    setTextureBackGround("../ressource/transBg.png");
 }
 
 void transition::setTextureBackGround(const std::string &value)
 {
-    spriteBg.setTexture(assetmanager.getTexture(value));
+    spriteBg.setTexture(AssetManager::getTexture(value));
     isTextureBgOn=true;
 }
 
 void transition::setTextureImage(const std::string &value)
 {
-    spriteImg.setTexture(assetmanager.getTexture(value));
+    spriteImg.setTexture(AssetManager::getTexture(value));
     spriteImg.setOrigin(sf::Vector2f(spriteImg.getGlobalBounds().width/2,spriteImg.getGlobalBounds().height/2));
     isTextureImgOn=true;
 }
@@ -90,15 +91,15 @@ void transition::update()
     }
     if ((chrono.getTempsMax()-3<chrono.getTimePassed()) && (chrono.getTimePassed()<chrono.getTempsMax()-2))
     {
-        spriteChiffre.setTexture(assetmanager.getTexture("../ressource/image/3.png"));
+        spriteChiffre.setTexture(AssetManager::getTexture("../ressource/image/3.png"));
     }
     else if ((chrono.getTempsMax()-2<chrono.getTimePassed()) && (chrono.getTimePassed()<chrono.getTempsMax()-1))
     {
-        spriteChiffre.setTexture(assetmanager.getTexture("../ressource/image/2.png"));
+        spriteChiffre.setTexture(AssetManager::getTexture("../ressource/image/2.png"));
     }
     else if ((chrono.getTempsMax()-1<chrono.getTimePassed()) && (chrono.getTimePassed()<chrono.getTempsMax()))
     {
-        spriteChiffre.setTexture(assetmanager.getTexture("../ressource/image/1.png"));
+        spriteChiffre.setTexture(AssetManager::getTexture("../ressource/image/1.png"));
     }
     chrono.update();
 }

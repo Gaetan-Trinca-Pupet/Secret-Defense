@@ -11,7 +11,7 @@ public:
     bool isFull();
     void setFull(bool val);
     bool isUnderShaker(const sf::Vector2f& point);
-
+    virtual void onRelease();
 private:
     bool full;
 };

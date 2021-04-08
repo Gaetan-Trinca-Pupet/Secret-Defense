@@ -259,12 +259,7 @@ void Bronx::Bronx::update()
                 if(y!=i)
                 {
                     if(verre.getGlobalBounds().intersects(verres[y].getGlobalBounds()))
-                    //if(verres[y].getGlobalBounds().left<verre.getGlobalBounds().left+verre.getGlobalBounds().width && verre.getGlobalBounds().left<verres[y].getGlobalBounds().left+verres[y].getGlobalBounds().width)
                     {
-                        //verre.setGetGroundLevelFunc([](sf::Vector2f position)->float{return (position.x < 695 && position.y < 501 ? 490 : 999999);});
-                        //verres[y].setGetGroundLevelFunc([](sf::Vector2f position)->float{return (position.x < 695 && position.y < 501 ? 490 : 999999);});
-                        //verre.setDelivered(false);
-                        //verres[y].setDelivered(false);
                         verre.setStored(false);
                         verres[y].setStored(false);
                         if(verre.getPosition().x<verres[y].getPosition().x)
@@ -378,6 +373,7 @@ void Bronx::Bronx::update()
             {
                 hand.remove(ingredientsComestibles[i]);
                 ingredientsComestibles.erase(ingredientsComestibles.begin() + i);
+                AssetManager::playSound("../ressource/audio/bing.wav");
             }
         }
         for (int i(ingredientsNonComestibles.size()); i != 0 && ingredientsNonComestibles.size() != 0;)
@@ -420,6 +416,7 @@ void Bronx::Bronx::update()
             {
                 verre.setCanBeGrabbed(true);
             }
+            AssetManager::playSound("../ressource/audio/bing.wav");
         }
         break;
 
@@ -441,6 +438,7 @@ void Bronx::Bronx::update()
             shaker.startFilling();
             frigo.setOpened(false);
             hint.setString("\n           Servez");
+            AssetManager::playSound("../ressource/audio/bing.wav");
         }
         break;
     }

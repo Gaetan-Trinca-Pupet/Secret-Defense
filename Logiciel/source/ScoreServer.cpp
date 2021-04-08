@@ -50,9 +50,9 @@ int ScoreServer::getBestScore()
 std::vector<Score> ScoreServer::get10BestScores()
 {
 	sf::Http server;
-	server.setHost("a.com");
+	server.setHost("https://adrien-sylvain.alwaysdata.net/PTUT/main.php");
 
-	sf::Http::Request request("/handleRequest.php");
+	sf::Http::Request request("main.php");
 	request.setField("action", "get10BestScores");
 	sf::Http::Response response = server.sendRequest(request);
 

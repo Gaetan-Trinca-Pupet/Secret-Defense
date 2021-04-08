@@ -11,7 +11,7 @@ MiniJeuManager::MiniJeuManager(AppData &app_):app(app_)
     addMiniJeu([](AppData& app) -> MiniJeu * { return new DistribMiniTests(app); }, "DistribMiniTests", "descriptionAmphiReponse");
     addMiniJeu([](AppData& app) -> MiniJeu * { return new EteindrePC::EteindrePC(app); }, "EteindrePC", "descriptionAmphiReponse");
     addMiniJeu([](AppData& app) -> MiniJeu* { return new memoryQuestions::MemoryQuestions(app); }, "MemoryQuestions", "descriptionAmphiReponse");
-    addMiniJeu([](AppData& app) -> MiniJeu* { return new Gifle::Gifle(app); }, "Gifle", /*app.option.secretMode ? */"descriptionGifle"/* : "descriptionOuEstSansMasque*/);
+    addMiniJeu([](AppData& app) -> MiniJeu* { return new TrouveSansMasque::TrouveSansMasque(app); }, "TrouveSansMasque", /*app.option.secretMode ? */"descriptionTrouveSansMasque"/* : "descriptionOuEstSansMasque*/);
     addBoss([](AppData& app) -> MiniJeu* { return new TestProjetPtut::TestProjetPtut(app); }, "TestProjetPtut", "descriptionAmphiReponse");
     addBoss([](AppData& app) -> MiniJeu* { return new Bronx::Bronx(app); }, "Bronx", "descriptionBronx");
 }
@@ -42,7 +42,7 @@ void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
             transition transtest (app, txt);
             transtest.play();
         }
-        std::cout<<"size: "<<wave.size()<<std::endl;
+
         MiniJeu* miniJeu=wave[wave.size()-1]->createNewMiniJeu(app);
         wave.pop_back();
         unsigned short int lives(app.lives);

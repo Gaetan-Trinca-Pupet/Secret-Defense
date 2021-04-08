@@ -8,7 +8,7 @@
 #include "../transition.h"
 #include "../gameOverWindow.h"
 #include "DistribMiniTests/DistribMiniTests.h"
-#include "Gifle/Gifle.h"
+#include "TrouveSansMasque/TrouveSansMasque.h"
 #include "MemoryQuestions/memoryquestions.h"
 #include "TestProjetPtut/TestProjetPtut.h"
 #include "EteindrePC/EteindrePC.h"
@@ -16,7 +16,7 @@
 #include "BranchePC/BranchePC.h"
 #include "CorrectTheCode/CorrectTheCode.h"
 #include "CorrigeCopie/CorrigeCopie.h"
-#include "Gifle/Gifle.h"
+#include "TrouveSansMasque/TrouveSansMasque.h"
 #include "Bronx/Bronx.h"
 
 class MiniJeuManager{

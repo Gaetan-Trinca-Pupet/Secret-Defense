@@ -22,7 +22,6 @@ int main()
     AppData app;
     app.window.create(sf::VideoMode(960, 540), "test");
     app.framerateManager.setWindow(app.window);
-	loadFramerateMode(app.framerateManager);
     app.difficulty=1;
     app.score=0;
     app.lives=3;
@@ -41,7 +40,7 @@ int main()
             app.mainMusique.setVolume(50);
             app.mainMusique.setLoop(true);
             app.mainMusique.play();
-            manager.play();
+            manager.play("TrouveSansMasque");
 			menu.setMenu(Menu::Menus::principal);
 		}
 	}

@@ -24,8 +24,8 @@ sf::Texture& AssetManager::getTexture(std::string path)
 	else
 	{
 		sf::Texture texture;
-		texture.loadFromFile(path);
 		textures[path] = texture;
+		textures[path].loadFromFile(path);
 		return textures[path];
 	}
 	
@@ -58,8 +58,8 @@ sf::SoundBuffer& AssetManager::getSoundBuffer(std::string path)
 	else
 	{
 		sf::SoundBuffer soundBuff;
-		soundBuff.loadFromFile(path);
 		soundBuffers[path] = soundBuff;
+		soundBuffers[path].loadFromFile(path);
 		return soundBuffers[path];
 	}
 }

@@ -21,9 +21,17 @@ bool Verre::isFull()
 void Verre::setFull(bool val)
 {
     full=val;
+    AssetManager::playSound("../ressource/audio/bing.wav");
 }
 
 bool Verre::isUnderShaker(const sf::Vector2f& point)
 {
     return (getPosition().x <= point.x && point.x <= getPosition().x+getSize().x && getPosition().y>=point.y /*&& point.y>=getPosition().y-200*/);
+}
+
+void Verre::onRelease()
+{
+    Deliverable::onRelease();
+    if(isStored())
+        AssetManager::playSound("../ressource/audio/bing.wav");
 }

@@ -23,7 +23,6 @@ private:
     sf::Sprite spriteImg; //sprite pour l'image des controles/astuces
     Chrono chrono;
 
-    AssetManager assetmanager;
     sf::Sprite spriteChiffre;
 
     sf::RectangleShape textBox;

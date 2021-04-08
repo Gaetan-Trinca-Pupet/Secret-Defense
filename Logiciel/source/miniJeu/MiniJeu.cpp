@@ -85,14 +85,14 @@ void MiniJeu::drawInterface(){
     sf::Text texteScore;
     texteScore.setFont(app.font);
     texteScore.setString("Score: "+std::to_string(app.score));
-    texteScore.setPosition(app.window.getView().getSize().x-150,app.window.getView().getSize().y-30);
+    texteScore.setPosition(app.window.getView().getSize().x-155,app.window.getView().getSize().y-35);
     texteScore.setOutlineColor(sf::Color::Black);
     texteScore.setOutlineThickness(2);
     sf::Sprite spriteCoeur;
     spriteCoeur.setTexture(AssetManager::getTexture("../ressource/image/coeur.png"));
     spriteCoeur.setTextureRect(sf::IntRect(0,0,(23*app.lives),23));
     spriteCoeur.setScale(2.0,2.0);
-    spriteCoeur.setPosition(sf::Vector2f(0,0));
+    spriteCoeur.setPosition(sf::Vector2f(5,5));
     app.window.draw(spriteCoeur);
     app.window.draw(texteScore);
 }

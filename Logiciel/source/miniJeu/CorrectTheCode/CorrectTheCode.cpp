@@ -1,7 +1,7 @@
 #include "../../../header/miniJeu/CorrectTheCode/CorrectTheCode.h"
 
 using namespace correctthecode;
-CorrectTheCode::CorrectTheCode(AppData &appdata) : MiniJeu(appdata), maxTime((3+2*std::min(int(app.difficulty), 5))* pow(0.95, std::max(int(app.difficulty)-5, 0) )), chrono(app.window), isEnding(false)
+CorrectTheCode::CorrectTheCode(AppData &appdata) : MiniJeu(appdata), maxTime((3+2*std::min(int(app.difficulty), 5))* pow(0.95, std::max(int(app.difficulty)-5, 0) )), chrono(app.window)
 {
 
 }
