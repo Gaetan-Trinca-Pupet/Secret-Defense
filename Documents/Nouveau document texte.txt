@@ -1,6 +1,0 @@
-proposition :
-
-- créer une planète généré procéduralement (en 3D) (OpenGL)
-- Jeux LAPORTE
-- Création d'un Logiciel Modélisation 3D (OpenGL)
-- langage naturel
