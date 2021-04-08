@@ -19,7 +19,7 @@ cd obj && g++ -c ../source/miniJeu/CorrigeCopie/*.cpp && cd ..
 cd obj && g++ -c ../source/miniJeu/memoryQuestions/*.cpp && cd ..
 
 
-cd obj && g++ -c ../source/miniJeu/Gifle/*.cpp && cd ..
+cd obj && g++ -c ../source/miniJeu/TrouveSansMasque/*.cpp && cd ..
 
 
 cd obj && g++ -c ../source/miniJeu/DistribMiniTests/*.cpp && cd ..
@@ -41,4 +41,4 @@ g++ main.cpp obj/*.o -o bin/secret.exe -lsfml-graphics -lsfml-system -lsfml-wind
 
 
 
-cd obj && g++ -c ../source/miniJeu/AmphiReponse/*.cpp && g++ -c ../source/miniJeu/TestProjetPtut/*.cpp && g++ -c ../source/miniJeu/EteindrePC/*.cpp &&  g++ -c ../source/miniJeu/BranchePC/*.cpp && g++ -c ../source/miniJeu/CorrectTheCode/*.cpp && g++ -c ../source/miniJeu/CorrigeCopie/*.cpp && g++ -c ../source/miniJeu/memoryQuestions/*.cpp && g++ -c ../source/miniJeu/Gifle/*.cpp && g++ -c ../source/miniJeu/DistribMiniTests/*.cpp && g++ -c ../source/miniJeu/*.cpp && g++ -c ../source/Menu/*.cpp && g++ -c ../source/*.cpp && g++ -c ../source/miniJeu/Bronx/*.cpp && cd ..
+cd obj && g++ -c ../source/miniJeu/AmphiReponse/*.cpp && g++ -c ../source/miniJeu/TestProjetPtut/*.cpp && g++ -c ../source/miniJeu/EteindrePC/*.cpp &&  g++ -c ../source/miniJeu/BranchePC/*.cpp && g++ -c ../source/miniJeu/CorrectTheCode/*.cpp && g++ -c ../source/miniJeu/CorrigeCopie/*.cpp && g++ -c ../source/miniJeu/memoryQuestions/*.cpp && g++ -c ../source/miniJeu/TrouveSansMasque/*.cpp && g++ -c ../source/miniJeu/DistribMiniTests/*.cpp && g++ -c ../source/miniJeu/*.cpp && g++ -c ../source/Menu/*.cpp && g++ -c ../source/*.cpp && g++ -c ../source/miniJeu/Bronx/*.cpp && cd ..
