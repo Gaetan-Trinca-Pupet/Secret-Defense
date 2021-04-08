@@ -6,6 +6,7 @@
 #include <string>
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "../miniJeu/MiniJeu.h"
 #include "../miniJeu/MiniJeuManager.h"
 #include "MenusEnum.h"
@@ -18,7 +19,12 @@ namespace Menu{
 		private :
 			Textfield pseudoField;
 			Selecteur selecteurFramrateMode;
+			Selecteur selecteurMusiqueOnOff;
 			Bouton bt_valider;
+			
+			sf::Text text_framerateMode;
+			sf::Text text_Music;
+			sf::Text text_pseudo;
 			
 		public :
 			MenuOptions();

@@ -1,2 +1,3 @@
-mode : high
-pseudo :Je te chie dessu
+mode : eco
+pseudo :Moi
+muted : no
