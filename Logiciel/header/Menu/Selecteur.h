@@ -17,6 +17,7 @@ namespace Menu{
 			sf::Font * font;
 			std::string * selectedOption;
 			bool folded;
+			bool enable;
 			
 			void drawCase(sf::RenderWindow& window, unsigned int& index);
 		public :
@@ -31,6 +32,8 @@ namespace Menu{
 			void setSelected(const std::string& str);
 			void pushOption(const std::string& str);
 			void setFont(sf::Font& f);
+			bool isFolded()const;
+			void setEnable(bool _enable);
 	};
 }
 

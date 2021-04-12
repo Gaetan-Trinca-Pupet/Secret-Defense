@@ -2,10 +2,12 @@
 
 Menu::Selecteur::Selecteur(){
 	folded = true;
+	enable = true;
 	selectedOption = nullptr;
 }
 
 void Menu::Selecteur::update(sf::RenderWindow& window){
+	if(!enable)return;
 	sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
 	sf::Vector2f mouse = window.mapPixelToCoords(pixelPos);
 	
@@ -94,4 +96,12 @@ void Menu::Selecteur::pushOption(const std::string& str){
 
 void Menu::Selecteur::setFont(sf::Font& f){
 	font = &f;
+}
+
+bool Menu::Selecteur::isFolded()const{
+	return folded;
+}
+
+void Menu::Selecteur::setEnable(bool _enable){
+	enable = _enable;
 }
