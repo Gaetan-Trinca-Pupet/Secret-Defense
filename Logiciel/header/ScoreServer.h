@@ -13,9 +13,8 @@ class ScoreServer
 public:
 
 	static bool error;
-	static std::string name;
-	static void sendScore(int score);
-	static int getBestScore();
+	static void sendScore(std::string name, int score);
+	static int getBestScore(std::string name);
 	static std::vector<Score> get10BestScores();
 
 

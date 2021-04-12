@@ -59,7 +59,7 @@ void AmphiReponse::AmphiReponse::setup()
 
 	
 
-	//Choisis les Questions Réponses et les ajoute dans le tableau
+	//Choisis les Questions RÃ©ponses et les ajoute dans le tableau
 	tabNum.resize(nbQuestion);
 	for (unsigned i = 0; i < tabNum.size(); ++i)
 		tabNum[i] = i;
@@ -71,7 +71,7 @@ void AmphiReponse::AmphiReponse::setup()
 		tabNum.erase(tabNum.begin() + n);
 	}
 
-	// Rajoute des mauvaise réponse au tableau
+	// Rajoute des mauvaise rÃ©ponse au tableau
 	tabNum.resize(tabM.size());
 	for (unsigned i = 0; i < tabNum.size(); ++i)
 		tabNum[i] = i;
@@ -86,15 +86,15 @@ void AmphiReponse::AmphiReponse::setup()
 	for (unsigned i = 0; i < tabQuest.size(); ++i)
 		main.add(tabQuest[i]);
 
-	// Set position des Réponses de facon random
+	// Set position des RÃ©ponses de facon random
 	tabNum.resize(tabQuest.size());
 	for (unsigned i = 0; i < tabNum.size(); ++i)
 		tabNum[i] = i;
-    std::vector<unsigned short> posx; //Génération d'un vecteur pour les positions x
+    std::vector<unsigned short> posx; //GÃ©nÃ©ration d'un vecteur pour les positions x
     for (unsigned short x = 0; x < 8; ++x)
         posx.push_back(x);
     std::random_shuffle(posx.begin(), posx.end());
-    std::vector<unsigned short> posy; //Génération d'un vecteur pour les positions y
+    std::vector<unsigned short> posy; //GÃ©nÃ©ration d'un vecteur pour les positions y
     for (unsigned short y = 0; y < 8; ++y)
         posy.push_back(y);
     std::random_shuffle(posy.begin(), posy.end());
@@ -107,11 +107,11 @@ void AmphiReponse::AmphiReponse::setup()
 
 	// Set position des Questions de facon random
 	tabNum.resize(tabQuest.size());
-    posx.resize(0); //Génération d'un vecteur pour les positions
+    posx.resize(0); //GÃ©nÃ©ration d'un vecteur pour les positions
     for (unsigned short x = 0; x < 8; ++x)
         posx.push_back(x);
     std::random_shuffle(posx.begin(), posx.end());
-    posy.resize(0); //Génération d'un vecteur pour les positions
+    posy.resize(0); //GÃ©nÃ©ration d'un vecteur pour les positions
     for (unsigned short y = 0; y < 6; ++y)
         posy.push_back(y);
 	for (unsigned i = 0; i < tabNum.size(); ++i)
@@ -158,7 +158,7 @@ void AmphiReponse::AmphiReponse::update()
 	
 	if (chrono.getTimePassed() > chrono.getTempsMax() && ! isFinished)
 	{
-		end(false, "Le temps est écoulé.");
+		end(false, "Le temps est Ã©coulÃ©.");
 	}
 }
 
