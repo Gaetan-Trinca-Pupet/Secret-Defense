@@ -66,7 +66,10 @@ void TrouveSansMasque::TrouveSansMasque::update()
             }
             else if (passants[i].isMasked() && passants[i].isTrouve() && erreurCpt-- <= 0)
             {
-                end(false, "Vous avez clické sur un passant masqué.");
+                if(app.pseudo == "Laporte")
+                    end(false, "Vous avez giflé un passant masqué.");
+                else
+                    end(false, "Vous avez clické sur un passant masqué.");
             }
 
             passants.erase(passants.begin() + i);
@@ -88,24 +91,24 @@ void TrouveSansMasque::TrouveSansMasque::creerPassants()
     pos = sf::Vector2f(-200, 100);
     pos.x -= rand() % 100;
     pos.y += rand() % ((int(app.window.getView().getSize().y - 200) / 2) - 10);
-    passants.push_back(Passant(pos, &app.window, 1, cpt++ != numPasdeMasque, app.difficulty));
+    passants.push_back(Passant(pos, &app.window, 1, cpt++ != numPasdeMasque, &app));
     //bas à gauche
     pos = sf::Vector2f(-200, app.window.getView().getSize().y - 100);
     pos.x -= rand() % 100;
     pos.y -= rand() % ((int(app.window.getView().getSize().y - 200) / 2) + 10);
-    passants.push_back(Passant(pos, &app.window, 1,cpt++ != numPasdeMasque, app.difficulty));
+    passants.push_back(Passant(pos, &app.window, 1,cpt++ != numPasdeMasque, &app));
 
     //haut à droite
     pos = sf::Vector2f(app.window.getView().getSize().x + 200, 100);
     pos.x += rand() % 100;
     pos.y += rand() % ((int(app.window.getView().getSize().y - 200) / 2) - 10);
-    passants.push_back(Passant(pos, &app.window, -1, cpt++ != numPasdeMasque, app.difficulty));
+    passants.push_back(Passant(pos, &app.window, -1, cpt++ != numPasdeMasque, &app));
 
     //bas à droite
     pos = sf::Vector2f(app.window.getView().getSize().x + 200, app.window.getView().getSize().y - 100);
     pos.x += rand() % 100;
     pos.y -= rand() % ((int(app.window.getView().getSize().y - 200) / 2) + 10);
-    passants.push_back(Passant(pos, &app.window, -1, cpt != numPasdeMasque, app.difficulty));
+    passants.push_back(Passant(pos, &app.window, -1, cpt != numPasdeMasque, &app));
 
 
 }

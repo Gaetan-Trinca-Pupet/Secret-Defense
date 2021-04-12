@@ -39,7 +39,7 @@ int main()
 		menu.play();
 		if(menu.getMenu() == Menu::Menus::jeu){
 			MiniJeuManager manager(app);
-			manager.play();
+			manager.play("CorrectTheCode");
 			menu.setMenu(Menu::Menus::gameOver);
 		}
 	}

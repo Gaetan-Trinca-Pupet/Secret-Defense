@@ -8,6 +8,7 @@ CorrectTheCode::CorrectTheCode(AppData &appdata) : MiniJeu(appdata), maxTime((3+
 
 void CorrectTheCode::setup()
 {
+    backGround.setTexture(AssetManager::getTexture("../ressource/CorrectTheCode/bgCorrectTheCode.png"));
     CodeLine::initCodeLine();
     unsigned short codenb (std::min((unsigned)app.difficulty*2-1, unsigned(9)) - rand()%2);
     code.resize((unsigned)codenb/2+2);
@@ -19,6 +20,7 @@ void CorrectTheCode::setup()
 
 void CorrectTheCode::draw()
 {
+    app.window.draw(backGround);
     for (CodeLine & codeline : code)
         app.window.draw(codeline);
     app.window.draw(chrono);

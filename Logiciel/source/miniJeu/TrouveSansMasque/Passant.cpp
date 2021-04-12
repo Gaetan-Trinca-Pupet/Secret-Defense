@@ -3,15 +3,15 @@
 
 
 
-Passant::Passant(const sf::Vector2f& pos, sf::RenderWindow* _window, float _dir, bool masque, unsigned difficulty)
-	:Clickable(pos, sf::Vector2f(), _window)
+Passant::Passant(const sf::Vector2f& pos, sf::RenderWindow* _window, float _dir, bool masque, AppData* _app)
+	:Clickable(pos, sf::Vector2f(), _window), app(_app)
 {
 	masked = masque;
 	window = _window;
 	dir = _dir;
 	trouve = false;
 	enFuite = false;
-	speed = 2.6 + (difficulty / (difficulty + 1.7)) * 1.4;
+	speed = 2.6 + (app->difficulty / (app->difficulty + 1.7)) * 1.4;
 	speed += (float(rand()) / float(RAND_MAX) - 0.5) * float(speed * 0.3);
 
 	setFillColor(sf::Color::Transparent);
@@ -59,7 +59,7 @@ void Passant::update()
 			clockPourDelaiAnimation.restart();
 
 			sf::IntRect newTextureRect(sprite.getTextureRect());
-			newTextureRect.left = trouve ? newTextureRect.width * 2 : 0;
+			if(app->pseudo != "Laporte") newTextureRect.left = trouve ? newTextureRect.width * 2 : 0;
 			sprite.setTextureRect(newTextureRect);
 
 			if (sprite.getTextureRect().top == 0)
@@ -101,14 +101,13 @@ void Passant::actionOnClick()
 	if (trouve) return;
 	AssetManager::playSound("../ressource/audio/" + std::string(masked ? "bong" : "bing") + ".wav");
 	trouve = true;
-	speed *= 6;
+	speed *= 7;
 
 	clockPourDelaiFuite.restart();
 
 	sf::IntRect newTextureRect(sprite.getTextureRect());
 	newTextureRect.left += newTextureRect.width;
-	newTextureRect.top = 0;
-	//newTextureRect.top = app.option.secretMode ? newTextureRect.height : 0;
+	newTextureRect.top = app->pseudo != "Laporte" ? newTextureRect.height : 0;
 	sprite.setTextureRect(newTextureRect);
 }
 

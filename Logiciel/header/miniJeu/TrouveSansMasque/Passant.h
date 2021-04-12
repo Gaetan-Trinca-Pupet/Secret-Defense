@@ -2,6 +2,7 @@
 #define __PASSANT_H_
 
 #include "../../clickable.h"
+#include "../../miniJeu/MiniJeu.h"
 #include "../../AssetManager.h"
 
 class Passant : public Clickable
@@ -16,9 +17,9 @@ public:
 	 * \param window fenêtre (utilisée pour savoir si le passant a atteint l'autre côté de l'écran)
 	 * \param dir direction vers laquelle el passant se déplace (1 vers la doite, -1 vers la gauche)
 	 * \param isMasque indique sur le passant est masqué ou non
-	 * \param difficulty difficulté, utilisée pour calculer la vitesse de déplacement
+	 * \param app sert à récupérer la difficulté et pseudo
 	 */
-	Passant(const sf::Vector2f& pos, sf::RenderWindow* window, float dir, bool isMasque, unsigned difficulty);
+	Passant(const sf::Vector2f& pos, sf::RenderWindow* window, float dir, bool isMasque, AppData* app);
 	virtual ~Passant();
 
 	/**
@@ -59,6 +60,8 @@ public:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:
+	AppData* app;
+
 	sf::Sprite sprite;
 
 	bool trouve;

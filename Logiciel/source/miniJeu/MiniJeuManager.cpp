@@ -11,7 +11,7 @@ MiniJeuManager::MiniJeuManager(AppData &app_):app(app_)
     addMiniJeu([](AppData& app) -> MiniJeu * { return new DistribMiniTests(app); }, "DistribMiniTests", "descriptionAmphiReponse");
     addMiniJeu([](AppData& app) -> MiniJeu * { return new EteindrePC::EteindrePC(app); }, "EteindrePC", "descriptionAmphiReponse");
     addMiniJeu([](AppData& app) -> MiniJeu* { return new memoryQuestions::MemoryQuestions(app); }, "MemoryQuestions", "descriptionAmphiReponse");
-    addMiniJeu([](AppData& app) -> MiniJeu* { return new TrouveSansMasque::TrouveSansMasque(app); }, "TrouveSansMasque", /*app.option.secretMode ? */"descriptionTrouveSansMasque"/* : "descriptionOuEstSansMasque*/);
+    addMiniJeu([](AppData& app) -> MiniJeu* { return new TrouveSansMasque::TrouveSansMasque(app); }, "TrouveSansMasque", app.pseudo != "Laporte" ? "descriptionTrouveSansMasque" : "Giflez les passants sans masque\n(Souris)");
     addBoss([](AppData& app) -> MiniJeu* { return new TestProjetPtut::TestProjetPtut(app); }, "TestProjetPtut", "descriptionAmphiReponse");
     addBoss([](AppData& app) -> MiniJeu* { return new Bronx::Bronx(app); }, "Bronx", "descriptionBronx");
 }
