@@ -25,6 +25,8 @@ int main()
     app.difficulty=0;
     app.score=0;
     app.lives=3;
+	app.icon.loadFromFile("../ressource/icon.png");
+	if(app.icon.getPixelsPtr() != nullptr)app.window.setIcon(238,238,app.icon.getPixelsPtr());
     if (!app.font.loadFromFile("../ressource/fonts/OpenSans-Regular.ttf"))
     {
         std::cout<<"erreur loadFromFile"<<std::endl;

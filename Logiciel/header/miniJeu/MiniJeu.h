@@ -26,6 +26,7 @@ struct AppData{
     unsigned short int lives;
     bool fullscreen;
     sf::Music mainMusique;
+	sf::Image icon;
 };
 
 

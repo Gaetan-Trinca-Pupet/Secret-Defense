@@ -21,9 +21,11 @@ std::string MiniJeu::play(){
                     if(!app.fullscreen){
                         app.window.create(sf::VideoMode(960, 540), "test",sf::Style::Fullscreen);
                         app.window.setView(sf::View(sf::Vector2f(480,270), sf::Vector2f(960,540)));
+						if(app.icon.getPixelsPtr() != nullptr)app.window.setIcon(238,238,app.icon.getPixelsPtr());
                         app.fullscreen = true;
                     }else{
                         app.window.create(sf::VideoMode(960, 540), "test");
+						if(app.icon.getPixelsPtr() != nullptr)app.window.setIcon(238,238,app.icon.getPixelsPtr());
                         app.fullscreen = false;
                     }
                     app.framerateManager.reset();
