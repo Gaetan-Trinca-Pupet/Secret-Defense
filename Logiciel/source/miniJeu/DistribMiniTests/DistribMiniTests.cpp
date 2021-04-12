@@ -80,7 +80,7 @@ void DistribMiniTests::update()
 				//si l'étudiant e peux attraper le minitest, le supprimer
 				if (e.tryToCatch(miniTests[i]->getPosition()))
 				{
-					AssetManager::playSound("../ressource/audio/bing.wav");
+                    AssetManager::playSound("../ressource/audio/bing.wav",20);
 					delete miniTests[i];
 					miniTests.erase(miniTests.begin() + i);
 					--nbADistribuer;

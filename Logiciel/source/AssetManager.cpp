@@ -31,7 +31,7 @@ sf::Texture& AssetManager::getTexture(std::string path)
 	
 }
 
-void AssetManager::playSound(std::string path)
+void AssetManager::playSound(std::string path, float volume)
 {
 	for (int i(sounds.size()); i != 0 && sounds.size() != 0;)
 	{
@@ -43,6 +43,7 @@ void AssetManager::playSound(std::string path)
 	}
 
 	sounds.push_back(sf::Sound(getSoundBuffer(path)));
+    sounds.back().setVolume(volume);
 	sounds.back().play();
 }
 

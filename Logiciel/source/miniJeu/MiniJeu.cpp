@@ -53,7 +53,7 @@ void MiniJeu::end(bool won, std::string message)
     if (isFinished) return;
     endMsg = message;
     app.mainMusique.stop();
-    AssetManager::playSound("../ressource/audio/" + std::string(won ? "success" : "defeat") + ".wav");
+    AssetManager::playSound("../ressource/audio/" + std::string(won ? "success" : "defeat") + ".wav",20);
     endDelay.restart();
     isFinished = true;
     if (!won) app.lives -= 1;

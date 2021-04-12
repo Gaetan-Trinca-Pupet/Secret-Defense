@@ -38,6 +38,7 @@ void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
                 std::cerr<<"erreur openFromFile musique de transition"<<std::endl;
 
             app.mainMusique.setLoop(false);
+            app.mainMusique.setVolume(30);
             app.mainMusique.play();
             transition transtest (app, txt);
             transtest.play();

@@ -103,7 +103,7 @@ void Passant::actionOnClick()
 	{
 		AssetManager::playSound("../ressource/audio/gifle.wav");
 	}
-	AssetManager::playSound("../ressource/audio/" + std::string(masked ? "bong" : "bing") + ".wav");
+    AssetManager::playSound("../ressource/audio/" + std::string(masked ? "bong" : "bing") + ".wav",20);
 	trouve = true;
 	speed *= 7;
 

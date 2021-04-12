@@ -33,7 +33,7 @@ public:
 	 * \param path le chemin vers le son
 	 * \return la texture
 	 */
-	static void playSound(std::string path);
+    static void playSound(std::string path, float volume=100);
 	
 
 

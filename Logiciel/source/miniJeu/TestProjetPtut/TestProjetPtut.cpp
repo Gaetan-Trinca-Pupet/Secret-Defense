@@ -17,6 +17,7 @@ void TestProjetPtut::TestProjetPtut::setup(){
     if(!app.mainMusique.openFromFile("../ressource/audio/testProjetPtut.wav"))
         std::cerr<<"erreur openFromFile musique de testProjetPtut"<<std::endl;
 
+    app.mainMusique.setVolume(30);
     app.mainMusique.setLoop(true);
     app.mainMusique.play();
 
