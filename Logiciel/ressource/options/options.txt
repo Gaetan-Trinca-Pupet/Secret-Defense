@@ -1,3 +1,3 @@
-mode : eco
+mode : middle
 pseudo :Moi
-muted : no
+muted : yes

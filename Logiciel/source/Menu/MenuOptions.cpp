@@ -55,6 +55,12 @@ void Menu::MenuOptions::update(sf::RenderWindow& window, Menus& menu, AppData& a
 	selecteurMusiqueOnOff.update(window);
 	bt_valider.update(window);
 	
+	if(selecteurMusiqueOnOff.getSelected() == "Off"){
+		sf::Listener::setGlobalVolume(0);
+	}else{
+		sf::Listener::setGlobalVolume(50);
+	}
+	
 	if(bt_valider.isReleased()){
 		std::string choix = selecteurFramrateMode.getSelected();
 		if(choix == "economique"){
