@@ -14,6 +14,7 @@ private :
     std::vector<CodeLine> code;
     float maxTime;
     Chrono chrono;
+    sf::Sprite backGround;
 
 public :
     ///
