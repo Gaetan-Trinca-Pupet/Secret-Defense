@@ -19,7 +19,7 @@ Menu::MenuOptions::MenuOptions(){
 	selecteurFramrateMode.pushOption("dynamique");
 	
 	selecteurMusiqueOnOff.setSize(sf::Vector2f(75,45));
-	selecteurMusiqueOnOff.setPosition(sf::Vector2f(480-120+15,200));
+	selecteurMusiqueOnOff.setPosition(sf::Vector2f(480-120+15+50,200));
 	selecteurMusiqueOnOff.pushOption("On");
 	selecteurMusiqueOnOff.pushOption("Off");
 	
@@ -31,8 +31,8 @@ Menu::MenuOptions::MenuOptions(){
 	text_Music.setString("Sons");
 	text_pseudo.setString("Pseudo");
 	text_framerateMode.setPosition(sf::Vector2f(/*325+15*/480-100,50));
-	text_Music.setPosition(sf::Vector2f(/*500-15*/480-100,175));
-	text_pseudo.setPosition(sf::Vector2f(/*325+15*/windowWidth_u/2-100,300));
+	text_Music.setPosition(sf::Vector2f(/*500-15*/480-50+50,175));
+	text_pseudo.setPosition(sf::Vector2f(/*325+15*/windowWidth_u/2-115,300));
 	text_framerateMode.setOutlineColor(sf::Color(0,0,0));
 	text_Music.setOutlineColor(sf::Color(0,0,0));
 	text_pseudo.setOutlineColor(sf::Color(0,0,0));
