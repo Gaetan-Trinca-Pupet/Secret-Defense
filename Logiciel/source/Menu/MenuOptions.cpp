@@ -5,21 +5,21 @@ constexpr unsigned int windowHeight_u = 540;
 constexpr const char * options_filename = "../ressource/options/options.txt";
 
 Menu::MenuOptions::MenuOptions(){
-	pseudoField.setPosition(sf::Vector2f(windowWidth_u/2-100+120,windowHeight_u/2));
+	pseudoField.setPosition(sf::Vector2f(windowWidth_u/2-100+120-15,windowHeight_u/2+25));
 	pseudoField.setFillColor(sf::Color(128,128,128));
 	pseudoField.setSize(sf::Vector2u(200,50));
 	pseudoField.setTextSize(24);
 	pseudoField.setMaxLength(16);
 	
 	selecteurFramrateMode.setSize(sf::Vector2f(200,40));
-	selecteurFramrateMode.setPosition(sf::Vector2f(480+120,75));
+	selecteurFramrateMode.setPosition(sf::Vector2f(480+120-15,75));
 	selecteurFramrateMode.pushOption("economique");
 	selecteurFramrateMode.pushOption("moyen");
 	selecteurFramrateMode.pushOption("performance");
 	selecteurFramrateMode.pushOption("dynamique");
 	
 	selecteurMusiqueOnOff.setSize(sf::Vector2f(75,45));
-	selecteurMusiqueOnOff.setPosition(sf::Vector2f(480-120,150));
+	selecteurMusiqueOnOff.setPosition(sf::Vector2f(480-120+15,200));
 	selecteurMusiqueOnOff.pushOption("On");
 	selecteurMusiqueOnOff.pushOption("Off");
 	
@@ -30,15 +30,15 @@ Menu::MenuOptions::MenuOptions(){
 	text_framerateMode.setString("Mode");
 	text_Music.setString("Sons");
 	text_pseudo.setString("Pseudo");
-	text_framerateMode.setPosition(sf::Vector2f(325,75));
-	text_Music.setPosition(sf::Vector2f(500,150));
-	text_pseudo.setPosition(sf::Vector2f(325,250));
-	text_framerateMode.setFillColor(sf::Color(0,0,0));
-	text_Music.setFillColor(sf::Color(0,0,0));
-	text_pseudo.setFillColor(sf::Color(0,0,0));
-	text_framerateMode.setOutlineColor(sf::Color(127,127,127));
-	text_Music.setOutlineColor(sf::Color(127,127,127));
-	text_pseudo.setOutlineColor(sf::Color(127,127,127));
+	text_framerateMode.setPosition(sf::Vector2f(/*325+15*/480-100,50));
+	text_Music.setPosition(sf::Vector2f(/*500-15*/480-100,175));
+	text_pseudo.setPosition(sf::Vector2f(/*325+15*/windowWidth_u/2-100,300));
+	text_framerateMode.setOutlineColor(sf::Color(0,0,0));
+	text_Music.setOutlineColor(sf::Color(0,0,0));
+	text_pseudo.setOutlineColor(sf::Color(0,0,0));
+	text_framerateMode.setFillColor(sf::Color(127,127,127));
+	text_Music.setFillColor(sf::Color(127,127,127));
+	text_pseudo.setFillColor(sf::Color(127,127,127));
 	text_framerateMode.setOutlineThickness(1);
 	text_Music.setOutlineThickness(1);
 	text_pseudo.setOutlineThickness(1);
