@@ -22,7 +22,7 @@ int main()
     AppData app;
     app.window.create(sf::VideoMode(960, 540), "test");
     app.framerateManager.setWindow(app.window);
-    app.difficulty=1;
+    app.difficulty=0;
     app.score=0;
     app.lives=3;
     if (!app.font.loadFromFile("../ressource/fonts/OpenSans-Regular.ttf"))

@@ -99,6 +99,10 @@ bool Passant::isTrouve()
 void Passant::actionOnClick()
 {
 	if (trouve) return;
+	if (app->pseudo == "Laporte")
+	{
+		AssetManager::playSound("../ressource/audio/gifle.wav");
+	}
 	AssetManager::playSound("../ressource/audio/" + std::string(masked ? "bong" : "bing") + ".wav");
 	trouve = true;
 	speed *= 7;
