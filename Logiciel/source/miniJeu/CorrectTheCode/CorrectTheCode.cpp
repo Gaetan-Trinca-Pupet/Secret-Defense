@@ -10,7 +10,7 @@ void CorrectTheCode::setup()
 {
     backGround.setTexture(AssetManager::getTexture("../ressource/CorrectTheCode/bgCorrectTheCode.png"));
     CodeLine::initCodeLine();
-    unsigned short codenb (std::min((unsigned)app.difficulty*2-1, unsigned(9)) - rand()%2);
+    unsigned short codenb (std::min((unsigned)app.difficulty*2, unsigned(8)) + rand()%2);
     code.resize((unsigned)codenb/2+2);
     for (unsigned short rank = 0; rank < code.size(); ++rank) {
         code[rank] = CodeLine(&app.window, codenb, rank);
