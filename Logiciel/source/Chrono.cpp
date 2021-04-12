@@ -9,7 +9,7 @@ Chrono::~Chrono() {
 }
 
 Chrono::Chrono(sf::RenderWindow& window) {
-
+	arc.setNBangles(110);
 	arc.setRadius(40);
 	arc.setPosition(sf::Vector2f(0.87,0.78));
 	outline.setRadius(48);

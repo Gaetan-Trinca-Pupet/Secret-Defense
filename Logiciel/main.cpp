@@ -20,7 +20,7 @@ int main()
 {
     srand(time(NULL));
     AppData app;
-    app.window.create(sf::VideoMode(960, 540), "test");
+    app.window.create(sf::VideoMode(960, 540), "test",sf::Style::Default,sf::ContextSettings(0,0,8));
     app.framerateManager.setWindow(app.window);
     app.difficulty=0;
     app.score=0;
