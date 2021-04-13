@@ -7,7 +7,7 @@ MiniJeuManager::MiniJeuManager(AppData &app_):app(app_)
     addMiniJeu([](AppData& app) -> MiniJeu * { return new AmphiReponse::AmphiReponse(app); }, "AmphiReponse", "Répondez aux questions !\nContrôles : Souris");
     addMiniJeu([](AppData& app) -> MiniJeu * { return new correctthecode::CorrectTheCode(app); }, "CorrectTheCode", "Trouvez la ligne incorrecte !\nContrôles : Souris");
     addMiniJeu([](AppData& app) -> MiniJeu * { return new BranchePC::BranchePC(app); }, "BranchePC", "Branchez les PC !\nContrôles : Souris");
-    addMiniJeu([](AppData& app) -> MiniJeu * { return new CorrigeCopie::CorrigeCopie(app); }, "CorrigeCopie", "Corrigez la copie !\nContrôles : Couris");
+    addMiniJeu([](AppData& app) -> MiniJeu * { return new CorrigeCopie::CorrigeCopie(app); }, "CorrigeCopie", "Corrigez la copie !\nContrôles : Souris");
     addMiniJeu([](AppData& app) -> MiniJeu * { return new DistribMiniTests(app); }, "DistribMiniTests", "Distribuez les tests !\nContrôles : Souris");
     addMiniJeu([](AppData& app) -> MiniJeu * { return new EteindrePC::EteindrePC(app); }, "EteindrePC", "Éteignez les PC !\nContrôles : Pavé directionnel + Espace");
     addMiniJeu([](AppData& app) -> MiniJeu * { return new memoryQuestions::MemoryQuestions(app); }, "MemoryQuestions", "Trouvez la questions déjà posée !\nContrôles : Souris");
