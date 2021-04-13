@@ -223,7 +223,7 @@ void Bronx::Bronx::update()
             || ((ingredient->getGlobalBounds().left+ingredient->getGlobalBounds().width) < 0))
             && (!ingredient->getIsGrabbed()))
         {
-            end(false, "Vous avez fait tomber un ingrédient...");
+            end(false, "Vous avez fait tomber un ingrï¿½dient...");
         }
     }
 
@@ -247,7 +247,7 @@ void Bronx::Bronx::update()
             || ((verre.getGlobalBounds().left+verre.getGlobalBounds().width) < 0))
             && (!verre.getIsGrabbed()))
         {
-            end(false, "Vous avez fait tomber un ingrédient...");
+            end(false, "Vous avez fait tomber un ingrï¿½dient...");
         }
         if(!verre.getIsGrabbed())
         {
@@ -353,7 +353,7 @@ void Bronx::Bronx::update()
                 ingredient->setCanBeGrabbed(true);
             }
             frigo.setOpened(false);
-            hint.setString("          Mettez les\n   ingrédients dans\n           le shaker");
+            hint.setString("          Mettez les\n   ingrï¿½dients dans\n           le shaker");
         }
         break;
     }
@@ -378,7 +378,7 @@ void Bronx::Bronx::update()
             --i;
             if (ingredientsNonComestibles[i]->isDelivered())
             {
-                end(false, "Vous avez mis un mauvais ingrédient...");
+                end(false, "Vous avez mis un mauvais ingrï¿½dient...");
                 break;
             }
         }
@@ -456,7 +456,6 @@ void Bronx::Bronx::update()
         }
         if (verresPleins == true)
         {
-            //if(!isFinished)std::cout << chrono.getTimePassed() << std::endl;
             end(true);
         }
         break;

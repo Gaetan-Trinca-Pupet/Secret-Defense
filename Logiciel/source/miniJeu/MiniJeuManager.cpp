@@ -4,16 +4,16 @@ MiniJeuManager::MiniJeuManager(AppData &app_):app(app_)
 {
     phaseMusique='1';
 
-    addMiniJeu([](AppData& app) -> MiniJeu * { return new AmphiReponse::AmphiReponse(app); }, "AmphiReponse", "Déplacez les réponses sur les bonne questions.\n(Souris)");
-    addMiniJeu([](AppData& app) -> MiniJeu * { return new correctthecode::CorrectTheCode(app); }, "CorrectTheCode", "descriptionCorrectTheCode");
-    addMiniJeu([](AppData& app) -> MiniJeu * { return new BranchePC::BranchePC(app); }, "BranchePC", "descriptionAmphiReponse");
-    addMiniJeu([](AppData& app) -> MiniJeu * { return new CorrigeCopie::CorrigeCopie(app); }, "CorrigeCopie", "descriptionAmphiReponse");
-    addMiniJeu([](AppData& app) -> MiniJeu * { return new DistribMiniTests(app); }, "DistribMiniTests", "descriptionAmphiReponse");
-    addMiniJeu([](AppData& app) -> MiniJeu * { return new EteindrePC::EteindrePC(app); }, "EteindrePC", "descriptionAmphiReponse");
-    addMiniJeu([](AppData& app) -> MiniJeu* { return new memoryQuestions::MemoryQuestions(app); }, "MemoryQuestions", "descriptionAmphiReponse");
-    addMiniJeu([](AppData& app) -> MiniJeu* { return new TrouveSansMasque::TrouveSansMasque(app); }, "TrouveSansMasque", app.pseudo != "Laporte" ? "descriptionTrouveSansMasque" : "Giflez les passants sans masque\n(Souris)");
-    addBoss([](AppData& app) -> MiniJeu* { return new TestProjetPtut::TestProjetPtut(app); }, "TestProjetPtut", "descriptionAmphiReponse");
-    addBoss([](AppData& app) -> MiniJeu* { return new Bronx::Bronx(app); }, "Bronx", "descriptionBronx");
+    addMiniJeu([](AppData& app) -> MiniJeu * { return new AmphiReponse::AmphiReponse(app); }, "AmphiReponse", "Répondez aux questions !\nContrôles : Souris");
+    addMiniJeu([](AppData& app) -> MiniJeu * { return new correctthecode::CorrectTheCode(app); }, "CorrectTheCode", "Trouvez la ligne incorrecte !\nContrôles : Souris");
+    addMiniJeu([](AppData& app) -> MiniJeu * { return new BranchePC::BranchePC(app); }, "BranchePC", "Branchez les PC !\nContrôles : Souris");
+    addMiniJeu([](AppData& app) -> MiniJeu * { return new CorrigeCopie::CorrigeCopie(app); }, "CorrigeCopie", "Corrigez la copie !\nContrôles : Couris");
+    addMiniJeu([](AppData& app) -> MiniJeu * { return new DistribMiniTests(app); }, "DistribMiniTests", "Distribuez les tests !\nContrôles : Souris");
+    addMiniJeu([](AppData& app) -> MiniJeu * { return new EteindrePC::EteindrePC(app); }, "EteindrePC", "Éteignez les PC !\nContrôles : Pavé directionnel + Espace");
+    addMiniJeu([](AppData& app) -> MiniJeu * { return new memoryQuestions::MemoryQuestions(app); }, "MemoryQuestions", "Trouvez la questions déjà posée !\nContrôles : Souris");
+    addMiniJeu([](AppData& app) -> MiniJeu* { return new TrouveSansMasque::TrouveSansMasque(app); }, "TrouveSansMasque", app.pseudo != "Laporte" ? "Trouvez les passants sans masque!\nContrôles : Souris" : "Giflez les passants sans masque\nContrôles : Souris");
+    addBoss([](AppData& app) -> MiniJeu * { return new TestProjetPtut::TestProjetPtut(app); }, "TestProjetPtut", "Testez le Space Invaders customisé !\nContrôles : Gauche, Droite, Espace");
+    addBoss([](AppData& app) -> MiniJeu* { return new Bronx::Bronx(app); }, "Bronx", "Suivez l'algorithme du Bronx !");
 }
 
 void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)

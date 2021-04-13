@@ -21,7 +21,7 @@ void TestProjetPtut::TestProjetPtut::setup(){
     app.mainMusique.setLoop(true);
     app.mainMusique.play();
 
-	chrono.setTempsMax(30);
+    chrono.setTempsMax(25);
 	setBackgroundColor(sf::Color(0,0,0));
 	textureBackground.loadFromFile("../ressource/TestProjetPtut/bg.bmp");
 	textureBackground.setRepeated(true);
@@ -89,7 +89,7 @@ void TestProjetPtut::TestProjetPtut::update(){
 		--app.lives;
 		over = true;
 		app.window.setMouseCursorVisible(true);
-	}else if(chrono.getTimePassed() > 30){
+    }else if(chrono.getTimePassed() > 25){
 		over = true;
 		app.window.setMouseCursorVisible(true);
 	}

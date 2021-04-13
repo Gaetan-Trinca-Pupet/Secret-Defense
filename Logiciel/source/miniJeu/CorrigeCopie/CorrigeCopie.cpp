@@ -99,7 +99,7 @@ void CorrigeCopie::CorrigeCopie::setup()
 	for (unsigned i = 0; i < tabLibelle.size(); ++i)
 	{
 		unsigned n = std::rand() % tab.size();
-		tabLibelle[i].question.setString(tab[n].question);
+        tabLibelle[i].question.setString(sf::String::fromUtf8(tab[n].question.cbegin(), tab[n].question.cend()));
 
 		if (std::rand() % 2 == 0)
 		{
