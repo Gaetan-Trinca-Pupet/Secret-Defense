@@ -86,11 +86,10 @@ void TestProjetPtut::TestProjetPtut::update(){
 		controles.shuffle();
 	}
 	if(spaceship.getPv() <= 0){
-		--app.lives;
-		over = true;
+		end(false, "Votre vaisseau a été détruit.");
 		app.window.setMouseCursorVisible(true);
     }else if(chrono.getTimePassed() > 25){
-		over = true;
+		end(true, "Victoire, la difficulté augmente !");
 		app.window.setMouseCursorVisible(true);
 	}
 	glitchEffect.update();

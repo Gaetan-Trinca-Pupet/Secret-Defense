@@ -31,7 +31,7 @@ int main()
     {
         std::cout<<"erreur loadFromFile"<<std::endl;
     }
-	if(!app.mainMusique.openFromFile("../ressource/audio/etapes/minijeu1.wav"))
+	if(!app.mainMusique.openFromFile("../ressource/audio/menu.wav"))
         std::cerr<<"erreur openFromFile audio"<<std::endl;
     app.mainMusique.setVolume(30);
     app.mainMusique.setLoop(true);

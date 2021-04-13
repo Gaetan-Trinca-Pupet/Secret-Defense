@@ -72,6 +72,11 @@ Menu::Menus Menu::Menu::getMenu()const{
 }
 
 void Menu::Menu::setMenu(const Menus m){
-	if (m == gameOver) menuGameOver.setScore(app.score);
+	if (m == gameOver)
+	{
+		menuGameOver.setScore(app.score);
+		app.mainMusique.openFromFile("../ressource/audio/menu.wav");
+		app.mainMusique.play();
+	}
 	menu = m;
 }

@@ -74,7 +74,8 @@ void Menu::MenuScores::setup()
 	}
 	else
 	{
-		playerScore.setString("Vous:   " + *playerName + "  :  " + std::to_string(thePersonalScore));
+		playerScore.setString("Vous:   " + sf::String::fromUtf8(playerName->begin(), playerName->end())
+			+ "  :  "+ std::to_string(thePersonalScore));
 	}
 	
 }

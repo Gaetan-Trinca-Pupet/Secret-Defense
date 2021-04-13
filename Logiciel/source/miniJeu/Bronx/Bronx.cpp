@@ -461,7 +461,7 @@ void Bronx::Bronx::update()
         }
         if (verresPleins == true)
         {
-            end(true);
+            end(true, "Victoire, la difficulté augmente !");
         }
         break;
     }
