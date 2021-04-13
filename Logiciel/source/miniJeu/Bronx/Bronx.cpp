@@ -353,7 +353,8 @@ void Bronx::Bronx::update()
                 ingredient->setCanBeGrabbed(true);
             }
             frigo.setOpened(false);
-            hint.setString("          Mettez les\n   ingrédients dans\n           le shaker");
+            std::string str("          Mettez les\n   ingrédients dans\n           le shaker");
+            hint.setString(sf::String::fromUtf8(str.begin(), str.end()));
         }
         break;
     }
@@ -378,6 +379,7 @@ void Bronx::Bronx::update()
             --i;
             if (ingredientsNonComestibles[i]->isDelivered())
             {
+
                 end(false, "Vous avez mis un mauvais ingrédient...");
                 break;
             }
@@ -399,7 +401,8 @@ void Bronx::Bronx::update()
                 if (ingredient->isStored())
                     ingredient->setCanBeGrabbed(false);
             }
-            hint.setString("\n     Agitez le shaker");
+            std::string str("\n     Agitez le shaker");
+            hint.setString(sf::String::fromUtf8(str.begin(), str.end()));
         }
         break;
     case 3:
@@ -407,7 +410,8 @@ void Bronx::Bronx::update()
         if (shaker.isShakingFinished())
         {
             ++etape;
-            hint.setString("          Sortez les\n     verres du frigo");
+            std::string str("          Sortez les\n     verres du frigo");
+            hint.setString(sf::String::fromUtf8(str.begin(), str.end()));
             for (Verre& verre : verres)
             {
                 verre.setCanBeGrabbed(true);
@@ -433,7 +437,8 @@ void Bronx::Bronx::update()
             ++etape;
             shaker.startFilling();
             frigo.setOpened(false);
-            hint.setString("\n           Servez");
+            std::string str("\n           Servez");
+            hint.setString(sf::String::fromUtf8(str.begin(), str.end()));
             AssetManager::playSound("../ressource/audio/bing.wav",20);
         }
         break;

@@ -1,6 +1,6 @@
 Q Quel est la taille d'une adresse dans la mémoire ?
-V 8 octets
 V 64 bits
+V 8 octets
 F 8 bits
 F 64 octets
 F 16 bits
@@ -29,7 +29,7 @@ F Je préfère la BD.
 F Non c'est mon papa le meilleur !!!!!!
 F Bah non.
 Q Ecrivez le corps de la fonction find(n,tab) où on recherche n dans tab :
-V for (unsigned i = 0 ; i < tab.size() ;++i) if (tab[i] == n) return i;
+V for (unsigned i = 0 ; i < tab.size() ;++i)\n    if (tab[i] == n) return i;
 F if (n == tab) return true;
 F if (n != tab) return false;
 F return n;
@@ -47,7 +47,7 @@ Q Pète et répète sont sur un bateau, pète tombe à l'eau, qui c'est qui rest
 V Répète.
 F Pète.
 F Petit bateau, qui navigue sur les flots.
-Q Écrivez un pointeur sur un int :
+Q Déclarez un pointeur sur un int :
 V int* n = new int();
 V int i;\nint* n = &i;
 F int n = new int();

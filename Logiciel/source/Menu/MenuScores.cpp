@@ -59,7 +59,7 @@ void Menu::MenuScores::setup()
 	{
 		str += std::to_string(i+1) + (i >= 9 ? "    " : "      ") + theScores[i].first + "  :  " + std::to_string(theScores[i].second) + '\n';
 	}
-	bestScores.setString(str);
+	bestScores.setString(sf::String::fromUtf8(str.begin(), str.end()));
 
 
 	int thePersonalScore = ScoreServer::getBestScore(*playerName);
