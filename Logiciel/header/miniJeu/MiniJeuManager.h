@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include "MiniJeu.h"
 #include "FactoryMiniJeu.h"
+#include "../ScoreServer.h"
 #include "../transition.h"
 #include "../gameOverWindow.h"
 #include "DistribMiniTests/DistribMiniTests.h"

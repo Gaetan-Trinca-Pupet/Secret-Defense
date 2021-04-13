@@ -47,7 +47,16 @@ int ScoreServer::getBestScore(std::string name)
 	}
 	error = false;
 
-	return std::stoi(response.getBody());
+	std::stringstream stream(response.getBody());
+
+	int score;
+	stream >> score;
+	if (stream.fail())
+	{
+		return -1;
+	}
+
+	return score;
 }
 
 std::vector<Score> ScoreServer::get10BestScores()
@@ -71,7 +80,6 @@ std::vector<Score> ScoreServer::get10BestScores()
 	}
 
 	std::stringstream stream(response.getBody());
-	//std::stringstream stream(response);
 
 
 	stream.peek();

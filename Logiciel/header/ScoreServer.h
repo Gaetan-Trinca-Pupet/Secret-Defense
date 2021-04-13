@@ -1,5 +1,5 @@
-#ifndef __TEXTFIELD_H_
-#define __TEXTFIELD_H_
+#ifndef __SCORE_SERVER_H_
+#define __SCORE_SERVER_H_
 
 #include <SFML/Network.hpp>
 #include <iostream>

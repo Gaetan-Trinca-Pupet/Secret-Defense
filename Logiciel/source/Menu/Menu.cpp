@@ -1,10 +1,13 @@
 #include "../../header/Menu/Menu.h"
 
-Menu::Menu::Menu(AppData& appData) : app(appData){
+Menu::Menu::Menu(AppData& appData) : app(appData), menuScores(&appData.pseudo){
 	//connexion.setFont(app.font);
 	menuPrincipal.setFont(app.font);
+	menuPrincipal.setMenuScores(&menuScores);
 	menuOptions.setFont(app.font);
 	menuGameOver.setFont(app.font);
+	menuScores.setFont(app.font);
+	menuScores.setup();
 	menuOptions.setup(app);
 	menu = Menus::principal;
 	finished = false;
@@ -49,17 +52,19 @@ void Menu::Menu::play(){
 
 void Menu::Menu::update(){
 	//if(menu == Menus::connexion)connexion.update(app.window, menu);
-	if(menu == Menus::principal)menuPrincipal.update(app.window, menu);
-	else if(menu == Menus::jeu || menu == Menus::quitter)finished=true;
+	if (menu == Menus::principal)menuPrincipal.update(app.window, menu);
+	else if (menu == Menus::jeu || menu == Menus::quitter)finished=true;
 	else if(menu == Menus::options)menuOptions.update(app.window, menu, app);
-	else if(menu == Menus::gameOver)menuGameOver.update(app.window, menu);
+	else if (menu == Menus::gameOver)menuGameOver.update(app.window, menu);
+	else if (menu == Menus::scores)menuScores.update(app.window, menu);
 }
 
 void Menu::Menu::draw(){
 	//if(menu == Menus::connexion)connexion.draw(app.window);
-	if(menu == Menus::principal)menuPrincipal.draw(app.window);
-	else if(menu == Menus::options)menuOptions.draw(app.window);
-	else if(menu == Menus::gameOver)menuGameOver.draw(app.window);
+	if (menu == Menus::principal)menuPrincipal.draw(app.window);
+	else if (menu == Menus::options)menuOptions.draw(app.window);
+	else if (menu == Menus::gameOver)menuGameOver.draw(app.window);
+	else if (menu == Menus::scores)menuScores.draw(app.window);
 }
 
 Menu::Menus Menu::Menu::getMenu()const{
@@ -67,5 +72,6 @@ Menu::Menus Menu::Menu::getMenu()const{
 }
 
 void Menu::Menu::setMenu(const Menus m){
+	if (m == gameOver) menuGameOver.setScore(app.score);
 	menu = m;
 }

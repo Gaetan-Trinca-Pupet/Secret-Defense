@@ -10,9 +10,11 @@ namespace Menu{
 		private :
 			Bouton bt_rejouer;
 			Bouton bt_retour;
+			sf::Text scoreText;
 			
 		public :
 			MenuGameOver();
+			void setScore(int score);
 			void update(sf::RenderWindow& window, Menus& menu);
 			void draw(sf::RenderWindow& window);
 			void setFont(sf::Font& f);

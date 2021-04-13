@@ -66,6 +66,7 @@ void MiniJeuManager::play(unsigned int nbMiniJeu, unsigned int nbBoss)
         }
 
     }
+    ScoreServer::sendScore(app.pseudo, app.score);
 }
 
 void MiniJeuManager::play(const std::string &title)

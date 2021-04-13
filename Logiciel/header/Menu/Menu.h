@@ -8,6 +8,7 @@
 #include "MenuPrincipal.h"
 #include "MenuOptions.h"
 #include "MenuGameOver.h"
+#include "MenuScores.h"
 
 namespace Menu{
 	
@@ -15,12 +16,13 @@ namespace Menu{
 		
 		private :
 			AppData& app;
-			//Connexion connexion;
 			sf::Sprite background;
 			MenuPrincipal menuPrincipal;
 			MenuOptions menuOptions;
 			MenuGameOver menuGameOver;
+			MenuScores menuScores;
 			Menus menu;
+
 			bool finished;
 			void update();
 			void draw();
