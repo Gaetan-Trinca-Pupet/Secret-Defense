@@ -33,7 +33,7 @@ int main()
     }
 	if(!app.mainMusique.openFromFile("../ressource/audio/menu.wav"))
         std::cerr<<"erreur openFromFile audio"<<std::endl;
-    app.mainMusique.setVolume(30);
+    app.mainMusique.setVolume(50);
     app.mainMusique.setLoop(true);
     app.mainMusique.play();
 	Menu::Menu menu(app);
