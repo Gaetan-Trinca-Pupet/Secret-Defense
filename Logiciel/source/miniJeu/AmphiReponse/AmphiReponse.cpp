@@ -146,6 +146,7 @@ void AmphiReponse::AmphiReponse::update()
 	for (QuestionReponse* prise : tabQuest)
 		if (prise->isMatched() and main.find(prise))
 		{
+			AssetManager::playSound("../ressource/audio/bing.wav",20);
 			main.remove(prise);
 			--nbQuestion;
 		}

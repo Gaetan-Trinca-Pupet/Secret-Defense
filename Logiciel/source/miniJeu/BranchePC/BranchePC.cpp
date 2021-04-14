@@ -5,7 +5,7 @@ void BranchePC::BranchePC::setup()
 	
     nbPrise = (std::min((unsigned)app.difficulty+1, (unsigned)6));
 
-    chrono.setTempsMax(3.0+3.5*std::pow(0.95, int(app.difficulty)));
+    chrono.setTempsMax(3.0+2.5*std::pow(0.65, int(app.difficulty)));
 
 
 	
@@ -67,6 +67,7 @@ void BranchePC::BranchePC::update()
 	for (Prise* prise : tabPrise)
 		if (prise->isMatched() && main.find(prise))
 		{
+			AssetManager::playSound("../ressource/audio/bing.wav",20);
 			main.remove(prise);
 			--nbPrise;
 		}

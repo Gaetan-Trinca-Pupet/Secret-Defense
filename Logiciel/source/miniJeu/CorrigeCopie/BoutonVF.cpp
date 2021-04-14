@@ -3,6 +3,7 @@
 void CorrigeCopie::BoutonVF::actionOnClick()
 {
 	beenClicked = true;
+	
 }
 
 bool CorrigeCopie::BoutonVF::isWhat()

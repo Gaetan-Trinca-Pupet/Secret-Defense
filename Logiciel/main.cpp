@@ -45,6 +45,5 @@ int main()
 			menu.setMenu(Menu::Menus::gameOver);
 		}
 	}
-
     return 0;
 }

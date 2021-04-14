@@ -85,7 +85,6 @@ void CorrigeCopie::CorrigeCopie::computeTabText()
 
 void CorrigeCopie::CorrigeCopie::setup()
 {
-
 	std::vector<QuestRep> tab = getTabQuest();
 
     const unsigned nbQuestion = std::min(int(tab.size()), int(app.difficulty) + 2);
@@ -154,6 +153,8 @@ void CorrigeCopie::CorrigeCopie::setup()
 
 void CorrigeCopie::CorrigeCopie::update()
 {
+	
+	
 	posCamera = (feuille.getSize().y + (app.window.getView().getSize().y / 2)) * (chrono.getTimePassed() / chrono.getTempsMax() );
 
 	feuille.setPosition(100, int((app.window.getView().getSize().y / 2) - posCamera));
@@ -186,9 +187,14 @@ void CorrigeCopie::CorrigeCopie::update()
 	{
 		if(tabBouton[i].first->hasBeenClicked() || tabBouton[i].second->hasBeenClicked())
 			if(tabLibelle[i].VF == (tabBouton[i].first->hasBeenClicked() ? tabBouton[i].first->isWhat() : tabBouton[i].second->isWhat()))
+			{
+				if(tabLibelle[i].isCorrect == false)
+					AssetManager::playSound("../ressource/audio/bing.wav",20);
 				tabLibelle[i].isCorrect = true;
+			}
 			else if (not isFinished)
 			{
+				AssetManager::playSound("../ressource/audio/bong.wav",20);
 				end(false, "Votre correction est fausse.");
 			}
 	}
