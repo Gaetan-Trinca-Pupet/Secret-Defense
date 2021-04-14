@@ -28,12 +28,12 @@ void Menu::Menu::play(){
                 if(event.key.code == sf::Keyboard::F11){
 					
                     if(!app.fullscreen){
-                        app.window.create(sf::VideoMode(960, 540), "test",sf::Style::Fullscreen, sf::ContextSettings(0,0,8));
+                        app.window.create(sf::VideoMode(960, 540), "Secret Defense",sf::Style::Fullscreen, sf::ContextSettings(0,0,8));
                         app.window.setView(sf::View(sf::Vector2f(480,270), sf::Vector2f(960,540)));
 						if(app.icon.getPixelsPtr() != nullptr)app.window.setIcon(238,238,app.icon.getPixelsPtr());
                         app.fullscreen = true;
                     }else{
-                        app.window.create(sf::VideoMode(960, 540), "test", sf::Style::Default, sf::ContextSettings(0,0,8));
+                        app.window.create(sf::VideoMode(960, 540), "Secret Defense", sf::Style::Default, sf::ContextSettings(0,0,8));
 						if(app.icon.getPixelsPtr() != nullptr)app.window.setIcon(238,238,app.icon.getPixelsPtr());
                         app.fullscreen = false;
                     }
